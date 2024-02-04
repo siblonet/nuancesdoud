@@ -159,7 +159,7 @@ async function DataLoad() {
                 "owner": "noble",
                 "image": [
                     {
-                        "ima": "https://www.freepik.com/free-ai-image/dark-glass-bottle-with-single-liquid-drop-generative-ai_40968153.htm#query=parfum&position=5&from_view=search&track=sph&uuid=a41e5ad2-3ca1-4a01-bb37-e88c9b239f08",
+                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/6822c4be-9683-4758-a7b8-89c95a5151d5IMG-20231120-WA0135.jpg",
                         "_id": "655d4334f93f7154154c6431"
                     },
                     {
@@ -184,7 +184,7 @@ async function DataLoad() {
             },
             {
                 "_id": "65589482b769a60e37828d3a",
-                "addarticle": "Chemises manches courtes",
+                "addarticle": "Luxiol Parfum",
                 "quantity": 25,
                 "addgenre": "Homme",
                 "addtransage": "15-80",
@@ -194,7 +194,7 @@ async function DataLoad() {
                 "addfour": "Noble",
                 "adddispo": "En stock",
                 "addnouveaute": "Nouveau",
-                "addcoul": "#775357,#D9A6D4,#3A1A85,#AB8A2D,#D9A6D4",
+                "addcoul": "#71432b,#1a86e1,#e6425c,#3d56ba,#dbaf94",
                 "addtail": "L,M,XL,XXL",
                 "addmateri": "Coton",
                 "addmarque": "Noble",
@@ -206,23 +206,23 @@ async function DataLoad() {
                 "owner": "noble",
                 "image": [
                     {
-                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/a235d5c7-a5dd-4b97-989d-5fadd7ae9167IMG-20231117-WA0088.jpg",
+                        "ima": "assets/img/par1.png",
                         "_id": "65589482b769a60e37828d3b"
                     },
                     {
-                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/60a7dc48-e929-4f81-8843-5d0b503e09d7IMG-20231117-WA0073.jpg",
+                        "ima": "assets/img/par2.png",
                         "_id": "65589482b769a60e37828d3c"
                     },
                     {
-                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/e9beb9aa-97b2-435d-a673-ba632890cf9bIMG-20231117-WA0069.jpg",
+                        "ima": "assets/img/par3.png",
                         "_id": "65589482b769a60e37828d3d"
                     },
                     {
-                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/b79422ed-0c5f-4691-bf10-683a21050f3fIMG-20231117-WA0070.jpg",
+                        "ima": "assets/img/par4.png",
                         "_id": "65589482b769a60e37828d3e"
                     },
                     {
-                        "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/c69c729f-a80f-4359-a0be-85162412e4deIMG-20231117-WA0072.jpg",
+                        "ima": "assets/img/par5.png",
                         "_id": "65589482b769a60e37828d3f"
                     }
                 ],

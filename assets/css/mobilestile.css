@@ -24,7 +24,7 @@
     .navbar-area {
         height: 42px !important;
         background: linear-gradient(to right,
-                #006e65 0%,
+                #1d191a 0%,
                 #04af0c 20%,
                 gold 40%,
                 #000000 80%,
@@ -609,7 +609,7 @@
 
     .backgrou {
         display: block !important;
-        background-color: #006e65 !important;
+        background-color: #1d191a !important;
     }
 
 

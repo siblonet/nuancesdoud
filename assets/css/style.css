@@ -56,11 +56,11 @@ Default CSS
 @import url("https://fonts.googleapis.com/css?family=Cabin:400,400i,500,500i,600,600i,700,700i&amp;display=swap");
 
 :root {
-  --companycoa: #0c6248;
-  --companycob: #fdd804;
+  --companycoa: #1d191a;
+  --companycob: #d2b154;
   --companycoc: #dc3545;
-  --companycod: #037703;
-  --companycoe: #006e65;
+  --companycod: #1d191a;
+  --companycoe: #1d191a;
   --warning: #ffc107;
   --danger: #dc3545;
   --black: #000000;
@@ -780,7 +780,7 @@ Navbar CSS
   height: 2px;
   width: 100%;
   background: linear-gradient(to right,
-                #006e65 0%,
+                #1d191a 0%,
                 #04af0c 20%,
                 gold 40%,
                 #000000 80%,
@@ -1903,7 +1903,7 @@ display: none !important;
   width: 0;
   height: 0;
   border-radius: 50%;
-  background-color: #006e65;
+  background-color: #1d191a;
   -webkit-transition: width .6s ease-in-out, height .5s ease-in-out;
   transition: width .6s ease-in-out, height .5s ease-in-out;
   -webkit-transform: translate(-50%, -50%);
@@ -8197,7 +8197,7 @@ Page Title CSS
 .page-title-area {
   overflow: hidden;
   background: linear-gradient(to right,
-      #006e65 0%,
+      #1d191a 0%,
       #037703 20%,
       gold 40%,
       var(--black) 80%,
@@ -9179,7 +9179,7 @@ Checkout CSS
   margin-bottom: 40px;
   overflow: hidden;
   background: linear-gradient(to right,
-      #006e65 0%,
+      #1d191a 0%,
       #037703 20%,
       gold 40%,
       var(--black) 80%,
@@ -10761,7 +10761,7 @@ Footer CSS
   border-bottom-right-radius: 50%;
   border-bottom-left-radius: 50%;
   background: linear-gradient(to right,
-      #006e65 0%,
+      #1d191a 0%,
       #037703 20%,
       gold 40%,
       #000000 80%,
@@ -10993,7 +10993,7 @@ Footer CSS
 }
 
 .single-footer-widget .about-the-store .footer-contact-info li .awe:hover {
-  color: #006e65;
+  color: #1d191a;
 }
 
 .single-footer-widget .about-the-store .footer-contact-info li .awe:hover::before {
