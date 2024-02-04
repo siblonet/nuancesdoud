@@ -109,6 +109,7 @@ async function DataLoad() {
     try {
         const items = await sendRequestnot('GET', 'boutique/noble');
         //console.log(items);
+        //console.log(items.pagesetting);
         if (!items) {
             const productContainer = document.getElementById('product-container');
             productContainer.innerHTML = '';
@@ -276,13 +277,50 @@ async function DataLoad() {
                 "created": "2023-11-22T19:55:52.860Z",
                 "__v": 0
             }];
+
+            const page = [
+
+                {
+                    "_id": "655a958cacd12639d757e961",
+                    "which": "backglise",
+                    "owner": "noble",
+                    "image": "assets/img/par5.png",
+                    "created": "2023-11-19T23:09:00.313Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "655e041df548f63923d4fa4c",
+                    "which": "phonea",
+                    "owner": "noble",
+                    "image": "assets/img/par2.png",
+                    "created": "2023-11-22T13:37:33.998Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "655e04c1f548f63923d4fa8a",
+                    "which": "phoneb",
+                    "owner": "noble",
+                    "image": "assets/img/par1.png",
+                    "created": "2023-11-22T13:40:17.539Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "655e04e3f548f63923d4fa8c",
+                    "which": "phonec",
+                    "owner": "noble",
+                    "image": "assets/img/par3.png",
+                    "created": "2023-11-22T13:40:51.919Z",
+                    "__v": 0
+                }
+
+            ];
             await openArticleDatabase()
             clearArticle(datoaa);
-            //console.log(items.article);
             //await openArticleDatabase()
             //clearArticle(items.article);
             await openPersonnalizingDatabase()
-            clearSetting(items.pagesetting);
+            clearSetting(page);
+            //clearSetting(items.pagesetting);
             await openOrdersDatabase()
             clearOrdersa(items.order);
         }
