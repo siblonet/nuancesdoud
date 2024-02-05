@@ -162,7 +162,7 @@ function recentProduct(recenPr) {
                                         </li>
                                         <li>
                                             <div class="compare-btn">
-                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detail?ov=${product._id}}">
+                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="details.html?ov=${product._id}}">
                                                     <i class="bx bx-refresh"></i>
                                                     <span class="tooltip-label">Plus infos</span>
                                                 </a>
@@ -205,7 +205,7 @@ function recentProduct(recenPr) {
 
                             <div class="products-content">
                                 <span class="category" style="color: ${product.addcoul.substring(0, 7)};">${product.addtypepro}</span>
-                                <h3><a href="detail?ov=${product._id}">${product.addarticle}</a></h3>
+                                <h3><a href="details.html?ov=${product._id}">${product.addarticle}</a></h3>
                                 <div class="star-rating">
                                     <i class="bx bxs-star"></i>
                                     <i class="bx bxs-star"></i>
@@ -254,7 +254,7 @@ function recentProduct(recenPr) {
                     <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
 
                         <a style="cursor: pointer !important;"
-                            href="detail?ov=${product._id}">
+                            href="details.html?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
                             <img src="${product.image[1].ima}" class="hover-image" alt="image"> 
                         </a>
@@ -271,7 +271,7 @@ function recentProduct(recenPr) {
                             </li>
                             <li>
                                 <div class="compare-btn">
-                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detail?ov=${product._id}}">
+                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="details.html?ov=${product._id}}">
                                         <i class="bx bx-refresh"></i>
                                         <span class="tooltip-label">Plus infos</span>
                                     </a>
@@ -314,7 +314,7 @@ function recentProduct(recenPr) {
 
                 <div class="products-content">
                     <span class="category" style="color: ${product.addcoul.substring(0, 7)};">${product.addtypepro}</span>
-                    <h3><a href="detail?ov=${product._id}">${product.addarticle}</a></h3>
+                    <h3><a href="details.html?ov=${product._id}">${product.addarticle}</a></h3>
                     <div class="star-rating">
                         <i class="bx bxs-star"></i>
                         <i class="bx bxs-star"></i>
@@ -514,7 +514,7 @@ async function showProductQuickView(a, productId) {
             const modalImage = document.getElementById('ipage');
             modalImage.src = a == "a" ? product.image[0].ima : product.image[1].ima;
 
-            const newURL = `detail?ov=${product._id}`;  // Replace with the desired new URL
+            const newURL = `details.html?ov=${product._id}`;  // Replace with the desired new URL
 
             const linkElement = document.getElementById('change-url');
 
@@ -592,7 +592,7 @@ async function showProductQuickView(a, productId) {
             const modalImage = document.getElementById('ipage');
             modalImage.src = a == "a" ? product.image[0].ima : product.image[1].ima;
 
-            const newURL = `detail?ov=${product._id}`;  // Replace with the desired new URL
+            const newURL = `details.html?ov=${product._id}`;  // Replace with the desired new URL
 
             const linkElement = document.getElementById('change-url');
 
