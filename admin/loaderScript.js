@@ -31,7 +31,7 @@ const RenderFirst = () => {
         const adminiBodyHTML = ``;
 
         adminiBody.innerHTML = adminiBodyHTML;
-        window.location.href = "../login.html"
+        window.location.href = "login"
     }
 };
 
