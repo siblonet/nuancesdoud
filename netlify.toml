@@ -28,7 +28,7 @@ status = 200
 
 [[redirects]]
 from = "pannier"
-to = "/cart.html"
+to = "/pannier.html"
 status = 200
 
 
@@ -75,7 +75,7 @@ to = "/filtera:splat"
 
 [[redirects]]
 from = "/detaila"
-to = "/products-type-1.html"
+to = "/details.html"
 status = 200
 
 [[redirects]]
