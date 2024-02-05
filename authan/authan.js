@@ -66,7 +66,7 @@ async function Inscription() {
                 motdepass: password,
                 email: email,
                 phone: phone,
-                owner: "noble"
+                owner: "nuance"
             };
 
 
@@ -138,7 +138,7 @@ async function loGin() {
             motdepass: password,
         };
 
-        const response = await authantificationRequest('POST', 'people/login/noble', person);
+        const response = await authantificationRequest('POST', 'people/login/nuance', person);
 
         if (response && response.invalide) {
             load.classList.remove("load28")
@@ -196,7 +196,7 @@ async function loginCommage() {
             motdepass: password,
         };
 
-        const response = await authantificationRequest('POST', 'people/login/noble', person);
+        const response = await authantificationRequest('POST', 'people/login/nuance', person);
 
         if (response && response.inconnu) {
             load.classList.remove("load28")

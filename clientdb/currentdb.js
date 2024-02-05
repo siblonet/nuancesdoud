@@ -220,20 +220,20 @@ function ClearImage() {
 function AddArticleTest() {
     document.getElementById("ajouteencou").innerText = "En cours"
     const product = {
-        "addarticle": "Chemise Noble à manches court",
+        "addarticle": "Chemise nuance à manches court",
         "quantity": 1,
         "addgenre": "Homme",
         "addtransage": "17-55",
         "addprix": 5,
         "addreduction": 4,
         "addoccasion": "promo",
-        "addfour": "Noble",
+        "addfour": "nuance",
         "adddispo": "En stock (1articles)",
         "addnouveaute": "NOUVEAU",
         "addcoul": "#f0cdc4,#05208f,#f0cdc4,#05208f,05208f",
         "addtail": "XL,X,M,L,XS",
         "addmateri": "Coton",
-        "addmarque": "Noble",
+        "addmarque": "nuance",
         "addtype": "ACCOUTREMENT",
         "addtypepro": "Chemise",
         "addphone": "0768020606",
@@ -309,7 +309,7 @@ function AddArticle() {
                 addphone: addphone,
                 addexpe: addexpe,
                 notes: notes,
-                owner: "noble",
+                owner: "nuance",
                 image: imas
             };
             document.getElementById("ajouteencou").innerText = "En cours"
@@ -406,7 +406,7 @@ function getPanierSend(tocompl) {
 
 
             try {
-                const response = await sendReque('POST', 'orders/noble', tocompl);
+                const response = await sendReque('POST', 'orders/nuance', tocompl);
                 if (response.er == "done" && response.id == "done") {
                     TotalAll("clear", "");
                     window.location.href = "client"

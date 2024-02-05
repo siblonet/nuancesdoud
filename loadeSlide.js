@@ -21,7 +21,7 @@ function  setPad(setPad) {
         $("#background-video")[0].play();
 
         $(".nobleim").attr("src", `${setPad.find(item => item.which === "logoextern") ? setPad.find(item => item.which === "logoextern").image : "assets/img/logonouce.jpg"}`);
-        $(".bg-image1").css("background-image", `url(${setPad.find(item => item.which === "backglise") ? setPad.find(item => item.which === "backglise").image : "assets/img/offer-bg.jpg"})`);
+        $(".bg-image1").css("background-image", `url(${setPad.find(item => item.which === "backglise") ? setPad.find(item => item.which === "backglise").image : "assets/img/par4.png"})`);
     } else {
         $(".nobleim").attr("src", "assets/img/logonouce.jpg")
         $("#chanVideo").attr("src", "assets/background.webm");
@@ -32,7 +32,7 @@ function  setPad(setPad) {
         $(".banner-bg2").css("background-image", "url(assets/img/par3.png)");
         $(".banner-bg3").css("background-image", "url(assets/img/par2.png)");
 
-        $(".bg-image1").css("background-image", "url(assets/img/offer-bg.jpg)");
+        $(".bg-image1").css("background-image", "url(assets/img/par4.png)");
     }
 
 };

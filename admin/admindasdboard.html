@@ -139,7 +139,7 @@
         <div class="sidebar-menu sticky-sidebar-menu">
             <div class="logo">
                 <h1>
-                    <a href="dasboard.html">Noble</a>
+                    <a href="dasboard.html">Nuance</a>
                 </h1>
             </div>
 
@@ -1078,7 +1078,7 @@
                 });
 
 
-            } else if (data.owner == "noble" && data.admin == "") {
+            } else if (data.owner == "nuance" && data.admin == "") {
                 ClientId.push(data);
                 const clientId = document.getElementById("clientId");
                 clientId.innerHTML += `<a class='informasia aa' href='javascript:void' title='Chat Whatsapp'>
@@ -1104,7 +1104,7 @@
                 $("#first-msga").animate({ scrollTop: $("#first-msga")[0].scrollHeight }, 500);
 
             } else if (asd.length < 1) {
-                if (data.owner == "noble" && data.admin == me) {
+                if (data.owner == "nuance" && data.admin == me) {
                     $("#whatsapp-chat").addClass("showa").removeClass("hidea"),
                         $("#whatsapp-chat").addClass("tuesla");
                     setTimeout(() => {
@@ -1129,7 +1129,7 @@
 
 
                     }, 1300);
-                } else if (data.owner == "noble" && data.admin == "") {
+                } else if (data.owner == "nuance" && data.admin == "") {
                     $("#whatsapp-chat").addClass("showa").removeClass("hidea"),
                         $("#whatsapp-chat").addClass("tuesla");
                     setTimeout(() => {
@@ -1158,10 +1158,10 @@
 
 
 
-            } else if (data.owner == "noble" && data.admin == me) {
+            } else if (data.owner == "nuance" && data.admin == me) {
                 document.getElementById("chatss").innerText = `${parseInt(chatss) + 1}`;
 
-            } else if (data.owner == "noble" && data.admin == "") {
+            } else if (data.owner == "nuance" && data.admin == "") {
                 document.getElementById("chatss").innerText = `${parseInt(chatss) + 1}`;
 
             }

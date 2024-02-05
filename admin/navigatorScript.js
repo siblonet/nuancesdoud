@@ -1202,7 +1202,7 @@ async function getUserandArticles() {
     ClientData.length = 0;
     AdminData.length = 0;
     let available = 0;
-    const User = await sendRequestforOrderget('GET', 'people/persons/noble');
+    const User = await sendRequestforOrderget('GET', 'people/persons/nuance');
     User.forEach(user => {
         if (user.admin == "true") {
             AdminData.push(user);
