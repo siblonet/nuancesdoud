@@ -20,14 +20,14 @@ loadData()
 
 function setLogin(items) {
         if (items && items.length > 0) {
-            $(".nobleim").attr("src", `${items.find(item => item.which === "logoextern") ? items.find(item => item.which === "logoextern").image : "assets/img/noble.png"}`);
-            $(".page-linear").css("background-image", `url(${items.find(item => item.which === "loginimg") ? items.find(item => item.which === "loginimg").image : "assets/img/auth.png"})`);
-            $(".bg-image1").css("background-image", `url(${items.find(item => item.which === "backglise") ? items.find(item => item.which === "backglise").image : "assets/img/offer-bg.jpg"})`);
+            $(".nobleim").attr("src", `${items.find(item => item.which === "logoextern") ? items.find(item => item.which === "logoextern").image : "assets/img/logonouce.jpg"}`);
+            $(".page-linear").css("background-image", `url(${items.find(item => item.which === "loginimg") ? items.find(item => item.which === "loginimg").image : "assets/img/par1.png"})`);
+            $(".bg-image1").css("background-image", `url(${items.find(item => item.which === "backglise") ? items.find(item => item.which === "backglise").image : "assets/img/par4.png"})`);
         } else {
             console.log("ele");
-            $(".nobleim").attr("src", "assets/img/noble.png");
-            $(".page-linear").css("background-image", "url(assets/img/auth.png)");
-            $(".bg-image1").css("background-image", "url(assets/img/offer-bg.jpg)");
+            $(".nobleim").attr("src", "assets/img/logonouce.jpg");
+            $(".page-linear").css("background-image", "url(assets/img/par1.png)");
+            $(".bg-image1").css("background-image", "url(assets/img/par4.png)");
         }
 
     };
