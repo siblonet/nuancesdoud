@@ -59,8 +59,8 @@ const pErsonnalige = () => {
             $("#phonec").css("background-image", "url(../assets/img/par3.png)");
 
             $("#backglise").css("background-image", 'url(../assets/img/par2.png)');
-            $("#logoextern").attr("src", "../assets/img/logonouce.jpg");
-            $("#logointern").attr("src", "../assets/img/logonouce.jpg");
+            $("#logoextern").attr("src", "../assets/img/logo.png");
+            $("#logointern").attr("src", "../assets/img/logo.png");
             $("#loginimg").css("background-image", "url(../assets/img/par1.png)");
             $(".loadavideo").css("display", "none");
 
