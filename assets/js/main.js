@@ -27,12 +27,15 @@
 
     // Header Sticky
     $(window).on('scroll', function () {
+        if (!isMobileDevice()) {
+
         if ($(this).scrollTop() > 130) {
             $('.header-sticky').addClass("is-sticky");
         }
         else {
             $('.header-sticky').removeClass("is-sticky");
         }
+    }
 
     });
     var c, currentScrollTop = 0,
