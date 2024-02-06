@@ -18,10 +18,10 @@ let annoncePers = [];
 
     if (items && items.length > 0) {
 
-        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "../assets/img/log2a.png"}`);
+        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);
 
     } else {
-        $("#logointerne").attr("src", "../assets/img/log2a.png");
+        $("#logointerne").attr("src", "../assets/img/logo.png");
     };
 
 })(jQuery);
