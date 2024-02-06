@@ -61,7 +61,7 @@ const NafigatioTo = async (where) => {
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb my-breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">
-                            <a href="">
+                            <a href="/">
                                 <i class="fa fa-angle-double-left"></i>
                                     Aller à la boutique
                             </a>
