@@ -26,9 +26,9 @@ const getAnnonce = async (method, endpoint, data = null) => {
     const items = await getAnnonce('GET', 'boutique/annoncedata/nuance');
 
     if (items && items.length > 0) {
-        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);
+        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "/assets/img/logo.png"}`);
     } else {
-        $("#logointerne").attr("src", "../assets/img/logo.png");
+        $("#logointerne").attr("src", "/assets/img/logo.png");
     }
 
 })(jQuery);
