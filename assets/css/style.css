@@ -711,16 +711,17 @@ Navbar CSS
 
 .navbar-area {
   height: 87px;
-  background:transparent !important;
+  background: transparent !important;
   position: relative;
   width: 100%;
   z-index: 888;
 
 }
 
-.mobilefooter{
+.mobilefooter {
   display: none;
 }
+
 .navbar-area.header-sticky {
   position: fixed;
   top: 0;
@@ -740,9 +741,23 @@ Navbar CSS
   opacity: 1;
   visibility: visible;
 }
-.shoph{
+
+.shoph {
   display: none !important;
 }
+
+@media only screen and (min-width: 992px) {
+
+  .logoname {
+    display: none;
+  }
+
+  .logonamebas {
+    display: none;
+  }
+}
+
+
 /*
 .navbar-area.header-sticky.scrollUp {
   -webkit-transform: translateY(-85px);
@@ -776,15 +791,15 @@ Navbar CSS
   z-index: 0;
 }
 
-.linearboottom{
+.linearboottom {
   height: 2px;
   width: 100%;
   background: linear-gradient(to right,
-                #1d191a 0%,
-                #04af0c 20%,
-                gold 40%,
-                #000000 80%,
-                #ff0000 90%) !important;
+      #1d191a 0%,
+      #04af0c 20%,
+      gold 40%,
+      #000000 80%,
+      #ff0000 90%) !important;
 }
 
 
@@ -793,7 +808,7 @@ Navbar CSS
   padding-right: 40px;
 }
 
-.hiddenpc{
+.hiddenpc {
   display: none !important;
 }
 
@@ -1776,8 +1791,8 @@ Main Banner CSS
   background-image: url(../img/main-banner2.jpg);
 }
 
-.backgrou{
-display: none !important;
+.backgrou {
+  display: none !important;
 }
 
 
@@ -1809,7 +1824,7 @@ display: none !important;
 
 
 
-.mobilelogo{
+.mobilelogo {
   display: none !important;
 }
 
@@ -1826,16 +1841,16 @@ display: none !important;
 .button-85a:before {
   content: "";
   background: linear-gradient(45deg,
-          #ff0000,
-          #ff7300,
-          #fffb00,
-          #b30086,
-          #00ffd5,
-          #003e8b,
-          #7a00ff,
-          #ff00c8,
-          #48ff00,
-          #ff0000);
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #b30086,
+      #00ffd5,
+      #003e8b,
+      #7a00ff,
+      #ff00c8,
+      #48ff00,
+      #ff0000);
   position: absolute;
   top: -0px;
   left: -7px;
@@ -1852,15 +1867,15 @@ display: none !important;
 
 @keyframes glowing-button-85 {
   0% {
-      background-position: 0 0;
+    background-position: 0 0;
   }
 
   50% {
-      background-position: 400% 0;
+    background-position: 400% 0;
   }
 
   100% {
-      background-position: 0 0;
+    background-position: 0 0;
   }
 }
 
@@ -8212,11 +8227,12 @@ Page Title CSS
 
 }
 
-.login-area.ptb-100{
+.login-area.ptb-100 {
   padding-top: 50px !important;
   padding-bottom: 100px;
 }
-.signup-area.ptb-100{
+
+.signup-area.ptb-100 {
   padding-top: 50px !important;
   padding-bottom: 100px;
 }
@@ -10487,11 +10503,11 @@ Login CSS
   display: none;
 }
 
-.page-title-area .page-title-content ul a{
+.page-title-area .page-title-content ul a {
   color: #170202;
 }
 
-.boderit{
+.boderit {
   display: none;
 }
 
@@ -11494,4 +11510,5 @@ Live Chat CSS
     top: 110%;
   }
 }
+
 /*# sourceMappingURL=style.css.map */
