@@ -251,24 +251,7 @@ const NafigatioTo = async (where) => {
         `;
 
 
-        /*
-        
-          <div class="col-lg-6 pl-lg-2 chart-grid">
-                            <div class="card text-center card_border">
-                                <div class="card-header chart-grid__header">
-                                </div>
-                                <div class="card-body">
-                                    <div id="container">
-                                        <canvas id="linecharta"></canvas>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-muted chart-grid__footer">
-                                    Mis à jour à l'instant
-                                </div>
-
-                            </div>
-                        </div>
-                        */
+       
 
 
         adminiSpace.innerHTML = dasboardHTML;
