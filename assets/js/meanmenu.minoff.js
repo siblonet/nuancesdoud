@@ -26,6 +26,12 @@ To be used with jquery.meanmenu.js by Chris Wharton (http://www.meanthemes.com/p
             meanDisplay: "block",
             removeElements: ""
         };
+
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.includes('mobile');
+        };
+
         e = $.extend(n, e);
         var a = window.innerWidth || document.documentElement.clientWidth;
         return this.each(function () {
@@ -70,21 +76,25 @@ To be used with jquery.meanmenu.js by Chris Wharton (http://www.meanthemes.com/p
                 },
                 W = function () {
                     jQuery(".mean-bar,.mean-push").remove(),
-                    jQuery(t).removeClass("mean-container"),
-                    jQuery(n).css("display", g),
-                    A = !1,
-                    E = !1,
-                    jQuery(p).removeClass("mean-remove")
+                        jQuery(t).removeClass("mean-container"),
+                        jQuery(n).css("display", g),
+                        A = !1,
+                        E = !1,
+                        jQuery(p).removeClass("mean-remove")
                 },
                 b = function () {
                     var e = "background:" + l + ";color:" + l + ";" + w;
                     if (o >= a) {
-                        jQuery(p).addClass("mean-remove"),
-                            E = !0,
-                            jQuery(t).addClass("mean-container"),
-                            jQuery(".mean-container").prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="' + e + '">Show Navigation</a><nav class="mean-nav"></nav></div>');
-                        
-                            var r = jQuery(n).html();
+
+                       
+                        if (!isMobileDevice()) {
+                            jQuery(p).addClass("mean-remove"),
+                                E = !0,
+                                jQuery(t).addClass("mean-container"),
+                                jQuery(".mean-container").prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="' + e + '">Show Navigation</a><nav class="mean-nav"></nav></div>');
+                        }
+
+                        var r = jQuery(n).html();
                         jQuery(".mean-nav").html(r),
                             Q && jQuery("nav.mean-nav ul, nav.mean-nav ul *").each(function () {
                                 jQuery(this).is(".mean-remove") ? jQuery(this).attr("class", "mean-remove") : jQuery(this).removeAttr("class"),
@@ -111,12 +121,12 @@ To be used with jquery.meanmenu.js by Chris Wharton (http://www.meanthemes.com/p
                             M.removeClass("meanclose"),
                             jQuery(M).click(function (e) {
                                 e.preventDefault(),
-                                A === !1 ? (M.css("text-align", "center"),
-                                    M.css("text-indent", "0"),
-                                    M.css("font-size", i),
-                                    jQuery(".mean-nav ul:first").slideDown(), A = !0) : (jQuery(".mean-nav ul:first").slideUp(),
-                                        A = !1), M.toggleClass("meanclose"), P(),
-                                jQuery(p).addClass("mean-remove")
+                                    A === !1 ? (M.css("text-align", "center"),
+                                        M.css("text-indent", "0"),
+                                        M.css("font-size", i),
+                                        jQuery(".mean-nav ul:first").slideDown(), A = !0) : (jQuery(".mean-nav ul:first").slideUp(),
+                                            A = !1), M.toggleClass("meanclose"), P(),
+                                    jQuery(p).addClass("mean-remove")
                             }),
                             f && jQuery(".mean-nav ul > li > a:first-child").on("click", function () {
                                 jQuery(".mean-nav ul:first").slideUp(),
