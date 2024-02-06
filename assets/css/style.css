@@ -10750,7 +10750,7 @@ Contact CSS
 Footer CSS
 =================================================*/
 .footer-area {
-  background-color: var(--black);
+  background-color: #1d191a;
   position: relative;
   z-index: 1;
 }
