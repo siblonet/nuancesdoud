@@ -25,7 +25,7 @@ Author URL: http://w3layouts.com
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #0c6248;
+  --primary: #1d191a;
   --secondary: #fd7e14;
   --nobleco: #ffc107;
   --success: #03c895;
@@ -175,7 +175,7 @@ sup {
 }
 
 a {
-  color: #0c6248;
+  color: #1d191a;
   text-decoration: none;
   background-color: transparent;
 }
@@ -2767,8 +2767,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .btn-primary:hover {
@@ -2788,8 +2788,8 @@ fieldset:disabled a.btn {
 .btn-primary.disabled,
 .btn-primary:disabled {
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
@@ -3139,14 +3139,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #0c6248;
-  border-color: #0c6248;
+  color: #1d191a;
+  border-color: #1d191a;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .btn-outline-primary:focus,
@@ -3156,7 +3156,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {
-  color: #0c6248;
+  color: #1d191a;
   background-color: transparent;
 }
 
@@ -3164,8 +3164,8 @@ fieldset:disabled a.btn {
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show>.btn-outline-primary.dropdown-toggle {
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
@@ -3428,7 +3428,7 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #0c6248;
+  color: #1d191a;
   text-decoration: none;
 }
 
@@ -3740,7 +3740,7 @@ input[type="button"].btn-block {
 .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #0c6248;
+  background-color: #1d191a;
 }
 
 .dropdown-item.disabled,
@@ -4101,8 +4101,8 @@ input[type="button"].btn-block {
 
 .custom-control-input:checked~.custom-control-label::before {
   color: #fff;
-  border-color: #0c6248;
-  background-color: #0c6248;
+  border-color: #1d191a;
+  background-color: #1d191a;
 }
 
 .custom-control-input:focus~.custom-control-label::before {
@@ -4168,8 +4168,8 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before {
-  border-color: #0c6248;
-  background-color: #0c6248;
+  border-color: #1d191a;
+  background-color: #1d191a;
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::after {
@@ -4400,7 +4400,7 @@ input[type="button"].btn-block {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #0c6248;
+  background-color: #1d191a;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4431,7 +4431,7 @@ input[type="button"].btn-block {
 .custom-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #0c6248;
+  background-color: #1d191a;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4465,7 +4465,7 @@ input[type="button"].btn-block {
   margin-top: 0;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
-  background-color: #0c6248;
+  background-color: #1d191a;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4607,7 +4607,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: #fff;
-  background-color: #0c6248;
+  background-color: #1d191a;
 }
 
 .nav-fill .nav-item {
@@ -5349,7 +5349,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #0c6248;
+  color: #1d191a;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
@@ -5382,8 +5382,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .page-item.disabled .page-link {
@@ -5467,7 +5467,7 @@ a.badge:focus {
 
 .badge-primary {
   color: #fff;
-  background-color: #0c6248;
+  background-color: #1d191a;
 }
 
 a.badge-primary:hover,
@@ -5787,7 +5787,7 @@ a.badge-dark.focus {
   color: #fff;
   text-align: center;
   white-space: nowrap;
-  background-color: #0c6248;
+  background-color: #1d191a;
   transition: width 0.6s ease;
 }
 
@@ -5877,8 +5877,8 @@ a.badge-dark.focus {
 .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #0c6248;
-  border-color: #0c6248;
+  background-color: #1d191a;
+  border-color: #1d191a;
 }
 
 .list-group-item+.list-group-item {
@@ -7071,7 +7071,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #0c6248 !important;
+  background-color: #1d191a !important;
 }
 
 a.bg-primary:hover,
@@ -7207,7 +7207,7 @@ button.bg-dark:focus {
 }
 
 .border-primary {
-  border-color: #0c6248 !important;
+  border-color: #1d191a !important;
 }
 
 .border-secondary {
@@ -10800,7 +10800,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #0c6248 !important;
+  color: #1d191a !important;
 }
 
 a.text-primary:hover,
@@ -14772,7 +14772,7 @@ License: https://linearicons.com/free/license
 }
 
 :root {
-  --primary: #0c6248;
+  --primary: #1d191a;
   --secondary: #ffc107;
   --success: #03c895;
   --danger: #ffc107;
@@ -15253,7 +15253,7 @@ footer.dashboard p a:hover {
   background: #ffffff;
   text-align: center;
   height: 70px;
-  border-bottom: 4px solid #0c6248;
+  border-bottom: 4px solid #1d191a;
 }
 
 .logo a {
@@ -15285,7 +15285,7 @@ div#page-wrapper {
   display: block !important;
   background: #ffffff;
   line-height: 60px;
-  border-bottom: 4px solid #0c6248;
+  border-bottom: 4px solid #1d191a;
 }
 
 .logo-icon a {
