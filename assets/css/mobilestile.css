@@ -6,11 +6,12 @@
     .linearboottom {
         display: none !important
     }
+
     .products-box .products-image .products-button {
         display: none !important;
         visibility: hidden !important;
         opacity: 0;
-      }
+    }
 
 
     .pcfooter {
@@ -700,4 +701,80 @@
     }
 
 
+}
+
+.sociala {
+    align-items: center !important;
+    justify-content: center !important;
+    height: 50px !important;
+    width: 50px !important;
+    overflow: hidden !important;
+
+}
+
+.socialb {
+    align-items: center !important;
+    justify-content: center !important;
+    height: 50px !important;
+    width: 50px !important;
+    overflow: hidden !important;
+
+}
+
+.socialc {
+    align-items: center !important;
+    justify-content: center !important;
+    height: 50px !important;
+    width: 50px !important;
+    overflow: hidden !important;
+
+}
+
+.sociald {
+    align-items: center !important;
+    justify-content: center !important;
+    height: 50px !important;
+    width: 50px !important;
+    overflow: hidden !important;
+
+}
+
+.logoname {
+    background-color: transparent;
+    position: relative;
+    z-index: 9999;
+    width: 100%;
+    overflow: hidden;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoprincipal {
+    width: 30px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+}
+
+
+.logonamebas {
+    background-color: transparent;
+    position: relative;
+    z-index: 9999;
+    width: 100%;
+    overflow: hidden;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logoprincipallong {
+    width: 40%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
 }
