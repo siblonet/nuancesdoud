@@ -26,12 +26,12 @@
 
 
     <link rel="stylesheet" href="../assets/css/loading.css">
-    <link rel="stylesheet" href="admin/assets/css/livechat.css">
+    <link rel="stylesheet" href="./assets/css/livechat.css">
 
     <title>Nuance-Admin</title>
-    <link rel="stylesheet" href="admin/assets/css/style-starter.css">
-    <link rel="stylesheet" href="admin/tirthcss.css">
-    <link rel="stylesheet" href="admin/noble.css">
+    <link rel="stylesheet" href="./assets/css/style-starter.css">
+    <link rel="stylesheet" href="./tirthcss.css">
+    <link rel="stylesheet" href="./noble.css">
 
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <style>
@@ -530,60 +530,20 @@
                     <input type="hidden" id="arti_id" value="">
 
                     <div class="col-lg-6 col-md-6">
+                        <br>
+                        <br>
                         <div class="products-content">
-                            <h3>
-                                <a id="optionCancilename">
-                                </a>
-                            </h3>
-
                             <div class="price">
+                                <a id="optionCancilename"></a>
                                 <span class="new-price" id="optionViewNewPrice"></span>
                             </div>
-                            <div class="products-review">
-                                <div class="rating">
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                </div>
-                                <a class="rating-count" id="rating"></a>
-                            </div>
-                            <ul class="products-info">
-                                <li><span>Vendeur:</span> <a id="quickFour"></a></li>
-                                <li><span>Disponibilité:</span> <a id="quickDispo"></a></li>
-                                <li><span>Type :</span> <a id="quickType"></a></li>
-                            </ul>
-                            <div class="products-color-switch">
-                                <h4>Couleur:</h4>
-                                <ul id="quickCouleu">
 
-                                </ul>
-                            </div>
-                            <div class="products-color-switch">
-                                <h4>Couleur selectionné par client:</h4>
-                                <ul id="quickColose">
-
-                                </ul>
-                            </div>
-                            <br>
-                            <div class="products-size-wrapper">
-                                <h4>Taille selectionné par client:</h4>
-                                <ul id="quickTail">
-
-                                </ul>
-                            </div>
                             <div class="products-add-to-cart" id="hidlater">
-                                <p>Quantité Demandé par client:</p>
 
-                                <div class="input-counter">
-                                    <span class="minus-btn">
-                                        <i class="bx bx-minus"></i>
-                                    </span>
-                                    <input type="text" id="productQuantity" value="1">
-                                    <span class="plus-btn">
-                                        <i class="bx bx-plus"></i>
-                                    </span>
+                                <div class="">
+                                    <span>Quantité :</span>
+
+                                    <input autofocus type="text" id="productQuantity" value="1">
                                 </div>
                             </div>
 
@@ -596,8 +556,8 @@
                 </div>
 
                 <br>
-                <br>
                 <div id="statusOrder">
+                <br>
 
                 </div>
                 <div class="row align-items-center">
@@ -664,17 +624,7 @@
                         onclick="cancelItemById()">Annuller</button>
                     <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
 
-                    <!--
-                    <div class="dropdown">
-                        <ul class="dropdown-menu">
-                            <li><span onclick="selectStatus('${pan._id}', '${pani._id}','done')">Livré</span></li>
-                            <li><span onclick="selectStatus('${pan._id}', '${pani._id}','review')">En attente</span>
-                            </li>
-                            <li><span onclick="selectStatus('${pan._id}', '${pani._id}','onway')">En cours</span></li>
-                            <li><span onclick="selectStatus('${pan._id}', '${pani._id}','fail')">Échoué</span></li>
-                        </ul>
-                    </div>
-                -->
+
                 </div>
             </div>
 
@@ -805,14 +755,14 @@
     <script src="../productsFetcher/database_handl.js"></script>
     <script src="../convertisseur.js"></script>
     <script src="../disconnexion.js"></script>
-    <script src="admin/admindasdboard.js"></script>
-    <script src="admin/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="admin/assets/js/jquery-1.10.2.min.js"></script>
-    <script src="admin/assets/js/Chart.min.js"></script>
-    <script src="admin/assets/js/utils.js"></script>
+    <script src="./admindasdboard.js"></script>
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/jquery-1.10.2.min.js"></script>
+    <script src="./assets/js/Chart.min.js"></script>
+    <script src="./assets/js/utils.js"></script>
 
-    <script src="admin/assets/js/jquery.nicescroll.js"></script>
-    <script src="admin/assets/js/scripts.js"></script>
+    <script src="./assets/js/jquery.nicescroll.js"></script>
+    <script src="./assets/js/scripts.js"></script>
 
     <script>
         var closebtns = document.getElementsByClassName("close-grid");
@@ -832,11 +782,11 @@
         });
     </script>
 
-    <script src="admin/assets/js/modernizr.js"></script>
-    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/modernizr.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
     <script src="../clientdb/currentdb.js"></script>
-    <script src="admin/navigatorScript.js"></script>
-    <script src="admin/loaderScript.js"></script>
+    <script src="./navigatorScript.js"></script>
+    <script src="./loaderScript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
 
 
@@ -1036,8 +986,8 @@
 
             });
     </script>
-    <script src="admin/changesSlide.js"></script>
-    <script src="admin/personalige.js"></script>
+    <script src="./changesSlide.js"></script>
+    <script src="./personalige.js"></script>
 
 </body>
 

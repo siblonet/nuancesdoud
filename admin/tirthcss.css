@@ -246,8 +246,9 @@ Add Article CSS
     }
 
     .articlerowsub {
+        overflow: hidden;
         background-color: #ffffff;
-        height: 300px;
+        height: 320px;
         width: 100%;
         padding: 0px 20px 0px 20px;
         border-radius: 2%;
@@ -325,6 +326,31 @@ Add Article CSS
 
     .articlerow .imaros div img {
         height: 90%;
+        width: 100%;
+    }
+
+
+    .articlerow .imaroso {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-self: center;
+        height: 120px;
+        overflow: hidden;
+    }
+
+
+    .articlerow .imaroso div {
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5%;
+        overflow: hidden;
+    }
+
+    .articlerow .imaroso div img {
+        height: 85%;
         width: 100%;
     }
 }

@@ -452,40 +452,16 @@ const NafigatioTo = async (where) => {
         ActiveAd.classList.remove('active');
         ActiveAr.classList.remove('active');
         ActiveAn.classList.remove('active');
+
         await openOrdersDatabase();
 
-        addAticlebtn.innerHTML = "";
-        const commandesHTML = `
-                <main class="main">
-                <br>
-                <br>
-                <br>
-                <section class="main__section">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Client <span class="icon-arrow">&UpArrow;</span></th>
-                                <th>Article <span class="icon-arrow">&UpArrow;</span></th>
-                                <th style="text-align: center !important;">Prix Unité <span class="icon-arrow">&UpArrow;</span></th>
-                                <th style="text-align: center !important;">Quantité <span class="icon-arrow">&UpArrow;</span></th>
-                                <th style="text-align: center !important;"> Statut <span class="icon-arrow">&UpArrow;</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-data">
-                          
-                            
-
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-        `;
-        adminiSpace.innerHTML = commandesHTML;
-
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.includes('mobile');
+        }
         const transaction = orderdb.transaction(["OrderdStore"], "readonly");
         const objectStore = transaction.objectStore("OrderdStore");
-        const tbodyId = document.getElementById('tbody-data');
-        tbodyId.innerHTML = '';
+
         Orderdata.length = 0
 
         objectStore.openCursor().onsuccess = (event) => {
@@ -494,11 +470,112 @@ const NafigatioTo = async (where) => {
                 Orderdata.push(cursor.value);
                 cursor.continue();
             } else {
+                if (isMobileDevice()) {
+                    Orderdata.forEach((pan) => {
 
-                Orderdata.forEach((pan) => {
-                    pan.articles.forEach((pani) => {
-                        const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut == "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
-                        const panierTBODY = `
+                        const orderHTML = `
+                            <br>
+                            <br>
+                            <br>
+                            <div class="articlerow">
+                                ${pan.articles.map(pani => {
+                            const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut === "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
+
+                            return `
+                                        <div class="articlerowsub">
+                                            <div class="title">
+                                                <div class="leftone">
+                                                    <br>
+                                                    <p style="max-height: 50px; overflow: hidden;">${pan.client.nom} ${pan.client.prenom}</p>
+                                                    <p>Contact: ${pan.phone}</p>
+                                                    <p>Ville: ${pan.ville}</p>
+                                                    <p style="max-width: 200px;">Lieu: ${pan.lieu}</p>
+                                                </div>
+                                                <div  style="background-color: #eeeeee; height: 130px; width: 2px; margin-left: -50px"></div>
+
+                                                <div class="rightone">
+                                                    <br>
+                                                    <p style="max-height: 50px; overflow: hidden; color: #1d191a">Article: ${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</p>
+                                                    <p style="color: #1d191a">Quantité: ${pani.quantcho}</p>
+                                                    <p style="color: #1d191a">Prix: ${pani.prix} F</p>
+                                                    <p style="color: #1d191a">Barcode: ${pani.arti_id.barcode}</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div style="height: 50px; overflow: hidden; display: flex; justify-content: space-between; align-items: center">
+                                                <div class="leftone">
+                                                    <p class="ouviro" data-toggle="modal" data-target="#optionCancile" onclick="optionCancileView('${pan._id}', '${pani._id}', '${pani.arti_id._id}')">Ouvrir</p>
+                                                </div>
+
+                                                <div class="rightone"">
+                                                    <p style="cursor: pointer" class="statuscor status ${deliveryStatus === 'livré' ? 'delivered' : deliveryStatus === 'en attente' ? 'pending' : deliveryStatus === 'en cours' ? 'shipped' : 'cancelled'}">
+                                                    ${deliveryStatus}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+
+
+                                           
+                                            <div class="imaroso">
+                                                <div style="background-color: ${pani.arti_id.addcoul.substring(0, 7)};">
+                                                    <img src="${pani.arti_id.image[0].ima}" alt="image1">
+                                                </div>
+                                                <span style="width: 10px;"></span>
+                                                <div style="background-color: ${pani.arti_id.addcoul.substring(8, 15)};">
+                                                    <img src="${pani.arti_id.image[1].ima}" alt="image2">
+                                                </div>
+                                                <span style="width: 10px;"></span>
+                                                <div style="background-color: ${pani.arti_id.addcoul.substring(16, 23)};">
+                                                    <img src="${pani.arti_id.image[2].ima}" alt="image3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                        }).join('')}
+                            </div>
+                        `;
+                        adminiSpace.innerHTML = orderHTML;
+                    });
+                }
+                else {
+
+                    addAticlebtn.innerHTML = "";
+                    const commandesHTML = `
+                        <main class="main">
+                        <br>
+                        <br>
+                        <br>
+                        <section class="main__section">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Client <span class="icon-arrow">&UpArrow;</span></th>
+                                        <th>Article <span class="icon-arrow">&UpArrow;</span></th>
+                                        <th style="text-align: center !important;">Prix Unité <span class="icon-arrow">&UpArrow;</span></th>
+                                        <th style="text-align: center !important;">Quantité <span class="icon-arrow">&UpArrow;</span></th>
+                                        <th style="text-align: center !important;"> Statut <span class="icon-arrow">&UpArrow;</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-data">
+                                  
+                                    
+        
+                                </tbody>
+                            </table>
+                        </section>
+                    </main>
+                `;
+                    adminiSpace.innerHTML = commandesHTML;
+                    const tbodyId = document.getElementById('tbody-data');
+                    tbodyId.innerHTML = '';
+                    Orderdata.forEach((pan) => {
+                        pan.articles.forEach((pani) => {
+                            //console.log(pani.arti_id);
+                            const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut == "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
+                            const panierTBODY = `
                         <tr  style="cursor: pointer" data-toggle="modal" data-target="#optionCancile" onclick="optionCancileView('${pan._id}', '${pani._id}', '${pani.arti_id._id}')">
 
                             <td style="color: #ffffff !important">
@@ -520,8 +597,8 @@ const NafigatioTo = async (where) => {
                             <td style="color: #ffffff !important">
                                 <a>${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</a>
                                 <ul>
-                                    <li>Color: <span style="background-color: ${pani.arti_id.color.substring(0, 7)}; color: ${pani.arti_id.color.substring(0, 7)}">${pani.arti_id.color.substring(0, 7)}</span></li>
-                                    <li>Message: <span>${pani.note}</span></li>
+                                    <li>Color: <span style="background-color: ${pani.arti_id.addcoul.substring(0, 7)}; color: ${pani.arti_id.addcoul.substring(0, 7)}">${pani.arti_id.addcoul.substring(0, 7)}</span></li>
+                                    <li>Message: <span>${pani.note ? pani.note : 'Pas de message'}</span></li>
                                     <li>Description: <span>${pani.arti_id ? pani.arti_id.notes : 'Article Supprimé'}</span></li>
                                 </ul>
                             </td>
@@ -543,9 +620,10 @@ const NafigatioTo = async (where) => {
                         </tr>
                     `;
 
-                        tbodyId.innerHTML += panierTBODY;
+                            tbodyId.innerHTML += panierTBODY;
+                        });
                     });
-                });
+                }
 
             }
         };
@@ -715,11 +793,13 @@ const NafigatioTo = async (where) => {
                                 <div class="articlerowsub" >
                                     <div class="title">
                                         <div class="leftone">
+                                            <br>
                                             <p style="max-height: 50px; overflow: hidden;">${pani.addarticle}</p>
                                             <p>Quantité: ${pani.quantity}</p>
                                             <p>Prix: ${pani.addprix} F</p>
                                         </div>
                                         <div class="rightone">
+                                            <br>
                                             <p class="sta shipp"  style="cursor: pointer" data-toggle="modal" data-target="#modArticle" onclick="optionEditeView('${pani._id}')">Ouvrir</p>
                                             <div style="height: 5px"></div>
                                             <p  class="sta" style="font-size: 14px; background-color: ${pani.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${pani.quantity > 0 ? "#ffffff" : "red"}">${pani.quantity > 0 ? "Disponible" : "Finis"}</p>

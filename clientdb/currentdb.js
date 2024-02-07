@@ -350,9 +350,6 @@ function getPanierSend(tocompl) {
             tocompl.articles.push({
                 arti_id: cursor.value._id,
                 quantcho: cursor.value.quantcho,
-                image: cursor.value.imago,
-                color: cursor.value.color,
-                size: cursor.value.size,
                 prix: cursor.value.prix
             });
             cursor.continue();

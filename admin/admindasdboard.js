@@ -30,6 +30,7 @@ async function cancelItemById() {
 };
 
 async function optionCancileView(_id, proid, arti_id) {
+    //console.log(_id, proid, arti_id);
     await openOrdersDatabase();
 
     getDasbordById(_id).then(result => {
@@ -37,78 +38,17 @@ async function optionCancileView(_id, proid, arti_id) {
 
 
         if (product && product.arti_id) {
-            const splo = product.arti_id.addcoul.split(",") ? product.arti_id.addcoul.split(",") : "#eeeeee";
-            const colora = splo[0] == "null" ? "#eeeeee" : splo[0];
-            const colorb = splo[1] == "null" ? "#eeeeee" : splo[1];
-            const colorc = splo[2] == "null" ? "#eeeeee" : splo[2];
-            const colord = splo[3] == "null" ? "#eeeeee" : splo[3];
-            const colore = splo[4] == "null" ? "#eeeeee" : splo[4];
-
-            const sploa = product.arti_id.addtail.split(",") ? product.arti_id.addtail.split(",") : "-";
-            const qsizea = sploa[0] == "null" ? "-" : sploa[0];
-            const qsizeb = sploa[1] == "null" ? "-" : sploa[1];
-            const qsizec = sploa[2] == "null" ? "-" : sploa[2];
-            const qsized = sploa[3] == "null" ? "-" : sploa[3];
-            const qsizee = sploa[4] == "null" ? "-" : sploa[4];
-
+            const splo = product.arti_id.addcoul;
+           
             document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
             document.getElementById('optionViewNewPrice').innerText = `${product.arti_id.addprix} F.CFA`;
-            document.getElementById('rating').innerText = `5 avis`;
-            document.getElementById('quickFour').innerText = `${product.arti_id.addfour}`;
-            document.getElementById('quickDispo').innerText = `${product.arti_id.adddispo}`;
-            document.getElementById('quickType').innerText = `${product.arti_id.addtype}`;
             document.getElementById('productQuantity').value = product.quantcho;
-
-            /*
-                   addarticle: addarticle,
-                   addquant:,
-                   addgenre
-                   addtransage
-                   addreduction: addreduction,
-                   addprix: addprix,
-                   addoccasion
-                   addfour: addfour,
-                   adddispo: adddispo,
-                   addnouveaute
-                   addcoul: addcoul,
-                   addtail: addtail,
-                   addmateri: addmateri,
-                   addmarque
-                   addtype: addtype,
-                   addtypepro
-                   addphone: addphone,
-                   addexpe: addexpe,
-                   who: '',
-                   notes: notes,
-                   image: imas
-               */
-            const quickCouleuHtml = document.getElementById('quickCouleu');
-            const quickTailHtml = document.getElementById('quickTail');
-            quickCouleuHtml.innerHTML = '';
-            quickTailHtml.innerHTML = '';
-
-            const quickColoHTML = `
-                                    <li><a style="background-color: ${colora} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                                    <li><a style="background-color: ${colorb} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                                    <li><a style="background-color: ${colorc} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                                    <li><a style="background-color: ${colord} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                                    <li><a style="background-color: ${colore} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                                    `;
-            quickCouleuHtml.innerHTML = quickColoHTML;
-
-            const quickSizeHTML = `
-                                    <li id="quisizeli0"><a>${qsizea}</a></li>
-                                    <li id="quisizeli1"><a>${qsizeb}</a></li>
-                                    <li id="quisizeli2"><a>${qsizec}</a></li>
-                                    <li id="quisizeli3"><a>${qsized}</a></li>
-                                    <li id="quisizeli4"><a>${qsizee}</a></li>
-                                    `;
-            quickTailHtml.innerHTML = quickSizeHTML;
+      
 
             const orderStatuHtml = document.getElementById('statusOrder');
             orderStatuHtml.innerHTML = '';
             const orderStatus = product.statut === "done" ? "livré" : product.statut == "review" ? "en attente" : product.statut === "onway" ? "en cours" : "échoué";
-            const orderStatu = ` <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">Commande ${orderStatus}</span>
+            const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
                                     `;
             orderStatuHtml.innerHTML = orderStatu;
 
@@ -131,14 +71,10 @@ async function optionCancileView(_id, proid, arti_id) {
             bacgro.style.backgroundColor = product.backgroundColor;
             const modalImage = document.getElementById('ipage');
             modalImage.src = product.arti_id.image[0].ima;
-            const colSizeImage = product.image.split(",");
-            const quickColose = document.getElementById('quickColose');
-            quickColose.innerHTML = '';
-            selctSizea = [];
-            selcta = [];
-            for (let poa = 0; poa < colSizeImage.length; poa++) {
-                quiColorfunb(poa, splo[parseInt(colSizeImage[poa])], product.arti_id.image[parseInt(colSizeImage[poa])].ima)
-                quiSizefunab(parseInt(colSizeImage[poa]), sploa[parseInt(colSizeImage[poa])])
+           
+            
+            for (let poa = 0; poa < 3; poa++) {
+                quiColorfunb(product.arti_id.image[poa].ima)
             }
 
         } else {
@@ -409,28 +345,11 @@ async function getArticleById(_id) {
 
 
 
-let selcta = [];
-
-function quiSizefunab(id, siz) {
-    const one = document.getElementById(`quisizeli${id}`);
-    one.classList.add('active');
-    selcta.push({ id: `quisizeli${id}`, size: siz });
-};
 
 
-let selctSizea = [];
-function quiColorfunb(impo, id, im) {
-    const bacgro = document.getElementById('bagron');
-    bacgro.style.backgroundColor = id;
+function quiColorfunb(im) {
     const modalImage = document.getElementById('ipage');
     modalImage.src = im;
-
-    const quickTailHtml = document.getElementById('quickColose');
-
-    selctSizea.push({ col: id, id: impo });
-
-    const quickSizeHTML = `<li style="background-color: ${id};"><a></a></li>`;
-    quickTailHtml.innerHTML += quickSizeHTML;
 };
 
 

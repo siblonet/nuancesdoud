@@ -264,6 +264,19 @@ textarea {
   line-height: inherit;
 }
 
+.ouviro {
+  cursor: pointer;
+  background-color: #109691a6;
+  color: #054846;
+  padding: 3px 20px 3px 20px;
+  border-radius: 20px;
+}
+
+
+.statuscor{
+  padding: 3px 20px 3px 20px !important;
+  border-radius: 20px !important;
+}
 button,
 input {
   overflow: visible;
