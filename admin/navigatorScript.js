@@ -521,8 +521,8 @@ const NafigatioTo = async (where) => {
                                 <a>${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</a>
                                 <ul>
                                     <li>Color: <span style="background-color: ${pani.color.substring(0, 7)}; color: ${pani.color.substring(0, 7)}">${pani.color.substring(0, 7)}</span></li>
-                                    <li>Size: <span>${pani.size}</span></li>
-                                    <li>Material: <span>${pani.arti_id ? pani.arti_id.addmateri : 'Article Supprimé'}</span></li>
+                                    <li>Message: <span>${pani.note}</span></li>
+                                    <li>Description: <span>${pani.arti_id ? pani.arti_id.notes : 'Article Supprimé'}</span></li>
                                 </ul>
                             </td>
                              
@@ -738,14 +738,6 @@ const NafigatioTo = async (where) => {
                                         <div style="background-color: ${pani.addcoul.substring(16, 23)};">
                                             <img src="${pani.image[2].ima}" alt="image3">
                                         </div>
-                                        <span style="width: 10px;"></span>
-                                        <div style="background-color: ${pani.addcoul.substring(24, 31)};">
-                                            <img src="${pani.image[3].ima}" alt="image4">
-                                        </div>
-                                        <span style="width: 10px;"></span>
-                                        <div style="background-color: ${pani.addcoul.substring(32, 39)};">
-                                            <img src="${pani.image[4].ima}" alt="image5">
-                                        </div>
                                     </div>
                                 </div>
                             `;
@@ -807,9 +799,8 @@ const NafigatioTo = async (where) => {
                             <a style="color: #ffffff !important">${pani.addarticle}</a>
                             <ul>
                                 <li>Color: <span style="background-color: ${pani.addcoul.substring(8, 15)} !important; color: #ffffff; padding-left: 5px; padding-right: 5px">${pani.addcoul.substring(8, 15)}</span></li>
-                                <li>Size: <span>${pani.addtail}</span></li>
-                                <li>Material: <span>${pani.addmateri}</span></li>
-                                <li>Type: <span>${pani.addtype}</span></li>
+                                <li>barcode: <span>${pani.barcode}</span></li>
+                                <li>Description: <span>${pani.notes}</span></li>
                             </ul>
                         </td>
                         <td style="color: #ffffff !important; text-align: center !important;"> 
