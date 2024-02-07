@@ -1146,6 +1146,7 @@ const NavBaractivity = async () => {
         const ordernotif = [];
 
         let odernotnu = 0;
+        let commandos = 0;
         let totalSold = 0;
         if (items && items.length > 0) {
             items.forEach((pan) => {
