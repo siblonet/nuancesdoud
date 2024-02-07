@@ -520,7 +520,7 @@ const NafigatioTo = async (where) => {
                             <td style="color: #ffffff !important">
                                 <a>${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</a>
                                 <ul>
-                                    <li>Color: <span style="background-color: ${pani.color.substring(0, 7)}; color: ${pani.color.substring(0, 7)}">${pani.color.substring(0, 7)}</span></li>
+                                    <li>Color: <span style="background-color: ${pani.arti_id.color.substring(0, 7)}; color: ${pani.arti_id.color.substring(0, 7)}">${pani.arti_id.color.substring(0, 7)}</span></li>
                                     <li>Message: <span>${pani.note}</span></li>
                                     <li>Description: <span>${pani.arti_id ? pani.arti_id.notes : 'Article Supprimé'}</span></li>
                                 </ul>
@@ -720,7 +720,6 @@ const NafigatioTo = async (where) => {
                                             <p>Prix: ${pani.addprix} F</p>
                                         </div>
                                         <div class="rightone">
-                                            <p class="status">Statut</p>
                                             <p class="sta shipp"  style="cursor: pointer" data-toggle="modal" data-target="#modArticle" onclick="optionEditeView('${pani._id}')">Ouvrir</p>
                                             <div style="height: 5px"></div>
                                             <p  class="sta" style="font-size: 14px; background-color: ${pani.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${pani.quantity > 0 ? "#ffffff" : "red"}">${pani.quantity > 0 ? "Disponible" : "Finis"}</p>

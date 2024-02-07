@@ -742,7 +742,7 @@ Navbar CSS
   visibility: visible;
 }
 #background-video{
-  background-color: #007bff;
+  background-color: rgb(187, 148, 50);
 }
 .shoph {
   display: none !important;
