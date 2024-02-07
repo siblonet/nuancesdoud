@@ -1151,6 +1151,8 @@ const NavBaractivity = async () => {
             items.forEach((pan) => {
                 pan.articles.forEach((pani) => {
                     totalSold += pani.statut == "done" ? pani.prix * pani.quantcho : 0;
+                    commandos += 1;
+                    
                     if (pani.statut == "review") {
                         odernotnu += 1;
                         if (ordernotif.length < 3) {
@@ -1164,9 +1166,9 @@ const NavBaractivity = async () => {
             const odernotifi = document.getElementById('odernotifi');
             odernotifi.innerHTML = '';
             document.getElementById('recetteMoney').innerText = `${totalSold} F.CFA`;
+            document.getElementById('CommandesNum').innerText = commandos;
 
             if (odernotnu > 0) {
-                document.getElementById('CommandesNum').innerText = odernotnu;
                 const odernotifiHTML = `
     
                     <i class="fa fa-bell-o"></i>

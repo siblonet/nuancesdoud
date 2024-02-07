@@ -3,7 +3,7 @@ async function selectStatus(sta) {
     const idar = document.getElementById('proid').value;
 
     await sendRequestforOrder('PUT', `orders/statoo/${ido}/${idar}`, { statut: sta });
-    window.location.reload()
+    window.location.href = "/"
 };
 
 async function cancelItemById() {
