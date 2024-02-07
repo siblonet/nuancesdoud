@@ -136,7 +136,7 @@ async function DataLoad() {
             loaderRemove.style.display = "none";
 
         } else {
-            
+
             await openArticleDatabase()
             clearArticle(items.article);
             await openPersonnalizingDatabase()

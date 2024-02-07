@@ -251,7 +251,7 @@ const NafigatioTo = async (where) => {
         `;
 
 
-       
+
 
 
         adminiSpace.innerHTML = dasboardHTML;
@@ -1043,64 +1043,69 @@ const NafigatioTo = async (where) => {
         pErsonnalige();
     }
 }
-
 async function loadOrder() {
-    await openOrdersDatabase()
-    const transactiona = orderdb.transaction(["OrderdStore"], "readonly");
-    const objectStorea = transactiona.objectStore("OrderdStore");
-    const dataa = [];
+    return new Promise((resolve, reject) => {
+        openOrdersDatabase().then(() => {
+            const transactiona = orderdb.transaction(["OrderdStore"], "readonly");
+            const objectStorea = transactiona.objectStore("OrderdStore");
+            const dataa = [];
 
-    objectStorea.openCursor().onsuccess = (event) => {
-        const cursor = event.target.result;
-        if (cursor) {
-            dataa.push(cursor.value);
-            cursor.continue();
-        }
-    };
+            const cursorRequest = objectStorea.openCursor();
 
-    objectStorea.onerror = (event) => {
-        console.log(event.target.error);
-    };
+            cursorRequest.onsuccess = (event) => {
+                const cursor = event.target.result;
+                if (cursor) {
+                    dataa.push(cursor.value);
+                    cursor.continue();
+                } else {
+                    resolve(dataa);
+                }
+            };
 
-    return dataa
-};
+            cursorRequest.onerror = (event) => {
+                reject(event.target.error);
+            };
+        });
+    });
+}
 
 const NavBaractivity = async () => {
-    const items = await loadOrder();
+    try {
+        const items = await loadOrder();
 
-    const ordernotif = [];
+        const ordernotif = [];
 
-    let odernotnu = 0;
-    let totalSold = 0;
-    if (items && items.length > 0) {
-        items.forEach((pan) => {
-            pan.articles.forEach((pani) => {
-                totalSold += pani.statut == "done" ? pani.prix * pani.quantcho : 0;
-                if (pani.statut == "review") {
-                    odernotnu += 1;
-                    if (ordernotif.length < 3) {
-                        ordernotif.push(pan);
+        let odernotnu = 0;
+        let totalSold = 0;
+        if (items && items.length > 0) {
+            items.forEach((pan) => {
+                pan.articles.forEach((pani) => {
+                    totalSold += pani.statut == "done" ? pani.prix * pani.quantcho : 0;
+                    if (pani.statut == "review") {
+                        odernotnu += 1;
+                        if (ordernotif.length < 3) {
+                            ordernotif.push(pan);
+                        }
                     }
-                }
 
+                });
             });
-        });
 
-        const odernotifi = document.getElementById('odernotifi');
-        odernotifi.innerHTML = '';
-        document.getElementById('recetteMoney').innerText = `${totalSold} F.CFA`;
+            const odernotifi = document.getElementById('odernotifi');
+            odernotifi.innerHTML = '';
+            document.getElementById('recetteMoney').innerText = `${totalSold} F.CFA`;
 
-        if (odernotnu > 0) {
-            document.getElementById('CommandesNum').innerText = odernotnu;
-            const odernotifiHTML = `
+            if (odernotnu > 0) {
+                document.getElementById('CommandesNum').innerText = odernotnu;
+                const odernotifiHTML = `
     
                     <i class="fa fa-bell-o"></i>
                     <span class="badge blue" style="background-color: rgb(255, 0, 98);">${odernotnu}</span>
     
                         `;
-            odernotifi.innerHTML = odernotifiHTML;
-            const notification_header = document.getElementById('notification_header');
-            notification_header.innerHTML = `
+                odernotifi.innerHTML = odernotifiHTML;
+                const notification_header = document.getElementById('notification_header');
+                notification_header.innerHTML = `
             <li>
                 <div class="notification_header">
                     <h3>Vous avez ${odernotnu > 1 ? `<i style='color: red'>${odernotnu}</i>` + " nouvelles commandes en attentes" : "<i style='color: red'>Une</i> nouvelle commande en attente"}</h3>
@@ -1117,7 +1122,7 @@ const NavBaractivity = async () => {
                 </a>
             </li>
             ${ordernotif.length > 1 ?
-                    `
+                        `
                
             <li class="odd">
                 <a href="#" class="grid">
@@ -1129,11 +1134,11 @@ const NavBaractivity = async () => {
                 </a>
             </li>
             `
-                    :
-                    ""
-                }
+                        :
+                        ""
+                    }
             ${ordernotif.length > 2 ?
-                    `
+                        `
             <li>
                 <a href="#" class="grid">
                     <div class="user_img"><img src="../assets/img/avatay.png" alt=""></div>
@@ -1144,9 +1149,9 @@ const NavBaractivity = async () => {
                 </a>
             </li>
             `
-                    :
-                    ""
-                }
+                        :
+                        ""
+                    }
             <li>
             <div class="notification_bottom">
                 <a style="cursor: pointer" onclick="NafigatioTo('commandes')" class="bg-primary">Traiter les commandes</a>
@@ -1154,23 +1159,25 @@ const NavBaractivity = async () => {
             </li>
             `;
 
+            } else {
+                const odernotifiHTML = `
+                    <i class="fa fa-bell-o"></i>
+                `;
+                odernotifi.innerHTML = odernotifiHTML;
+            }
         } else {
+
+            const odernotifi = document.getElementById('odernotifi');
+            odernotifi.innerHTML = '';
             const odernotifiHTML = `
                     <i class="fa fa-bell-o"></i>
                 `;
             odernotifi.innerHTML = odernotifiHTML;
         }
-    } else {
 
-        const odernotifi = document.getElementById('odernotifi');
-        odernotifi.innerHTML = '';
-        const odernotifiHTML = `
-                    <i class="fa fa-bell-o"></i>
-                `;
-        odernotifi.innerHTML = odernotifiHTML;
+    } catch (error) {
+        console.error(error);
     }
-
-
 }
 
 
@@ -1238,12 +1245,12 @@ async function getUserandArticles() {
 async function Disconexion() {
     var result = window.confirm("Etes vous sur ne vouloir, vous deconnectez?");
 
-if (result) {
+    if (result) {
 
-    sessionStorage.clear();
-    localStorage.clear();
-    window.location.href = "login"
-}
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = "login"
+    }
 
 };
 
