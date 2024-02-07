@@ -741,7 +741,9 @@ Navbar CSS
   opacity: 1;
   visibility: visible;
 }
-
+#background-video{
+  background-color: #007bff;
+}
 .shoph {
   display: none !important;
 }

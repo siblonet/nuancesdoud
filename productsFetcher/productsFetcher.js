@@ -142,7 +142,7 @@ async function DataLoad() {
             await openPersonnalizingDatabase()
             clearSetting(items.pagesetting);
             await openOrdersDatabase()
-            console.log(items.order);
+            //console.log(items.order);
             clearOrdersa(items.order);
         }
 
