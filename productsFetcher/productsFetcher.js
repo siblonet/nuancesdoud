@@ -175,8 +175,9 @@ async function DataLoad() {
 
 
 const sessi = sessionStorage.getItem('session');
-if (!sessi) {
-    DataLoad();
+//if (!sessi) {
+if ("avoid reload" === "avoid reload") {
+        DataLoad();
 
 } else {
     async function loadData() {

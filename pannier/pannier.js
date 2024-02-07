@@ -1,5 +1,4 @@
 async function Pannier(ad) {
-
     if (ad === "rapide") {
 
     }
@@ -32,21 +31,8 @@ async function getArticleByIdforpaniera(idm, quand) {
             const element = document.getElementById('hidlater');
             element.classList.remove('hiddendshow');
             element.classList.add('hiddendhid');
-
-            let sizo = "";
-            let imago = "";
-            selct.forEach((si, index) => sizo += index + 1 == selct.length ? si.size : si.size + ",");
-
-            let cilor = "";
-            selctSize.forEach((si, index) => {
-                cilor += index + 1 == selctSize.length ? si.col : si.col + ",";
-                imago += index + 1 == selctSize.length ? si.id : si.id + ","
-            });
             prod.quantcho = quand;
             prod.prix = prod.addprix;
-            prod.imago = selctSize.length > 0 ? imago : "0";
-            prod.color = selctSize.length > 0 ? cilor : prod.addcoul.substring(0, 7);
-            prod.size = selct.length > 0 ? sizo : prod.addtail[2] == "," ? prod.addtail[0] + prod.addtail[1] : prod.addtail[0];
             TotalAll("post", prod);
         } else {
             document.getElementById('modalcoma').style.display = "block";
@@ -94,9 +80,6 @@ async function getArticleByIdforpanier(_id) {
 
         prod.quantcho = 1;
         prod.prix = prod.addprix;
-        prod.imago = "0";
-        prod.color = prod.addcoul.substring(0, 7);
-        prod.size = prod.addtail[2] == "," ? prod.addtail[0] + prod.addtail[1] : prod.addtail[0];
         TotalAll("post", prod);
     };
 
@@ -116,9 +99,6 @@ async function getArticleByIdforpanierOr(_id) {
 
         prod.quantcho = 1;
         prod.prix = prod.addprix;
-        prod.imago = "0";
-        prod.color = prod.addcoul.substring(0, 7);
-        prod.size = prod.addtail[2] == "," ? prod.addtail[0] + prod.addtail[1] : prod.addtail[0];
         TotalAll("post", prod);
     };
 
@@ -150,16 +130,12 @@ function getallData() {
                         <tr>
                             <td class="product-thumbnail">
                                 <a href="#">
-                                    <img src="${pani.image[parseInt(pani.imago[0])].ima}" alt="item">
+                                    <img src="${pani.image[0].ima}" alt="item">
                                 </a>
                             </td>
                             <td class="product-name">
                                 <a href="#">${pani.addarticle}</a>
-                                <ul>
-                                    <li>Color: <span style="background-color: ${pani.color.substring(0, 7)}; color: ${pani.color.substring(0, 7)}">${pani.color.substring(0, 7)}</span></li>
-                                    <li>Size: <span>${pani.size}</span></li>
-                                    <li>Material: <span>${pani.addmateri}</span></li>
-                                </ul>
+                               
                             </td>
                             <td class="product-price">
                                 <span class="unit-amount">${pani.prix} F</span>
@@ -235,7 +211,7 @@ function getallDataa() {
                                     <span>${panner.length}</span>
                                 `;
                 pannierNumber1.innerHTML += panniernumHTML1;
-               
+
 
 
 
@@ -262,11 +238,15 @@ function getallDataa() {
                     const productHTML = `
                                         <div class="products-cart">
                                             <div class="products-image">
-                                                <a href="#"><img src="${pro.image[parseInt(pro.imago[0])].ima}" alt="image"></a>
+                                                <a>
+                                                <img src="${pro.image[0].ima}" alt="image">
+                                                </a>
                                             </div>
                                             <div class="products-content">
-                                                <h3><a href="#">${pro.addarticle}</a></h3>
-                                                <span>Bleu / XS</span>
+                                                <h3>
+                                                    <h3>${pro.addarticle}</h3>
+                                                </h3>
+                                                <span>Parfum</span>
                                                 <div class="products-price">
                                                     <span>${pro.quantcho}</span>
                                                     <span>x</span>
@@ -274,7 +254,9 @@ function getallDataa() {
                                                     <span>=</span>
                                                     <span class="price">${pro.prix * pro.quantcho}</span>
                                                 </div>
-                                                <a style="cursor: pointer !important;" class="remove-btn" onclick="removeItemById('${pro._id}')"><i class="bx bx-trash"></i></a>
+                                                <a style="cursor: pointer !important;" class="remove-btn" onclick="removeItemById('${pro._id}')">
+                                                    <i class="bx bx-trash"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         `;
@@ -339,7 +321,7 @@ function getallDataa() {
                                     <i class="bx bx-shopping-bag"></i>
                                 `;
                 pannierNumber1.innerHTML += panniernumHTML1;
-                
+
 
 
                 pannierNumber2.innerHTML = ''; // Clear previous content

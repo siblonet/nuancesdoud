@@ -1,7 +1,7 @@
 let recenProd = [];
-let selct = [];
-let selctSize = [];
 let isAdmin = false;
+let imagefolder = [];
+
 
 function getUsenam() {
     const tokens = sessionStorage.getItem('tibule');
@@ -162,7 +162,7 @@ function recentProduct(recenPr) {
                                         </li>
                                         <li>
                                             <div class="compare-btn">
-                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="details.html?ov=${product._id}}">
+                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                                     <i class="bx bx-refresh"></i>
                                                     <span class="tooltip-label">Plus infos</span>
                                                 </a>
@@ -204,8 +204,8 @@ function recentProduct(recenPr) {
 
 
                             <div class="products-content">
-                                <span class="category" style="color: ${product.addcoul.substring(0, 7)};">${product.addtypepro}</span>
-                                <h3><a href="details.html?ov=${product._id}">${product.addarticle}</a></h3>
+                                <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
+                                <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
                                 <div class="star-rating">
                                     <i class="bx bxs-star"></i>
                                     <i class="bx bxs-star"></i>
@@ -232,13 +232,6 @@ function recentProduct(recenPr) {
                                     -${percentDf.toFixed()}%
                                 </span>
                             </span>
-                            ${product.addnouveaute == "NOUVEAU" ?
-                            `
-                                <i class="nouveau">Nouveautés</i>
-                                `
-                            :
-                            ""
-                        }
                               `
                         :
                         ""
@@ -254,7 +247,7 @@ function recentProduct(recenPr) {
                     <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
 
                         <a style="cursor: pointer !important;"
-                            href="details.html?ov=${product._id}">
+                            href="detaila?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
                             <img src="${product.image[1].ima}" class="hover-image" alt="image"> 
                         </a>
@@ -271,7 +264,7 @@ function recentProduct(recenPr) {
                             </li>
                             <li>
                                 <div class="compare-btn">
-                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="details.html?ov=${product._id}}">
+                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                         <i class="bx bx-refresh"></i>
                                         <span class="tooltip-label">Plus infos</span>
                                     </a>
@@ -287,14 +280,8 @@ function recentProduct(recenPr) {
                             </li>
                         </ul>
                     </div>
-                    ${product.addnouveaute == "NOUVEAU" && product.addreduction < product.addprix ?
-                        `
-            <div class="new-tag">Nouveautés</div>
-            `
-                        :
-                        ""
-                    } 
-                    ${product.addoccasion == "PROMO" ?
+                    
+                    ${product.addoccasion == "Promo" ?
                         `
                             <div class="new-tage">Promo</div>
                         `
@@ -302,7 +289,7 @@ function recentProduct(recenPr) {
                         ""
                     }
 
-                    ${product.addoccasion == "SOLD" ?
+                    ${product.addoccasion == "Sold" ?
                         `
                         <div class="sale-tag">Solde</div>
                     `
@@ -313,8 +300,8 @@ function recentProduct(recenPr) {
 
 
                 <div class="products-content">
-                    <span class="category" style="color: ${product.addcoul.substring(0, 7)};">${product.addtypepro}</span>
-                    <h3><a href="details.html?ov=${product._id}">${product.addarticle}</a></h3>
+                    <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
+                    <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
                     <div class="star-rating">
                         <i class="bx bxs-star"></i>
                         <i class="bx bxs-star"></i>
@@ -340,13 +327,6 @@ function recentProduct(recenPr) {
                     <span>
                         -${percentDf.toFixed()}%
                     </span>
-                    ${product.addnouveaute == "NOUVEAU" ?
-                            `
-                    <i class="nouveau">Nouveautés</i>
-                    `
-                            :
-                            ""
-                        }
                 </span>
                   `
                         :
@@ -418,8 +398,6 @@ function recentProduct(recenPr) {
 
 
 async function showProductQuickView(a, productId) {
-    selct = [];
-    selctSize = [];
     //await openDatabase();
     const transaction = panierdb.transaction(["PannierContent"], "readonly");
     const objectStore = transaction.objectStore("PannierContent");
@@ -441,27 +419,15 @@ async function showProductQuickView(a, productId) {
     getRequesta.onsuccess = (event) => {
         const product = event.target.result;
         if (!result) {
+            imagefolder = product.image;
+
             const splo = product.addcoul.split(",") ? product.addcoul.split(",") : "#eeeeee";
             const colora = splo[0] == "null" ? "#eeeeee" : splo[0];
-            const colorb = splo[1] == "null" ? "#eeeeee" : splo[1];
-            const colorc = splo[2] == "null" ? "#eeeeee" : splo[2];
-            const colord = splo[3] == "null" ? "#eeeeee" : splo[3];
-            const colore = splo[4] == "null" ? "#eeeeee" : splo[4];
-
-            const sploa = product.addtail.split(",") ? product.addtail.split(",") : "-";
-            const qsizea = sploa[0] == "null" ? "-" : sploa[0];
-            const qsizeb = sploa[1] == "null" ? "-" : sploa[1];
-            const qsizec = sploa[2] == "null" ? "-" : sploa[2];
-            const qsized = sploa[3] == "null" ? "-" : sploa[3];
-            const qsizee = sploa[4] == "null" ? "-" : sploa[4];
 
             document.getElementById('coloholder').innerText = product.addcoul;
 
             document.getElementById('addToCartBtn').style.backgroundColor = colora;
             document.getElementById('addToCartBtn').style.borderColor = colora;
-
-            const quickChosingHtml = document.getElementById('quickColose');
-            quickChosingHtml.innerHTML = '';
 
             document.getElementById('quickViewProductName').innerText = product.addarticle;
             document.getElementById('quickViewProductName').style.color = `${colora}`;
@@ -470,37 +436,14 @@ async function showProductQuickView(a, productId) {
 
             document.getElementById('quickViewNewPrice').innerText = `${product.addprix} F.CFA`;
             document.getElementById('rating').innerText = `5 avis`;
-            document.getElementById('quickFour').innerText = `${product.addfour}`;
-            document.getElementById('quickDispo').innerText = `${product.adddispo}`;
-            document.getElementById('quickType').innerText = `${product.addtype}`;
+            document.getElementById('descrip').innerText = product.notes;
+
 
             let prodque = document.getElementById('productQuantity');
             if (prodque) {
                 prodque.value = 1
             };
 
-            const quickCouleuHtml = document.getElementById('quickCouleu');
-            const quickTailHtml = document.getElementById('quickTail');
-            quickCouleuHtml.innerHTML = '';
-            quickTailHtml.innerHTML = '';
-
-            const quickColoHTML = `
-                            <li><a onclick="quiColorfun('0', '${colora}', '${product.image[0].ima}')" style="cursor: pointer !important; background-color: ${colora} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('1', '${colorb}', '${product.image[1].ima}')" style="cursor: pointer !important; background-color: ${colorb} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('2', '${colorc}', '${product.image[2].ima}')" style="cursor: pointer !important; background-color: ${colorc} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('3', '${colord}', '${product.image[3].ima}')" style="cursor: pointer !important; background-color: ${colord} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('4', '${colore}', '${product.image[4].ima}')" style="cursor: pointer !important; background-color: ${colore} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            `
-            quickCouleuHtml.innerHTML = quickColoHTML;
-
-            const quickSizeHTML = `
-                            <li><a id="quisizelia" onclick="quiSizefun('a', '${qsizea}')" style="cursor: pointer !important; border-color: ${colora}; color: ${colora}">${qsizea}</a></li>
-                            <li><a id="quisizelib" onclick="quiSizefun('b', '${qsizeb}')" style="cursor: pointer !important">${qsizeb}</a></li>
-                            <li><a id="quisizelic" onclick="quiSizefun('c', '${qsizec}')" style="cursor: pointer !important">${qsizec}</a></li>
-                            <li><a id="quisizelid" onclick="quiSizefun('d', '${qsized}')" style="cursor: pointer !important">${qsized}</a></li>
-                            <li><a id="quisizelie" onclick="quiSizefun('e', '${qsizee}')" style="cursor: pointer !important">${qsizee}</a></li>
-                            `
-            quickTailHtml.innerHTML = quickSizeHTML;
             document.getElementById('idp').value = product.who;
             document.getElementById('ido').value = `${product._id}`;
 
@@ -512,9 +455,9 @@ async function showProductQuickView(a, productId) {
             const bacgro = document.getElementById('bagron');
             bacgro.style.backgroundColor = `${colora}`;
             const modalImage = document.getElementById('ipage');
-            modalImage.src = a == "a" ? product.image[0].ima : product.image[1].ima;
+            modalImage.src = imagefolder[0].ima;
 
-            const newURL = `details.html?ov=${product._id}`;  // Replace with the desired new URL
+            const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
 
             const linkElement = document.getElementById('change-url');
 
@@ -524,60 +467,24 @@ async function showProductQuickView(a, productId) {
         } else {
             const splo = product.addcoul.split(",") ? product.addcoul.split(",") : "#eeeeee";
             const colora = splo[0] == "null" ? "#eeeeee" : splo[0];
-            const colorb = splo[1] == "null" ? "#eeeeee" : splo[1];
-            const colorc = splo[2] == "null" ? "#eeeeee" : splo[2];
-            const colord = splo[3] == "null" ? "#eeeeee" : splo[3];
-            const colore = splo[4] == "null" ? "#eeeeee" : splo[4];
 
-            const sploa = product.addtail.split(",") ? product.addtail.split(",") : "-";
-            const qsizea = sploa[0] == "null" ? "-" : sploa[0];
-            const qsizeb = sploa[1] == "null" ? "-" : sploa[1];
-            const qsizec = sploa[2] == "null" ? "-" : sploa[2];
-            const qsized = sploa[3] == "null" ? "-" : sploa[3];
-            const qsizee = sploa[4] == "null" ? "-" : sploa[4];
             document.getElementById('coloholder').innerText = product.addcoul;
 
             document.getElementById('addToCartBtn').style.backgroundColor = colora;
             document.getElementById('addToCartBtn').style.borderColor = colora;
 
-            const quickChosingHtml = document.getElementById('quickColose');
-            quickChosingHtml.innerHTML = '';
             document.getElementById('quickViewProductName').innerText = product.addarticle;
             document.getElementById('quickViewProductName').style.color = `${colora}`;
             document.getElementById('quickViewOldPrice').innerText = product.addreduction > product.addprix ? `${product.addreduction} F.CFA` : "";
             document.getElementById('quickViewNewPrice').innerText = `${product.addprix} F.CFA`;
             document.getElementById('rating').innerText = `5 avis`;
-            document.getElementById('quickFour').innerText = `${product.addfour}`;
-            document.getElementById('quickDispo').innerText = `${product.adddispo}`;
-            document.getElementById('quickType').innerText = `${product.addtype}`;
 
             let prodque = document.getElementById('productQuantity');
             if (prodque) {
                 prodque.value = 1
             };
 
-            const quickCouleuHtml = document.getElementById('quickCouleu');
-            const quickTailHtml = document.getElementById('quickTail');
-            quickCouleuHtml.innerHTML = '';
-            quickTailHtml.innerHTML = '';
 
-            const quickColoHTML = `
-                            <li><a onclick="quiColorfun('0', '${colora}', '${product.image[0].ima}')" style="cursor: pointer !important; background-color: ${colora} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('1', '${colorb}', '${product.image[1].ima}')" style="cursor: pointer !important; background-color: ${colorb} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('2', '${colorc}', '${product.image[2].ima}')" style="cursor: pointer !important; background-color: ${colorc} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('3', '${colord}', '${product.image[3].ima}')" style="cursor: pointer !important; background-color: ${colord} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            <li><a onclick="quiColorfun('4', '${colore}', '${product.image[4].ima}')" style="cursor: pointer !important; background-color: ${colore} !important; border: 1px solid #f8f8f8 !important"></a></li>
-                            `
-            quickCouleuHtml.innerHTML = quickColoHTML;
-
-            const quickSizeHTML = `
-                            <li><a id="quisizelia" onclick="quiSizefun('a', '${qsizea}')" style="cursor: pointer !important; border-color: ${colora}; color: ${colora}">${qsizea}</a></li>
-                            <li><a id="quisizelib" onclick="quiSizefun('b', '${qsizeb}')" style="cursor: pointer !important">${qsizeb}</a></li>
-                            <li><a id="quisizelic" onclick="quiSizefun('c', '${qsizec}')" style="cursor: pointer !important">${qsizec}</a></li>
-                            <li><a id="quisizelid" onclick="quiSizefun('d', '${qsized}')" style="cursor: pointer !important">${qsized}</a></li>
-                            <li><a id="quisizelie" onclick="quiSizefun('e', '${qsizee}')" style="cursor: pointer !important">${qsizee}</a></li>
-                            `
-            quickTailHtml.innerHTML = quickSizeHTML;
             document.getElementById('idp').value = product.who;
             document.getElementById('ido').value = `${product._id}`;
 
@@ -590,9 +497,9 @@ async function showProductQuickView(a, productId) {
             bacgro.style.backgroundColor = `${colora}`;
 
             const modalImage = document.getElementById('ipage');
-            modalImage.src = a == "a" ? product.image[0].ima : product.image[1].ima;
+            modalImage.src = product.image[0].ima;
 
-            const newURL = `details.html?ov=${product._id}`;  // Replace with the desired new URL
+            const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
 
             const linkElement = document.getElementById('change-url');
 
@@ -609,172 +516,9 @@ async function showProductQuickView(a, productId) {
 };
 
 
-function quiSizefun(id, siz) {
-    const colo = document.getElementById("coloholder").innerText;
 
-    if (selct.length == 0 && `quisizeli${id}` !== "quisizelia") {
-        const onea = document.getElementById("quisizelia");
-        const one = document.getElementById(`quisizeli${id}`);
-        onea.style.color = "#858585";
-        onea.style.borderColor = "#eeeeee";
-        switch (id) {
-            case "a":
-                one.style.color = colo.substring(0, 7);
-                one.style.borderColor = colo.substring(0, 7);
-                break;
-            case "b":
-                one.style.color = colo.substring(8, 15);
-                one.style.borderColor = colo.substring(8, 15);
-                break;
-
-            case "c":
-                one.style.color = colo.substring(16, 23);
-                one.style.borderColor = colo.substring(16, 23);
-                break;
-
-            case "d":
-                one.style.color = colo.substring(24, 31);
-                one.style.borderColor = colo.substring(24, 31);
-                break;
-
-            case "e":
-                one.style.color = colo.substring(32, 39);
-                one.style.borderColor = colo.substring(32, 39);
-                break;
-
-            default:
-                break;
-        }
-        selct.push({ id: `quisizeli${id}`, size: siz });
-    } else {
-        let prodque = document.getElementById('productQuantity').value;
-        if (parseInt(prodque) + 1 > selct.length + 1) {
-            const one = document.getElementById(`quisizeli${id}`);
-            switch (id) {
-                case "a":
-                    one.style.color = colo.substring(0, 7);
-                    one.style.borderColor = colo.substring(0, 7);
-                    break;
-                case "b":
-                    one.style.color = colo.substring(8, 15);
-                    one.style.borderColor = colo.substring(8, 15);
-                    break;
-
-                case "c":
-                    one.style.color = colo.substring(16, 23);
-                    one.style.borderColor = colo.substring(16, 23);
-                    break;
-
-                case "d":
-                    one.style.color = colo.substring(24, 31);
-                    one.style.borderColor = colo.substring(24, 31);
-                    break;
-
-                case "e":
-                    one.style.color = colo.substring(32, 39);
-                    one.style.borderColor = colo.substring(32, 39);
-                    break;
-
-                default:
-                    break;
-            }
-
-            selct.push({ id: `quisizeli${id}`, size: siz });
-        } else {
-            selct.forEach(ee => {
-                const one = document.getElementById(`${ee.id}`);
-                one.style.color = "#858585";
-                one.style.borderColor = "#eeeeee";
-            });
-            selct = [];
-            const one = document.getElementById(`quisizeli${id}`);
-            switch (id) {
-                case "a":
-                    one.style.color = colo.substring(0, 7);
-                    one.style.borderColor = colo.substring(0, 7);
-                    break;
-                case "b":
-                    one.style.color = colo.substring(8, 15);
-                    one.style.borderColor = colo.substring(8, 15);
-                    break;
-
-                case "c":
-                    one.style.color = colo.substring(16, 23);
-                    one.style.borderColor = colo.substring(16, 23);
-                    break;
-
-                case "d":
-                    one.style.color = colo.substring(24, 31);
-                    one.style.borderColor = colo.substring(24, 31);
-                    break;
-
-                case "e":
-                    one.style.color = colo.substring(32, 39);
-                    one.style.borderColor = colo.substring(32, 39);
-                    break;
-
-                default:
-                    break;
-            }
-            selct.push({ id: `quisizeli${id}`, size: siz });
-        };
-    }
-
-};
-
-function quiColorfun(impo, id, im) {
-    const bacgro = document.getElementById('bagron');
-    bacgro.style.backgroundColor = id;
+function quickImagechanger(impog) {
     const modalImage = document.getElementById('ipage');
-    modalImage.src = im;
-    let proquant = document.getElementById('productQuantity').value;
-
-
-
-    document.getElementById('quickViewProductName').style.color = id;
-    document.getElementById('addToCartBtn').style.backgroundColor = id;
-    document.getElementById('addToCartBtn').style.borderColor = id;
-
-
-
-
-    const quickTailHtml = document.getElementById('quickColose');
-    quickTailHtml.innerHTML = '';
-
-    if (selctSize.length == 0 && parseInt(proquant) == 1) {
-        selctSize.push({ col: id, id: impo });
-
-        const quickSizeHTML = `<li style="background-color: ${id};"><a onclick="quiColoremo(${0})" style="cursor: pointer !important"></a></li>`;
-        quickTailHtml.innerHTML = quickSizeHTML;
-
-    } else {
-        if (parseInt(proquant) > selctSize.length) {
-            selctSize.push({ col: id, id: impo });
-            let quickSizeHTML = '';
-            selctSize.forEach((coa, index) => {
-                quickSizeHTML += `<li style="background-color: ${coa.col};"><a onclick="quiColoremo('${index}')" style="cursor: pointer !important"></a></li>`;
-            });
-            quickTailHtml.innerHTML = quickSizeHTML;
-        } else {
-            selctSize = [];
-            selctSize.push({ col: id, id: impo });
-            const quickSizeHTML = `<li style="background-color: ${id};"><a onclick="quiColoremo(${0})" style="cursor: pointer !important"></a></li>`;
-            quickTailHtml.innerHTML = quickSizeHTML;
-        }
-    }
-}
-
-function quiColoremo(pos) {
-    const quickTailHtml = document.getElementById('quickColose');
-    quickTailHtml.innerHTML = '';
-    if (pos >= 0 && pos < selctSize.length) {
-        selctSize.splice(pos, 1);
-        let quickSizeHTML = '';
-        selctSize.forEach((coa, index) => {
-            quickSizeHTML += `<li style="background-color: ${coa.col};"><a onclick="quiColoremo('${index}')" style="cursor: pointer !important"></a></li>`;
-        });
-        quickTailHtml.innerHTML = quickSizeHTML;
-
-    }
+    modalImage.src = imagefolder[impog].ima;
 
 }
