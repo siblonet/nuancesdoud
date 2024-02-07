@@ -19,10 +19,10 @@ async function cancelItemById() {
         const vin_or = Orderdata.find(re => re._id === ido);
         if (vin_or.articles.length > 1) {
             await sendRequestforOrder('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
-    
+
         } else {
             await sendRequestforOrder('DELETE', `orders/${ido}/${arti_id}/${quan}`);
-    
+
         }
         window.location.reload()
     }
@@ -212,7 +212,7 @@ function removeImageEdite(id) {
         if (removedImage) {
             removedImage.ima = "one";
         }
-    
+
         imasEdi.forEach((ed, index) => {
             const imagePreview = document.getElementById(`Editeimage${index + 1}`);
             imagePreview.innerHTML = '';
@@ -237,45 +237,27 @@ async function EditeViewArticle() {
         const addarticle = document.getElementById('Editearticle').value;
         const addquant = parseInt(document.getElementById('Editequant').value);
         const addgenre = document.getElementById('Editegenre').value;
-        const addtransage = document.getElementById('Editetransage').value;
         const addprix = document.getElementById('Editeprix').value;
         const addreduction = document.getElementById('Editereduction').value;
         const addoccasion = document.getElementById('Editeoccasion').value;
-        const addfour = document.getElementById('Editefour').value;
-        const adddispo = document.getElementById('Editedispo').value;
-        const addnouveaute = document.getElementById('Editenouveaute').value;
         const addcoul = document.getElementById('Editecoul').value;
-        const addtail = document.getElementById('Editetail').value;
-        const addmateri = document.getElementById('Editemateri').value;
         const addmarque = document.getElementById('Editemarque').value;
-        const addtype = document.getElementById('Editetype').value;
-        const addtypepro = document.getElementById('Editetypepro').value;
-        const addphone = document.getElementById('Editephone').value;
-        const addexpe = document.getElementById('Editeexpe').value;
+        const addbarcode = document.getElementById('Editebarcode').value;
         const notes = document.getElementById('Editenotes').value;
 
 
-        if (addarticle && addgenre && addtransage && addprix && addfour && adddispo && addcoul && addtail && addmateri && addmarque && addtype && addtypepro && addphone && addexpe && notes) {
+        if (addarticle && addgenre && addbarcode && addprix && addcoul && addmarque && notes) {
             const product = {
                 addarticle: addarticle,
                 quantity: parseInt(addquant),
                 addgenre: addgenre,
-                addtransage: addtransage,
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
                 addoccasion: addoccasion,
-                addfour: addfour,
-                adddispo: adddispo,
-                addnouveaute: addnouveaute,
                 addcoul: addcoul,
-                addtail: addtail,
-                addmateri: addmateri,
                 addmarque: addmarque,
-                addtype: addtype,
-                addtypepro: addtypepro,
-                addphone: addphone,
-                addexpe: addexpe,
                 notes: notes,
+                barcode: addbarcode,
                 image: imasEdi
 
             };
@@ -308,23 +290,16 @@ async function optionEditeView(_id) {
         document.getElementById('Editearticle').value = product.addarticle;
         document.getElementById('Editequant').value = parseInt(product.quantity);
         document.getElementById('Editegenre').value = product.addgenre;
-        document.getElementById('Editetransage').value = product.addtransage;
         document.getElementById('Editereduction').value = product.addreduction;
         document.getElementById('Editeprix').value = product.addprix;
         document.getElementById('Editeoccasion').value = product.addoccasion;
-        document.getElementById('Editefour').value = product.addfour;
-        document.getElementById('Editedispo').value = product.adddispo;
-        document.getElementById('Editenouveaute').value = product.addnouveaute;
         document.getElementById('Editecoul').value = product.addcoul;
-        document.getElementById('Editetail').value = product.addtail;
-        document.getElementById('Editemateri').value = product.addmateri;
         document.getElementById('Editemarque').value = product.addmarque;
-        document.getElementById('Editetype').value = product.addtype;
-        document.getElementById('Editetypepro').value = product.addtypepro;
-        document.getElementById('Editephone').value = product.addphone;
-        document.getElementById('Editeexpe').value = product.addexpe;
+        document.getElementById('Editebarcode').value = product.barcode;
         document.getElementById('Editenotes').value = product.notes;
 
+        /*Editetransage Editeexpe Editefour Editephone Editetypepro Editetype Editemateri Editedispo Editetail Editenouveaute*/
+        /*addtransage addexpe addfour addphone addtypepro addtype addmateri adddispo addtail addnouveaute*/
 
         product.image.forEach((ed, index) => {
             const imagePreview = document.getElementById(`Editeimage${index + 1}`);

@@ -223,21 +223,12 @@ function AddArticleTest() {
         "addarticle": "Chemise nuance à manches court",
         "quantity": 1,
         "addgenre": "Homme",
-        "addtransage": "17-55",
         "addprix": 5,
         "addreduction": 4,
         "addoccasion": "promo",
-        "addfour": "nuance",
         "adddispo": "En stock (1articles)",
-        "addnouveaute": "NOUVEAU",
         "addcoul": "#f0cdc4,#05208f,#f0cdc4,#05208f,05208f",
-        "addtail": "XL,X,M,L,XS",
-        "addmateri": "Coton",
         "addmarque": "nuance",
-        "addtype": "ACCOUTREMENT",
-        "addtypepro": "Chemise",
-        "addphone": "0768020606",
-        "addexpe": "Non",
         "notes": "Une chemise très belle",
         "image": [
             { "ima": "https://storage.googleapis.com/seeme-7a462.appspot.com/7b3c83ed-2b5b-435d-a9ea-4657597df12echemisenobeb.jpeg" },
@@ -268,47 +259,32 @@ function AddArticle() {
         const addarticle = document.getElementById('addarticle').value;
         const addquant = document.getElementById('addquant').value;
         const addgenre = document.getElementById('addgenre').value;
-        const addtransage = document.getElementById('addtransage').value;
         const addprix = document.getElementById('addprix').value;
         const addreduction = document.getElementById('addreduction').value;
         const addoccasion = document.getElementById('addoccasion').value;
-
-        const addfour = document.getElementById('addfour').value;
-        const adddispo = document.getElementById('adddispo').value;
-        const addnouveaute = document.getElementById('addnouveaute').value;
+        const addbarcode = document.getElementById('addbarcode').value;
 
         const addcoul = document.getElementById('addcoul').value;
-        const addtail = document.getElementById('addtail').value;
-        const addmateri = document.getElementById('addmateri').value;
         const addmarque = document.getElementById('addmarque').value;
-
-        const addtype = document.getElementById('addtype').value;
-        const addtypepro = document.getElementById('addtypepro').value;
-        const addphone = document.getElementById('addphone').value;
-        const addexpe = document.getElementById('addexpe').value;
         const notes = document.getElementById('notes').value;
 
-        if (addarticle && addgenre && addtransage && addprix && addfour && adddispo && addcoul && addtail && addmateri && addmarque && addtype && addtypepro && addphone && addexpe && notes && imas.length > 4) {
+
+
+
+
+
+        if (addarticle && addgenre && addbarcode && addprix && addmarque && notes && imas.length > 2) {
             const product = {
                 addarticle: addarticle,
                 quantity: parseInt(addquant),
                 addgenre: addgenre,
-                addtransage: addtransage,
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
                 addoccasion: addoccasion,
-                addfour: addfour,
-                adddispo: adddispo,
-                addnouveaute: addnouveaute,
-                addcoul: addcoul,
-                addtail: addtail,
-                addmateri: addmateri,
+                addcoul: addcoul ? addcoul : "#ffffff,#ffffff,#ffffff",
                 addmarque: addmarque,
-                addtype: addtype,
-                addtypepro: addtypepro,
-                addphone: addphone,
-                addexpe: addexpe,
                 notes: notes,
+                barcode: addbarcode,
                 owner: "nuance",
                 image: imas
             };

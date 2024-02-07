@@ -7,7 +7,7 @@ function getUsenam() {
     const tokens = sessionStorage.getItem('tibule');
     if (tokens && tokens.split("°")) {
         const sploz = tokens.split("°");
-        const admin = sploz[5];
+        const admin = sploz[6];
         const usernam = document.getElementById('usernam');
         const usernama = document.getElementById('usernama');
 
@@ -385,7 +385,7 @@ function recentProduct(recenPr) {
                         <img src="assets/img/error-404.png" alt="Le magasin est vide">
                     </div>
                         
-                    ${tokens && tokens.split("°") && tokens.split("°")[5] == "GIFV" ?
+                    ${tokens && tokens.split("°") && tokens.split("°")[6] == "GIFV" ?
                 `
                             <br>
                             <br>

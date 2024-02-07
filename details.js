@@ -5,7 +5,7 @@ function getUsenam() {
     const tokens = sessionStorage.getItem('tibule');
     if (tokens && tokens.split("°")) {
         const sploz = tokens.split("°");
-        const admin = sploz[5];
+        const admin = sploz[6];
         const usernam = document.getElementById('usernam');
         const usernama = document.getElementById('usernama');
         usernam.innerHTML = '';
