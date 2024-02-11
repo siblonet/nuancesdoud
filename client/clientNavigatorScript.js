@@ -80,14 +80,14 @@ const NafigatioTo = async (where) => {
                                 <div class="col-sm-6 pr-sm-2 statistics-grid">
                                     <div class="card card_border border-primary-topa p-4" style="cursor: pointer;" onclick="NafigatioTo('commandes')">
                                         <i class="lnr lnr-cart"> </i>
-                                        <h3 class="text-primary number" id="oderLivre">0</h3>
+                                        <h3 class="text-primary number" id="oderLivre">En cours...</h3>
                                         <p class="stat-text">Commandes Livré</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 pl-sm-2 statistics-grid">
                                     <div class="card card_border border-primary-topc p-4" style="cursor: pointer" onclick="NafigatioTo('commandes')">
                                         <i class="lnr lnr-cart"> </i>
-                                        <h3 class="text-success number" id="oderCours">0</h3>
+                                        <h3 class="text-success number" id="oderCours">En cours...</h3>
                                         <p class="stat-text">Commandes en cours</p>
                                     </div>
                                 </div>
@@ -98,14 +98,14 @@ const NafigatioTo = async (where) => {
                                 <div class="col-sm-6 pr-sm-2 statistics-grid">
                                     <div class="card card_border border-primary-topb p-4" style="cursor: pointer;" onclick="NafigatioTo('commandes')">
                                         <i class="lnr lnr-cart"> </i>
-                                        <h3 class="text-secondary number" id="oderAttent">0</h3>
+                                        <h3 class="text-secondary number" id="oderAttent">En cours...</h3>
                                         <p class="stat-text">Commandes en attente</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 pl-sm-2 statistics-grid">
                                     <div class="card card_border border-primary-topd p-4" style="cursor: pointer;" onclick="NafigatioTo('commandes')">
                                     <i class="lnr lnr-cart"> </i>
-                                    <h3 class="text-red number"  id="oderEchoue">0</h3>
+                                    <h3 class="text-red number"  id="oderEchoue">En cours...</h3>
                                         <p class="stat-text">Commandes échoué</p>
                                     </div>
                                 </div>
@@ -152,23 +152,12 @@ const NafigatioTo = async (where) => {
                     <div class="articlerow">
                       ${Orderdata.flatMap((pan) =>
                         pan.articles.map((pani) => {
-                            const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut === "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
-
-                            const colorHTML = pani.color.split(',').map((e) => {
-                                return `
-                              <p style="background-color: ${e}; height: 20px; width: 20px; border-radius: 3px"></p>
-                            `;
-
-                            }).join('');
-
-                            const imageHTML = pani.image.split(',').map((e) => {
-                                return `
-                                 <img class="imago" src="${pani.arti_id ? pani.arti_id.image[parseInt(e)].ima : 'eee'}" alt="image">
-                            `;
-                            }).join('');
-
+                            const deliveryStatus = pan.statut === "done" ? "livré" : pan.statut === "review" ? "en attente" : pan.statut === "onway" ? "en cours" : "échoué";
+                        
                             return `
                             <div class="articlerowsub">
+                            <br>
+
                               <div class="title">
                                 <div class="leftone">
                                   <p style="max-height: 50px; overflow: hidden;">${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</p>
@@ -178,13 +167,14 @@ const NafigatioTo = async (where) => {
                                   <p>Prix: ${pani.prix} F</p>
                                   <p>Quantité: ${pani.quantcho}</p>
                                   <p>Total: ${pani.prix * pani.quantcho} F</p>
-                                  <p>Total: ${pani.size}</p>
 
-                                  <div class="clolo">
-                                    <p>Couleur: </p>${colorHTML}
-                                  </div>
                                   <div class="clola">
-                                    ${imageHTML}
+                                    
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[0].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[1].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[2].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[3].ima : 'eee.jpg'}" alt="Article Supprimé">
+
                                   </div>
                                 </div>
 
@@ -195,7 +185,6 @@ const NafigatioTo = async (where) => {
                                     <p style="cursor: pointer" class="status ${deliveryStatus === 'livré' ? 'delivered' : deliveryStatus === 'en attente' ? 'pending' : deliveryStatus === 'en cours' ? 'shipped' : 'cancelled'}">
                                         ${deliveryStatus}
                                     </p>
-                                    <p class="sta" style="color: #C3C3C3">Fournisseur: ${pani.arti_id ? pani.arti_id.addphone : 'Article Supprimé'}</p>
                                 </div>
                               </div>
                             </div>
@@ -214,43 +203,6 @@ const NafigatioTo = async (where) => {
             }
         } else {
 
-            {/*
-            
-            
-            <div class="rightone">
-                                                            <p class="status">${pani.prix} F</p>
-                                                            <p class="status">${pani.quantcho}</p>
-                                                            <p class="status">Total: ${pani.prix * pani.quantcho} F</p>
-                                                            <p class="sta shipp" style="cursor: pointer" data-toggle="modal" data-target="#optionCancile" onclick="optionCancileView('${pan._id}', '${pani._id}', '${pani.arti_id._id}')">Ouvrir</p>
-                                                            <div style="height: 5px"></div>
-                                                            <p style="cursor: pointer" class="status ${deliveryStatus === 'livré' ? 'delivered' : deliveryStatus === 'en attente' ? 'pending' : deliveryStatus === 'en cours' ? 'shipped' : 'cancelled'}">
-                                                                ${deliveryStatus}
-                                                            </p>
-                                                        </div>
-
-
-            
-            <!--<div class="imaros">
-            <div style="background-color: ${pani.addcoul.substring(0, 7)};">
-                <img src="${pani.image[0].ima}" alt="image1">
-            </div>
-            <span style="width: 10px;"></span>
-            <div style="background-color: ${pani.addcoul.substring(8, 15)};">
-                <img src="${pani.image[1].ima}" alt="image2">
-            </div>
-            <span style="width: 10px;"></span>
-            <div style="background-color: ${pani.addcoul.substring(16, 23)};">
-                <img src="${pani.image[2].ima}" alt="image3">
-            </div>
-            <span style="width: 10px;"></span>
-            <div style="background-color: ${pani.addcoul.substring(24, 31)};">
-                <img src="${pani.image[3].ima}" alt="image4">
-            </div>
-            <span style="width: 10px;"></span>
-            <div style="background-color: ${pani.addcoul.substring(32, 39)};">
-                <img src="${pani.image[4].ima}" alt="image5">
-            </div>
-        </div>-->*/}
             const commandesHTML = `
                             <main class="main">
                             <br>
@@ -314,9 +266,7 @@ const NafigatioTo = async (where) => {
                                         <td style="color: #ffffff !important">
                                             <a>${pani.arti_id ? pani.arti_id.addarticle : 'Article Supprimé'}</a>
                                             <ul>
-                                                <li>Color: <span style="background-color: ${pani.color.substring(0, 7)}; color: ${pani.color.substring(0, 7)}">${pani.color.substring(0, 7)}</span></li>
-                                                <li>Size: <span>${pani.size}</span></li>
-                                                <li>Material: <span>${pani.arti_id ? pani.arti_id.addmateri : 'Article Supprimé'}</span></li>
+                                                <li>Color: <span style="background-color: ${pani.arti_id.addcoul.substring(0, 7)}; color: ${pani.color.substring(0, 7)}">${pani.color.substring(0, 7)}</span></li>
                                             </ul>
                                         </td>
                                         
@@ -471,22 +421,20 @@ const NavBaractivity = async () => {
     let oderLivre = 0;
     let oderEchoue = 0;
     if (items.length > 0) {
-        items.forEach((pan) => {
-            pan.articles.forEach((pani) => {
-                if (pani.statut == "review") {
-                    oderAttent += 1;
+        items.forEach((pani) => {
+            if (pani.statut == "review") {
+                oderAttent += 1;
 
-                } else if (pani.statut == "onway") {
-                    oderCours += 1;
+            } else if (pani.statut == "onway") {
+                oderCours += 1;
 
-                } else if (pani.statut == "done") {
-                    oderLivre += 1;
+            } else if (pani.statut == "done") {
+                oderLivre += 1;
 
-                } else if (pani.statut == "fail") {
-                    oderEchoue += 1;
+            } else if (pani.statut == "fail") {
+                oderEchoue += 1;
 
-                }
-            });
+            }
         });
 
         document.getElementById('oderAttent').innerText = oderAttent;
