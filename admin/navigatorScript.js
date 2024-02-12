@@ -472,6 +472,7 @@ const NafigatioTo = async (where) => {
             } else {
                 if (isMobileDevice()) {
                     Orderdata.forEach((pan) => {
+                        const deliveryStatus = pan.statut === "done" ? "livré" : pan.statut === "review" ? "en attente" : pan.statut === "onway" ? "en cours" : "échoué";
 
                         const orderHTML = `
                             <br>
@@ -479,7 +480,6 @@ const NafigatioTo = async (where) => {
                             <br>
                             <div class="articlerow">
                                 ${pan.articles.map(pani => {
-                            const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut === "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
 
                             return `
                                         <div class="articlerowsub">
@@ -531,6 +531,10 @@ const NafigatioTo = async (where) => {
                                                 <div style="background-color: ${pani.arti_id.addcoul.substring(16, 23)};">
                                                     <img src="${pani.arti_id.image[2].ima}" alt="image3">
                                                 </div>
+                                                <span style="width: 10px;"></span>
+                                                <div style="background-color: ${pani.arti_id.addcoul.substring(24, 30)};">
+                                                    <img src="${pani.arti_id.image[2].ima}" alt="image3">
+                                                </div>
                                             </div>
                                         </div>
                                     `;
@@ -572,9 +576,9 @@ const NafigatioTo = async (where) => {
                     const tbodyId = document.getElementById('tbody-data');
                     tbodyId.innerHTML = '';
                     Orderdata.forEach((pan) => {
+                        const deliveryStatus = pan.statut === "done" ? "livré" : pan.statut == "review" ? "en attente" : pan.statut === "onway" ? "en cours" : "échoué";
                         pan.articles.forEach((pani) => {
                             //console.log(pani.arti_id);
-                            const deliveryStatus = pani.statut === "done" ? "livré" : pani.statut == "review" ? "en attente" : pani.statut === "onway" ? "en cours" : "échoué";
                             const panierTBODY = `
                         <tr  style="cursor: pointer" data-toggle="modal" data-target="#optionCancile" onclick="optionCancileView('${pan._id}', '${pani._id}', '${pani.arti_id._id}')">
 
@@ -816,6 +820,10 @@ const NafigatioTo = async (where) => {
                                         <span style="width: 10px;"></span>
                                         <div style="background-color: ${pani.addcoul.substring(16, 23)};">
                                             <img src="${pani.image[2].ima}" alt="image3">
+                                        </div>
+                                        <span style="width: 10px;"></span>
+                                        <div style="background-color: ${pani.addcoul.substring(24, 30)};">
+                                            <img src="${pani.image[3].ima}" alt="image3">
                                         </div>
                                     </div>
                                 </div>
@@ -1150,18 +1158,17 @@ const NavBaractivity = async () => {
         let totalSold = 0;
         if (items && items.length > 0) {
             items.forEach((pan) => {
-                pan.articles.forEach((pani) => {
-                    totalSold += pani.statut == "done" ? pani.prix * pani.quantcho : 0;
-                    commandos += 1;
-                    
-                    if (pani.statut == "review") {
-                        odernotnu += 1;
-                        if (ordernotif.length < 3) {
-                            ordernotif.push(pan);
-                        }
-                    }
+                totalSold += pan.statut == "done" ? pan.prix * pan.quantcho : 0;
+                commandos += 1;
 
-                });
+                if (pan.statut == "review") {
+                    odernotnu += 1;
+                    if (ordernotif.length < 3) {
+                        ordernotif.push(pan);
+                    }
+                }
+
+
             });
 
             const odernotifi = document.getElementById('odernotifi');

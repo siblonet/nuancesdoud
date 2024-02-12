@@ -1,8 +1,7 @@
 async function selectStatus(sta) {
     const ido = document.getElementById('ido').value;
-    const idar = document.getElementById('proid').value;
 
-    await sendRequestforOrder('PUT', `orders/statoo/${ido}/${idar}`, { statut: sta });
+    await sendRequestforOrder('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
     window.location.href = "/"
 };
 
@@ -38,7 +37,6 @@ async function optionCancileView(_id, proid, arti_id) {
 
 
         if (product && product.arti_id) {
-            const splo = product.arti_id.addcoul;
            
             document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
             document.getElementById('optionViewNewPrice').innerText = `${product.arti_id.addprix} F.CFA`;
