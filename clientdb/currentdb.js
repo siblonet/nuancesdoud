@@ -335,7 +335,33 @@ function addtoPanier(data) {
 
 }
 
+const CinetPayment = (idx) => {
+    const transaction_id = Math.floor(Math.random() * 100000000).toString()
+    const data = JSON.stringify({
+        apikey: "40810444265c61783e168b8.19353314",
+        site_id: "5868317",
+        transaction_id: transaction_id, //
+        amount: 100,
+        currency: "XOF",
+        alternative_currency: "CFA",
+        description: `Achat de ${" "}`,
+        notify_url: `${apiUrlfine}/orders/change/order/payment/statuts/${idx}/${transaction_id}`,
+        return_url: "https://nuancesdoud.com/client",
+        channels: "ALL"
+    });
 
+    const settings = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: data
+    };
+
+    fetch(RAUTA.CINETPAY, settings)
+        .then((answ) => answ.json())
+        .then((dat) => window.location.href = dat.data.payment_url).catch((szs) => console.log("payment error", szs));
+}
 
 function getPanierSend(tocompl) {
     const tohia = document.getElementById('tohia');
@@ -374,18 +400,19 @@ function getPanierSend(tocompl) {
                     return { id: "erro", er: "erro" };
                 }
 
-                return { id: responseData.done, er: responseData.done };
+                return { id: responseData.done, er: "done" };
             };
 
 
             try {
                 const response = await sendReque('POST', 'orders/nuance', tocompl);
-                if (response.er == "done" && response.id == "done") {
+                if (response.er == "done" && response.id !== "erro") {
                     TotalAll("clear", "");
-                    window.location.href = "client"
+
                     load.classList.remove("load28")
                     load.classList.add("tohi")
                     tohia.classList.remove("tohi");
+                    CinetPayment(response.id);
                 } else if (response.er !== "done" && response.id !== "done") {
                     load.classList.remove("load28")
                     load.classList.add("tohi")

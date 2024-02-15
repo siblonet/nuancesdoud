@@ -58,37 +58,6 @@
         }
     </script>
 
-    <script>
-
-        const CinetPayment = () => {
-            const data = JSON.stringify({
-                apikey: "197100257562a92c0fa5a8c5.28252652",
-                site_id: "231621",
-                transaction_id: Math.floor(Math.random() * 100000000).toString(), //
-                amount: amount,
-                currency: "XOF",
-                alternative_currency: "CFA",
-                description: `Achat de ${" "}`,
-                notify_url: `${apiUrlfine}/orders/cinetpay/${first_id}/${amount}`,
-                return_url: "https://nuancesdoud.com/client",
-                channels: "ALL"
-            });
-
-            const settings = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: data
-            };
-
-            fetch(RAUTA.CINETPAY, settings)
-                .then((answ) => answ.json())
-                .then((dat) => console.log(dat.data.payment_url)).catch();
-
-        };
-
-    </script>
 </head>
 
 <body>
