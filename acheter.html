@@ -23,6 +23,9 @@
     <meta name="old" content="VpypOIDVHTt4dAVSbfctTNi7K4i8Vh5uiYu4bWspKUE" />
     <meta name="google-site-verification" content="TLBXmgrTHj960GF4Qj5cnnbp0dfAEExTef8A_NY9ncs" />
 
+
+    <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/boxicons.min.css">
@@ -89,15 +92,15 @@
                 </div>
             </div>
             <div class="user-actions" id="connectedor">
-                
+
                 <div class="user-actions-linear"></div>
 
 
                 <i style="color: #037703 !important;" class="bx bx-log-in">
                 </i>
                 <span class="span" style="color: #037703 !important;">Client déjà enregistré ?
-                    <a  onmouseover="this.style.color='#007bff'" onmouseout="this.style.color='#000'"
-                    data-bs-toggle="modal" data-bs-target="#connexionComade">
+                    <a onmouseover="this.style.color='#007bff'" onmouseout="this.style.color='#000'"
+                        data-bs-toggle="modal" data-bs-target="#connexionComade">
                         Cliquez ici pour vous connecter
                     </a>
                 </span>
@@ -163,7 +166,7 @@
                                         <input type="tel" class="form-control" id="telephoneValue">
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
                                         <textarea name="notes" id="notes" cols="30" rows="5"
@@ -205,30 +208,19 @@
                                 </table>
                             </div>
                             <div class="payment-box">
-
                                 <div class="payment-method">
-
                                     <p>
-                                        <!--<input type="radio" id="direct-bank-transfer" name="radio-group" checked>
-                                        <label for="direct-bank-transfer">Virement bancaire direct</label>-->
-                                        Les modes de paiement en ligne tels que
-                                        MOMO, OMoney, Moov Money et Wave,
-                                        ainsi que les cartes de crédit,
-                                        seront bientôt disponibles.
-                                        Pour l'instant, vous payez à la livraison du colis.
+                                        <input type="radio" id="paypal" name="radio-group" checked>
+                                        <label for="paypal">Paiement en ligne</label>
                                     </p>
-                                    <!--<p>
-                                        <input type="radio" id="paypal" name="radio-group">
-                                        <label for="paypal">PayPal</label>
-                                    </p>-->
                                     <p>
-                                        <input type="radio" id="cash-on-delivery" name="radio-group" checked>
+                                        <input type="radio" id="cash-on-delivery" name="radio-group">
                                         <label for="cash-on-delivery">Paiement à la livraison</label>
                                     </p>
                                 </div>
                                 <a style="cursor: pointer !important" class="default-btn loading"
                                     onclick="sendCommen()">
-                                    <span class="" id="tohia">Passer la commande</span>
+                                    <span class="" id="tohia">Valider la commande</span>
                                     <div class="tohi" id="tohi">
                                         <img src="assets/img/add.png" height="20px" width="20px" alt="defdaar">
                                     </div>
@@ -303,18 +295,19 @@
                                 <div class="row">
                                     <div class="col-lg-5 col-md-6">
                                         <div class="offer-content">
-                                            <span class="sub-title" style="color: #006e65 !important;">Offre à durée limitée !</span>
+                                            <span class="sub-title" style="color: #006e65 !important;">Offre à durée
+                                                limitée !</span>
 
 
 
 
                                             <h2>-40% DE RÉDUCTION</h2>
                                             <p>Profitez des meilleures offres maintenant</p>
-                    
+
                                             <div class="anim">
                                                 <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
-                                                <a href="#product-container"
-                                                    class="button-85 wow comIn" data-wow-delay=".3s">
+                                                <a href="#product-container" class="button-85 wow comIn"
+                                                    data-wow-delay=".3s">
                                                     Découvrir maintenant
                                                     <span></span>
                                                 </a>
@@ -491,13 +484,17 @@
                             <br>
                             <ul class="quick-links">
                                 <li>
-                                    <a style="color: #ffffff;" href="questions">FAQ</a></li>
+                                    <a style="color: #ffffff;" href="questions">FAQ</a>
+                                </li>
                                 <li>
-                                    <a style="color: #ffffff;" href="contact">Contactez-nous</a></li>
+                                    <a style="color: #ffffff;" href="contact">Contactez-nous</a>
+                                </li>
                                 <li>
-                                    <a style="color: #ffffff;" href="service-client">Service client</a></li>
+                                    <a style="color: #ffffff;" href="service-client">Service client</a>
+                                </li>
                                 <li>
-                                    <a style="color: #ffffff;" href="contact">Aide et support</a></li>
+                                    <a style="color: #ffffff;" href="contact">Aide et support</a>
+                                </li>
                             </ul>
                         </div>
                         <ul class="social-link">

@@ -1,3 +1,5 @@
+let totalPricea = 0;
+
 function getAdmin() {
     const token = sessionStorage.getItem('tibule');
     const splo = token.split("°");
@@ -335,55 +337,33 @@ function addtoPanier(data) {
 
 }
 
-const CinetPayment = (idx) => {
+
+
+function CinetPayment(orderdata) {
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
-    const data = JSON.stringify({
-        apikey: "40810444265c61783e168b8.19353314",
-        site_id: "5868317",
-        transaction_id: transaction_id, //
-        amount: 100,
-        currency: "XOF",
-        alternative_currency: "CFA",
-        description: `Achat de ${" "}`,
-        notify_url: `${apiUrlfine}/orders/change/order/payment/statuts/${idx}/${transaction_id}`,
-        return_url: "https://nuancesdoud.com/client",
-        channels: "ALL"
+
+    CinetPay.setConfig({
+        apikey: '40810444265c61783e168b8.19353314',//   YOUR APIKEY
+        site_id: '5868317',//YOUR_SITE_ID
+        notify_url: `https://nuance-doud.adaptable.app/orders/change/order/payment/statuts/${transaction_id}`,
+        mode: 'PRODUCTION'
+    });
+    CinetPay.getCheckout({
+        transaction_id: transaction_id, // YOUR TRANSACTION ID
+        amount: totalPricea,
+        currency: 'XOF',
+        channels: 'MOBILE_MONEY, WALLET',
+        description: `Achat de ${orderdata.articles.length}`,
     });
 
-    const settings = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: data
-    };
+    CinetPay.waitResponse(function (data) {
+        if (data.status == "REFUSED") {
+            alert("Votre paiement a échoué")
+            //window.location.reload();
 
-    fetch(RAUTA.CINETPAY, settings)
-        .then((answ) => answ.json())
-        .then((dat) => {
-            console.log(dat.data.payment_url);
-            window.location.href = dat.data.payment_url
-        }
-        ).catch((szs) => console.log("payment error", szs));
-}
-
-function getPanierSend(tocompl) {
-    const tohia = document.getElementById('tohia');
-    const load = document.getElementById('tohi');
-    const errer = document.getElementById('rejected');
-
-    const transaction = panierdb.transaction(["PannierContent"], "readonly");
-    const objectStore = transaction.objectStore("PannierContent");
-    objectStore.openCursor().onsuccess = async (event) => {
-        const cursor = event.target.result;
-        if (cursor) {
-            tocompl.articles.push({
-                arti_id: cursor.value._id,
-                quantcho: cursor.value.quantcho,
-                prix: cursor.value.prix
-            });
-            cursor.continue();
-        } else {
+        } else if (data.status == "ACCEPTED") {
+            orderdata.payment_status = "paid"
+            orderdata.transaction_id = transaction_id;
 
             const sendReque = async (method, endpoint, data = null) => {
                 const options = {
@@ -403,55 +383,182 @@ function getPanierSend(tocompl) {
                 if (!response.ok) {
                     return { id: "erro", er: "erro" };
                 }
-                CinetPayment(responseData.done);
 
                 return { id: responseData.done, er: "done" };
             };
 
+            (async () => {
+                try {
+                    const response = await sendReque('POST', 'orders/nuance', orderdata);
+                    if (response.er == "done" && response.id !== "erro") {
+                        TotalAll("clear", "");
 
-            try {
-                const response = await sendReque('POST', 'orders/nuance', tocompl);
-                if (response.er == "done" && response.id !== "erro") {
-                    TotalAll("clear", "");
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                    } else if (response.er !== "done" && response.id !== "done") {
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                        errer.classList.add("rejected");
+                        document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
 
-                    load.classList.remove("load28")
-                    load.classList.add("tohi")
-                    tohia.classList.remove("tohi");
-                    CinetPayment(response.id);
-                } else if (response.er !== "done" && response.id !== "done") {
-                    load.classList.remove("load28")
-                    load.classList.add("tohi")
-                    tohia.classList.remove("tohi");
-                    errer.classList.add("rejected");
-                    document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
+                        setTimeout(() => {
+                            errer.classList.remove("rejected");
+                        }, 3500);
+                    };
+
+                } catch (e) {
+                    setTimeout(() => {
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                        errer.classList.add("rejected");
+                        document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
+                    }, 1500);
 
                     setTimeout(() => {
                         errer.classList.remove("rejected");
-                    }, 3500);
+                    }, 4500);
+
+                }
+
+            })()
+
+        }
+    });
+    CinetPay.onError(function (data) {
+        console.log(data);
+    });
+}
+
+
+
+/*const CinetPayment = (idx) => {
+    const transaction_id = Math.floor(Math.random() * 100000000).toString()
+    const data = JSON.stringify({
+        apikey: "40810444265c61783e168b8.19353314",
+        site_id: "5868317",
+        transaction_id: transaction_id, //
+        amount: 100,
+        currency: "XOF",
+        alternative_currency: "CFA",
+        description: `Achat de ${" "}`,
+        notify_url: `${apiUrlfine}orders/change/order/payment/statuts/${idx}/${transaction_id}`,
+        return_url: "https://nuancesdoud.com/client",
+        channels: "ALL"
+    });
+
+    const settings = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: data
+    };
+
+    fetch(cinetpay, settings)
+        .then((answ) => answ.json())
+        .then((dat) => {
+            console.log(dat.data.payment_url);
+            window.location.href = dat.data.payment_url
+        }
+        ).catch((szs) => console.log("payment error", szs));
+}*/
+
+function getPanierSend(tocompl) {
+    const tohia = document.getElementById('tohia');
+    const load = document.getElementById('tohi');
+    const errer = document.getElementById('rejected');
+
+    const transaction = panierdb.transaction(["PannierContent"], "readonly");
+    const objectStore = transaction.objectStore("PannierContent");
+    objectStore.openCursor().onsuccess = async (event) => {
+        const cursor = event.target.result;
+        if (cursor) {
+            tocompl.articles.push({
+                arti_id: cursor.value._id,
+                quantcho: cursor.value.quantcho,
+                prix: cursor.value.prix
+            });
+            cursor.continue();
+        } else {
+
+            if (tocompl.payment_method === "electronical") {
+                CinetPayment(tocompl);
+
+            } else {
+                const sendReque = async (method, endpoint, data = null) => {
+                    const options = {
+                        method,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
+
+                    if (data) {
+                        options.body = JSON.stringify(data);
+                    }
+
+                    const response = await fetch(apiUrlfine + endpoint, options);
+                    const responseData = await response.json();
+
+                    if (!response.ok) {
+                        return { id: "erro", er: "erro" };
+                    }
+
+                    return { id: responseData.done, er: "done" };
                 };
 
-            } catch (e) {
-                setTimeout(() => {
-                    load.classList.remove("load28")
-                    load.classList.add("tohi")
-                    tohia.classList.remove("tohi");
-                    errer.classList.add("rejected");
-                    document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
-                }, 1500);
 
-                setTimeout(() => {
-                    errer.classList.remove("rejected");
-                }, 4500);
+                try {
+                    const response = await sendReque('POST', 'orders/nuance', tocompl);
+                    if (response.er == "done" && response.id !== "erro") {
+                        TotalAll("clear", "");
+
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                        window.location.href = "client"
+                    } else if (response.er !== "done" && response.id !== "done") {
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                        errer.classList.add("rejected");
+                        document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
+
+                        setTimeout(() => {
+                            errer.classList.remove("rejected");
+                        }, 3500);
+                    };
+
+                } catch (e) {
+                    setTimeout(() => {
+                        load.classList.remove("load28")
+                        load.classList.add("tohi")
+                        tohia.classList.remove("tohi");
+                        errer.classList.add("rejected");
+                        document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
+                    }, 1500);
+
+                    setTimeout(() => {
+                        errer.classList.remove("rejected");
+                    }, 4500);
+
+                }
+
+
 
             }
 
-        }
-    };
+        };
 
-    transaction.onerror = (event) => {
-        console.error("Transaction error:", event.target.error);
+        transaction.onerror = (event) => {
+            console.error("Transaction error:", event.target.error);
+        };
     };
 };
+
 
 function getallCheckou() {
     const transaction = panierdb.transaction(["PannierContent"], "readonly");
@@ -487,7 +594,6 @@ function getallCheckou() {
             const pantotalid = document.getElementById('toteauxche');
             pantotalid.innerHTML = '';
 
-            let totalPricea = 0;
 
             for (const pri of data) {
                 const adda = pri.prix * pri.quantcho;

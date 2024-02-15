@@ -32,6 +32,10 @@ function totalManager() {
 totalManager();
 
 async function sendCommen() {
+    const paypal = document.getElementById('paypal').checked;
+    //const cash = document.getElementById('cash-on-delivery').checked;
+
+    const payment_method = paypal ? "electronical" : "cash"
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
@@ -59,6 +63,9 @@ async function sendCommen() {
                 note: notesValue,
                 owner: "nuance",
                 client: mynam,
+                payment_method: payment_method,
+                payment_status: "nopay",
+                transaction_id: "",
             };
 
 
@@ -112,6 +119,9 @@ async function sendCommen() {
                         note: notesValue,
                         owner: "nuance",
                         client: response.token,
+                        payment_method: payment_method,
+                        payment_status: "nopay",
+                        transaction_id: "",
                     };
 
                     TotalAll('sendOrder', articleOne);
