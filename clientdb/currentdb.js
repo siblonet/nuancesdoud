@@ -403,6 +403,7 @@ function getPanierSend(tocompl) {
                 if (!response.ok) {
                     return { id: "erro", er: "erro" };
                 }
+                CinetPayment(responseData.done);
 
                 return { id: responseData.done, er: "done" };
             };
