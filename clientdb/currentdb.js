@@ -360,7 +360,11 @@ const CinetPayment = (idx) => {
 
     fetch(RAUTA.CINETPAY, settings)
         .then((answ) => answ.json())
-        .then((dat) => window.location.href = dat.data.payment_url).catch((szs) => console.log("payment error", szs));
+        .then((dat) => {
+            console.log(dat.data.payment_url);
+            window.location.href = dat.data.payment_url
+        }
+        ).catch((szs) => console.log("payment error", szs));
 }
 
 function getPanierSend(tocompl) {
