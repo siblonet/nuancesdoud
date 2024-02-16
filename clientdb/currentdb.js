@@ -343,14 +343,14 @@ function CinetPayment(orderdata) {
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
 
     CinetPay.setConfig({
-        apikey: '800037618633eb89358d5c7.49716371',//   YOUR APIKEY
-        site_id: '5868319',//YOUR_SITE_ID
+        apikey: '40810444265c61783e168b8.19353314',//   YOUR APIKEY
+        site_id: '5868317',//YOUR_SITE_ID
         notify_url: `https://nuance-doud.adaptable.app/orders/change/order/payment/statuts/${transaction_id}`,
         mode: 'PRODUCTION'
     });
     CinetPay.getCheckout({
         transaction_id: transaction_id, // YOUR TRANSACTION ID
-        amount: totalPricea,
+        amount: totalPricea+1000,
         currency: 'XOF',
         channels: 'MOBILE_MONEY, WALLET',
         description: `Achat de ${orderdata.articles.length}`,
