@@ -136,14 +136,13 @@ async function productStypes1(viewid) {
                                     <div class="row">
                                         <div class="col-lg-5 col-md-6">
                                         <div class="offer-content">
-                                        <span class="sub-title" style="color: #006e65 !important;">Offre à durée
-                                            limitée !</span>
+                                        <span class="sub-title" style="color: #006e65 !important;"></span>
 
 
 
 
-                                        <h2>-40% DE RÉDUCTION</h2>
-                                        <p>Profitez des meilleures offres maintenant</p>
+                                        <h2></h2>
+                                        <p></p>
 
                                         <div class="anim">
                                             <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
@@ -185,14 +184,13 @@ async function productStypes1(viewid) {
                                     <div class="row">
                                         <div class="col-lg-5 col-md-6">
                                         <div class="offer-content">
-                                        <span class="sub-title" style="color: #006e65 !important;">Offre à durée
-                                            limitée !</span>
+                                        <span class="sub-title" style="color: #006e65 !important;"></span>
 
 
 
 
-                                        <h2>-40% DE RÉDUCTION</h2>
-                                        <p>Profitez des meilleures offres maintenant</p>
+                                        <h2></h2>
+                                        <p></p>
 
                                         <div class="anim">
                                             <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
