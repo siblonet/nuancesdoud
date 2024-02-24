@@ -93,17 +93,17 @@ async function productStypes1(viewid) {
                 const modalImage3 = document.getElementById('ima3');
                 modalImage1.src = prod.image[0].ima;
                 modalImage1.style.backgroundColor = prod.addcoul.substring(0, 7);
-                modalImage2.src = prod.image[1].ima;
+                modalImage2.src = prod.image[0].ima;
                 modalImage2.style.backgroundColor = prod.addcoul.substring(8, 15);
-                modalImage3.src = prod.image[2].ima;
+                modalImage3.src = prod.image[0].ima;
                 modalImage3.style.backgroundColor = prod.addcoul.substring(16, 23);
 
                 const modalImagea = document.getElementById('imaa');
                 const modalImageb = document.getElementById('imab');
                 const modalImagec = document.getElementById('imac');
                 modalImagea.src = prod.image[0].ima;
-                modalImageb.src = prod.image[1].ima;
-                modalImagec.src = prod.image[2].ima;
+                modalImageb.src = prod.image[0].ima;
+                modalImagec.src = prod.image[0].ima;
                 modalImagea.style.backgroundColor = prod.addcoul.substring(0, 7);
                 modalImageb.style.backgroundColor = prod.addcoul.substring(8, 15);
                 modalImagec.style.backgroundColor = prod.addcoul.substring(16, 23);

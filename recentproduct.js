@@ -144,7 +144,7 @@ function recentProduct(recenPr) {
                                     data-bs-toggle="modal"
                                     data-bs-target="#productsQuickView" 
                                     onclick="showProductQuickView('b', '${product._id}')">
-                                    <img class="two" src="${product.image[1].ima}" alt="image"> 
+                                    <img class="two" src="${product.image[0].ima}" alt="image"> 
                                 </a>
                             </div>
                                
@@ -249,7 +249,7 @@ function recentProduct(recenPr) {
                         <a style="cursor: pointer !important;"
                             href="detaila?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
-                            <img src="${product.image[1].ima}" class="hover-image" alt="image"> 
+                            <img src="${product.image[0].ima}" class="hover-image" alt="image"> 
                         </a>
 
                         <div class="products-button">

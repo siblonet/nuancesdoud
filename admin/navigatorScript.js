@@ -525,15 +525,15 @@ const NafigatioTo = async (where) => {
                                                 </div>
                                                 <span style="width: 10px;"></span>
                                                 <div style="background-color: ${pani.arti_id.addcoul.substring(8, 15)};">
-                                                    <img src="${pani.arti_id.image[1].ima}" alt="image2">
+                                                    <img src="${pani.arti_id.image[0].ima}" alt="image2">
                                                 </div>
                                                 <span style="width: 10px;"></span>
                                                 <div style="background-color: ${pani.arti_id.addcoul.substring(16, 23)};">
-                                                    <img src="${pani.arti_id.image[2].ima}" alt="image3">
+                                                    <img src="${pani.arti_id.image[0].ima}" alt="image3">
                                                 </div>
                                                 <span style="width: 10px;"></span>
                                                 <div style="background-color: ${pani.arti_id.addcoul.substring(24, 30)};">
-                                                    <img src="${pani.arti_id.image[2].ima}" alt="image3">
+                                                    <img src="${pani.arti_id.image[0].ima}" alt="image3">
                                                 </div>
                                             </div>
                                         </div>
@@ -815,15 +815,15 @@ const NafigatioTo = async (where) => {
                                         </div>
                                         <span style="width: 10px;"></span>
                                         <div style="background-color: ${pani.addcoul.substring(8, 15)};">
-                                            <img src="${pani.image[1].ima}" alt="image2">
+                                            <img src="${pani.image[0].ima}" alt="image2">
                                         </div>
                                         <span style="width: 10px;"></span>
                                         <div style="background-color: ${pani.addcoul.substring(16, 23)};">
-                                            <img src="${pani.image[2].ima}" alt="image3">
+                                            <img src="${pani.image[0].ima}" alt="image3">
                                         </div>
                                         <span style="width: 10px;"></span>
                                         <div style="background-color: ${pani.addcoul.substring(24, 30)};">
-                                            <img src="${pani.image[3].ima}" alt="image3">
+                                            <img src="${pani.image[0].ima}" alt="image3">
                                         </div>
                                     </div>
                                 </div>

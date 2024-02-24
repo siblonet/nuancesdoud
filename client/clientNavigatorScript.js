@@ -171,9 +171,9 @@ const NafigatioTo = async (where) => {
                                   <div class="clola">
                                     
                                     <img class="imago" src="${pani.arti_id ? pani.arti_id.image[0].ima : 'eee.jpg'}" alt="Article Supprimé">
-                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[1].ima : 'eee.jpg'}" alt="Article Supprimé">
-                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[2].ima : 'eee.jpg'}" alt="Article Supprimé">
-                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[3].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[0].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[0].ima : 'eee.jpg'}" alt="Article Supprimé">
+                                    <img class="imago" src="${pani.arti_id ? pani.arti_id.image[0].ima : 'eee.jpg'}" alt="Article Supprimé">
 
                                   </div>
                                 </div>
@@ -441,6 +441,11 @@ const NavBaractivity = async () => {
         document.getElementById('oderCours').innerText = oderCours;
         document.getElementById('oderLivre').innerText = oderLivre;
         document.getElementById('oderEchoue').innerText = oderEchoue;
+    }else{
+        document.getElementById('oderAttent').innerText = 0;
+        document.getElementById('oderCours').innerText = 0;
+        document.getElementById('oderLivre').innerText = 0;
+        document.getElementById('oderEchoue').innerText = 0;  
     }
 
 }
