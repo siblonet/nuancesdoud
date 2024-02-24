@@ -180,7 +180,7 @@ async function EditeViewArticle() {
         const notes = document.getElementById('Editenotes').value;
 
 
-        if (addarticle && addgenre && addbarcode && addprix && addcoul && addmarque && notes) {
+        if (addarticle && addgenre && addbarcode && addprix && addcoul && addmarque) {
             const product = {
                 addarticle: addarticle,
                 quantity: parseInt(addquant),

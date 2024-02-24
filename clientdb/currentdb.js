@@ -271,11 +271,7 @@ function AddArticle() {
         const notes = document.getElementById('notes').value;
 
 
-
-
-
-
-        if (addarticle && addgenre && addbarcode && addprix && addmarque && notes && imas.length > 2) {
+        if (addarticle && addgenre && addbarcode && addprix && addmarque && imas.length > 0) {
             const product = {
                 addarticle: addarticle,
                 quantity: parseInt(addquant),
