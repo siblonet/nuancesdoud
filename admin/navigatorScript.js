@@ -263,26 +263,26 @@ const NafigatioTo = async (where) => {
                     label: 'Jan',
                     backgroundColor: "#20c997",
                     borderColor: "#28a745",
-                    data: [0, 0, 0, 32, 85, 0, 55, 0],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0],
                     fill: false,
                 }, {
                     label: 'Fev',
                     fill: false,
                     backgroundColor: "#054846",
                     borderColor: "#054846",
-                    data: [10, 0, 20, 0, 25, 0, 10, 40],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0],
                 }, {
                     label: 'Mars',
                     fill: false,
                     backgroundColor: "#4755AB",
                     borderColor: "#4755AB",
-                    data: [0, 100, 20, 0, 0, 50, 0, 100],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0],
                 },
                 {
                     label: 'Avr',
                     backgroundColor: "#03c895",
                     borderColor: "#03c895",
-                    data: [10, 0, 0, 0, 25, 0, 10, 70],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0],
                     fill: false,
                 },
                 {
@@ -327,7 +327,7 @@ const NafigatioTo = async (where) => {
                     label: 'Déc',
                     backgroundColor: "#f53794",
                     borderColor: "#f53794",
-                    data: [31, 100, 1, 1, 1, 1, 1, 100],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0],
                     fill: false,
                 }]
             },
@@ -372,7 +372,7 @@ const NafigatioTo = async (where) => {
                         borderWidth: 1,
                         backgroundColor: "#4755AB",
                         borderColor: "#4755AB",
-                        data: [30, 10, 70, 15, 30, 20, 70, 80],
+                        data: [0, 0, 0, 0, 0, 0, 0, 0],
 
                     },
                     {
@@ -386,7 +386,7 @@ const NafigatioTo = async (where) => {
                         label: 'Mai',
                         backgroundColor: "#B162AC",
                         borderColor: "#B162AC",
-                        data: [10, 38, 20, 35, 25, 0, 0, 5],
+                        data: [0, 0, 0, 0, 0, 0, 0, 0],
                         borderWidth: 1,
                     },
                     {
@@ -399,7 +399,7 @@ const NafigatioTo = async (where) => {
                         label: 'Juillet',
                         backgroundColor: "#4755AB",
                         borderColor: "#4755AB",
-                        data: [10, 20, 30, 40, 50, 60, 70, 80],
+                        data: [0, 0, 0, 0, 0, 0, 0, 0],
                         borderWidth: 1,
                     }, {
                         label: 'Août',
@@ -412,7 +412,7 @@ const NafigatioTo = async (where) => {
                         label: 'Sept',
                         backgroundColor: "#166a8f",
                         borderColor: "#166a8f",
-                        data: [0, 100, 20, 1, 0, 50, 0, 100],
+                        data: [0, 0, 0, 0, 0, 0, 0, 0],
 
                         borderWidth: 1,
                     }, {
