@@ -1275,7 +1275,8 @@ async function getArticleOnly() {
             cursor.continue();
         } else {
             document.getElementById("ajouteencou").innerText = "Ajouter encore"
-            NafigatioTo("articles")
+            window.location.href = "/"
+
         };
     };
 
