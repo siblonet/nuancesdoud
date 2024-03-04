@@ -385,37 +385,125 @@ function CinetPayment(orderdata) {
 
 
 
-/*const CinetPayment = (idx) => {
+/*
+
+
+
+
+function CinetPayment(orderdata) {
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
-    const data = JSON.stringify({
-        apikey: "40810444265c61783e168b8.19353314",
-        site_id: "5868317",
-        transaction_id: transaction_id, //
-        amount: 100,
-        currency: "XOF",
-        alternative_currency: "CFA",
-        description: `Achat de ${" "}`,
-        notify_url: `${apiUrlfine}orders/change/order/payment/statuts/${idx}/${transaction_id}`,
-        return_url: "https://nuancesdoud.com/client",
-        channels: "ALL"
-    });
- 
-    const settings = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: data
-    };
- 
-    fetch(cinetpay, settings)
-        .then((answ) => answ.json())
-        .then((dat) => {
-            console.log(dat.data.payment_url);
-            window.location.href = dat.data.payment_url
+
+
+    //notify_url: `https://nuance-doud.adaptable.app/orders/change/order/payment/statuts/${transaction_id}`,
+    const kaliacall = async (method, endpoint, data = null) => {
+        const options = {
+            method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        if (data) {
+            options.body = JSON.stringify(data);
         }
-        ).catch((szs) => console.log("payment error", szs));
-}*/
+
+        const response = await fetch(apiUrlfine + endpoint, options);
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            return { id: "erro", er: "erro" };
+        }
+
+        return responseData;
+    };
+
+    const apikey = "ae236ee337b78dfc46a24e3a50e1a270fce8db37";
+    const service = "010324183052320001";
+    const channel = "orangeci mtnci cards"
+    const response = kaliacall('GET', `https://kaliapay.com/flash/${apikey}/${totalPricea}/${service}/${transaction_id}/${custom_data}/?provider=${provider}&customer=${orderdata.phone}`);
+
+    if (response.status && response.status == "success") {
+        window.location.href = response.url;
+
+        orderdata.payment_status = "waiting"
+        orderdata.transaction_id = transaction_id;
+
+        const sendReque = async (method, endpoint, data = null) => {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            const response = await fetch(apiUrlfine + endpoint, options);
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                return { id: "erro", er: "erro" };
+            }
+
+            return { id: responseData.done, er: "done" };
+        };
+
+        (async () => {
+            try {
+                const response = await sendReque('POST', 'orders/nuance', orderdata);
+                if (response.er == "done" && response.id !== "erro") {
+                    TotalAll("clear", "");
+
+                    load.classList.remove("load28")
+                    load.classList.add("tohi")
+                    tohia.classList.remove("tohi");
+                } else if (response.er !== "done" && response.id !== "done") {
+                    load.classList.remove("load28")
+                    load.classList.add("tohi")
+                    tohia.classList.remove("tohi");
+                    errer.classList.add("rejected");
+                    document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
+
+                    setTimeout(() => {
+                        errer.classList.remove("rejected");
+                    }, 3500);
+                };
+
+            } catch (e) {
+                setTimeout(() => {
+                    load.classList.remove("load28")
+                    load.classList.add("tohi")
+                    tohia.classList.remove("tohi");
+                    errer.classList.add("rejected");
+                    document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
+                }, 1500);
+
+                setTimeout(() => {
+                    errer.classList.remove("rejected");
+                }, 4500);
+
+            }
+
+        })()
+
+    } else {
+        alert("Votre paiement a échoué")
+    }
+
+
+
+     {
+         "url" : "https://mpayment.orange-money.com/ci/mpayment/abstract/v15q1m9wpzjk65vidgyqw5f0rcjx12kp7ilskoaseive0gwfsmvo2s5ajiepvppt",
+             "expiry": "10/10/2023 - 10:35",
+                 "status": "success",
+                     "message": ""
+     }
+    
+
+
+*/
 
 function getPanierSend(tocompl) {
     const tohia = document.getElementById('tohia');

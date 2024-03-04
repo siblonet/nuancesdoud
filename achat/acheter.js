@@ -32,6 +32,8 @@ function totalManager() {
 totalManager();
 
 async function sendCommen() {
+    document.getElementById('noorderduplu').setAttribute('onclick', null);
+
     const paypal = document.getElementById('paypal').checked;
     //const cash = document.getElementById('cash-on-delivery').checked;
 
