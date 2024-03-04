@@ -30,8 +30,8 @@
 
     <title>Nuance-Admin</title>
     <link rel="stylesheet" href="admin/assets/css/style-starter.css">
-    <link rel="stylesheet" href="admin/tirthcss.css">
-    <link rel="stylesheet" href="admin/noble.css">
+    <link rel="stylesheet" href="./tirthcss.css">
+    <link rel="stylesheet" href="./noble.css">
 
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <style>
@@ -372,9 +372,7 @@
                             <div class="order-details">
                                 <h3 class="title">Selection des images</h3>
                                 <div class="order-table table-responsive">
-                                    <div id="imagePreview1"></div>
-                                    <div id="imagePreview2"></div>
-                                    <div id="imagePreview3"></div>
+                                    <div id="imagePreview1" onclick="removeImageCreate()"></div>
                                 </div>
                                 <div class="order-table table-responsive" id="limitimag">
                                     <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
@@ -383,8 +381,8 @@
                                 <br>
 
                                 <div>
-                                    <a id="ajouteencou" style="cursor: pointer !important;" data-bs-dismiss="modal"
-                                        aria-label="Close" class="btn btn-success" onclick="AddArticle()">Ajouter</a>
+                                    <a id="ajouteencou" style="cursor: pointer !important;" data-dismiss="modal"
+                                        class="btn btn-success" onclick="AddArticle()">Ajouter</a>
 
                                     <a style="cursor: pointer !important; background-color: #bb1f1f !important;"
                                         class="btn btn-success" onclick="ClearImage('recenProd')">Vider image</a>
@@ -485,9 +483,7 @@
                             <div class="order-details">
                                 <h3 class="title">Selection des images</h3>
                                 <div class="order-table table-responsive">
-                                    <div style="cursor: pointer !important;" id="Editeimage1"></div>
-                                    <div style="cursor: pointer !important;" id="Editeimage2"></div>
-                                    <div style="cursor: pointer !important;" id="Editeimage3"></div>
+                                    <div style="cursor: pointer !important;" id="Editeimage1" onclick="removeImageEdite()"></div>
                                 </div>
                                 <div class="order-table table-responsive">
                                     <input type="file" id="imageInputf" accept="image/*"
@@ -514,8 +510,9 @@
     <div class="modal fade productsQuickView" id="optionCancile" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="bx bx-x"></i></span>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span style="color: #000000 !important;"><i class="bx bx-x"
+                            style="color: #000000 !important;">x</i></span>
                 </button>
 
                 <div class="row align-items-center">
@@ -542,8 +539,7 @@
 
                                 <div class="">
                                     <span>Quantité :</span>
-
-                                    <input autofocus type="text" id="productQuantity" value="1">
+                                    <input disabled type="text" id="productQuantity" value="">
                                 </div>
                             </div>
 
@@ -611,7 +607,7 @@
                     </div>
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="hidchange">
                     <button type="button" class="btn btn-info" data-dismiss="modal" onclick="selectStatus('onway')">En
                         cours</button>
                     <button type="button" class="btn btn-success" data-dismiss="modal"
@@ -755,7 +751,7 @@
     <script src="../productsFetcher/database_handl.js"></script>
     <script src="../convertisseur.js"></script>
     <script src="../disconnexion.js"></script>
-    <script src="admin/admindasdboard.js"></script>
+    <script src="./admindasdboard.js"></script>
     <script src="admin/assets/js/jquery-3.3.1.min.js"></script>
     <script src="admin/assets/js/jquery-1.10.2.min.js"></script>
     <script src="admin/assets/js/Chart.min.js"></script>

@@ -44,32 +44,26 @@ async function clearArticlea() {
 const imas = [];
 
 function previewImagef(event) {
+    const imagePreview = document.getElementById("imagePreview1");
+    imagePreview.innerHTML = "<span style='color: red'>En cours ..</span>";
     if (imas.length < 5) {
-        const imagePreview = document.getElementById(`imagePreview${imas.length + 1}`);
-        imagePreview.innerHTML = '';
-
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
 
             reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.height = '300px';
-                img.style.width = '200px';
-                img.setAttribute('onclick', 'removeImageCreate(event)');
-                img.setAttribute('id', `todeleId${imas.length + 1}`);
-                imagePreview.appendChild(img);
-                imagePreview.appendChild(img);
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="aricle image" width="200px" height="300">`;
+
+                reader.readAsDataURL(file);
             };
-            reader.readAsDataURL(file);
-        };
+        }
     }
 };
 
 async function previewImage() {
+    const imagePreview = document.getElementById("imagePreview1");
+    imagePreview.innerHTML = "<span style='color: red'>En cours ..</span>";
     if (imas.length < 5) {
-
         const fileInput = document.getElementById('imageInput');
         const file = fileInput.files[0];
 
@@ -91,8 +85,7 @@ async function previewImage() {
 
 async function sendBase64ToServer(base64Data, fileName) {
 
-    const imagePreview = document.getElementById(`imagePreview${imas.length + 1}`);
-    imagePreview.innerHTML = '';
+    const imagePreview = document.getElementById("imagePreview1");
 
     const response = await fetch(apiUrlfine + "boutique/uploadImage", {
         method: 'POST',
@@ -105,60 +98,22 @@ async function sendBase64ToServer(base64Data, fileName) {
     if (response.ok) {
         const url = await response.json();
         imas.push(url);
-        setTimeout(() => {
-            const img = document.createElement('img');
-            img.src = url.ima;
-            img.style.height = '300px';
-            img.style.width = '200px';
-            img.setAttribute('onclick', 'removeImageCreate(event)');
-            img.setAttribute('id', `todeleId${imas.length + 1}`);
-            imagePreview.appendChild(img);
-            imagePreview.appendChild(img);
-        }, 2500);
-
-        // Use the signed URL to upload the image to Google Cloud Storage (not shown here)
+        imagePreview.innerHTML = `<img src="${url.ima}" alt="aricle image" width="200px" height="300">`;
     } else {
         console.error('Error getting signed URL:', response.statusText);
     }
-
-    //previewImagef(evenct)
-
 }
 
-function removeImageCreate(event) {
+
+function removeImageCreate() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
 
     if (result) {
-        const clickedElementId = event.target.id;
-        if (clickedElementId.startsWith('todeleId')) {
-            const imageNumber = parseInt(clickedElementId.replace('todeleId', '')) - 1;
-            if (imageNumber >= 0 && imageNumber) {
-                imas.splice(imageNumber, 1);
-
-
-                // Clear the image previews
-                const imagePreviews = document.querySelectorAll('[id^="imagePreview"]');
-                imagePreviews.forEach((preview) => {
-                    preview.innerHTML = '';
-                });
-
-                // Update the remaining image previews
-                imas.forEach((ed, index) => {
-                    const imagePreview = document.getElementById(`imagePreview${index + 1}`);
-                    const img = document.createElement('img');
-                    img.src = ed.ima;
-                    img.style.height = '300px';
-                    img.style.width = '200px';
-                    img.setAttribute('onclick', 'removeImageCreate(event)');
-                    img.setAttribute('id', `todeleId${index + 1}`);
-                    imagePreview.appendChild(img);
-                });
-            }
-        }
-
+        document.getElementById('imagePreview1').innerHTML = "";
     }
 
 }
+
 
 const sendRequest = async (method, endpoint, data = null) => {
     const options = {
@@ -346,7 +301,7 @@ function CinetPayment(orderdata) {
     });
     CinetPay.getCheckout({
         transaction_id: transaction_id, // YOUR TRANSACTION ID
-        amount: totalPricea+1000,
+        amount: totalPricea + 1000,
         currency: 'XOF',
         channels: 'MOBILE_MONEY, WALLET',
         description: `Achat de ${orderdata.articles.length}`,
@@ -444,7 +399,7 @@ function CinetPayment(orderdata) {
         return_url: "https://nuancesdoud.com/client",
         channels: "ALL"
     });
-
+ 
     const settings = {
         method: "POST",
         headers: {
@@ -452,7 +407,7 @@ function CinetPayment(orderdata) {
         },
         body: data
     };
-
+ 
     fetch(cinetpay, settings)
         .then((answ) => answ.json())
         .then((dat) => {

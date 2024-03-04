@@ -37,15 +37,15 @@ async function optionCancileView(_id, proid, arti_id) {
 
 
         if (product && product.arti_id) {
-           
+
             document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
             document.getElementById('optionViewNewPrice').innerText = `${product.arti_id.addprix} F.CFA`;
             document.getElementById('productQuantity').value = product.quantcho;
-      
+
 
             const orderStatuHtml = document.getElementById('statusOrder');
             orderStatuHtml.innerHTML = '';
-            const orderStatus = product.statut === "done" ? "livré" : product.statut == "review" ? "en attente" : product.statut === "onway" ? "en cours" : "échoué";
+            const orderStatus = result.statut === "done" ? "livré" : result.statut == "review" ? "en attente" : result.statut === "onway" ? "en cours" : "échoué";
             const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
                                     `;
             orderStatuHtml.innerHTML = orderStatu;
@@ -69,12 +69,13 @@ async function optionCancileView(_id, proid, arti_id) {
             bacgro.style.backgroundColor = product.backgroundColor;
             const modalImage = document.getElementById('ipage');
             modalImage.src = product.arti_id.image[0].ima;
-           
-            
-            for (let poa = 0; poa < 3; poa++) {
-                quiColorfunb(product.arti_id.image[poa].ima)
-            }
 
+
+            quiColorfunb(product.arti_id.image[0].ima);
+
+            if (result.statut === "done") {
+                document.getElementById('hidchange').innerHTML = "";
+            }
         } else {
             document.getElementById('optionCancilename').innerText = "Article Supprimé";
 
@@ -113,15 +114,9 @@ function previewImageEdite(event) {
                     const id = imasEdi[firstOneIndex]._id;
                     imasEdi[firstOneIndex].ima = url.ima;
 
-                    const imagePreview = document.getElementById(`Editeimage${firstOneIndex + 1}`);
-                    imagePreview.innerHTML = '';
-
-                    const img = document.createElement('img');
-                    img.src = url.ima;
-                    img.style.height = '300px';
-                    img.style.width = '200px';
-                    img.setAttribute('onclick', `removeImageEdite('${id}')`);
-                    imagePreview.appendChild(img);
+                    const imagePreview = document.getElementById(`Editeimage1`);
+                    imagePreview.innerHTML = `<img src="${url.ima}" alt="aricle image" width="200px" height="300">`;
+                    //img.setAttribute('onclick', `removeImageEdite('${id}')`);
                 } else {
                     alert("No placeholder image found in imasEdi.");
                 }
@@ -137,30 +132,13 @@ function previewImageEdite(event) {
 }
 
 
-function removeImageEdite(id) {
+function removeImageEdite() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
 
     if (result) {
-
-        const removedImage = imasEdi.find((eo) => eo._id === id);
-        if (removedImage) {
-            removedImage.ima = "one";
-        }
-
-        imasEdi.forEach((ed, index) => {
-            const imagePreview = document.getElementById(`Editeimage${index + 1}`);
-            imagePreview.innerHTML = '';
-            if (ed.ima !== "one") {
-                const img = document.createElement('img');
-                img.src = ed.ima;
-                img.style.height = '300px';
-                img.style.width = '200px';
-                img.setAttribute('onclick', `removeImageEdite('${ed._id}')`);
-                imagePreview.appendChild(img);
-            }
-        });
+        imasEdi.length = 0;
+        document.getElementById(`Editeimage1`).imagePreview.innerHTML;
     }
-
 
 }
 
@@ -236,17 +214,11 @@ async function optionEditeView(_id) {
         /*addtransage addexpe addfour addphone addtypepro addtype addmateri adddispo addtail addnouveaute*/
 
         product.image.forEach((ed, index) => {
-            const imagePreview = document.getElementById(`Editeimage${index + 1}`);
+            const imagePreview = document.getElementById(`Editeimage1`);
             imagePreview.innerHTML = '';
             imasEdi.push(ed);
-            const img = document.createElement('img');
-            img.src = ed.ima;
-            img.style.height = '300px';
-            img.style.width = '200px';
-            img.setAttribute('onclick', `removeImageEdite('${ed._id}')`);
-            imagePreview.appendChild(img);
+            imagePreview.innerHTML = `<img src="${ed.ima}" alt="aricle image" width="200px" height="300">`;
         });
-
 
     });
 };
