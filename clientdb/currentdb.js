@@ -313,7 +313,7 @@ function CinetPayment(orderdata) {
             //window.location.reload();
 
         } else if (data.status == "ACCEPTED") {
-            orderdata.payment_status = "paid"
+            orderdata.payment_status = "waiting"
             orderdata.transaction_id = transaction_id;
 
             const sendReque = async (method, endpoint, data = null) => {
