@@ -108,18 +108,10 @@ function previewImageEdite(event) {
                 const url = await response.json();
 
                 // Find the first element in imasEdi with ima set to "one"
-                const firstOneIndex = imasEdi.findIndex(eo => eo.ima === "one");
+                imasEdi[0].ima = url.ima;
+                const imagePreview = document.getElementById(`Editeimage1`);
+                imagePreview.innerHTML = `<img src="${url.ima}" alt="aricle image" width="200px" height="300">`;
 
-                if (firstOneIndex !== -1) {
-                    const id = imasEdi[firstOneIndex]._id;
-                    imasEdi[firstOneIndex].ima = url.ima;
-
-                    const imagePreview = document.getElementById(`Editeimage1`);
-                    imagePreview.innerHTML = `<img src="${url.ima}" alt="aricle image" width="200px" height="300">`;
-                    //img.setAttribute('onclick', `removeImageEdite('${id}')`);
-                } else {
-                    alert("No placeholder image found in imasEdi.");
-                }
 
                 fileInput.value = '';
             } else {
@@ -137,7 +129,7 @@ function removeImageEdite() {
 
     if (result) {
         imasEdi.length = 0;
-        document.getElementById(`Editeimage1`).imagePreview.innerHTML;
+        document.getElementById(`Editeimage1`).innerHTML = "";
     }
 
 }
