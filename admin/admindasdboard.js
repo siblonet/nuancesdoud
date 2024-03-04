@@ -128,7 +128,6 @@ function removeImageEdite() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
 
     if (result) {
-        imasEdi.length = 0;
         document.getElementById(`Editeimage1`).innerHTML = "";
     }
 
