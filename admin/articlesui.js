@@ -59,8 +59,6 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
                                 <div style="height: 5px"></div>
                                 <p  class="sta" style="padding-left: ${article.quantity > 0 ? '10px' : '30px'}; padding-right: ${article.quantity > 0 ? '10px' : '30px'}; font-size: 14px; background-color: ${article.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${article.quantity > 0 ? "#ffffff" : "red"}">${article.quantity > 0 ? "Disponible" : "Finis"}</p>
                                 <div style="height: 7px"></div>
-
-                                <i onclick="addArticletoPannierManually('${article._id}')" class="sta vente lnr lnr-cart"></i>
                             </div>
                     </div>
       
@@ -84,12 +82,12 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${article.addprix}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${(article.addprix / 1000).toFixed(3)}</strong> F</p>
                         </div>
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? article.addreduction : 0}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? (article.addreduction / 1000).toFixed(3) : 0}</strong> F</p>
                         </div>
                     </div>
                 </div>
@@ -121,37 +119,6 @@ inputElement.addEventListener("input", function () {
     ArticlesUISearch(inputElement.value)
 });
 
-const addArticletoPannierManually = async (article_id) => {//appler par maint
-    if (internet == "online" && connected) {
-        const result = await GetArticleByID(article_id);
-        if (result && !ArticleFromPhone.find((exito) => exito._id == article_id)) {
-            const buybag = document.getElementById("buybag");
-            const previe = parseInt(buybag.innerText);
-            buybag.style.backgroundColor = 'rgb(255, 0, 98)';
-            document.getElementById("buybag").innerText = `${previe ? previe + 1 : 1}`;
-
-            result.quantcho = 1;
-            result.prix = result.addprix;
-            ArticleFromPhone.push(result);
-            GetFromPhone();
-        }
-
-    } else if (connected) {
-        const result = await GetOfflineArticleByID(article_id);
-        if (result && !ArticleFromPhone.find((exito) => exito.id_has == article_id)) {
-            const buybag = document.getElementById("buybag");
-            const previe = parseInt(buybag.innerText);
-            buybag.style.backgroundColor = 'rgb(255, 0, 98)';
-            document.getElementById("buybag").innerText = `${previe ? previe + 1 : 1}`;
-
-            result.quantcho = 1;
-            result.prix = result.addprix;
-            ArticleFromPhone.push(result);
-            GetFromPhone();
-        }
-    }
-
-};
 
 
 function CreateArticle() {

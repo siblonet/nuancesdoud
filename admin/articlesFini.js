@@ -63,12 +63,12 @@ function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAtic
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${article.addprix}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${(article.addprix / 1000).toFixed(3)}</strong> F</p>
                         </div>
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? article.addreduction : 0}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? (article.addreduction / 1000).toFixed(3) : 0}</strong> F</p>
                         </div>
                     </div>
                 </div>

@@ -34,7 +34,6 @@ async function ArticlesUISearch(search) {
                                 <p  class="sta" style="padding-left: ${article.quantity > 0 ? '10px' : '30px'}; padding-right: ${article.quantity > 0 ? '10px' : '30px'}; font-size: 14px; background-color: ${article.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${article.quantity > 0 ? "#ffffff" : "red"}">${article.quantity > 0 ? "Disponible" : "Finis"}</p>
                                 <div style="height: 7px"></div>
 
-                                <i onclick="addArticletoPannierManually('${article._id}')" class="sta vente lnr lnr-cart"></i>
                             </div>
                     </div>
       
@@ -58,12 +57,12 @@ async function ArticlesUISearch(search) {
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${article.addprix}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${(article.addprix / 1000).toFixed(3)}</strong> F</p>
                         </div>
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? article.addreduction : 0}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Promo: <strong>${article.addreduction ? (article.addreduction / 1000).toFixed(3) : 0}</strong> F</p>
                         </div>
                     </div>
                 </div>
