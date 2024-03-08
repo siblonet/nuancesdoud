@@ -1,20 +1,21 @@
 function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace) {
-    ActiveDas.classList.add('active');
-    ActiveCo.classList.remove('active');
-    ActiveCl.classList.remove('active');
-    ActiveAr.classList.remove('active');
-    ActiveAn.classList.remove('active');
-    addAticlebtn.innerHTML = "";
-    const dasboardHTML = `
+  ActiveDas.classList.add('active');
+  ActiveCo.classList.remove('active');
+  ActiveCl.classList.remove('active');
+  ActiveAr.classList.remove('active');
+  ActiveAn.classList.remove('active');
+  addAticlebtn.innerHTML = "";
+  const dasboardHTML = `
     
         <div class="container-fluid content-top-gap">
          
             <div class="welcome-msg pt-3 pb-4" id="realchangea">
-                <h1>Bonjour <span class="text-primary">${username}</span></h1>
+                <h1 style="color: #aaaaaa">Bonjour <span class="text-primary" style="font-weight: bold; color: #0d7fdd  !important;">${username}</span></h1>
+                <p>Vous étes dans votre espace administratif.</p>
+                <a style="font-size: 12px; font-weight: 100; color: #007bff !important;" href="/">Aller à Espace Publique</a>
             </div>
 
 
-            
             <div class="statistics">
             <div class="row">
               <div class="col-xl-6 pr-xl-2">
@@ -153,62 +154,62 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
     
     `;
 
-    adminiSpace.innerHTML = dasboardHTML;
-    NavBaractivity();
+  adminiSpace.innerHTML = dasboardHTML;
+  NavBaractivity();
 
 }
 
 
 const NavBaractivity = () => {
-    const currentDate = new Date();
+  const currentDate = new Date();
 
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const day = String(currentDate.getDate()).padStart(2, '0');
 
-    GetOrder().then((order) => {
-        const ordernotif = [];
-        let odernotnu = 0;
-        let totalSold = 0;
-        let SoldNumber = 0;
-        let CommandesNum = 0;
+  GetOrder().then((order) => {
+    const ordernotif = [];
+    let odernotnu = 0;
+    let totalSold = 0;
+    let SoldNumber = 0;
+    let CommandesNum = 0;
 
 
-        if (order && order.length > 0) {
-            order.forEach((pan) => {
-                totalSold += pan.statut === "done" && pan.created.startsWith(`${year}-${month}-${day}`) ? parseInt(pan.reduction) : 0;
+    if (order && order.length > 0) {
+      order.forEach((pan) => {
+        totalSold += pan.statut === "done" && pan.created.startsWith(`${year}-${month}-${day}`) ? parseInt(pan.reduction) : 0;
 
-                SoldNumber += pan.statut == "done" ? 1 : 0;
+        SoldNumber += pan.statut == "done" ? 1 : 0;
 
-                if (pan.statut !== "done" && pan.statut !== "fail") {
-                    odernotnu += 1;
-                    if (ordernotif.length < 3) {
-                        ordernotif.push(pan);
-                    }
-                };
+        if (pan.statut !== "done" && pan.statut !== "fail") {
+          odernotnu += 1;
+          if (ordernotif.length < 3) {
+            ordernotif.push(pan);
+          }
+        };
 
-                if (pan.statut !== "done") {
-                    CommandesNum += 1;
+        if (pan.statut !== "done") {
+          CommandesNum += 1;
 
-                };
-            });
+        };
+      });
 
-            const odernotifi = document.getElementById('odernotifi');
-            odernotifi.innerHTML = '';
-            document.getElementById('recetteMoney').innerText = `${(totalSold / 1000).toFixed(3)} F.CFA`;
-            document.getElementById('CommandesNum').innerText = CommandesNum;
-            document.getElementById('CommandesNuma').innerText = SoldNumber;
+      const odernotifi = document.getElementById('odernotifi');
+      odernotifi.innerHTML = '';
+      document.getElementById('recetteMoney').innerText = `${(totalSold / 1000).toFixed(3)} F.CFA`;
+      document.getElementById('CommandesNum').innerText = CommandesNum;
+      document.getElementById('CommandesNuma').innerText = SoldNumber;
 
-            if (odernotnu > 0) {
-                const odernotifiHTML = `
+      if (odernotnu > 0) {
+        const odernotifiHTML = `
     
                     <i class="fa fa-bell-o"></i>
                     <span class="badge blue" style="background-color: rgb(255, 0, 98);">${odernotnu}</span>
     
                         `;
-                odernotifi.innerHTML = odernotifiHTML;
-                const notification_header = document.getElementById('notification_header');
-                notification_header.innerHTML = `
+        odernotifi.innerHTML = odernotifiHTML;
+        const notification_header = document.getElementById('notification_header');
+        notification_header.innerHTML = `
             <li>
                 <div class="notification_header">
                     <h3>Vous avez ${odernotnu > 1 ? `<i style='color: red'>${odernotnu}</i>` + " nouvelles commandes en attentes" : "<i style='color: red'>Une</i> nouvelle commande en attente"}</h3>
@@ -225,7 +226,7 @@ const NavBaractivity = () => {
                 </a>
             </li>
             ${ordernotif.length > 1 ?
-                        `
+            `
                
             <li class="odd">
                 <a href="#" class="grid">
@@ -237,11 +238,11 @@ const NavBaractivity = () => {
                 </a>
             </li>
             `
-                        :
-                        ""
-                    }
+            :
+            ""
+          }
             ${ordernotif.length > 2 ?
-                        `
+            `
             <li>
                 <a href="#" class="grid">
                     <div class="user_img"><img src="admin/assets/img/avatay.png" alt=""></div>
@@ -252,9 +253,9 @@ const NavBaractivity = () => {
                 </a>
             </li>
             `
-                        :
-                        ""
-                    }
+            :
+            ""
+          }
             <li>
             <div class="notification_bottom">
                 <a style="cursor: pointer" onclick="NafigatioTo('commandes')" class="bg-primary">Traiter les commandes</a>
@@ -262,57 +263,57 @@ const NavBaractivity = () => {
             </li>
             `;
 
-            } else {
-                const odernotifiHTML = `
+      } else {
+        const odernotifiHTML = `
                     <i class="fa fa-bell-o"></i>
                 `;
-                odernotifi.innerHTML = odernotifiHTML;
-            }
-        } else {
-            const odernotifi = document.getElementById('odernotifi');
-            odernotifi.innerHTML = '';
-            const odernotifiHTML = `
+        odernotifi.innerHTML = odernotifiHTML;
+      }
+    } else {
+      const odernotifi = document.getElementById('odernotifi');
+      odernotifi.innerHTML = '';
+      const odernotifiHTML = `
                     <i class="fa fa-bell-o"></i>
                 `;
-            odernotifi.innerHTML = odernotifiHTML;
-        };
+      odernotifi.innerHTML = odernotifiHTML;
+    };
 
-    }).catch((error) => console.log(error));
+  }).catch((error) => console.log(error));
 
-    GetPeople("person").then((people) => {
+  GetPeople("person").then((people) => {
 
-        document.getElementById('PeoplesNum').innerText = people.length;
-    }).catch((error) => console.log(error));
-
-
-    GetArticle().then((articlesDa) => {
-        let availableArticlea = 0;
-        let availablearticle = 0;
-
-        articlesDa.forEach((arti) => {
-            availableArticlea += arti.quantity < 1 ? 1 : 0;
-            availablearticle += arti.quantity > 0 ? 1 : 0;
-        });
-
-        document.getElementById('availableArticlea').innerText = availableArticlea;
-        document.getElementById('availableArticle').innerText = availablearticle;
-    }).catch((error) => console.log(error));
+    document.getElementById('PeoplesNum').innerText = people.length;
+  }).catch((error) => console.log(error));
 
 
-    GetPeople("Anony").then((people) => {
+  GetArticle().then((articlesDa) => {
+    let availableArticlea = 0;
+    let availablearticle = 0;
 
-        document.getElementById('PeoplesNumAnony').innerText = people.length;
-    }).catch((error) => console.log(error));
+    articlesDa.forEach((arti) => {
+      availableArticlea += arti.quantity < 1 ? 1 : 0;
+      availablearticle += arti.quantity > 0 ? 1 : 0;
+    });
+
+    document.getElementById('availableArticlea').innerText = availableArticlea;
+    document.getElementById('availableArticle').innerText = availablearticle;
+  }).catch((error) => console.log(error));
 
 
-    (async () => {
-        const version = await requesttoBackend('GET', 'boutique/version/new/pc/software/phone');
-        if (version.version > 0) {
-            document.getElementById("mobileUrl").value = version.url;
-            document.getElementById("ApplicationMobile").innerText = 1;
-        }
+  GetPeople("Anony").then((people) => {
 
-    })();
+    document.getElementById('PeoplesNumAnony').innerText = people.length;
+  }).catch((error) => console.log(error));
+
+
+  (async () => {
+    const version = await requesttoBackend('GET', 'boutique/version/new/pc/software/phone');
+    if (version.version > 0) {
+      document.getElementById("mobileUrl").value = version.url;
+      document.getElementById("ApplicationMobile").innerText = 1;
+    }
+
+  })();
 
 
 

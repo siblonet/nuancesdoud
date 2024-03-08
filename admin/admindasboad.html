@@ -214,9 +214,12 @@
         <div class="header sticky-header">
 
             <div class="menu-right">
+
+
                 <div class="navbar user-panel-top">
 
                     <div class="user-dropdown-details d-flex">
+
                         <div class="profile_details_left">
 
                             <ul class="nofitications-dropdown">
@@ -304,7 +307,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="form-outline searcha" data-mdb-input-init id="searcha">
+            <input type="search" id="form1" class="form-control" placeholder="Recherchez avec le nom ou barcode" aria-label="Search" />
+        </div>
 
         <div class="main-content" id="main-content">
 
@@ -452,73 +457,34 @@
 
                                 <div>
                                     <div class="order-table table-responsive"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
-
+                                        style="justify-content: center; align-items: center; text-align: center;">
                                         <div id="imagePreview1" class="addarticleimageshow"
-                                            onclick="removeImageCreate(1)"></div>
-                                        <div class="" style="width: 5px;"></div>
-
-                                        <div id="imagePreview2" class="addarticleimageshow"
-                                            onclick="removeImageCreate(2)"></div>
+                                            onclick="removeImageCreate()">
+                                            <img id="imagePreviewHere" src="admin/assets/img/imgo.png"
+                                                style="height: 100% !important; width: 100% !important;"
+                                                alt="Loading ..." />
+                                        </div>
                                     </div>
 
                                     <div class="" style="height: 5px; background-color: #ffffff;"></div>
 
                                     <div class="" id="limitimag1"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center; background-color: #ffffff">
-                                        <div id="doblik1" class="doblik" onclick="AddArticleImage(1)">
-                                            <p style="color: #ffffff;">Image 1</p>
-
+                                        style="justify-content: center; align-items: center; text-align: center; background-color: #ffffff">
+                                        <div id="doblik1" class="doblik">
+                                            <input type="file" id="doblik11" accept="image/*"
+                                                onchange="AddArticleImage()">
                                         </div>
 
-                                        <div id="doblik2" class="doblik" onclick="AddArticleImage(2)">
-                                            <p style="color: #ffffff;">Image 2</p>
-
-                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="" style="height: 15px; background-color: #ffffff;"></div>
-
-                                <div>
-                                    <div class="order-table table-responsive"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
-
-                                        <div id="imagePreview3" class="addarticleimageshow"
-                                            onclick="removeImageCreate(3)"></div>
-                                        <div class="" style="width: 5px;"></div>
-
-                                        <div id="imagePreview4" class="addarticleimageshow"
-                                            onclick="removeImageCreate(4)"></div>
-                                    </div>
-
-
-                                    <div class="" style="height: 5px; background-color: #ffffff;"></div>
-
-                                    <div class="order-table table-responsive" id="limitimag2"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center; background-color: #ffffff">
-                                        <div id="doblik3" class="doblik" onclick="AddArticleImage(3)">
-                                            <p style="color: #ffffff;">Image 3</p>
-
-                                        </div>
-
-                                        <div id="doblik4" class="doblik" onclick="AddArticleImage(4)">
-                                            <p style="color: #ffffff;">Image 4</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="" style="height: 5px;"></div>
 
                                 <br>
 
                                 <div>
                                     <a id="ajouteencou" style="cursor: pointer !important;" data-dismiss="modal"
                                         aria-label="Close" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
-
-                                    <a style="cursor: pointer !important; background-color: #bb1f1f !important;"
-                                        class="btn btn-success" onclick="ClearImage('recenProd')">Vider image</a>
 
                                     <a style="cursor: pointer !important;" class="btn btn-info" data-dismiss="modal"
                                         onclick="ClearArticleinfos('addarticles')">Fermer</a>
@@ -542,6 +508,7 @@
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
     <div class="modal fade productsQuickView" id="modArticle" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -623,100 +590,46 @@
                             <div class="order-details">
                                 <h3 class="title">Selection des images</h3>
 
-                                <div style="background-color: #ffffff;">
-                                    <div class="order-table table-responsive"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
-
-                                        <div class="addarticleimageshow" onclick="removeImageEdite(1)">
-                                            <input type="hidden" id="editeimageid1" value="">
-                                            <img id="Editeimage1" src=""
-                                                style="height: 100% !important; width: 100% !important;"
-                                                alt="Image 1" />
-                                        </div>
-
-                                        <div class="" style="width: 5px;"></div>
-
-                                        <div class="addarticleimageshow" onclick="removeImageEdite(2)">
-                                            <input type="hidden" id="editeimageid2" value="">
-                                            <img id="Editeimage2" src=""
-                                                style="height: 100% !important; width: 100% !important;"
-                                                alt="Image 2" />
-
-                                        </div>
-                                    </div>
-
-                                    <div class="" style="height: 5px; background-color: #ffffff;"></div>
-
-                                    <div class="order-table table-responsive" id="limitimage1"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center; background-color: #ffffff">
-                                        <div id="Editeimageonline1" class="doblik" onclick="EditeArticleImage(1)">
-                                            <p style="color: #000000;">Image 1</p>
-
-                                        </div>
-
-                                        <div id="Editeimageonline2" class="doblik" onclick="EditeArticleImage(2)">
-                                            <p style="color: #000000;">Image 2</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="" style="height: 15px; background-color: #ffffff;"></div>
-
                                 <div>
                                     <div class="order-table table-responsive"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
+                                        style="justify-content: center; align-items: center; text-align: center;">
 
-                                        <div class="addarticleimageshow" onclick="removeImageEdite(3)">
-                                            <input type="hidden" id="editeimageid3" value="">
-                                            <img id="Editeimage3" src=""
+                                        <div class="addarticleimageshow" onclick="removeImageEdite()">
+                                            <input type="hidden" id="editeimageid1" value="">
+                                            <img id="Editeimage1" src="admin/assets/img/imgo.png"
                                                 style="height: 100% !important; width: 100% !important;"
-                                                alt="Image 3" />
-
+                                                alt="Loading ..." />
                                         </div>
-                                        <div class="" style="width: 5px;"></div>
 
-                                        <div class="addarticleimageshow" onclick="removeImageEdite(4)">
-                                            <input type="hidden" id="editeimageid4" value="">
-                                            <img id="Editeimage4" src=""
-                                                style="height: 100% !important; width: 100% !important;"
-                                                alt="Image 4" />
-
-                                        </div>
                                     </div>
 
-
-                                    <div class="" style="height: 5px; background-color: #ffffff;"></div>
-
-                                    <div class="order-table table-responsive" id="limitimage2"
-                                        style="display: flex; justify-content: space-between; align-items: center; text-align: center; background-color: #ffffff">
-                                        <div id="Editeimageonline3" class="doblik" onclick="EditeArticleImage(3)">
-                                            <p style="color: #000000;">Image 3</p>
-
+                                    <div class="order-table table-responsive" id="limitimage1"
+                                        style="justify-content: center; align-items: center; text-align: center; background-color: #ffffff">
+                                        <div id="Editeimageonline1" class="doblik">
+                                            <input type="file" id="Editeimageonline1inpu" accept="image/*"
+                                                onchange="EditeArticleImage()">
                                         </div>
+                                    </div>
+                                    <div class="" style="height: 15px; background-color: #ffffff;"></div>
 
-                                        <div id="Editeimageonline4" class="doblik" onclick="EditeArticleImage(4)">
-                                            <p style="color: #000000;">Image 4</p>
+                                    <br>
 
-                                        </div>
+                                    <div>
+
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                            onclick="RemoveArticleById()">Supprimer</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick="EditeArticle()">Modifer</button>
+                                        <button type="button" class="btn btn-info" data-dismiss="modal"
+                                            onclick="ClearArticleinfos('editearticles')">Fermer</button>
                                     </div>
                                 </div>
-
-                                <div class="" style="height: 5px;"></div>
 
                             </div>
                         </div>
                     </div>
                 </form>
-                <div class="modal-footer">
 
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"
-                        onclick="RemoveArticleById()">Supprimer</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal"
-                        onclick="EditeArticle()">Modifer</button>
-                    <button type="button" class="btn btn-info" data-dismiss="modal"
-                        onclick="ClearArticleinfos('editearticles')">Fermer</button>
-                </div>
             </div>
         </div>
     </div>

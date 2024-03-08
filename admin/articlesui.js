@@ -5,7 +5,10 @@ let ActiveAra;
 let ActiveAna;
 let adminiSpacea;
 
+
+
 function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
+    
     ArticleFromPhoneSearch = [];
     ActiveDasa = ActiveDas;
     ActiveCoa = ActiveCo;
@@ -13,38 +16,31 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
     ActiveAra = ActiveAr;
     ActiveAna = ActiveAn;
     adminiSpacea = adminiSpace;
-    isExaminating = true;
-    isArticle = true;
-    isVendu = false;
-    isCommande = false;
-    isFinis = false;
-    isPeoples = false;
-    if (connected) {
 
-        ActiveDas.classList.remove('active');
-        ActiveCo.classList.remove('active');
-        ActiveCl.classList.remove('active');
-        ActiveAr.classList.add('active');
-        ActiveAn.classList.remove('active');
-        document.getElementById('filter-order').classList.remove('active');
+    ActiveDas.classList.remove('active');
+    ActiveCo.classList.remove('active');
+    ActiveCl.classList.remove('active');
+    ActiveAr.classList.add('active');
+    ActiveAn.classList.remove('active');
+    document.getElementById('filter-order').classList.remove('active');
 
-        const livecha = document.getElementById('add-article');
+    const livecha = document.getElementById('add-article');
 
-        setTimeout(() => {
-            livecha.classList.add('active');
-        }, 1000);
+    setTimeout(() => {
+        livecha.classList.add('active');
+    }, 1000);
 
-        GetArticle("avail").then((offarticles) => {
+    GetArticle("avail").then((offarticles) => {
 
 
-            const articlesHTML = `
+        const articlesHTML = `
                 <br>
                 <br>
                 <br>
                 <br>
-              
+
         ${offarticles.map(article => {
-                return `
+            return `
             <div class="articlerow">
       
                 <div class="articlerwedgea">
@@ -102,18 +98,28 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
             <br>
       
             `;
-            }).join('')}
+        }).join('')}
 
         `;
 
 
 
-            adminiSpace.innerHTML = articlesHTML;
-        }).catch((error) => console.log(error))
-    }
+        adminiSpace.innerHTML = articlesHTML;
+        document.getElementById('searcha').style.display = "block";
+
+    }).catch((error) => console.log(error))
+
 
 }
 
+const inputElement = document.getElementById("form1");
+
+// Add an event listener for the input event
+inputElement.addEventListener("input", function () {
+
+
+    ArticlesUISearch(inputElement.value)
+});
 
 const addArticletoPannierManually = async (article_id) => {//appler par maint
     if (internet == "online" && connected) {
@@ -163,7 +169,7 @@ function CreateArticle() {
         const notes = document.getElementById('notes').value;
 
 
-        if (addarticle && addgenre && addbarcode && addprix && addmarque && (Offlineimas.length > 0 || Onlineimas.length > 0)) {
+        if (addarticle && addgenre && addbarcode && addprix && addmarque && Onlineimas.length > 0) {
             const product = {
                 id_has: Math.floor(Math.random() * 100000000).toString(),
                 addarticle: addarticle,
@@ -177,34 +183,25 @@ function CreateArticle() {
                 notes: notes,
                 barcode: addbarcode,
                 owner: "nuance",
-                image: internet === "online" ? Onlineimas : Offlineimas
+                image: Onlineimas
             };
             document.getElementById("ajouteencou").innerText = "En cours"
 
-            if (internet === "online") {
-                const createItem = async () => {
-                    try {
-                        const createdProdec = await requesttoBackend('POST', 'boutique', product);
-                        if (createdProdec) {
-                            const items = await requesttoBackend('GET', 'boutique/only/article/nuance');
-                            await deleteArticle();
-                            await PostArticle(items);
-                        }
-
-                    } catch (error) {
-                        console.error('Error creating product:', error.message);
+            const createItem = async () => {
+                try {
+                    const createdProdec = await requesttoBackend('POST', 'boutique', product);
+                    if (createdProdec) {
+                        const items = await requesttoBackend('GET', 'boutique/only/article/nuance');
+                        await deleteArticle();
+                        await PostArticle(items);
                     }
-                };
 
-                createItem();
+                } catch (error) {
+                    console.error('Error creating product:', error.message);
+                }
+            };
 
-            } else {
-                const createArticle = async () => {
-                    await PostOfflineArticle(product).then((dd) => console.log(dd)).catch((error) => console.log(error));
-                };
-                createArticle();
-            }
-
+            createItem();
             document.getElementById("ajouteencou").innerText = "Ajouter Encore"
 
         }
@@ -213,62 +210,43 @@ function CreateArticle() {
     }
 }
 
-async function AddArticleImage(pos) {
-    const imagePreview = document.getElementById(`imagePreview${pos}`);
-    imagePreview.innerHTML = '';
+async function AddArticleImage() {
+    const imagePreview = document.getElementById(`imagePreviewHere`);
+    imagePreview.src = '';
 
-    if (Onlineimas.length < 4) {
+    const fileInput = document.getElementById(`doblik11`);
+    const file = fileInput.files[0];
 
-        const fileInput = document.getElementById(`doblik${pos}${pos}`);
-        const file = fileInput.files[0];
-
-        if (!file) {
-            alert("Aucune image n'a été selectionné!");
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = async function (event) {
-            const base64Data = event.target.result.split(',')[1];
-            const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name });
-            const imarandomid = Math.floor(Math.random() * 100000000).toString()
-            Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
-
-            const img = document.createElement('img');
-            img.src = url.ima;
-            img.style.height = '100%';
-            img.style.width = '100%';
-            imagePreview.appendChild(img);
-            imagePreview.appendChild(img);
-            const doblik = document.getElementById(`doblik${pos}`);
-            doblik.style.width = "40%";
-
-            doblik.setAttribute('onclick', `Duplique('${pos}', '${imarandomid}')`);
-            doblik.innerHTML = `<p style="color: #ffffff;">Dupliquer</p>`
-        };
-        reader.readAsDataURL(file);
-        if (Onlineimas.length == 4) {
-            document.getElementById('limitimag1').style.display = "none";
-            document.getElementById('limitimag2').style.display = "none";
-        }
+    if (!file) {
+        alert("Aucune image n'a été selectionné!");
+        return;
     }
 
+    const reader = new FileReader();
+    reader.onload = async function (event) {
+        const base64Data = event.target.result.split(',')[1];
+        const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name });
+        const imarandomid = Math.floor(Math.random() * 100000000).toString()
+        Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
+
+        const img = document.getElementById('imagePreviewHere');
+        img.src = url.ima;
+
+    };
+    reader.readAsDataURL(file);
+    document.getElementById('limitimag1').style.display = "none";
 
 }
 
-function removeImageCreate(pos) {
+
+function removeImageCreate() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
-    const imagePreview = document.getElementById(`imagePreview${pos}`);
-    imagePreview.innerHTML = '';
+    const imagePreview = document.getElementById(`imagePreviewHere`);
+    imagePreview.src = '';
 
     if (result) {
-        Onlineimas.splice(pos - 1, 1);
-
-
-
-
+        Onlineimas.length = 0;
         document.getElementById('limitimag1').style.display = "flex";
-        document.getElementById('limitimag2').style.display = "flex";
     }
 
 }
@@ -278,9 +256,6 @@ async function openArticleforediting(id_has) {
 
 
     const Editeimageonline1 = document.getElementById('Editeimageonline1');
-    const Editeimageonline2 = document.getElementById('Editeimageonline2');
-    const Editeimageonline3 = document.getElementById('Editeimageonline3');
-    const Editeimageonline4 = document.getElementById('Editeimageonline4');
 
     const styels = `
     align-items: center; 
@@ -297,16 +272,12 @@ async function openArticleforediting(id_has) {
 `;
 
     Editeimageonline1.style = styels;
-    Editeimageonline2.style = styels;
-    Editeimageonline3.style = styels;
-    Editeimageonline4.style = styels;
+
 
     Onlineimas.length = 0;
 
     GetArticleByID(id_has).then(product => {
-        product.image.forEach((ed, index) => {
-            Onlineimas.push(ed);
-        });
+        Onlineimas.push(product.image[0]);
 
         document.getElementById('ediatiid').value = id_has;
         document.getElementById('editearticle').value = product.addarticle;
@@ -325,56 +296,7 @@ async function openArticleforediting(id_has) {
         imagePreview1.src = Onlineimas[0].ima;
         document.getElementById('editeimageid1').value = Onlineimas[0]._id;
 
-        /*const imagePreview2 = document.getElementById(`Editeimage2`);
-        imagePreview2.src = Onlineimas[1].ima;
-        document.getElementById('editeimageid2').value = Onlineimas[1]._id;
-
-        const imagePreview3 = document.getElementById(`Editeimage3`);
-        imagePreview3.src = Onlineimas[2].ima;
-        document.getElementById('editeimageid3').value = Onlineimas[2]._id;
-
-        const imagePreview4 = document.getElementById(`Editeimage4`);
-        imagePreview4.src = Onlineimas[3].ima;
-        document.getElementById('editeimageid4').value = Onlineimas[3]._id;*/
-
-
-
-        const onlineImapro1 = document.getElementById('Editeimageonline1');
-        onlineImapro1.setAttribute('onclick', "");
-        onlineImapro1.innerHTML = `
-                <input type="file" id="Editeimageonline1inpu" accept="image/*"
-            onchange="EditeArticleImage(1)" >
-            `;
-
-        const onlineImapro2 = document.getElementById('Editeimageonline2');
-        onlineImapro2.setAttribute('onclick', "");
-
-        onlineImapro2.innerHTML = `
-                <input type="file" id="Editeimageonline2inpu" accept="image/*"
-            onchange="EditeArticleImage(2)" >
-            `;
-
-
-        const onlineImapro3 = document.getElementById('Editeimageonline3');
-        onlineImapro3.setAttribute('onclick', "");
-
-        onlineImapro3.innerHTML = `
-                <input type="file" id="Editeimageonline3inpu" accept="image/*"
-            onchange="EditeArticleImage(3)" >
-            `;
-
-        const onlineImapro4 = document.getElementById('Editeimageonline4');
-        onlineImapro4.setAttribute('onclick', "");
-
-        onlineImapro4.innerHTML = `
-                <input type="file" id="Editeimageonline4inpu" accept="image/*"
-            onchange="EditeArticleImage(4)" >
-            `;
-
-        if (Onlineimas.length == 4) {
-            document.getElementById('limitimage1').style.display = "none";
-            document.getElementById('limitimage2').style.display = "none";
-        }
+        document.getElementById('limitimage1').style.display = "none";
 
     });
 
@@ -382,87 +304,72 @@ async function openArticleforediting(id_has) {
 
 
 
-function removeImageEdite(pos) {
+function removeImageEdite() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
-    const imid = document.getElementById(`editeimageid${pos}`).value;
-
 
     if (result) {
-        const imagePreview = document.getElementById(`Editeimage${pos}`);
-        imagePreview.src = '';
-        const newOfflineime = Onlineimas.filter((im) => im._id !== imid);
-        Onlineimas.length = 0;
-        newOfflineime.forEach((ed, index) => {
-            Onlineimas.push(ed);
-        });
+        const imagePreview = document.getElementById(`Editeimage1`);
+        imagePreview.src = './assets/img/imgo.png';
+        Onlineimas[0].ima = "./assets/img/imgo.png";
 
         document.getElementById('limitimage1').style.display = "flex";
-        document.getElementById('limitimage2').style.display = "flex";
     }
 
 
 }
 
-async function EditeArticleImage(pos) {
-    const imagePreview = document.getElementById(`Editeimage${pos}`);
-
-    if (Onlineimas.length < 4) {
-
-        const fileInput = document.getElementById(`Editeimageonline${pos}inpu`);
-        const file = fileInput.files[0];
-
-        if (!file) {
-            alert("Aucune image n'a été selectionné!");
-            return;
-        };
-        console.log(file.name, file.name.toString());
-        const reader = new FileReader();
-        reader.onload = async function (event) {
-            const base64Data = event.target.result.split(',')[1];
-
-            const response = await fetch(apiUrlfine + "boutique/uploadImage", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ima: base64Data, nam: file.name }),
-            });
-
-            if (response.ok) {
-                const url = await response.json();
-                console.log(url);
-                Onlineimas.push(url);
-                setTimeout(() => {
-                    imagePreview.src = url.ima;
-                    imagePreview.style.height = '100%';
-                    imagePreview.style.width = '100%';
-                }, 2500);
-            } else {
-                console.log("gegegeg")
-            }
+async function EditeArticleImage() {
+    const imagePreview = document.getElementById(`Editeimage1`);
+    imagePreview.src = 'gghgh.jpg';
 
 
-        };
-        reader.readAsDataURL(file);
-        if (Onlineimas.length == 4) {
-            document.getElementById('limitimage1').style.display = "none";
-            document.getElementById('limitimage2').style.display = "none";
+    const fileInput = document.getElementById(`Editeimageonline1inpu`);
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Aucune image n'a été selectionné!");
+        return;
+    };
+
+
+    const reader = new FileReader();
+    reader.onload = async function (event) {
+        const base64Data = event.target.result.split(',')[1];
+
+        const response = await fetch(apiUrlfine + "boutique/uploadImage", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ima: base64Data, nam: file.name }),
+        });
+
+        if (response.ok) {
+            const url = await response.json();
+            console.log(url);
+            Onlineimas[0].ima = url.ima;
+            setTimeout(() => {
+                imagePreview.src = url.ima;
+            }, 2500);
+        } else {
+            console.log("gegegeg")
         }
+
+
+    };
+    reader.readAsDataURL(file);
+    if (Onlineimas.length > 0) {
+        document.getElementById('limitimage1').style.display = "none";
     }
-
-
-
-}
+};
 
 
 function ClearArticleinfos(caller) {
     if (caller == "addarticles") {
         document.getElementById('autocliaddcheck').value = "off";
         initDataLoader();
-        Offlineimas.length = 0;
         Onlineimas.length = 0;
     } else {
-        Offlineimas.length = 0;
         Onlineimas.length = 0;
     }
 }
@@ -497,7 +404,7 @@ async function EditeArticle() {
                 notes: notes,
                 owner: "nuance",
                 barcode: addbarcode,
-                image: internet == "online" ? Onlineimas : Offlineimas
+                image: Onlineimas
 
             };
 
@@ -528,7 +435,6 @@ async function RemoveArticleById() {
         const _ide = document.getElementById("ediatiid").value;
         await requesttoBackend('DELETE', `boutique/${_ide}`);
         Onlineimas.length = 0;
-        Offlineimas.length = 0;
         initDataLoader();
 
 

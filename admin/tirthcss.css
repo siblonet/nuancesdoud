@@ -202,6 +202,15 @@ Add Article CSS
     transition: 0.5s;
 }
 
+.searcha {
+    position: fixed;
+    left: 5%;
+    right: 0;
+    top: 10%;
+    z-index: 9999;
+    display: none;
+}
+
 .add-article.active {
     bottom: 25px;
     opacity: 1;
@@ -417,8 +426,8 @@ Add Article CSS
 }
 
 .addarticleimageshow {
-    height: 200px;
-    width: 200px;
+    height: 350px;
+    width: 350px;
     overflow: hidden;
     border-radius: 15px;
     align-items: center;
@@ -458,15 +467,16 @@ Add Article CSS
     border-radius: 2rem;
     text-align: center;
 }
+
 .articlerow .articlerwedgea .sta.shipp {
-        background-color: #109691a6;
-        color: #054846;
+    background-color: #109691a6;
+    color: #054846;
 
 }
 
 .articlerow .articlerwedgea .sta.vente {
     background-color: #eeeeee;
-    padding-left: 30px; 
+    padding-left: 30px;
     padding-right: 30px;
     cursor: pointer
 }
@@ -505,6 +515,7 @@ Add Article CSS
 .articlerow .articlerwedge .articlesInfosa .imageholder img {
     height: 100%;
     width: 100%;
-    
+
 }
+
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ for article end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
