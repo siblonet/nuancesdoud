@@ -23,7 +23,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                     <div class="store3 card card_border border-primary-topa p-4"
                       onclick="NafigatioTo('articles')">
                       <i class="lnr store">
-                        <img src="./assets/img/store3a.png" alt="store1" width="50" height="50">
+                        <img src=="admin/assets/img/store3a.png" alt="store1" width="50" height="50">
                       </i>
                       <h3 class="text-primary number" id="availableArticle">0</h3>
                       <p class="stat-text">Article Disponible</p>
@@ -35,7 +35,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
 
 
                       <i class="lnr store">
-                      <img src="./assets/img/comandea.png" alt="store5" width="50" height="50">
+                      <img src=="admin/assets/img/comandea.png" alt="store5" width="50" height="50">
                   </i>
 
                       <h3 class="text-secondary number" id="CommandesNum">0</h3>
@@ -51,7 +51,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                     <div class="store2 card card_border border-primary-topa p-4"
                       onclick="NafigatioTo('finis')">
                       <i class="lnr store">
-                      <img src="./assets/img/store2.png" alt="store2" width="50" height="50">
+                      <img src=="admin/assets/img/store2.png" alt="store2" width="50" height="50">
                     </i>                      <h3 class="text-primary number" id="availableArticlea">0</h3>
                       <p class="stat-text">Article Vide</p>
                     </div>
@@ -61,7 +61,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                       onclick="NafigatioTo('vendu')">
 
                       <i class="lnr store">
-                      <img src="./assets/img/commandeb.png" alt="store4" width="50" height="50">
+                      <img src=="admin/assets/img/commandeb.png" alt="store4" width="50" height="50">
                   </i>
 
                       <h3 class="text-secondary number" id="CommandesNuma">0</h3>
@@ -86,7 +86,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                     <div class="store4 card card_border border-primary-topd p-4">
 
                     <i class="lnr store">
-                        <img src="./assets/img/creditecard.png" alt="store4" width="50" height="50">
+                        <img src=="admin/assets/img/creditecard.png" alt="store4" width="50" height="50">
                     </i> 
 
                     <h3 class="text-red number" id="recetteMoney">0 F.CFA</h3>
@@ -113,7 +113,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                    >
 
                     <i class="lnr store">
-                    <img src="./assets/img/phonea.png" alt="store5" width="50" height="70">
+                    <img src=="admin/assets/img/phonea.png" alt="store5" width="50" height="70">
                 </i>
 
                     <h3 class="text-secondary number" id="ApplicationMobile">0</h3>
@@ -217,7 +217,7 @@ const NavBaractivity = () => {
 
             <li>
                 <a href="#" class="grid">
-                    <div class="user_img"><img src="./assets/img/avatay.png" alt=""></div>
+                    <div class="user_img"><img src=="admin/assets/img/avatay.png" alt=""></div>
                     <div class="notification_desc">
                     <p>${ordernotif[0].client.nom + " " + ordernotif[0].client.prenom}</p>
                     <span>${ordernotif[0].articles[0].arti_id.addarticle} ${ordernotif[0].articles[0].prix * ordernotif[0].articles[0].quantcho} F</span>
@@ -229,7 +229,7 @@ const NavBaractivity = () => {
                
             <li class="odd">
                 <a href="#" class="grid">
-                    <div class="user_img"><img src="./assets/img/avatay.png" alt=""></div>
+                    <div class="user_img"><img src=="admin/assets/img/avatay.png" alt=""></div>
                     <div class="notification_desc">
                     <p>${ordernotif[1].client.nom + " " + ordernotif[1].client.prenom}</p>
                     <span>${ordernotif[1].articles[0].arti_id.addarticle} ${ordernotif[1].articles[0].prix * ordernotif[1].articles[0].quantcho} F</span>
@@ -244,7 +244,7 @@ const NavBaractivity = () => {
                         `
             <li>
                 <a href="#" class="grid">
-                    <div class="user_img"><img src="./assets/img/avatay.png" alt=""></div>
+                    <div class="user_img"><img src=="admin/assets/img/avatay.png" alt=""></div>
                     <div class="notification_desc">
                     <p>${ordernotif[2].client.nom + " " + ordernotif[2].client.prenom}</p>
                     <span>${ordernotif[2].articles[0].arti_id.addarticle} ${ordernotif[2].articles[0].prix * ordernotif[2].articles[0].quantcho} F</span>
