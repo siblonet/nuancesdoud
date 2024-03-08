@@ -1,27 +1,16 @@
 let annoncePers = [];
 
 (async function ($) {
-    await openPersonnalizingDatabase()
-    const transactiona = pageSettings.transaction(["PageContents"], "readonly");
-    const objectStorea = transactiona.objectStore("PageContents");
-    const items = [];
-
-    objectStorea.openCursor().onsuccess = (event) => {
-        const cursor = event.target.result;
-        if (cursor) {
-            items.push(cursor.value);
-            cursor.continue();
-        } else {
-            annoncePers = items
-        }
-    };
+    const items = await GetSettings();
+    annoncePers = items;
+    console.loog(items);
 
     if (items && items.length > 0) {
 
-        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);
+        $("#logointerne").attr("src", `${items.find(item => item.which === "logointern") ? items.find(item => item.which === "logointern").image : "./assets/img/logo.png"}`);
 
     } else {
-        $("#logointerne").attr("src", "../assets/img/logo.png");
+        $("#logointerne").attr("src", "./assets/img/logo.png");
     };
 
 })(jQuery);

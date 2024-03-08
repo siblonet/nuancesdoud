@@ -21,6 +21,27 @@ async function PostArticle(articles) {
 }
 
 
+async function PostPannier(panier) {
+    const panierdb = await openPannierDatabase();
+    const PPTransation = panierdb.transaction(["PannierStore"], "readwrite");
+    const PPStore = PPTransation.objectStore("PannierStore");
+
+    let added = false;
+    const adding = PPStore.add(panier);
+
+    adding.onsuccess = () => {
+        added = true;
+    };
+
+    adding.onerror = (event) => {
+        console.log("PostPannier", event.target.error);
+    };
+
+
+    return added
+}
+
+
 async function PostOrder(orders) {
     const orderdb = await openOrdersDatabase();
     const POTransation = orderdb.transaction(["OrderdStore"], "readwrite");
@@ -43,7 +64,6 @@ async function PostOrder(orders) {
 
     return added
 }
-
 
 async function PostPeople(people) {
     const peopledb = await openPeopleDatabase();
@@ -68,7 +88,27 @@ async function PostPeople(people) {
 }
 
 
+async function PostSettings(settingdata) {
+    const settingdb = await openSettingsDatabase();
+    const PSTransation = settingdb.transaction(["SettingStore"], "readwrite");
+    const PSStore = PSTransation.objectStore("SettingStore");
 
+    let added = false;
+    settingdata.map(satting => {
+        const adding = PSStore.add(satting);
+
+        adding.onsuccess = () => {
+            added = true;
+        };
+
+        adding.onerror = (event) => {
+            console.log("PostSettings", event.target.error);
+        };
+
+    });
+
+    return added
+}
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ adding systme as post end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ adding systme as post end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -136,6 +176,80 @@ async function GetArticleByID(id) {
         requestingByID.onerror = (event) => {
             console.error("Error accessing object GetArticleByID store:", event.target.error);
             reject(event.target.error);
+        };
+    });
+}
+
+
+async function GetPannier() {
+    const panierdb = await openPannierDatabase();
+    const GPTransation = panierdb.transaction(["PannierStore"], "readonly");
+    const GPStore = GPTransation.objectStore("PannierStore");
+    return new Promise((resolve, reject) => {
+        const pannier = [];
+
+        GPStore.openCursor().onsuccess = (event) => {
+            const cursor = event.target.result;
+            if (cursor) {
+                pannier.push(cursor.value);
+                cursor.continue();
+            } else {
+                resolve(pannier);
+            }
+        };
+
+        GPTransation.onerror = (event) => {
+            console.log("GetPannier error: " + event.target.errorCode);
+            reject([]);
+        };
+    });
+
+}
+
+async function GetPannierToSend(order) {
+    const panierdb = await openPannierDatabase();
+    const GPTransation = panierdb.transaction(["PannierStore"], "readonly");
+    const GPStore = GPTransation.objectStore("PannierStore");
+    return new Promise((resolve, reject) => {
+
+        GPStore.openCursor().onsuccess = (event) => {
+            const cursor = event.target.result;
+            if (cursor) {
+                order.articles.push({
+                    arti_id: cursor.value._id,
+                    quantcho: cursor.value.quantcho,
+                    prix: cursor.value.prix
+                });
+                cursor.continue();
+            } else {
+                resolve(order);
+            }
+        };
+
+        GPTransation.onerror = (event) => {
+            console.log("GetPannier error: " + event.target.errorCode);
+            reject(false);
+        };
+    });
+
+}
+
+async function GetPannierByID(id) {
+    return new Promise(async (resolve, reject) => {
+        const panierdb = await openPannierDatabase();
+        const GPTransation = panierdb.transaction(["PannierStore"], "readonly");
+        const GPStore = GPTransation.objectStore("PannierStore");
+
+        const requestingByID = GPStore.get(id);
+
+        requestingByID.onsuccess = (event) => {
+            const pannier = event.target.result;
+            resolve(pannier);
+        };
+
+        requestingByID.onerror = (event) => {
+            console.error("Error accessing object GetPannierByID store:", event.target.error);
+            reject(false);
         };
     });
 }
@@ -253,8 +367,76 @@ async function GetOrderByID(id) {
 }
 
 
+async function GetSettings() {
+    const settingdb = await openSettingsDatabase();
+    const GSTransation = settingdb.transaction(["SettingStore"], "readonly");
+    const GSStore = GSTransation.objectStore("SettingStore");
+    return new Promise((resolve, reject) => {
+        const sattings = [];
+
+        GSStore.openCursor().onsuccess = (event) => {
+            const cursor = event.target.result;
+            if (cursor) {
+                sattings.push(cursor.value);
+                cursor.continue();
+            } else {
+                resolve(sattings);
+            }
+        };
+
+        GSTransation.onerror = (event) => {
+            console.log("GetSettings error: " + event.target.errorCode);
+            reject([]);
+        };
+    });
+
+}
+
+async function GetSettingsByID(id) {
+    return new Promise(async (resolve, reject) => {
+        const settingdb = await openSettingsDatabase();
+        const GSTransation = settingdb.transaction(["SettingStore"], "readonly");
+        const GSStore = GSTransation.objectStore("SettingStore");
+
+        const requestingByID = GSStore.get(id);
+
+        requestingByID.onsuccess = (event) => {
+            const sattings = event.target.result;
+            resolve(sattings);
+        };
+
+        requestingByID.onerror = (event) => {
+            console.error("Error accessing object GetSettingsByID store:", event.target.error);
+            reject(false);
+        };
+    });
+}
+
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getting systme as get end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ update systme as put start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+async function PutPannier(pannier) {
+    return new Promise(async (resolve, reject) => {
+        const panierdb = await openPannierDatabase();
+        const PuPTransation = panierdb.transaction(["PannierStore"], "readwrite");
+        const PuPStore = PuPTransation.objectStore("PannierStore");
+
+        const update = PuPStore.put(pannier);
+
+        update.onsuccess = () => {
+            resolve(true);
+        };
+
+        update.onerror = (event) => {
+            console.error("Error accessing object PutPannier store:", event.target.error);
+            reject(false);
+        };
+    });
+}
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ update systme as put ends @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ deleting systme as delete start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
@@ -272,6 +454,45 @@ async function deleteArticle() {
 
     clearArtbyid.onerror = (event) => {
         console.error("Error accessing object deleteArticle store:", event.target.error);
+    };
+
+    return deleted
+}
+
+
+async function deletePannier() {
+    const panierdb = await openPannierDatabase();
+    const CPTransation = panierdb.transaction(["PannierStore"], "readwrite");
+    const CPStore = CPTransation.objectStore("PannierStore");
+
+    const clearPannier = CPStore.clear();
+
+    let deleted = false;
+    clearPannier.onsuccess = () => {
+        deleted = true;
+    };
+
+    clearPannier.onerror = (event) => {
+        console.error("Error accessing object deletePannier store:", event.target.error);
+    };
+
+    return deleted
+}
+
+async function deletePannierByID(id) {
+    const panierdb = await openPannierDatabase();
+    const DPTransation = panierdb.transaction(["PannierStore"], "readwrite");
+    const DPStore = DPTransation.objectStore("PannierStore");
+
+    const deleteArtbyid = DPStore.delete(id);
+
+    let deleted = false;
+    deleteArtbyid.onsuccess = () => {
+        deleted = true;
+    };
+
+    deleteArtbyid.onerror = (event) => {
+        console.error("Error accessing object deletePannier store:", event.target.error);
     };
 
     return deleted
@@ -318,5 +539,23 @@ async function deleteOrder() {
     return deleted
 }
 
+async function deleteSetting() {
+    const sattingdb = await openSettingsDatabase();
+    const CSTransation = sattingdb.transaction(["SettingStore"], "readwrite");
+    const CSStore = CSTransation.objectStore("SettingStore");
+
+    const clearSettings = CSStore.clear();
+
+    let deleted = false;
+    clearSettings.onsuccess = () => {
+        deleted = true;
+    };
+
+    clearSettings.onerror = (event) => {
+        console.error("Error accessing object deleteSetting store:", event.target.error);
+    };
+
+    return deleted
+}
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ deleting systme as delete end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */

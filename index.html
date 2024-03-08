@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="fr-FR">
+<!--d2b154-->
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#d2b154" />
-    <meta name="description" content="Nuances d’Oud est votre oasis envoûtante de parfums d’exception. Sillages et senteurs majestueux , vos atouts de séduction." />
+    <meta name="theme-color" content="#1d191a" />
+    <meta name="description"
+        content="Nuances d’Oud est votre oasis envoûtante de parfums d’exception. Sillages et senteurs majestueux , vos atouts de séduction." />
     <meta name="keywords"
         content="NUANCES D'OUD, D'OUD, NUANCES-Shop, NUANCES D'OUD, Siblo, Silence-AI, John, Kokar, Dibloni" />
     <meta name="author" content="John Kokar" />
@@ -463,11 +465,9 @@
                         <p></p>
 
                         <div class="anim">
-                            <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
-                            <a href="#product-container" class="button-85 wow comIn" data-wow-delay=".3s">
-                                
-                                <span></span>
-                            </a>
+                            <div style="background: transparent !important;" class="button-85a  wow comIn"
+                                data-wow-delay=".3s"></div>
+
                         </div>
                     </div>
                 </div>
@@ -551,7 +551,7 @@
                                 <span class="old-price" id="quickViewOldPrice"></span>
                                 <span class="new-price" id="quickViewNewPrice"></span>
                             </div>
-                            
+
                             <div class="products-review">
                                 <div class="rating">
                                     <i class="bx bxs-star"></i>
@@ -580,10 +580,12 @@
                                 </div>
 
                                 <button type="submit" class="default-btn" id="addToCartBtn"
-                                    onclick="(handleAddToCartClick())">Ajouter au panier</button>
+                                    onclick="AddtoPanierb()">Ajouter au panier</button>
 
                             </div>
-                            <a href="#" class="view-full-info" id="change-url">Voir les informations complètes</a>
+                            <a href="#" class="view-full-info" id="change-url"
+                                style="color: #007bff !important; text-decoration: none !important;">Voir les
+                                informations complètes</a>
                         </div>
                     </div>
                 </div>
@@ -619,177 +621,6 @@
     </div>
 
 
-    <div class="modal fade sizeGuideModal" id="sizeGuideModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="bx bx-x"></i></span>
-                </button>
-                <div class="modal-sizeguide">
-                    <h3>Guide des tailles</h3>
-                    <p>Ceci est un tableau de conversion approximatif pour vous aider à trouver votre taille.</p>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Italien</th>
-                                    <th>Espagnol</th>
-                                    <th>Allemand</th>
-                                    <th>Royaume-Uni</th>
-                                    <th>États-Unis</th>
-                                    <th>Japonais</th>
-                                    <th>Chinois</th>
-                                    <th>Russe</th>
-                                    <th>Coréen</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>34</td>
-                                    <td>30</td>
-                                    <td>28</td>
-                                    <td>4</td>
-                                    <td>00</td>
-                                    <td>3</td>
-                                    <td>155/75A</td>
-                                    <td>36</td>
-                                    <td>44</td>
-                                </tr>
-                                <tr>
-                                    <td>36</td>
-                                    <td>32</td>
-                                    <td>30</td>
-                                    <td>6</td>
-                                    <td>0</td>
-                                    <td>5</td>
-                                    <td>155/80A</td>
-                                    <td>38</td>
-                                    <td>44</td>
-                                </tr>
-                                <tr>
-                                    <td>38</td>
-                                    <td>34</td>
-                                    <td>32</td>
-                                    <td>8</td>
-                                    <td>2</td>
-                                    <td>7</td>
-                                    <td>160/84A</td>
-                                    <td>40</td>
-                                    <td>55</td>
-                                </tr>
-                                <tr>
-                                    <td>40</td>
-                                    <td>36</td>
-                                    <td>34</td>
-                                    <td>10</td>
-                                    <td>4</td>
-                                    <td>9</td>
-                                    <td>165/88A</td>
-                                    <td>42</td>
-                                    <td>55</td>
-                                </tr>
-                                <tr>
-                                    <td>42</td>
-                                    <td>38</td>
-                                    <td>36</td>
-                                    <td>12</td>
-                                    <td>6</td>
-                                    <td>11</td>
-                                    <td>170/92A</td>
-                                    <td>44</td>
-                                    <td>66</td>
-                                </tr>
-                                <tr>
-                                    <td>44</td>
-                                    <td>40</td>
-                                    <td>38</td>
-                                    <td>14</td>
-                                    <td>8</td>
-                                    <td>13</td>
-                                    <td>175/96A</td>
-                                    <td>46</td>
-                                    <td>66</td>
-                                </tr>
-                                <tr>
-                                    <td>46</td>
-                                    <td>42</td>
-                                    <td>40</td>
-                                    <td>16</td>
-                                    <td>10</td>
-                                    <td>15</td>
-                                    <td>170/98A</td>
-                                    <td>48</td>
-                                    <td>77</td>
-                                </tr>
-                                <tr>
-                                    <td>48</td>
-                                    <td>44</td>
-                                    <td>42</td>
-                                    <td>18</td>
-                                    <td>12</td>
-                                    <td>17</td>
-                                    <td>170/100B</td>
-                                    <td>50</td>
-                                    <td>77</td>
-                                </tr>
-                                <tr>
-                                    <td>50</td>
-                                    <td>46</td>
-                                    <td>44</td>
-                                    <td>20</td>
-                                    <td>14</td>
-                                    <td>19</td>
-                                    <td>175/100B</td>
-                                    <td>52</td>
-                                    <td>88</td>
-                                </tr>
-                                <tr>
-                                    <td>52</td>
-                                    <td>48</td>
-                                    <td>46</td>
-                                    <td>22</td>
-                                    <td>16</td>
-                                    <td>21</td>
-                                    <td>180/104B</td>
-                                    <td>54</td>
-                                    <td>88</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade productsShippingModal" id="productsShippingModal" tabindex="-1" role="dialog"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="bx bx-x"></i></span>
-                </button>
-                <div class="shipping-content">
-                    <h3>Expédition</h3>
-                    <ul>
-                        <li>Expédition terrestre gratuite sous 1 à 7 jours ouvrés</li>
-                        <li>Retrait en magasin disponible sous 1 à 7 jours ouvrés</li>
-                        <li>Options de livraison le lendemain et express également disponibles</li>
-                        <li>Les achats sont livrés dans une boîte orange nouée d'un ruban Bolduc, à l'exception des
-                            certains éléments</li>
-                        <li>Consultez la FAQ sur la livraison pour plus de détails sur les méthodes d'expédition, les
-                            coûts et les délais de livraison.</li>
-                    </ul>
-                    <h3>Retours et échanges</h3>
-                    <ul>
-                        <li>Facile et complémentaire, sous 14 jours</li>
-                        <li>Voir conditions et procédure dans notre FAQ retour</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <footer class="footer-area">
@@ -818,7 +649,7 @@
                                                 <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
                                                 <a href="#product-container" class="button-85 wow comIn"
                                                     data-wow-delay=".3s">
-                                                    
+
                                                     <span></span>
                                                 </a>
                                             </div>
@@ -837,26 +668,10 @@
                             <div class="icon">
                                 <i class="flaticon-tracking"></i>
                             </div>
-                            <h3>Livraison gratuite dans le monde entier</h3>
+                            <h3>Livraison Possible</h3>
                         </div>
-                        <div class="single-facility-box">
-                            <div class="icon">
-                                <i class="flaticon-return"></i>
-                            </div>
-                            <h3>Politique de retour facile</h3>
-                        </div>
-                        <div class="single-facility-box">
-                            <div class="icon">
-                                <i class="flaticon-shuffle"></i>
-                            </div>
-                            <h3>Politique d'échange de 7 jours</h3>
-                        </div>
-                        <div class="single-facility-box">
-                            <div class="icon">
-                                <i class="flaticon-sale"></i>
-                            </div>
-                            <h3>Coupon de réduction du week-end</h3>
-                        </div>
+
+
                         <div class="single-facility-box">
                             <div class="icon">
                                 <i class="flaticon-credit-card"></i>
@@ -873,7 +688,7 @@
                             <div class="icon">
                                 <i class="flaticon-customer-service"></i>
                             </div>
-                            <h3>Assistance client 24/7</h3>
+                            <h3>Assistance client 7/7</h3>
                         </div>
                     </div>
                 </div>
@@ -889,7 +704,7 @@
                         <h3 class="foota">À propos du magasin</h3>
                         <div class="about-the-store">
                             <p>Nuances d’Oud est votre oasis envoûtante de parfums d’exception. Sillages et senteurs
-                            majestueux , vos atouts de séduction.</p>
+                                majestueux , vos atouts de séduction.</p>
                             <ul class="footer-contact-info">
                                 <li>
                                     <i class="bx bx-map"></i>
@@ -972,7 +787,7 @@
                         <h3 class="foota">À propos</h3>
                         <div class="about-the-store">
                             <p>Nuances d’Oud est votre oasis envoûtante de parfums d’exception. Sillages et senteurs
-                            majestueux , vos atouts de séduction.</p>
+                                majestueux , vos atouts de séduction.</p>
                             <ul class="footer-contact-info">
                                 <li>
                                     <i class="bx bx-map"></i>
@@ -997,11 +812,7 @@
                         <div class="single-footer-widget pl-4">
                             <br>
                             <ul class="quick-links">
-                                <li><a style="color: #ffffff;" href="questions">FAQ</a></li>
-                                <li><a style="color: #ffffff;" href="contact">Contactez-nous</a></li>
-                                <li><a style="color: #ffffff;" href="service-client">Service client</a></li>
-                                <li><a style="color: #ffffff;" href="contact">Aide et support</a></li>
-
+                                <li><a style="color: #ffffff;" href="tel:0701743686">Contactez-nous</a></li>
                             </ul>
                         </div>
                         <ul class="social-link">
@@ -1072,15 +883,8 @@
     <div class="live-chat" id="live-chat">
         <img src="assets/img/help.png" alt="">
     </div>
-
     <script src="assets/js/jquery.min.js"></script>
-    <script src="./productsFetcher/database_handl.js"></script>
-    <script src="./router.js"></script>
-    <script src="recentproduct.js"></script>
-    <script src="./livechat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-    <script src="./loadeSlide.js"></script>
-    <script src="./productsFetcher/productsFetcher.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/magnific-popup.min.js"></script>
@@ -1093,11 +897,36 @@
     <script src="assets/js/sticky-sidebar.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <script src="./initializers/variablestore.js"></script>
+    <script src="./initializers/database_handl.js"></script>
+    <script src="./initializers/convertisseur.js"></script>
+    <script src="./initializers/router.js"></script>
+    <script src="./functionServices/product.services.js"></script>
+    <script src="./functionServices/requesthttps.js"></script>
+    <script src="./functionServices/pannierManipulator.js"></script>
+    <script src="./functionServices/recentproduct.js"></script>
+    <script src="./functionServices/loadeSlide.js"></script>
+    <script src="./initializers/inidataloader.js"></script>
+    <script src="./functionServices/wedgeimages.js"></script>
+
+
+    <!--
+    <script src="./productsFetcher/database_handl.js"></script>
+    <script src="./router.js"></script>
+    <script src="recentproduct.js"></script>
+    <script src="./livechat.js"></script>
+    <script src="./loadeSlide.js"></script>
+    <script src="./productsFetcher/productsFetcher.js"></script>
+
+
 
     <script src="convertisseur.js"></script>
     <script src="./pannier/pannier.js"></script>
     <script src="./clientdb/currentdb.js"></script>
-    <script src="./pannier/callpanindex.js"></script>
+    <script src="./pannier/callpanindex.js"></script>-->
+
+
     <script>
         let myLive = localStorage.getItem('myLive');
         let assit = "";

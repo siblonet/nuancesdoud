@@ -1,17 +1,17 @@
 const pErsonnalige = () => {
     (async function ($) {
         $(".loadavideo").css("display", "block");
-        $("#slidea").css("background-image", "url(./assets/loadingc.gif)");
-        $("#slideb").css("background-image", "url(./assets/loadingc.gif)");
-        $("#slidec").css("background-image", "url(./assets/loadingc.gif)");
+        $("#slidea").css("background-image", "url(./assetss/loadingc.gif)");
+        $("#slideb").css("background-image", "url(./assetss/loadingc.gif)");
+        $("#slidec").css("background-image", "url(./assetss/loadingc.gif)");
 
-        $("#phonea").css("background-image", "url(./assets/loadingc.gif)");
-        $("#phoneb").css("background-image", "url(./assets/loadingc.gif)");
-        $("#phonec").css("background-image", "url(./assets/loadingc.gif)");
+        $("#phonea").css("background-image", "url(./assetss/loadingc.gif)");
+        $("#phoneb").css("background-image", "url(./assetss/loadingc.gif)");
+        $("#phonec").css("background-image", "url(./assetss/loadingc.gif)");
 
-        $("#backglise").css("background-image", 'url(./assets/loadingc.gif)');
-        $("#logoextern").attr("src", "./assets/loadingc.gif");
-        $("#loginimg").attr("src", "./assets/loadingc.gif");
+        $("#backglise").css("background-image", 'url(./assetss/loadingc.gif)');
+        $("#logoextern").attr("src", "./assetss/loadingc.gif");
+        $("#loginimg").attr("src", "./assetss/loadingc.gif");
 
         if (annoncePers && annoncePers.length > 0) {
             $("#slidea").css("background-image", `url(${annoncePers.find(item => item.which === "slidea") ? annoncePers.find(item => item.which === "slidea").image : "../assets/img/par5.png"})`);
@@ -36,8 +36,8 @@ const pErsonnalige = () => {
 
 
             $("#backglise").css("background-image", `url(${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise").image : "../assets/img/par2.png"})`);
-            $("#logoextern").attr("src", `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern").image : "../assets/img/logo.png"}`);
-            $("#logointern").attr("src", `${annoncePers.find(item => item.which === "logointern") ? annoncePers.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);
+            $("#logoextern").attr("src", `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern").image : "./assets/img/logo.png"}`);
+            $("#logointern").attr("src", `${annoncePers.find(item => item.which === "logointern") ? annoncePers.find(item => item.which === "logointern").image : "./assets/img/logo.png"}`);
             $("#loginimg").css("background-image", `url(${annoncePers.find(item => item.which === "loginimg") ? annoncePers.find(item => item.which === "loginimg").image : "../assets/img/par3.png"})`);
             document.getElementById('backgliseid').value = `${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise")._id : "huhed9683e"}`;
             document.getElementById('logoexternid').value = `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern")._id : "huhed9683e"}`;
@@ -59,8 +59,8 @@ const pErsonnalige = () => {
             $("#phonec").css("background-image", "url(../assets/img/par3.png)");
 
             $("#backglise").css("background-image", 'url(../assets/img/par2.png)');
-            $("#logoextern").attr("src", "../assets/img/logo.png");
-            $("#logointern").attr("src", "../assets/img/logo.png");
+            $("#logoextern").attr("src", "./assets/img/logo.png");
+            $("#logointern").attr("src", "./assets/img/logo.png");
             $("#loginimg").css("background-image", "url(../assets/img/par1.png)");
             $(".loadavideo").css("display", "none");
 

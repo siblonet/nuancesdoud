@@ -23,30 +23,30 @@
     visibility: visible;
 }
 
-table {
+.tableb {
     width: 100%;
-    background-color: #054846;
+    background-color: #ffffff;
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
     overflow: hidden;
 }
 
-td img {
+.td img {
     width: 70px;
     height: 120px;
     margin-right: .5rem;
     vertical-align: middle;
 }
 
-table,
-th,
-td {
+.tableb,
+.th,
+.td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
 }
 
-thead th {
+.thead .th {
     position: sticky;
     top: 0;
     left: 0;
@@ -55,38 +55,38 @@ thead th {
     text-transform: capitalize;
 }
 
-tbody tr:nth-child(even) {
+.tbody .tr:nth-child(even) {
     background-color: rgb(19, 121, 137);
 }
 
-tbody tr {
+.tbody .tr {
     --delay: .1s;
     transition: .5s ease-in-out var(--delay), background-color 0s;
 }
 
-tbody tr.hide {
+.tbody .tr.hide {
     opacity: 0;
     transform: translateX(100%);
 }
 
-tbody tr:hover {
+.tbody .tr:hover {
     background-color: rgba(19, 121, 137, 0.643) !important;
 }
 
-tbody tr td,
-tbody tr td p,
-tbody tr td img {
+.tbody .tr .td,
+.tbody .tr .td p,
+.tbody .tr .td img {
     transition: .2s ease-in-out;
 }
 
-tbody tr.hide td,
-tbody tr.hide td p {
+.tbody .tr.hide .td,
+.tbody .tr.hide .td p {
     padding: 0;
     font: 0 / 0 sans-serif;
     transition: .2s ease-in-out .5s;
 }
 
-tbody tr.hide td img {
+.tbody .tr.hide .td img {
     width: 0;
     height: 0;
     transition: .2s ease-in-out .5s;
@@ -206,7 +206,17 @@ Add Article CSS
     bottom: 25px;
     opacity: 1;
     visibility: visible !important;
+
 }
+
+.daterow {
+    position: absolute;
+    right: 50px;
+    color: #aaaaaa;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
 
 
 @-webkit-keyframes livehelp {
@@ -231,126 +241,270 @@ Add Article CSS
 
 
 
-@media only screen and (max-width: 991px) {
-    .articlerow .title div p {
-        color: #ffffff;
-    }
+.articlerow .title div p {
+    color: #ffffff;
+}
 
-    .articlerow {
-        background-color: #ecf0f5;
-        width: 100vw;
-        padding: 0px 20px 0px 20px;
-        overflow-y: scroll;
-        scroll-behavior: smooth;
+.articlerow {
+    background-color: #ecf0f5;
+    width: 100%;
+    padding: 0px 20px 0px 20px;
+    overflow-y: scroll;
+}
 
-    }
+.articlerow .articlerwedge {
+    overflow: hidden;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 20px;
+    border-radius: 2%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    .articlerowsub {
-        overflow: hidden;
-        background-color: #ffffff;
-        height: 320px;
-        width: 100%;
-        padding: 0px 20px 0px 20px;
-        border-radius: 2%;
-        margin-bottom: 50px;
-        }
-
-    .articlerow .title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        align-self: center;
-    }
-
-
-    .articlerow .title .leftone,
-    .articlerow .title .rightone {
-        height: 130px;
-        overflow: hidden;
-
-    }
+.articlerow .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+}
 
 
-    .articlerow .title .leftone {
-        width: 230px;
-    }
-
-    .articlerow .title .rightone {
-        width: 140px;
-    }
+.articlerow .title .leftone,
+.articlerow .title .rightone {
+    height: 130px;
+    overflow: hidden;
+}
 
 
-    .articlerow .title .leftone p {
-        color: #054846;
-    }
+.articlerow .title .leftone {
+    width: 230px;
+}
+
+.articlerow .title .rightone {
+    width: 140px;
+}
+
+
+.articlerow .title .leftone p {
+    color: #054846;
+}
 
 
 
-    .articlerow .title .rightone .status {
-        color: #054846;
-    }
+.articlerow .firstlinearti .status {
+    color: #054846;
+}
 
-    .articlerow .title .rightone .sta.shipp {
+.articlerow .firstlinearti .sta.shipp {
+    background-color: #109691a6;
+    color: #054846;
+
+}
+
+
+
+.articlerow .firstlinearti .sta {
+    padding: .2rem 0;
+    border-radius: 2rem;
+    text-align: center;
+}
+
+
+.articlerow .articlerowsub .firstlinearti {
+    background-color: #faf7f7;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    height: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+
+
+
+.articlerow .imaros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    height: 70px;
+    overflow: hidden;
+}
+
+.articlerow .imaros div {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5%;
+    overflow: hidden;
+}
+
+
+.articlerow .imaros div img {
+    height: 100%;
+    width: 100%;
+}
+
+.articlerow .articlerwedge .articlesInfos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+    height: 120px;
+}
+
+.articlerow .articlerwedge .articlesInfos div {
+    height: 100%;
+    width: 150px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #eeeeee;
+    cursor: pointer;
+    text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.articlerow .orderinfoso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+}
+
+
+
+.articlerow .articlerowsub {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.articlerow .imaroso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    height: 120px;
+    overflow: hidden;
+}
+
+
+.articlerow .imaroso div {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5%;
+    overflow: hidden;
+}
+
+.articlerow .imaroso div img {
+    height: 85%;
+    width: 100%;
+}
+
+.addarticleimageshow {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+.butonms {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+;
+
+
+.doblik {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    height: 25px;
+    width: 100px;
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 7px;
+    background-color: #000000;
+    overflow: hidden;
+}
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ for article @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+.articlerow .articlerwedgea .sta {
+    padding: .2rem 0;
+    border-radius: 2rem;
+    text-align: center;
+}
+.articlerow .articlerwedgea .sta.shipp {
         background-color: #109691a6;
         color: #054846;
-    
-    }
 
-    
-
-    .articlerow .title .rightone .sta {
-        padding: .2rem 0;
-        border-radius: 2rem;
-        text-align: center;
-    }
-
-    .articlerow .imaros {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        align-self: center;
-        height: 170px;
-        overflow: hidden;
-    }
-
-
-    .articlerow .imaros div {
-        height: 100%;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5%;
-        overflow: hidden;
-    }
-
-
-    .articlerow .imaros div img {
-        height: 90%;
-        width: 100%;
-    }
-
-
-    .articlerow .imaroso {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        align-self: center;
-        height: 120px;
-        overflow: hidden;
-    }
-
-
-    .articlerow .imaroso div {
-        height: 100%;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5%;
-        overflow: hidden;
-    }
-
-    .articlerow .imaroso div img {
-        height: 85%;
-        width: 100%;
-    }
 }
+
+.articlerow .articlerwedgea .sta.vente {
+    background-color: #eeeeee;
+    padding-left: 30px; 
+    padding-right: 30px;
+    cursor: pointer
+}
+
+.articlerow .articlerwedgea {
+    overflow: hidden;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 20px;
+    border-radius: 2%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.articlerow .articlerwedgea .articlesInfosa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+    height: 100px;
+}
+
+.articlerow .articlerwedgea .articlesInfosa .imageholder {
+    height: 100%;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #eeeeee;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.articlerow .articlerwedge .articlesInfosa .imageholder img {
+    height: 100%;
+    width: 100%;
+    
+}
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ for article end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/

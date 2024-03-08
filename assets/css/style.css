@@ -1838,47 +1838,7 @@ Main Banner CSS
   border-radius: 5px;
   width: 160px;
   height: 50px;
-}
-
-.button-85a:before {
-  content: "";
-  background: linear-gradient(45deg,
-      #ff0000,
-      #ff7300,
-      #fffb00,
-      #b30086,
-      #00ffd5,
-      #003e8b,
-      #7a00ff,
-      #ff00c8,
-      #48ff00,
-      #ff0000);
-  position: absolute;
-  top: -0px;
-  left: -7px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(3px);
-  -webkit-filter: blur(3px);
-  width: calc(175px);
-  height: calc(50px);
-  animation: glowing-button-85 20s linear infinite;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 5px;
-}
-
-@keyframes glowing-button-85 {
-  0% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 400% 0;
-  }
-
-  100% {
-    background-position: 0 0;
-  }
+  background-color: transparent !important;
 }
 
 
@@ -1888,6 +1848,7 @@ Main Banner CSS
   display: flex;
   flex-wrap: 1;
   justify-content: center;
+  background-color: transparent !important;
 }
 
 
@@ -5397,9 +5358,13 @@ Offer CSS
   background-image: url(../img/offer-bg2.jpg);
 }
 
+#ipage{
+  height: 100%;
+  width: 100%;
+}
 .offer-content {
   max-width: 550px;
-  border: 1px solid var(--wt);
+  border: 2px solid var(--wt);
   margin-left: auto;
   text-align: center;
   border-radius: 5px;
@@ -5437,7 +5402,7 @@ Offer CSS
   right: 0;
   left: 0;
   bottom: 0;
-  background: var(--wt);
+  background: rgba(158, 108, 61, 0.671) !important; /* Adjust the opacity (0.8 in this example) */
   z-index: -1;
   border-radius: 5px;
   margin: 10px;
@@ -8986,10 +8951,16 @@ Cart CSS
   width: 100px;
 }
 
+
+.cart-table table tbody tr td.product-thumbnail a .imgo {
+  width: 50px;
+}
+
 .cart-table table tbody tr td.product-name a {
   display: inline-block;
   font-size: 16px;
   font-weight: 600;
+  margin-left: -50px !important;
 }
 
 .cart-table table tbody tr td.product-name ul {
@@ -9069,6 +9040,7 @@ Cart CSS
   text-align: center;
   display: inline-block;
   position: relative;
+  margin-left: -20px !important;
 }
 
 .cart-table table tbody tr td.product-quantity .input-counter span {
