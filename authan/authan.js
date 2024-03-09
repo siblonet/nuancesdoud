@@ -1,3 +1,13 @@
+let odMinurl = "admin";
+function isMobileDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return userAgent.includes('mobile');
+};
+if (isMobileDevice()) {
+    odMinurl = 'admini';
+}
+console.log("cheking mobile", odMinurl);
+
 async function Inscription() {
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
@@ -47,7 +57,7 @@ async function Inscription() {
                 load.classList.add("tohi")
                 tohia.classList.remove("tohi");
 
-                window.location.href = admin == "GIFV" ? adMinurl : "client"
+                window.location.href = admin == "GIFV" ? odMinurl : "client"
 
 
             } else if (!response) {
@@ -116,7 +126,7 @@ async function loGin() {
             load.classList.remove("load28")
             load.classList.add("tohi")
             tohia.classList.remove("tohi");
-            window.location.href = admin == "GIFV" ? adMinurl : "client"
+            window.location.href = admin == "GIFV" ? odMinurl : "client"
 
         } else if (!response) {
             load.classList.remove("load28")
