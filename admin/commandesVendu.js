@@ -166,7 +166,7 @@ const filterOrder = async () => {
                                 onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id._id}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
                                 <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
-                                <p style="color: #1d191a">${orar.prix} F</p>
+                                <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
                             </div>
                             <span style="width: 10px;"></span>
                             `;
@@ -212,7 +212,7 @@ const filterOrder = async () => {
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${order.reduction}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
 
                     </div>

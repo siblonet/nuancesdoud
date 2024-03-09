@@ -49,7 +49,7 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                             <div data-toggle="modal" data-target="#optionCancile"
                                 onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
-                                <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
+                                <p style="color: #1d191a">Qté: ${orar.quantcho}</p>
                                 <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
                             </div>
                             <span style="width: 10px;"></span>
@@ -77,21 +77,6 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                     <div class="orderinfoso">
                         <div style="background-color: #ffffff;">
                             <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
                         </div>
       
                         <span style="width: 10px;"></span>
@@ -166,8 +151,8 @@ const filterOrder = async () => {
                             <div data-toggle="modal" data-target="#optionCancile"
                                 onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id._id}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
-                                <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
-                                <p style="color: #1d191a">${orar.prix} F</p>
+                                <p style="color: #1d191a">Qté: ${orar.quantcho}</p>
+                                <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
                             </div>
                             <span style="width: 10px;"></span>
                             `;
@@ -196,24 +181,10 @@ const filterOrder = async () => {
                             <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
                         </div>
       
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client.phone}</strong></p>
-                        </div>
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${order.reduction}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
 
                     </div>
