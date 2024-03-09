@@ -43,6 +43,8 @@ async function initDataLoader() {
         $(function () {
             $("#loaderRemove").fadeOut("slow");;
         });
+    }else{
+        window.location.href = "/"
     }
 };
 

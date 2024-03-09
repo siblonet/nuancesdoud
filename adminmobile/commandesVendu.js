@@ -63,7 +63,7 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
 
                         <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
-                            Claisse: ${order.staff ? order.staff : "Online"}
+                            Caisse: ${order.staff ? order.staff : "Online"}
                         </p>
                         <div style="align-self: flex-start; width: 130px">
                             <p class="statuscor status delivered">
@@ -180,7 +180,7 @@ const filterOrder = async () => {
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
 
                         <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
-                            Claisse: ${order.staff ? order.staff : "Online"}
+                            Caisse: ${order.staff ? order.staff : "Online"}
                         </p>
                         <div style="align-self: flex-start; width: 130px">
                             <p class="statuscor status delivered">
