@@ -276,8 +276,8 @@ function removeImageEdite() {
 
     if (result) {
         const imagePreview = document.getElementById(`Editeimage1`);
-        imagePreview.src = './assets/img/imgo.png';
-        Onlineimas[0].ima = "./assets/img/imgo.png";
+        imagePreview.src = 'admin/assets/img/imgo.png';
+        Onlineimas[0].ima = "admin/assets/img/imgo.png";
 
         document.getElementById('limitimage1').style.display = "flex";
     }

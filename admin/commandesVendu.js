@@ -8,6 +8,8 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
     ActiveCl.classList.remove('active');
     ActiveAr.classList.remove('active');
     ActiveAn.classList.remove('active');
+    document.getElementById('searcha').style.display = "none";
+
     document.getElementById('add-article').classList.remove('active');
 
 

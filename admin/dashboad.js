@@ -4,6 +4,8 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
   ActiveCl.classList.remove('active');
   ActiveAr.classList.remove('active');
   ActiveAn.classList.remove('active');
+  document.getElementById('searcha').style.display = "none";
+
   addAticlebtn.innerHTML = "";
   const dasboardHTML = `
     

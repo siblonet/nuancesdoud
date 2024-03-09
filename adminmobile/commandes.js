@@ -131,8 +131,28 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             }
 
 
+
         } else {
             document.getElementById('optionCancilename').innerText = "Article Supprimé";
+
+            document.getElementById('optionViewNewPrice').innerText = `00.000 F.CFA`;
+            document.getElementById('optionViewNewBarcode').innerText = `Barcode`;
+            document.getElementById('productQuantity').value = 0;
+            document.getElementById('clientNameOrder').innerText = `Client`;
+
+
+            const orderStatuHtml = document.getElementById('statusOrder');
+            orderStatuHtml.innerHTML = '<p>Statut: </p> <span style="color: green">Livré</span>';
+
+            document.getElementById('villeValue').value = `Ville`;
+            document.getElementById('communeValue').value = `Commune`;
+            document.getElementById('adresseValue').value = `Lieu`;
+            document.getElementById('telephoneValue').value = `07000000`;
+
+            const modalImage = document.getElementById('ipage');
+            modalImage.src = "../admin/assets/img/imgo.png";
+
+            document.getElementById('livenonupdate').innerHTML = '';
 
         };
 
@@ -141,10 +161,11 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
 };
 
 
-async function selectStatusChange(sta) {
-    const ido = document.getElementById('ido').value;
-    await sendRequestforOrder('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
-
+async function selectStatusChange(sta = null) {
+    if (sta) {
+        const ido = document.getElementById('ido').value;
+        await sendRequestforOrder('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
+    }
 };
 
 async function cancelOrderById() {
