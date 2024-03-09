@@ -14796,6 +14796,10 @@ License: https://linearicons.com/free/license
   --card-shadow: 0 1px 2px 1px rgba(154, 154, 204, .22);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 p,
 .para__style {
   margin: 0;
@@ -15751,57 +15755,6 @@ ul.nav i {
   content: '';
 }
 
-.refreshdata {
-  display: block;
-  font-size: 14px;
-  cursor: pointer;
-  line-height: 1;
-  float: left;
-  color: #aaa !important;
-  transition: all 0.2s ease-out 0s;
-  z-index: 999;
-  padding: 10px 20px;
-  background: #fff;
-  padding-left: 25px;
-  width: 100%;
-  position: absolute;
-  bottom: 170px;
-}
-
-.downloadNew {
-  display: block;
-  font-size: 14px;
-  cursor: pointer;
-  line-height: 1;
-  float: left;
-  color: #aaa !important;
-  transition: all 0.2s ease-out 0s;
-  z-index: 999;
-  padding: 10px 20px;
-  background: #fff;
-  padding-left: 25px;
-  width: 100%;
-  position: absolute;
-  bottom: 90px;
-}
-
-.asyncdata {
-  display: block;
-  font-size: 14px;
-  cursor: pointer;
-  line-height: 1;
-  float: left;
-  color: #aaa !important;
-  transition: all 0.2s ease-out 0s;
-  z-index: 999;
-  padding: 10px 20px;
-  background: #fff;
-  padding-left: 25px;
-  width: 100%;
-  position: absolute;
-  bottom: 120px;
-}
-
 .toggle-btn {
   display: block;
   font-size: 24px;
@@ -15818,20 +15771,6 @@ ul.nav i {
   border-top: 1px solid var(--light-bg-color);
   position: absolute;
   bottom: 0;
-}
-
-.versionning {
-  display: block;
-  font-size: 10px;
-  float: left;
-  color: #aaa !important;
-  transition: all 0.2s ease-out 0s;
-  z-index: 998;
-  background: #fff;
-  width: 80%;
-  padding: 10px 20px;
-  position: absolute;
-  bottom: 50px;
 }
 
 .sidebar-menu-collapsed .toggle-btn {
@@ -16707,18 +16646,6 @@ ul.dropdown-menu li.user-info {
   border-top-right-radius: 4px;
 }
 
-ul.dropdown-menu li.flexdis {
-  background: var(--primary);
-  width: 100%;
-  margin: 0;
-  padding: 15px 15px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 ul.dropdown-menu.drp-mnu.show li {
   margin-left: 0;
 }
@@ -17366,75 +17293,6 @@ a.github {
   transform: scale(1.1);
   transition: 0.3s ease;
   opacity: 1;
-}
-
-
-.card_border i.store {
-  opacity: 1;
-}
-
-.statistics-grid .store3 {
-  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #6076d8 100%) !important;
-  cursor: pointer
-}
-.statistics-grid .store3 p{
-  color: #eeeeee !important
-}
-
-.statistics-grid .store2 p{
-  color: #eb9f50 !important
-}
-.statistics-grid .store2 {
-  background: linear-gradient(to right, #eb9f50 0%, #ffffff 100%) !important;
-  cursor: pointer
-}
-
-
-.statistics-grid .store4 {
-  background: linear-gradient(to right, #234bbb 0%, #ffffff 100%) !important;
-  cursor: pointer
-}
-.statistics-grid .store4 p{
-  color: #234bbb !important
-}
-.statistics-grid .store4 h3{
-  color: #234bbb !important
-}
-
-
-.statistics-grid .store5 {
-  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #2f3d55 100%) !important;
-  cursor: pointer
-}
-.statistics-grid .store5 p{
-  color: #ffffff !important
-}
-.statistics-grid .store5 h3{
-  color: #ffffff !important
-}
-
-
-.statistics-grid .store7 {
-  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #f0b968 100%) !important;
-  cursor: pointer
-}
-.statistics-grid .store7 p{
-  color: #2f3d55 !important
-}
-.statistics-grid .store7 h3{
-  color: #2f3d55 !important
-}
-
-
-.statistics-grid .store8 {
-  background: linear-gradient(to right, #1e1d1d 0%, #ffffff 100%) !important;
-  cursor: pointer
-}
-.statistics-grid .store8 p{
-  color: #1e1d1d !important
-}
-.statistics-grid .store8 h3{
-  color: #1e1d1d !important
 }
 
 .card_border:hover i.lnr.lnr-users {
@@ -18768,6 +18626,99 @@ img {
     font-size: 25px;
     line-height: 30px;
   }
+}
+
+
+ul.dropdown-menu li.flexdis {
+  background: var(--primary);
+  width: 100%;
+  margin: 0;
+  padding: 15px 15px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.card_border i.store {
+  opacity: 1;
+}
+
+.statistics-grid .store3 {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #6076d8 100%) !important;
+  cursor: pointer
+}
+
+.statistics-grid .store3 p {
+  color: #eeeeee !important
+}
+
+.statistics-grid .store2 p {
+  color: #eb9f50 !important
+}
+
+.statistics-grid .store2 {
+  background: linear-gradient(to right, #eb9f50 0%, #ffffff 100%) !important;
+  cursor: pointer
+}
+
+
+.statistics-grid .store4 {
+  background: linear-gradient(to right, #234bbb 0%, #ffffff 100%) !important;
+  cursor: pointer
+}
+
+.statistics-grid .store4 p {
+  color: #234bbb !important
+}
+
+.statistics-grid .store4 h3 {
+  color: #234bbb !important
+}
+
+
+.statistics-grid .store5 {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #2f3d55 100%) !important;
+  cursor: pointer
+}
+
+.statistics-grid .store5 p {
+  color: #ffffff !important
+}
+
+.statistics-grid .store5 h3 {
+  color: #ffffff !important
+}
+
+
+.statistics-grid .store7 {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #f0b968 100%) !important;
+  cursor: pointer
+}
+
+.statistics-grid .store7 p {
+  color: #2f3d55 !important
+}
+
+.statistics-grid .store7 h3 {
+  color: #2f3d55 !important
+}
+
+
+.statistics-grid .store8 {
+  background: linear-gradient(to right, #1e1d1d 0%, #ffffff 100%) !important;
+  cursor: pointer
+}
+
+.statistics-grid .store8 p {
+  color: #1e1d1d !important
+}
+
+.statistics-grid .store8 h3 {
+  color: #1e1d1d !important
 }
 
 /*# sourceMappingURL=style-starter.css.map */

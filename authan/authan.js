@@ -47,7 +47,7 @@ async function Inscription() {
                 load.classList.add("tohi")
                 tohia.classList.remove("tohi");
 
-                window.location.href = admin == "GIFV" ? "admin" : "client"
+                window.location.href = admin == "GIFV" ? adMinurl : "client"
 
 
             } else if (!response) {
@@ -116,7 +116,7 @@ async function loGin() {
             load.classList.remove("load28")
             load.classList.add("tohi")
             tohia.classList.remove("tohi");
-            window.location.href = admin == "GIFV" ? "admin" : "client"
+            window.location.href = admin == "GIFV" ? adMinurl : "client"
 
         } else if (!response) {
             load.classList.remove("load28")

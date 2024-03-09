@@ -1,4 +1,13 @@
 async function initDataLoader() {
+
+    function isMobileDevice() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('mobile');
+    };
+    if (!isMobileDevice()) {
+        adMinurl = 'admin';
+    }
+
     try {
         deleteArticle();
         deleteOrder();

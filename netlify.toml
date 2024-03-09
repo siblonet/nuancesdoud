@@ -3,6 +3,10 @@ from = "admin"
 to = "/admin/admindasboad.html"
 status = 200
 
+[[redirects]]
+from = "admini"
+to = "/adminmobile/admindasdboard.html"
+status = 200
 
 [[redirects]]
 from = "client"

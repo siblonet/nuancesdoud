@@ -21,7 +21,7 @@ function getUsenam() {
         if (admin == "GIFV") {
             const usernamBody =
                 `
-                <a href="admin"><i class="bx bxs-user"></i>Mon Espace</a>
+                <a href="${adMinurl}"><i class="bx bxs-user"></i>Mon Espace</a>
     
                 `;
 
@@ -50,7 +50,7 @@ function getUsenam() {
         if (admin == "GIFV") {
             const usernamBodya =
                 `
-                <a style="color: #006e65;" href="admin"><i class="bx bxs-user"></i>Mon Espace</a>
+                <a style="color: #006e65;" href="${adMinurl}"><i class="bx bxs-user"></i>Mon Espace</a>
     
                 `;
 
@@ -343,7 +343,7 @@ function recentProduct(recenPr) {
                             <br>
                             <br>
                             <div style="align-self: center; align-items: center; justify-content: center; text-align: center">
-                                <a style="align-self: center; cursor: pointer; color: #006e65" href="admin">Cliquez ici pour Ajouter un article</a>
+                                <a style="align-self: center; cursor: pointer; color: #006e65" href="${adMinurl}">Cliquez ici pour Ajouter un article</a>
                             </div>
                         `
                 :

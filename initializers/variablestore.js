@@ -13,3 +13,4 @@ let isVendu = false;
 let isCommande = false;
 let isFinis = false;
 let isPeoples = false;
+let adMinurl = 'admini';
