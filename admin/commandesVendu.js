@@ -113,19 +113,6 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
 
 };
 
-function filterArrayByDateRange(dataArray, startDate, endDate) {
-    // Convert start and end dates to Date objects
-    const startDateTime = new Date(startDate);
-    const endDateTime = new Date(endDate);
-
-    // Use the filter method to get items within the date range
-    const filteredArray = dataArray.filter(item => {
-        const itemDate = new Date(item.created);
-        return itemDate >= startDateTime && itemDate <= endDateTime;
-    });
-
-    return filteredArray;
-}
 
 // Example usage
 

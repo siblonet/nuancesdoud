@@ -10,15 +10,15 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
     ActiveEchoue.classList.remove('active');
 
     switch (who) {
-        case ActiveAttentes:
+        case "waiting":
             ActiveAttentes.classList.add('active');
             break;
 
-        case ActiveEncours:
+        case "onway":
             ActiveEncours.classList.add('active');
             break;
 
-        case ActiveEffectue:
+        case "done":
             ActiveEffectue.classList.add('active');
             break;
 
@@ -37,7 +37,7 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
     let ordersHTML = '';
 
     const ordersnotAvail = await GetOrder();
-    const orders = ordersnotAvail.filter((reveiw) => reveiw.statut == "done");
+    const orders = ordersnotAvail.filter((reveiw) => reveiw.statut == who);
 
 
     ordersHTML += `
@@ -69,8 +69,8 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
                     <div  style="align-items: flex-start; width: 170px">
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
                         <div style="align-self: flex-start; width: 130px">
-                            <p class="statuscor status delivered">
-                                Livré
+                            <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'waiting' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
+                            ${who === "done" ? "livré" : who == "review" ? "en attente" : who === "onway" ? "en cours" : "échoué"}
                             </p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
                     <div class="orderinfoso">
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Total: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
                     </div>
                 </div>
@@ -96,19 +96,6 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
 
 };
 
-function filterArrayByDateRange(dataArray, startDate, endDate) {
-    // Convert start and end dates to Date objects
-    const startDateTime = new Date(startDate);
-    const endDateTime = new Date(endDate);
-
-    // Use the filter method to get items within the date range
-    const filteredArray = dataArray.filter(item => {
-        const itemDate = new Date(item.created);
-        return itemDate >= startDateTime && itemDate <= endDateTime;
-    });
-
-    return filteredArray;
-}
 
 // Example usage
 
@@ -119,8 +106,7 @@ const filterOrder = async () => {
     let ordersHTML = '';
 
     const ordersnotAvail = await GetOrder();
-    const ordersStatusDone = ordersnotAvail.filter((reveiw) => reveiw.statut == "done");
-    const orders = filterArrayByDateRange(ordersStatusDone, startDate, endDate);
+    const orders = filterArrayByDateRange(ordersnotAvail, startDate, endDate);
 
 
     if (orders && orders.length > 0) {
@@ -155,27 +141,19 @@ const filterOrder = async () => {
                     <div  style="align-items: flex-start; width: 170px">
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
 
-                        <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
-                            Caisse: ${order.staff ? order.staff : "Online"}
-                        </p>
                         <div style="align-self: flex-start; width: 130px">
-                            <p class="statuscor status delivered">
-                                Livré
-                            </p>
+                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'waiting' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
+                        ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
+                        </p>
                         </div>
                     </div>
       
                     <br>
                     
                     <div class="orderinfoso">
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
-                        </div>
-      
-      
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Total: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
 
                     </div>
@@ -192,4 +170,101 @@ const filterOrder = async () => {
 
     }
 }
+
+async function openOrderforediting(orderid, orderarticleid, articleid) {
+    GetOrderByID(orderid).then(order => {
+        const product = order.articles.find(po => po._id == orderarticleid);
+
+        if (product && product.arti_id) {
+            document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
+            document.getElementById('optionViewNewPrice').innerText = `${product.arti_id.addprix} F.CFA`;
+            document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${product.arti_id.barcode}`;
+            document.getElementById('productQuantity').value = product.quantcho;
+
+
+            const orderStatuHtml = document.getElementById('statusOrder');
+            orderStatuHtml.innerHTML = '';
+            const orderStatus = order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué";
+            const orderStatu = `                     <p>Statut:  <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span></p>
+                                        `;
+            orderStatuHtml.innerHTML = orderStatu;
+
+
+            document.getElementById('ido').value = `${orderid}`;
+            document.getElementById('proid').value = `${orderarticleid}`;
+            document.getElementById('arti_id').value = `${articleid}`;
+
+            const element = document.getElementById('hidlater');
+            element.classList.remove('hiddendhid');
+            element.classList.add('hiddendshow');
+
+
+            document.getElementById('villeValue').value = `${order.ville}`;
+            document.getElementById('communeValue').value = `${order.commune}`;
+            document.getElementById('adresseValue').value = `${order.lieu}`;
+            document.getElementById('telephoneValue').value = `${order.phone}`;
+
+            const bacgro = document.getElementById('bagron');
+            bacgro.style.backgroundColor = product.backgroundColor;
+            const modalImage = document.getElementById('ipage');
+            modalImage.src = product.arti_id.image[0].ima;
+
+            if (order.statut == "done") {
+                document.getElementById('livenonupdate').innerHTML = '';
+
+            }
+
+
+
+        } else {
+            document.getElementById('optionCancilename').innerText = "Article Supprimé";
+
+            document.getElementById('optionViewNewPrice').innerText = `00.000 F.CFA`;
+            document.getElementById('optionViewNewBarcode').innerText = `Barcode`;
+            document.getElementById('productQuantity').value = 0;
+            document.getElementById('clientNameOrder').innerText = `Client`;
+
+
+            const orderStatuHtml = document.getElementById('statusOrder');
+            orderStatuHtml.innerHTML = '<p>Statut: </p> <span style="color: green">Livré</span>';
+
+            document.getElementById('villeValue').value = `Ville`;
+            document.getElementById('communeValue').value = `Commune`;
+            document.getElementById('adresseValue').value = `Lieu`;
+            document.getElementById('telephoneValue').value = `07000000`;
+
+            const modalImage = document.getElementById('ipage');
+            modalImage.src = "../admin/assets/img/imgo.png";
+
+            document.getElementById('livenonupdate').innerHTML = '';
+
+        };
+
+    }).catch();
+
+};
+
+
+async function cancelOrderById() {
+
+    var result = window.confirm("Voulez vous vraiment annuller?");
+
+    if (result) {
+        const ido = document.getElementById('ido').value;
+        const proid = document.getElementById('proid').value;
+        const arti_id = document.getElementById('arti_id').value;
+        const quan = document.getElementById('productQuantity').value;
+
+        const vin_or = Orderdata.find(re => re._id === ido);
+        if (vin_or.articles.length > 1) {
+            await sendRequestforOrder('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
+
+        } else {
+            await sendRequestforOrder('DELETE', `orders/${ido}/${arti_id}/${quan}`);
+
+        }
+
+    }
+
+};
 

@@ -24,7 +24,7 @@ function DashBoad(ActiveDasboard, ActiveAttentes, ActiveEncours, ActiveEffectue,
                 <div class="row">
                   <div class="col-sm-6 pr-sm-2 statistics-grid">
                     <div class="store3 card card_border border-primary-topa p-4"
-                      onclick="NafigatioTo('ActiveAttentes')">
+                      onclick="NafigatioTo('waiting')">
                       <i class="lnr store">
                         <img src="../admin/assets/img/store3a.png" alt="store1" width="50" height="50">
                       </i>
@@ -34,7 +34,7 @@ function DashBoad(ActiveDasboard, ActiveAttentes, ActiveEncours, ActiveEffectue,
                   </div>
                   <div class="col-sm-6 pl-sm-2 statistics-grid">
                     <div class="store5 card card_border border-primary-topb p-4" style="cursor: pointer"
-                      onclick="NafigatioTo('ActiveEncours')">
+                      onclick="NafigatioTo('onway')">
                       <i class="lnr store">
                       <img src="../admin/assets/img/comandea.png" alt="store5" width="50" height="50">
                      </i>
@@ -50,7 +50,7 @@ function DashBoad(ActiveDasboard, ActiveAttentes, ActiveEncours, ActiveEffectue,
                 <div class="row">
                   <div class="col-sm-6 pr-sm-2 statistics-grid">
                     <div class="store2 card card_border border-primary-topa p-4"
-                      onclick="NafigatioTo('ActiveEffectue')">
+                      onclick="NafigatioTo('done')">
                       <i class="lnr store">
                       <img src="../admin/assets/img/store2.png" alt="store2" width="50" height="50">
                     </i>                      
@@ -60,7 +60,7 @@ function DashBoad(ActiveDasboard, ActiveAttentes, ActiveEncours, ActiveEffectue,
                   </div>
                   <div class="col-sm-6 pl-sm-2 statistics-grid">
                     <div class="store7 card card_border border-primary-topb p-4" style="cursor: pointer"
-                      onclick="NafigatioTo('ActiveEchoue')">
+                      onclick="NafigatioTo('fail')">
                       <i class="lnr store">
                          <img src="../admin/assets/img/commandeb.png" alt="store4" width="50" height="50">
                       </i>
