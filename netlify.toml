@@ -10,7 +10,7 @@ status = 200
 
 [[redirects]]
 from = "client"
-to = "/client/client.html"
+to = "/clientmobile/clientdasbord.html"
 status = 200
 
 

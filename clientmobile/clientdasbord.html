@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="fr-FR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#d2b154" />
+    <meta name="description" content="" />
+    <meta name="keywords"
+        content="NUANCES D'OUD, D'OUD, NUANCES-Shop, NUANCES D'OUD, Siblo, Silence-AI, John, Kokar, Dibloni" />
+    <meta name="author" content="John Kokar" />
+    <meta property="og:title" content="NUANCES D'OUD" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nuances D'OUD" />
+    <meta property="og:locale" content="fr-FR" />
+    <meta property="article:author" content="John Kokar" />
+
+
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="clientmobile/assets/css/livechat.css">
+
+    <title>Nuance-Admin</title>
+    <link rel="stylesheet" href="clientmobile/assets/css/style-starter.css">
+    <link rel="stylesheet" href="clientmobile/tirthcss.css">
+    <link rel="stylesheet" href="clientmobile/noble.css">
+
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
+
+    <style>
+        .backi {
+            height: 200px !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+
+
+        .backiflex {
+            display: flex !important;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+
+        .backiflex .logoextern {
+            border-radius: 25px;
+            background-color: #000000;
+            height: 90%;
+            width: 70%;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            -webkit-box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, 0.451);
+        }
+
+        .backiflex .space {
+            width: 15px;
+            height: 40px;
+        }
+
+        .backiflex .logoextern img {
+            resize: both;
+            height: 100%;
+            width: 100%;
+        }
+
+        .backiflex .msgspace {
+            height: 100%;
+            width: 59%;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .backiflex .msgspace {
+            align-self: center;
+        }
+
+        #slided .loadavideo {
+            position: absolute;
+            width: 100% !important;
+            height: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            z-index: 2;
+            display: none;
+            align-self: center !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            background-image: url(assets/loadingc.gif);
+        }
+
+        #slided #baVdeo {
+            position: absolute;
+            width: 100% !important;
+            height: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            z-index: 0;
+            object-fit: cover;
+            align-self: center !important;
+            display: block !important;
+        }
+
+        .imageFile {
+            opacity: 0.5 !important;
+            cursor: pointer !important;
+            background-color: transparent !important;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/fr.min.js"></script>
+
+</head>
+
+<body class="sidebar-menu-collapsed" id="renderFirst">
+    <div class="preloader-area" id="loaderRemove">
+        <div class="spinner">
+            <div class="inner">
+                <div class="disc"></div>
+                <div class="disc"></div>
+                <div class="disc"></div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="sidebar-menu sticky-sidebar-menu">
+
+            <div class="logo"
+                style="align-items: center !important; justify-content: center !important; text-align: center !important;">
+                <div style="height: 30%; align-self: center !important;"></div>
+                <img src="../admin/assets/img/log2b.png" style="width: 70%; align-self: center !important;" alt="logo">
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="logo-icon text-center"
+                style="overflow: hidden; align-items: center; justify-content: center; padding: 5px; background-color: #f8f9fa;">
+                <img id="logointerne" src="../admin/assets/img/logo.png" style="height: 100%;" alt="logo">
+            </div>
+
+            <div class="sidebar-menu-inner">
+
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li class="" id="ActiveDasboard">
+                        <a style="cursor: pointer" onclick="NafigatioTo('ActiveDasboard')">
+                            <i class="fa fa-th"></i>
+                            <span>Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li class="active" id="ActiveAttentes">
+                        <a style="cursor: pointer" onclick="NafigatioTo('ActiveAttentes')">
+                            <i class="lnr lnr-cart">
+                            </i>
+                            <span>C En attente</span>
+                        </a>
+                    </li>
+                    <li class="active" id="ActiveEncours">
+                        <a style="cursor: pointer" onclick="NafigatioTo('ActiveEncours')">
+                            <i class="lnr lnr-cart">
+                            </i>
+                            <span>C En cours</span>
+                        </a>
+                    </li>
+
+                    <li class="active" id="ActiveEffectue">
+                        <a style="cursor: pointer" onclick="NafigatioTo('ActiveEffectue')">
+                            <i class="lnr lnr-store"> </i>
+                            <span>C éffectuée</span>
+                        </a>
+                    </li>
+                    <li class="active" id="ActiveEchoue">
+                        <a style="cursor: pointer" onclick="NafigatioTo('ActiveEchoue')">
+                            <i class="lnr lnr-cart"></i>
+                            <span>C Echoué</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+                <a class="toggle-btn">
+                    <i class="fa fa-angle-double-left menu-collapsed__left"><span>Fermer</span></i>
+                    <i class="fa fa-angle-double-right menu-collapsed__right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="header sticky-header">
+
+            <div class="menu-right">
+
+
+                <div class="navbar user-panel-top">
+
+                    <div class="user-dropdown-details d-flex">
+
+                        <div class="profile_details_left">
+
+                            <ul class="nofitications-dropdown">
+                                <li class="dropdown">
+                                    <a style="cursor: pointer;" class="dropdown-toggle openlivecha">
+                                        <i class="fa fa-comment-o"></i>
+                                        <span id="chatss" class="badge blue"
+                                            style="background-color: rgb(255, 0, 98);">0</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="profile_details">
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a style="cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"
+                                        id="dropdownMenu3" aria-haspopup="true" aria-expanded="false">
+                                        <div class="profile_img">
+                                            <img src="../admin/assets/img/avatay.png" class="rounded-circle" alt="" />
+                                            <div class="user-active">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
+                                        <li class="flexdis">
+                                            <div>
+                                                <h5 class="user-name" id="usernam"></h5>
+                                                <span class="status ml-2" id="userstatus"></span>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <a style="cursor: pointer" data-toggle="modal" data-target="#optionClient"
+                                                onclick="openProfile()">
+                                                <i class="lnr lnr-user"></i>
+                                                Mon profil
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a style="cursor: pointer" onclick="NafigatioTo('annonce')">
+                                                <i class="lnr lnr-cog"></i>
+                                                Paramètres
+                                            </a>
+                                        </li>
+                                        <li class="logout">
+                                            <a style="cursor: pointer" onclick="Disconexion()">
+                                                <i class="fa fa-power-off"></i>
+                                                Se déconnecter
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content" id="main-content">
+
+
+        </div>
+
+    </section>
+
+    <button style="display: none;" type="button" id="connexionQli" data-toggle="modal"
+        data-target="#connexionComade"></button>
+    <button style="display: none;" type="button" id="pinCodeOpen" data-toggle="modal" data-target="#pinCode"></button>
+
+    <button style="display: none;" type="button" id="connexionClose" data-dismiss="modal"></button>
+
+
+    <div class="modal fade productsQuickView" id="connexionComade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"
+                style="align-self: center !important; align-items: center !important; text-align: center !important; width: 100%;">
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label>Téléphone <span class="required">*</span></label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label>Mot de passe<span class="required">*</span></label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-outline-success" onclick="loGin()">Connexion</button>
+                <br>
+                <p style="color: #f70958; font-weight: bold;" id="erroconnet"></p>
+            </div>
+        </div>
+    </div>
+
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <div class="modal fade productsQuickView" id="pinCode" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"
+                style="align-self: center !important; align-items: center !important; text-align: center !important; width: 100%;">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label>Mot de passe<span class="required">*</span></label>
+                        <input type="password" class="form-control" id="passwordchange">
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                    onclick="changeUser()">Suivant</button>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+    <div class="modal fade productsQuickView" id="addArticle" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModaldata()">
+                    <span><i class="bx bx-x"></i></span>
+                </button>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="billing-details">
+                                <h3 class="title">Détails de l'article</h3>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Article <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="addarticle">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Quantité<span class="required">*</span></label>
+                                            <input type="number" class="form-control" id="addquant">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Genre (Homme/Femme/Unisexe) <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="addgenre">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Prix<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="addprix">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Réduction</label>
+                                            <input type="text" class="form-control" id="addreduction" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>À quel occasion ? (Promo, Sold)</label>
+                                            <input type="text" class="form-control" id="addoccasion">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Couleur <span class="required"></span></label>
+                                            <input type="text" class="form-control" id="addcoul">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Marque <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="addmarque">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Code a barre <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="addbarcode">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="notes" id="notes" cols="30" rows="5"
+                                                placeholder="Description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="order-details">
+                                <h3 class="title">Selection des images</h3>
+
+                                <div>
+                                    <div class="order-table table-responsive"
+                                        style="justify-content: center; align-items: center; text-align: center;">
+                                        <div id="imagePreview1" class="addarticleimageshow"
+                                            onclick="removeImageCreate()">
+                                            <img id="imagePreviewHere" src="../admin/assets/img/imgo.png"
+                                                style="height: 100% !important; width: 100% !important;"
+                                                alt="Loading ..." />
+                                        </div>
+                                    </div>
+
+                                    <div class="" style="height: 5px; background-color: #ffffff;"></div>
+
+                                    <div class="" id="limitimag1"
+                                        style="justify-content: center; align-items: center; text-align: center; background-color: #ffffff">
+                                        <div id="doblik1" class="doblik">
+                                            <input type="file" id="doblik11" accept="image/*"
+                                                onchange="AddArticleImage()">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="" style="height: 15px; background-color: #ffffff;"></div>
+
+                                <br>
+
+                                <div>
+                                    <a id="ajouteencou" style="cursor: pointer !important;" data-dismiss="modal"
+                                        aria-label="Close" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
+
+                                    <a style="cursor: pointer !important;" class="btn btn-info" data-dismiss="modal"
+                                        onclick="ClearArticleinfos('addarticles')">Fermer</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+    <div class="modal fade productsQuickView" id="modArticle" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="bx bx-x"></i></span>
+                </button>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="billing-details">
+                                <h3 class="title">Détails de l'article</h3>
+                                <div class="row">
+                                    <input type="hidden" id="ediatiid" value="">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Article <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="editearticle">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Quantité<span class="required">*</span></label>
+                                            <input type="number" class="form-control" id="editequant">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Genre (Homme/Femme/Unisexe) <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="editegenre">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Prix<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="editeprix">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Réduction</label>
+                                            <input type="text" class="form-control" id="editereduction">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>À quel occasion ? (Promo, Sold)</label>
+                                            <input type="text" class="form-control" id="editeoccasion">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Couleur <span class="required"></span></label>
+                                            <input type="text" class="form-control" id="editecoul">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Marque <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="editemarque">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Code a barre <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="editebarcode">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="notes" id="editenotes" cols="30" rows="5"
+                                                placeholder="Description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="order-details">
+                                <h3 class="title">Selection des images</h3>
+
+                                <div>
+                                    <div class="order-table table-responsive"
+                                        style="justify-content: center; align-items: center; text-align: center;">
+
+                                        <div class="addarticleimageshow" onclick="removeImageEdite()">
+                                            <input type="hidden" id="editeimageid1" value="">
+                                            <img id="Editeimage1" src="../admin/assets/img/imgo.png"
+                                                style="height: 100% !important; width: 100% !important;"
+                                                alt="Loading ..." />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="order-table table-responsive" id="limitimage1"
+                                        style="justify-content: center; align-items: center; text-align: center; background-color: #ffffff">
+                                        <div id="Editeimageonline1" class="doblik">
+                                            <input type="file" id="Editeimageonline1inpu" accept="image/*"
+                                                onchange="EditeArticleImage()">
+                                        </div>
+                                    </div>
+                                    <div class="" style="height: 15px; background-color: #ffffff;"></div>
+
+                                    <br>
+
+                                    <div>
+
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                            onclick="RemoveArticleById()">Supprimer</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick="EditeArticle()">Modifer</button>
+                                        <button type="button" class="btn btn-info" data-dismiss="modal"
+                                            onclick="ClearArticleinfos('editearticles')">Fermer</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article end here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article end here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article end here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article end here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ modif article end here @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+    <div class="modal fade productsQuickView" id="optionCancile" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="bx bx-x" style="color: #f70958 !important;">x</i></span>
+                </button>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image" id="bagron" style="">
+                            <img src="" id="ipage" alt="image de larticle">
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="ido" value="0">
+                    <input type="hidden" id="proid" value="0">
+                    <input type="hidden" id="arti_id" value="">
+
+                    <div class="col-lg-6 col-md-6">
+                        <br>
+                        <br>
+                        <div class="products-content">
+
+                            <div class="price">
+                                <a id="clientNameOrder"></a>
+                            </div>
+                            <div class="price">
+                                <a id="optionCancilename"></a>
+                            </div>
+
+                            <div class="price">
+                                <span class="new-price" id="optionViewNewPrice"></span>
+                            </div>
+                            <div class="price">
+                                <span class="new-price" id="optionViewNewBarcode"></span>
+                            </div>
+                            <div class="products-add-to-cart" id="hidlater">
+
+                                <div class="">
+                                    <span>Quantité :</span>
+
+                                    <input autofocus type="text" id="productQuantity" value="1">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <br>
+                <div id="statusOrder">
+                    <br>
+
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image" style="">
+
+                            <div class="billing-details">
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Ville </label>
+                                        <input type="text" class="form-control" id="villeValue">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Commune </label>
+                                        <input type="text" class="form-control" id="communeValue">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-content">
+
+                            <div class="billing-details">
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Adresse précis</label>
+                                        <input type="text" class="form-control" id="adresseValue">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Téléphone</label>
+                                        <input type="text" class="form-control" id="telephoneValue">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer" id="livenonupdate">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"
+                        onclick="selectStatusChange('onway')">En
+                        cours</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        onclick="selectStatusChange('done')">Livré</button>
+                    <button type="button" class="btn btn-dangera" data-dismiss="modal"
+                        onclick="selectStatusChange('fail')">Échoué</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="color: #fff;"
+                        onclick="selectStatusChange('review')">En attente</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        onclick="cancelOrderById()">Annuller</button>
+                    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start buying @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start buying @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start buying @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start buying @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start buying @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+    <div class="modal fade productsQuickView" id="buyingArticle" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="bx bx-x"></i></span>
+                </button>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image" id="buybagron" style="">
+                            <img src="" id="buyimage" alt="image de larticle">
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <br>
+                        <br>
+                        <div class="products-content">
+                            <div class="price">
+                                <a id="buyArticlename"></a>
+                                <span class="new-price" id="buyPrice"></span>
+                            </div>
+
+                            <div class="products-add-to-cart" id="hidlatera">
+
+                                <div class="">
+                                    <span>Quantité :</span>
+
+                                    <input autofocus type="text" id="buyproductQuantity" value="1">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <br>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"
+                        onclick="selectStatusChange('onway')">En
+                        cours</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        onclick="selectStatusChange('done')">Livré</button>
+                    <button type="button" class="btn btn-dangera" data-dismiss="modal"
+                        onclick="selectStatusChange('fail')">Échoué</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="color: #fff;"
+                        onclick="selectStatusChange('review')">En attente</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        onclick="cancelOrderById()">Annuller</button>
+                    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ buying end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+
+
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <div class="modal fade productsQuickView" id="buyClient" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="bx bx-x"></i></span>
+                </button>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image">
+
+                            <div class="billing-details">
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Nom </label>
+                                        <input type="text" class="form-control" id="byclientNom">
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Prénom </label>
+                                        <input type="text" class="form-control" id="byclientPrenom">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-content">
+
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Téléphone</label>
+                                        <input type="text" class="form-control" id="byclientPhone">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <textarea name="notes" id="bynotes" cols="30" rows="3"
+                                            placeholder="Commentaire: Ecrivez quelque chose en rapport avec cette commandes"
+                                            class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="createBuyed()">Valider
+                        l'Achat</button>
+
+                    <button type="button" class="btn btn-outline-success"
+                        onclick="GetClientforOrder()">Vérifier</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ client infos end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+    <div class="modal fade productsQuickView" id="optionClient" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="bx bx-x"></i></span>
+                </button>
+                <input type="hidden" id="clientid" value="">
+
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image">
+
+                            <div class="billing-details">
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Nom </label>
+                                        <input type="text" class="form-control" id="clientNom">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Prénom </label>
+                                        <input type="text" class="form-control" id="clientPrenom">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-content">
+
+                            <div class="billing-details">
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>eMail</label>
+                                        <input type="text" class="form-control" id="clientEmail">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Téléphone</label>
+                                        <input type="text" class="form-control" id="clientPhone">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn" data-dismiss="modal" id="userStatus"></button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"
+                        onclick="changePeopleStatus('staff')">Employer</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        onclick="changePeopleStatus('admin')">Admin</button>
+                    <button type="button" class="btn btn-dangera" data-dismiss="modal"
+                        onclick="changePeopleStatus('client')">Client</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        onclick="deleteUser()">Supprimer</button>
+                    <div id="usermodif"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+    <div class="modal fade productsQuickView" id="optionQrcode" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"
+                style="align-self: center !important; align-items: center !important; text-align: center !important; width: 100%;">
+                <p style="color: #dddddd;" id="ipsee"></p>
+                <div class="" id="qrcode">
+
+
+                </div>
+
+                <br>
+                <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
+
+            </div>
+        </div>
+
+    </div>
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Qrcode start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+
+    <div class="add-article" id="add-article">
+
+        <button type="button" id="autocliadd" class="btn btn-primary" data-toggle="modal" data-target="#addArticle"
+            onclick="StartCreateArticle()">
+            Ajouter
+        </button>
+        <input type="hidden" id="autocliaddcheck" value="off">
+    </div>
+
+
+    <div class="add-article" id="filter-order">
+        <i class="btn btn-primary fa fa-filter" data-toggle="modal" data-target="#filterOrder"></i>
+    </div>
+
+
+    <div class="modal fade productsQuickView" id="filterOrder" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="bx bx-x"></i></span>
+                </button>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-image">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>De cette date </label>
+                                        <input type="date" class="form-control" id="startDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="products-content">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>A cette date</label>
+                                        <input type="date" class="form-control" id="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                        onclick="filterOrder()">Appliquer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id='whatsapp-chat' class='hidea'>
+        <div class='header-chata'>
+            <div class='head-homea'>
+                <h3 class="h3">Assistance Direct</h3>
+
+            </div>
+            <div class='get-newa hidea'>
+                <div id='get-labela'></div>
+                <div id='get-namaa'></div>
+            </div>
+        </div>
+
+        <div class='home-chata' id="clientId">
+
+        </div>
+
+        <div class='start-chata hidea'>
+            <div class='first-msga' id="first-msga">
+
+            </div>
+
+            <div class='blanter-msga'>
+
+                <textarea name="notes" id="chat-inputa" cols="20" rows="2" placeholder="Saisissez-ici votre message"
+                    class="form-control textarea" maxlength='120'></textarea>
+
+                <a class="aa" href='javascript:void' id='send-ita'>Send</a>
+            </div>
+
+        </div>
+        <div id='get-numbera'></div>
+        <a class='close-chata aa' href='javascript:void'>×</a>
+    </div>
+
+
+
+    <script src="clientmobile/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="clientmobile/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="clientmobile/assets/js/Chart.min.js"></script>
+    <script src="clientmobile/assets/js/utils.js"></script>
+
+    <script src="clientmobile/assets/js/jquery.nicescroll.js"></script>
+    <script src="clientmobile/assets/js/scripts.js"></script>
+    <script src="clientmobile/assets/js/modernizr.js"></script>
+    <script src="clientmobile/assets/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+
+    <script src="../initializers/variablestore.js"></script>
+    <script src="../initializers/router.js"></script>
+    <script src="../initializers/database_handl.js"></script>
+    <script src="../functionServices/product.services.js"></script>
+    <script src="../functionServices/requesthttps.js"></script>
+    <script src="../initializers/convertisseur.js"></script>
+
+    <script src="clientmobile/dashboad.js"></script>
+    <script src="clientmobile/commandes.js"></script>
+    <script src="clientmobile/navigatorScript.js"></script>
+    <script src="clientmobile/uerparams.js"></script>
+
+    <script src="../functionServices/disconnexion.js"></script>
+    <script src="clientmobile/inidataloader.js"></script>
+
+
+
+    <script>
+        var closebtns = document.getElementsByClassName("close-grid");
+        var i;
+
+        for (i = 0; i < closebtns.length; i++) {
+            closebtns[i].addEventListener("click", function () {
+                this.parentElement.style.display = 'none';
+            });
+        }
+    </script>
+    <script>
+        $(function () {
+            $('.sidebar-menu-collapsed').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+
+
+</body>
+
+</html>

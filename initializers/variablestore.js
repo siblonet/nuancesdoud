@@ -1,6 +1,7 @@
 let internet;
 let username;
 let isAdmin = false;
+let isClient = false;
 const Onlineimas = [];
 const Offlineimas = [];
 let ArticleFromPhone = [];
