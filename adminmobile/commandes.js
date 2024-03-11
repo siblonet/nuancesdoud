@@ -164,7 +164,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
 async function selectStatusChange(sta = null) {
     if (sta) {
         const ido = document.getElementById('ido').value;
-        await sendRequestforOrder('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
+        await requesttoBackend('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
     }
 };
 
@@ -180,10 +180,10 @@ async function cancelOrderById() {
 
         const vin_or = Orderdata.find(re => re._id === ido);
         if (vin_or.articles.length > 1) {
-            await sendRequestforOrder('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
+            await requesttoBackend('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
 
         } else {
-            await sendRequestforOrder('DELETE', `orders/${ido}/${arti_id}/${quan}`);
+            await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
 
         }
 

@@ -7,14 +7,6 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     ActiveAn.classList.remove('active');
     document.getElementById('searcha').style.display = "none";
 
-    document.getElementById('add-article').classList.remove('active');
-
-
-    const filterorder = document.getElementById('filter-order');
-    setTimeout(() => {
-        filterorder.classList.add('active');
-    }, 1000);
-
     let ordersHTML = '';
 
     const ordersnotAvail = await GetOrder();
@@ -181,7 +173,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
 async function selectStatusChange(sta = null) {
     if (sta) {
         const ido = document.getElementById('ido').value;
-        await sendRequestforOrder('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
+        await requesttoBackend('PUT', `orders/change/order/statuts/${ido}`, { statut: sta });
     }
 };
 
@@ -197,10 +189,10 @@ async function cancelOrderById() {
 
         const vin_or = Orderdata.find(re => re._id === ido);
         if (vin_or.articles.length > 1) {
-            await sendRequestforOrder('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
+            await requesttoBackend('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
 
         } else {
-            await sendRequestforOrder('DELETE', `orders/${ido}/${arti_id}/${quan}`);
+            await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
 
         }
 
