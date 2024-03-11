@@ -453,9 +453,46 @@ const KaliaPay = async (order) => {
         console.log(payment_url);
 
         // Redirect to the obtained payment URL
-        window.location.href = payment_url.url;
+
+        const tohia = document.getElementById('tohia');
+        const load = document.getElementById('tohi');
+        const errer = document.getElementById('rejected');
+
+        try {
+            const response = await requesttoBackend('POST', 'orders/nuance', order);
+
+            if (response && response.done) {
+                await deletePannier();
+                load.classList.remove("load28");
+                load.classList.add("tohi");
+                tohia.classList.remove("tohi");
+                window.location.href = payment_url.url
+            } else if (!response) {
+                handleError("Erreur inconnue, Veuillez réessayer plus tard");
+            }
+
+        } catch (e) {
+            handleError("Vérifiez que vous avez accès à l'internet");
+        }
+
+        function handleError(message) {
+            setTimeout(() => {
+                load.classList.remove("load28");
+                load.classList.add("tohi");
+                tohia.classList.remove("tohi");
+                errer.classList.add("rejected");
+                document.getElementById('nointer').innerText = message;
+
+                setTimeout(() => {
+                    errer.classList.remove("rejected");
+                }, 3500);
+            }, 1500);
+        }
+
+
     } catch (error) {
-        console.error("Error during KaliaPay operation:", error);
+        handleError("Vérifiez que vous avez accès à l'internet");
+
         // Handle errors appropriately
     }
 };
