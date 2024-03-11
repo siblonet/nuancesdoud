@@ -196,7 +196,7 @@ async function cancelOrderById() {
 
         }
 
-
+        window.location.reload()
     }
 
 };

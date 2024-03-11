@@ -186,6 +186,7 @@ async function cancelOrderById() {
             await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
 
         }
+        window.location.reload()
 
 
     }
