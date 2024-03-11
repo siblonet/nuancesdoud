@@ -103,8 +103,9 @@ async function getallPanier() {
         pantotalid.innerHTML += pantotalhtml;
 
     } else {
-        document.getElementById('coverfor').classList.add("preloader-area");
 
+        
+        window.location.href = "/"
     }
 
 };
