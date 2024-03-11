@@ -162,7 +162,6 @@ async function sendCommen() {
         };
 
     } else {
-
         const prenomValue = document.getElementById('prenomValue').value;
         const nomValue = document.getElementById('nomValue').value;
         const villeValue = document.getElementById('villeValue').value;
@@ -185,7 +184,8 @@ async function sendCommen() {
                     owner: "nuance"
                 };
                 try {
-                    const response = requesttoBackend('POST', 'people', person);  // Await the result
+                    const response = await requesttoBackend('POST', 'people', person);  // Await the result
+                    console.log(response);
                     if (response && response.ee) {
                         load.classList.remove("load28")
                         load.classList.add("tohi")
@@ -198,6 +198,11 @@ async function sendCommen() {
                         }, 1000);
 
                     } else if (response && response.token) {
+                        sessionStorage.setItem('tibule', response.token);
+                        localStorage.removeItem('myLive');
+
+                        const splo = response.token.split("°");
+                        const clientid = thisiswhat(splo[0]);
 
                         const articleOne = {
                             articles: [],
@@ -208,7 +213,7 @@ async function sendCommen() {
                             note: notesValue,
                             owner: "nuance",
                             reduction: 0,
-                            client: response.token,
+                            client: clientid,
                             payment_method: payment_method,
                             payment_status: "waiting",
                             transaction_id: transaction_id,
@@ -254,6 +259,9 @@ async function sendCommen() {
                     errer.classList.remove("rejected");
                 }, 3500);
             }
+
+        } else {
+            alert("Renseignez les chemps obligatoire")
 
         }
     }
@@ -322,9 +330,12 @@ async function loginCommage() {
         localStorage.removeItem('myLive');
 
         const [name, lastname, mail] = responseData.token.split("°");
+        console.log(name, lastname, mail);
         const mynama = thisiswhat(`${name}â${lastname}`);
         const mynam = thisiswhat(`${name}â${lastname}â${mail}`);
         const [firstName, lastName, email] = mynam.split(" ");
+        console.log(firstName, lastName, email);
+        console.log(mynam);
 
         document.getElementById('prenomValue').value = firstName;
         document.getElementById('prenomValue').disabled = true;
@@ -375,6 +386,7 @@ async function SendPanierToOrder(tocomp) {
             }
         }
     } catch (e) {
+        console.log(e);
         handleError("Vérifiez que vous avez accès à l'internet");
     }
 
@@ -439,24 +451,34 @@ const Payment_Choix = (paymen_choix) => {
 
 
 const KaliaPay = async (order) => {
+
+    const tohia = document.getElementById('tohia');
+    const load = document.getElementById('tohi');
+    const errer = document.getElementById('rejected');
     try {
-        const apikey = "ae236ee337b78dfc46a24e3a50e1a270fce8db37";
-        const amount = parseInt(order.reduction);
-        const service = "010324183052320001";
-        const extra = order.transaction_id;
-        const custom_data = order.transaction_id;
         const customer = encodeURIComponent(document.getElementById('customerphone').value);
 
-        const PAY_URL = `https://kaliapay.com/flash/${apikey}/${amount}/${service}/${extra}/${custom_data}/?provider=${order.payment_method}&customer=${customer}`;
+        const postData = {
+            apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
+            service: '010324183052320001',
+            amount: parseInt(order.reduction),
+            custom_data: order.transaction_id,
+            extra: order.transaction_id,
+            provider: order.payment_method,
+            customer: customer
+        };
 
-        const payment_url = await requesttoBackend("GET", PAY_URL);
-        console.log(payment_url);
+        const apiUrl = 'https://kaliapay.com/flash-light/';
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(postData).toString()
+        };
 
-        // Redirect to the obtained payment URL
 
-        const tohia = document.getElementById('tohia');
-        const load = document.getElementById('tohi');
-        const errer = document.getElementById('rejected');
+
 
         try {
             const response = await requesttoBackend('POST', 'orders/nuance', order);
@@ -466,7 +488,16 @@ const KaliaPay = async (order) => {
                 load.classList.remove("load28");
                 load.classList.add("tohi");
                 tohia.classList.remove("tohi");
-                window.location.href = payment_url.url
+
+                fetch(apiUrl, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = data.url
+
+
+                    })
+                    .catch(error => console.error('Error:', error));
+
             } else if (!response) {
                 handleError("Erreur inconnue, Veuillez réessayer plus tard");
             }
@@ -475,24 +506,29 @@ const KaliaPay = async (order) => {
             handleError("Vérifiez que vous avez accès à l'internet");
         }
 
-        function handleError(message) {
-            setTimeout(() => {
-                load.classList.remove("load28");
-                load.classList.add("tohi");
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = message;
 
-                setTimeout(() => {
-                    errer.classList.remove("rejected");
-                }, 3500);
-            }, 1500);
-        }
 
 
     } catch (error) {
+        console.log(error);
         handleError("Vérifiez que vous avez accès à l'internet");
 
         // Handle errors appropriately
     }
+
+    function handleError(message) {
+        setTimeout(() => {
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
+            errer.classList.add("rejected");
+            document.getElementById('nointer').innerText = message;
+
+            setTimeout(() => {
+                errer.classList.remove("rejected");
+            }, 3500);
+        }, 1500);
+    }
 };
+
+
