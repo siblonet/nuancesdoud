@@ -329,13 +329,10 @@ async function loginCommage() {
         sessionStorage.setItem('tibule', responseData.token);
         localStorage.removeItem('myLive');
 
-        const [name, lastname, mail] = responseData.token.split("°");
-        console.log(name, lastname, mail);
+        const [id, name, lastname, phone, mail] = responseData.token.split("°");
         const mynama = thisiswhat(`${name}â${lastname}`);
-        const mynam = thisiswhat(`${name}â${lastname}â${mail}`);
-        const [firstName, lastName, email] = mynam.split(" ");
-        console.log(firstName, lastName, email);
-        console.log(mynam);
+        const mynam = thisiswhat(`${name}â${lastname}â${phone}â${mail}`);
+        const [firstName, lastName, telphone, email] = mynam.split(" ");
 
         document.getElementById('prenomValue').value = firstName;
         document.getElementById('prenomValue').disabled = true;
@@ -347,7 +344,7 @@ async function loginCommage() {
         document.getElementById('confirmezValue').disabled = true;
         document.getElementById('emailValue').value = email;
         document.getElementById('emailValue').disabled = true;
-        document.getElementById('telephoneValue').value = phone;
+        document.getElementById('telephoneValue').value = telphone;
 
         const connectedor = document.getElementById('connectedor');
         connectedor.innerHTML = `
