@@ -56,8 +56,8 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                             Caisse: ${order.staff ? order.staff : "Online"}
                         </p>
                         <div style="align-self: flex-start; width: 130px">
-                        <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'review' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
-                            ${who === "done" ? "livré" : who == "review" ? "en attente" : who === "onway" ? "en cours" : "échoué"}
+                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
+                            ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
                         </p>
                         </div>
                     </div>
