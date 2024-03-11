@@ -16,9 +16,6 @@
     <meta property="article:published_time" content="2023-10-19T08:00:00Z" />
     <meta property="article:modified_time" content="2023-10-19T08:00:00Z" />
 
-
-    <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
-
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/boxicons.min.css">
@@ -34,6 +31,7 @@
     <link rel="stylesheet" href="assets/css/loading.css">
     <link rel="stylesheet" href="assets/css/loadingbuton.css">
     <link rel="stylesheet" href="assets/css/dark.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <title>Valider l'achat</title>
     <link rel="icon" type="image/png" href="assets/img/logo.png">
@@ -201,17 +199,53 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="payment-box">
-                                <div class="payment-method">
-                                    <p>
-                                        <input type="radio" id="paypal" name="radio-group" checked>
-                                        <label for="paypal">Paiement en ligne</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="cash-on-delivery" name="radio-group">
-                                        <label for="cash-on-delivery">Paiement à la livraison</label>
-                                    </p>
+                            <div class="tab products-details-tab">
+                                <ul class="tabs">
+                                    <li>
+                                        <a style="cursor: pointer;" onclick="Payment_Choix('yes')">
+                                            <div class="dot"></div> Paiement en ligne
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a style="cursor: pointer;" onclick="Payment_Choix('no')">
+                                            <div class="dot"></div> Paiement à la livraison
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tabs-item">
+                                        <div class="products-details-tab-content">
+                                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                                <div class="payment_icons" id="orangeci"
+                                                    onclick="PaymenSelecion('orangeci')">
+                                                    <img src="assets/img/orange.png" alt="ORANGE MONEY">
+                                                </div>
+                                                <div class="payment_icons" id="mtnci" onclick="PaymenSelecion('mtnci')">
+                                                    <img src="assets/img/mtn.png" alt="MTN MONEY">
+                                                </div>
+                                                <div class="payment_icons" id="waveci"
+                                                    onclick="PaymenSelecion('waveci')">
+                                                    <img src="assets/img/icon.png" alt="WAVE CI">
+                                                </div>
+                                                <div class="payment_icons" id="cards" onclick="PaymenSelecion('cards')">
+                                                    <img src="assets/img/vm.png" alt="VISA MASTERCARD">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <input style="height: 40px !important; display: none;"
+                                                placeholder="Entrez tél pour " type="tel"
+                                                class="form-control" id="customerphone">
+                                        </div>
+                                    </div>
+
+
                                 </div>
+                            </div>
+
+                            <div class="payment-box">
+
                                 <a style="cursor: pointer !important" class="default-btn loading" onclick="sendCommen()"
                                     id="noorderduplu">
                                     <span class="" id="tohia">Valider la commande</span>

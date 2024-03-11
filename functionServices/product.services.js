@@ -220,6 +220,8 @@ async function GetPannierToSend(order) {
                     quantcho: cursor.value.quantcho,
                     prix: cursor.value.prix
                 });
+                
+                order.reduction += cursor.value.prix * cursor.value.quantcho
                 cursor.continue();
             } else {
                 resolve(order);

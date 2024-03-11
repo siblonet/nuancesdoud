@@ -1,3 +1,5 @@
+let paymen_method_selected = "null";
+
 function RenderingCheckout() {
     getallPanier();
     const token = sessionStorage.getItem('tibule');
@@ -109,41 +111,25 @@ async function getallPanier() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command start    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command start    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command start    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 
 
 async function sendCommen() {
     document.getElementById('noorderduplu').setAttribute('onclick', null);
 
-    const paypal = document.getElementById('paypal').checked;
-    //const cash = document.getElementById('cash-on-delivery').checked;
+    const payment_method = paymen_method_selected !== "null" ? paymen_method_selected : "cash";
 
-    const payment_method = paypal ? "electronical" : "cash"
+
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
 
     const token = sessionStorage.getItem('tibule');
+    const transaction_id = Math.floor(Math.random() * 100000000).toString()
+
     if (token) {
         const splo = token.split("°");
 
@@ -166,11 +152,11 @@ async function sendCommen() {
                 note: notesValue,
                 owner: "nuance",
                 client: mynam,
+                reduction: 0,
                 payment_method: payment_method,
-                payment_status: "nopay",
-                transaction_id: "",
+                payment_status: "waiting",
+                transaction_id: transaction_id,
             };
-
 
             SendPanierToOrder(articleOne);
         };
@@ -221,10 +207,11 @@ async function sendCommen() {
                             phone: telephoneValue,
                             note: notesValue,
                             owner: "nuance",
+                            reduction: 0,
                             client: response.token,
                             payment_method: payment_method,
-                            payment_status: "nopay",
-                            transaction_id: "",
+                            payment_status: "waiting",
+                            transaction_id: transaction_id,
                         };
 
                         SendPanierToOrder(articleOne);
@@ -273,6 +260,14 @@ async function sendCommen() {
 
 };
 
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command end    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command end    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command end    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command end    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command end    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
 
 async function loginCommage() {
     const tohia = document.getElementById('tohia');
@@ -281,118 +276,79 @@ async function loginCommage() {
     const phone = document.getElementById('phone').value;
     const password = document.getElementById('password').value;
 
-    if (phone != "" && password != "") {
-        tohia.classList.add("tohi");
-        load.classList.remove("tohi");
-        load.classList.add("load28");
-
-        const person = {
-            phone: phone,
-            motdepass: password,
-        };
+    if (phone && password) {
         try {
-            const responseData = await requesttoBackend('POST', 'people/login/nuance', person);
+            tohia.classList.add("tohi");
+            load.classList.remove("tohi");
+            load.classList.add("load28");
+
+            const userCredentials = {
+                phone: phone,
+                motdepass: password,
+            };
+
+            const responseData = await requesttoBackend('POST', 'people/login/nuance', userCredentials);
 
             if (!responseData) {
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
-
-
-                setTimeout(() => {
-                    errer.classList.remove("rejected");
-                }, 1500);
-
+                handleLoginError("Erreur inconnue, veuillez réessayer plus tard");
             } else if (responseData && responseData.token) {
-                sessionStorage.setItem('tibule', responseData.token);
-                localStorage.removeItem('myLive');
-
-                const splo = responseData.token.split("°");
-                const name = splo[1];
-                const lastname = splo[2];
-                const mail = splo[4];
-                const mynama = thisiswhat(`${name}â${lastname}`)
-                const mynam = thisiswhat(`${name}â${lastname}â${mail}`)
-                const myspl = mynam.split(" ");
-
-
-                document.getElementById('prenomValue').value = myspl[0];
-                document.getElementById('prenomValue').disabled = true;
-                document.getElementById('nomValue').value = myspl[1];
-                document.getElementById('nomValue').disabled = true;
-                document.getElementById('motValue').value = password;
-                document.getElementById('motValue').disabled = true;
-                document.getElementById('confirmezValue').value = password;
-                document.getElementById('confirmezValue').disabled = true;
-                document.getElementById('emailValue').value = myspl[2];
-                document.getElementById('emailValue').disabled = true;
-                document.getElementById('telephoneValue').value = phone;
-                const connectedor = document.getElementById('connectedor');
-                connectedor.innerHTML = '';
-                const connectedorHTML =
-                    `
-             
-            <div class="user-actions-linear"></div>
-    
-            <span class="span" style="color: #037703 !important;"> Bienvenue ${mynama}</span>
-    
-            `;
-                connectedor.innerHTML = connectedorHTML;
-
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-
+                handleSuccessfulLogin(responseData);
             } else if (responseData && responseData.ee) {
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = "Identifiants Incorrect !";
-
-
-                setTimeout(() => {
-                    errer.classList.remove("rejected");
-                }, 1500);
-
+                handleLoginError("Identifiants incorrects !");
             }
+        } catch (error) {
+            handleLoginError("Vérifiez que vous avez accès à l'internet");
+        }
+    } else {
+        handleLoginError("Les champs de renseignement sont obligatoires");
+    }
 
-
-
-        } catch (e) {
-            console.log(e);
-            const tohia = document.getElementById('tohia');
-            const load = document.getElementById('tohi');
-            const errer = document.getElementById('rejected');
-
-            setTimeout(() => {
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
-            }, 1500);
+    function handleLoginError(errorMessage) {
+        setTimeout(() => {
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
+            errer.classList.add("rejected");
+            document.getElementById('nointer').innerText = errorMessage;
 
             setTimeout(() => {
                 errer.classList.remove("rejected");
-            }, 4500);
+            }, 3500);
+        }, 1500);
+    }
 
-        }
-    } else {
-        load.classList.remove("load28")
-        load.classList.add("tohi")
+    function handleSuccessfulLogin(responseData) {
+        sessionStorage.setItem('tibule', responseData.token);
+        localStorage.removeItem('myLive');
+
+        const [name, lastname, mail] = responseData.token.split("°");
+        const mynama = thisiswhat(`${name}â${lastname}`);
+        const mynam = thisiswhat(`${name}â${lastname}â${mail}`);
+        const [firstName, lastName, email] = mynam.split(" ");
+
+        document.getElementById('prenomValue').value = firstName;
+        document.getElementById('prenomValue').disabled = true;
+        document.getElementById('nomValue').value = lastName;
+        document.getElementById('nomValue').disabled = true;
+        document.getElementById('motValue').value = password;
+        document.getElementById('motValue').disabled = true;
+        document.getElementById('confirmezValue').value = password;
+        document.getElementById('confirmezValue').disabled = true;
+        document.getElementById('emailValue').value = email;
+        document.getElementById('emailValue').disabled = true;
+        document.getElementById('telephoneValue').value = phone;
+
+        const connectedor = document.getElementById('connectedor');
+        connectedor.innerHTML = `
+            <div class="user-actions-linear"></div>
+            <span class="span" style="color: #037703 !important;"> Bienvenue ${mynama}</span>
+        `;
+
+        load.classList.remove("load28");
+        load.classList.add("tohi");
         tohia.classList.remove("tohi");
-        errer.classList.add("rejected");
-        document.getElementById('nointer').innerText = "Les champs de renseignement sone obligatoire";
-        setTimeout(() => {
-            errer.classList.remove("rejected");
-        }, 3500);
-    };
-
+    }
 }
-
 
 
 async function SendPanierToOrder(tocomp) {
@@ -400,47 +356,106 @@ async function SendPanierToOrder(tocomp) {
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
 
-    const tocompl = await GetPannierToSend(tocomp);
+    try {
+        const tocompl = await GetPannierToSend(tocomp);
 
-    if (tocompl && tocompl.payment_method === "electronical") {
-        CinetPayment(tocompl);
+        if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "null") {
+            await KaliaPay(tocompl);
+        } else if (tocompl) {
+            const response = await requesttoBackend('POST', 'orders/nuance', tocompl);
 
-    } else if (tocompl) {
-
-        try {
-            const response = requesttoBackend('POST', 'orders/nuance', tocompl);
             if (response && response.done) {
                 await deletePannier();
-                load.classList.remove("load28")
-                load.classList.add("tohi")
+                load.classList.remove("load28");
+                load.classList.add("tohi");
                 tohia.classList.remove("tohi");
-                window.location.href = "client"
+                window.location.href = "client";
             } else if (!response) {
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
+                handleError("Erreur inconnue, Veuillez réessayer plus tard");
+            }
+        }
+    } catch (e) {
+        handleError("Vérifiez que vous avez accès à l'internet");
+    }
 
-                setTimeout(() => {
-                    errer.classList.remove("rejected");
-                }, 3500);
-            };
-
-        } catch (e) {
-            setTimeout(() => {
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
-                errer.classList.add("rejected");
-                document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
-            }, 1500);
+    function handleError(message) {
+        setTimeout(() => {
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
+            errer.classList.add("rejected");
+            document.getElementById('nointer').innerText = message;
 
             setTimeout(() => {
                 errer.classList.remove("rejected");
-            }, 4500);
+            }, 3500);
+        }, 1500);
+    }
+}
 
-        }
 
-    };
+const PaymenSelecion = (paymen_method) => {
+    paymen_method_selected = paymen_method;
+    const Orangeci = document.getElementById('orangeci');
+    const Mtnci = document.getElementById('mtnci');
+    const Waveci = document.getElementById('waveci');
+    const Cards = document.getElementById('cards');
+
+    Orangeci.classList.remove('payment_icons_selected');
+    Mtnci.classList.remove('payment_icons_selected');
+    Waveci.classList.remove('payment_icons_selected');
+    Cards.classList.remove('payment_icons_selected');
+
+    document.getElementById(paymen_method).classList.add('payment_icons_selected');
+
+    if (paymen_method !== "cards") {
+        const customerphone = document.getElementById('customerphone');
+        customerphone.placeholder = `Entrez tél pour ${paymen_method === "orangeci" ? "ORANGE MONEY" : paymen_method === "mtnci" ? "MTN MONEY" : "Wave"}`;
+        customerphone.style.display = "block";
+    } else {
+        const customerphone = document.getElementById('customerphone');
+        customerphone.value = "";
+        customerphone.placeholder = "";
+        customerphone.style.display = "none";
+    }
+};
+
+
+const Payment_Choix = (paymen_choix) => {
+    if (paymen_choix === "no") {
+        paymen_method_selected = "null";
+
+        const customerphone = document.getElementById('customerphone');
+        customerphone.value = "";
+        customerphone.placeholder = "";
+        customerphone.style.display = "none";
+
+        document.getElementById('orangeci').classList.remove('payment_icons_selected');
+        document.getElementById('mtnci').classList.remove('payment_icons_selected');
+        document.getElementById('waveci').classList.remove('payment_icons_selected');
+        document.getElementById('cards').classList.remove('payment_icons_selected');
+    }
+};
+
+
+const KaliaPay = async (order) => {
+    try {
+        const apikey = "ae236ee337b78dfc46a24e3a50e1a270fce8db37";
+        const amount = parseInt(order.reduction);
+        const service = "010324183052320001";
+        const extra = order.transaction_id;
+        const custom_data = order.transaction_id;
+        const customer = encodeURIComponent(document.getElementById('customerphone').value);
+
+        const PAY_URL = `https://kaliapay.com/flash/${apikey}/${amount}/${service}/${extra}/${custom_data}/?provider=${order.payment_method}&customer=${customer}`;
+
+        const payment_url = await requesttoBackend("GET", PAY_URL);
+        console.log(payment_url);
+
+        // Redirect to the obtained payment URL
+        window.location.href = payment_url.url;
+    } catch (error) {
+        console.error("Error during KaliaPay operation:", error);
+        // Handle errors appropriately
+    }
 };
