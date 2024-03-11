@@ -5,13 +5,24 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     ActiveCl.classList.remove('active');
     ActiveAr.classList.remove('active');
     ActiveAn.classList.remove('active');
-    let ordersHTML = '';
     document.getElementById('searcha').style.display = "none";
+
+    document.getElementById('add-article').classList.remove('active');
+
+
+    const filterorder = document.getElementById('filter-order');
+    setTimeout(() => {
+        filterorder.classList.add('active');
+    }, 1000);
+
+    let ordersHTML = '';
 
     const ordersnotAvail = await GetOrder();
     const orders = ordersnotAvail.filter((reveiw) => reveiw.statut !== "done");
+    console.log(orders);
+
+
     ordersHTML += `
-                <br>
                 <br>
                 <br>
                 <br>
@@ -26,10 +37,10 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                         ${order.articles.map(orar => {
             return `
                             <div data-toggle="modal" data-target="#optionCancile"
-                                onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id._id}')">
+                                onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
                                 <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
-                                <p style="color: #1d191a">${orar.prix} F</p>
+                                <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
                             </div>
                             <span style="width: 10px;"></span>
                             `;
@@ -37,24 +48,30 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                     </div>
       
                     <hr>
-      
-                    <div class="" style="align-self: flex-start; width: 150px;">
-                        <p
-                            class="statuscor status delivered">
-                            Livré
+
+                    <div  style="align-items: flex-start; width: 170px">
+                    <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+
+                        <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
+                            Caisse: ${order.staff ? order.staff : "Online"}
                         </p>
+                        <div style="align-self: flex-start; width: 130px">
+                        <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'review' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
+                            ${who === "done" ? "livré" : who == "review" ? "en attente" : who === "onway" ? "en cours" : "échoué"}
+                        </p>
+                        </div>
                     </div>
       
                     <br>
                     
                     <div class="orderinfoso">
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client.nom} ${order.client.prenom}</strong></p>
+                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
                         </div>
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone}</strong></p>
+                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
                         </div>
       
                         <span style="width: 10px;"></span>
@@ -69,7 +86,7 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${order.reduction}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
                     </div>
                 </div>
@@ -81,6 +98,7 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     }).join('')}
 
         `;
+    adminiSpace.innerHTML = ordersHTML;
 
 }
 
