@@ -126,6 +126,9 @@ async function sendCommen() {
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
+    tohia.classList.add("tohi");
+    load.classList.remove("tohi");
+    load.classList.remove("load28");
 
     const token = sessionStorage.getItem('tibule');
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
@@ -188,8 +191,8 @@ async function sendCommen() {
                     console.log(response);
                     if (response && response.ee) {
                         load.classList.remove("load28")
-                        load.classList.add("tohi")
-                        tohia.classList.remove("tohi");
+                        tohia.classList.add("tohi")
+                        load.classList.remove("tohi");
                         errer.classList.add("rejected");
                         document.getElementById('nointer').innerText = `Le ${telephoneValue} est déjà associé un compte, \n Connectez-vous pour continuer`;
 
@@ -223,8 +226,8 @@ async function sendCommen() {
 
                     } else if (!response) {
                         load.classList.remove("load28")
-                        load.classList.add("tohi")
-                        tohia.classList.remove("tohi");
+                        tohia.classList.add("tohi")
+                        load.classList.remove("tohi");
                         errer.classList.add("rejected");
                         document.getElementById('nointer').innerText = "Erreur incconnu, Veuillez re-essayer plus tard";
 
@@ -239,8 +242,8 @@ async function sendCommen() {
                     console.log("creating client", error)
                     setTimeout(() => {
                         load.classList.remove("load28")
-                        load.classList.add("tohi")
-                        tohia.classList.remove("tohi");
+                        tohia.classList.add("tohi")
+                        load.classList.remove("tohi");
                         errer.classList.add("rejected");
                         document.getElementById('nointer').innerText = "Vérifiez que vous avez access a l'internet";
                     }, 1500);
@@ -251,8 +254,8 @@ async function sendCommen() {
                 }
             } else {
                 load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
+                tohia.classList.add("tohi")
+                load.classList.remove("tohi");
                 errer.classList.add("rejected");
                 document.getElementById('nointer').innerText = "Mot de passe n'est pas conform a la confirmation";
                 setTimeout(() => {
@@ -261,7 +264,8 @@ async function sendCommen() {
             }
 
         } else {
-            alert("Renseignez les chemps obligatoire")
+            alert("Renseignez les chemps obligatoire");
+            document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
 
         }
     }
@@ -380,11 +384,13 @@ async function SendPanierToOrder(tocomp) {
                 window.location.href = "client";
             } else if (!response) {
                 handleError("Erreur inconnue, Veuillez réessayer plus tard");
+                document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
             }
         }
     } catch (e) {
         console.log(e);
         handleError("Vérifiez que vous avez accès à l'internet");
+        document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
     }
 
     function handleError(message) {
@@ -497,11 +503,13 @@ const KaliaPay = async (order) => {
 
         } else if (!response) {
             handleError("Erreur inconnue, Veuillez réessayer plus tard");
+            document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
         }
 
     } catch (error) {
         console.log(error);
         handleError("Vérifiez que vous avez accès à l'internet");
+        document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
 
         // Handle errors appropriately
     }
