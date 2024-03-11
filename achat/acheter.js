@@ -117,7 +117,6 @@ async function getallPanier() {
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ send command start    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 
-
 async function sendCommen() {
     document.getElementById('noorderduplu').setAttribute('onclick', null);
 
@@ -486,10 +485,12 @@ const KaliaPay = async (order) => {
             const requestOptions = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Access-Control-Allow-Origin': '*' // Update this to the actual allowed origin(s)
                 },
                 body: new URLSearchParams(postData).toString()
             };
+            
 
 
 
