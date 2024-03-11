@@ -10,7 +10,7 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
     ActiveEchoue.classList.remove('active');
 
     switch (who) {
-        case "waiting":
+        case "review":
             ActiveAttentes.classList.add('active');
             break;
 
@@ -69,7 +69,7 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
                     <div  style="align-items: flex-start; width: 170px">
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
                         <div style="align-self: flex-start; width: 130px">
-                            <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'waiting' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
+                            <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'review' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
                             ${who === "done" ? "livré" : who == "review" ? "en attente" : who === "onway" ? "en cours" : "échoué"}
                             </p>
                         </div>
@@ -142,7 +142,7 @@ const filterOrder = async () => {
                     <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
 
                         <div style="align-self: flex-start; width: 130px">
-                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'waiting' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
+                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
                         ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
                         </p>
                         </div>

@@ -24,11 +24,11 @@ function DashBoad(ActiveDasboard, ActiveAttentes, ActiveEncours, ActiveEffectue,
                 <div class="row">
                   <div class="col-sm-6 pr-sm-2 statistics-grid">
                     <div class="store3 card card_border border-primary-topa p-4"
-                      onclick="NafigatioTo('waiting')">
+                      onclick="NafigatioTo('review')">
                       <i class="lnr store">
                         <img src="../admin/assets/img/store3a.png" alt="store1" width="50" height="50">
                       </i>
-                      <h3 class="text-primary number" id="waiting">0</h3>
+                      <h3 class="text-primary number" id="review">0</h3>
                       <p class="stat-text">C En attente</p>
                     </div>
                   </div>
@@ -93,13 +93,13 @@ const NavBaractivity = () => {
 
     if (order && order.length > 0) {
       order.forEach((pan) => {
-        orderWaiting += pan.statut == "waiting" ? 1 : 0;
+        orderWaiting += pan.statut == "review" ? 1 : 0;
         orderOnway += pan.statut == "onway" ? 1 : 0;
         OrderDone += pan.statut == "done" ? 1 : 0;
         OrderFail += pan.statut == "fail" ? 1 : 0;
       });
 
-      document.getElementById('waiting').innerText = orderWaiting;
+      document.getElementById('review').innerText = orderWaiting;
       document.getElementById('onway').innerText = orderOnway;
       document.getElementById('done').innerText = OrderDone;
       document.getElementById('fail').innerText = OrderFail;
