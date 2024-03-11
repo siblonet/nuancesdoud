@@ -458,56 +458,49 @@ const KaliaPay = async (order) => {
     try {
         const customer = encodeURIComponent(document.getElementById('customerphone').value);
 
-        const postData = {
-            apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
-            service: '010324183052320001',
-            amount: parseInt(order.reduction),
-            custom_data: order.transaction_id,
-            extra: order.transaction_id,
-            provider: order.payment_method,
-            customer: customer
-        };
-
-        const apiUrl = 'https://kaliapay.com/flash-light/';
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams(postData).toString()
-        };
 
 
+        const response = await requesttoBackend('POST', 'orders/nuance', order);
+
+        if (response && response.orderid) {
+            await deletePannier();
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
+
+            const postData = {
+                apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
+                service: '010324183052320001',
+                amount: parseInt(order.reduction),
+                custom_data: response.orderid,
+                extra: order.transaction_id,
+                provider: order.payment_method,
+                customer: customer
+            };
+
+            const apiUrl = 'https://kaliapay.com/flash-light/';
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(postData).toString()
+            };
 
 
-        try {
-            const response = await requesttoBackend('POST', 'orders/nuance', order);
 
-            if (response && response.done) {
-                await deletePannier();
-                load.classList.remove("load28");
-                load.classList.add("tohi");
-                tohia.classList.remove("tohi");
-
-                fetch(apiUrl, requestOptions)
-                    .then(response => response.json())
-                    .then(data => {
-                        window.location.href = data.url
+            fetch(apiUrl, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = data.url
 
 
-                    })
-                    .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
 
-            } else if (!response) {
-                handleError("Erreur inconnue, Veuillez réessayer plus tard");
-            }
-
-        } catch (e) {
-            handleError("Vérifiez que vous avez accès à l'internet");
+        } else if (!response) {
+            handleError("Erreur inconnue, Veuillez réessayer plus tard");
         }
-
-
-
 
     } catch (error) {
         console.log(error);
