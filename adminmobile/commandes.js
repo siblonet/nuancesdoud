@@ -178,7 +178,7 @@ async function cancelOrderById() {
         const arti_id = document.getElementById('arti_id').value;
         const quan = document.getElementById('productQuantity').value;
 
-        const vin_or = Orderdata.find(re => re._id === ido);
+        const vin_or = await GetOrderByID(ido);
         if (vin_or.articles.length > 1) {
             await requesttoBackend('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
 
