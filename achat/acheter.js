@@ -104,7 +104,7 @@ async function getallPanier() {
 
     } else {
 
-        
+
         window.location.href = "/"
     }
 
@@ -463,7 +463,7 @@ const KaliaPay = async (order) => {
 
 
 
-        const response = await requesttoBackend('POST', 'orders/nuance', order);
+        const response = await requesttoBackend('POST', `orders/${customer}/nuance`, order);
 
         if (response && response.orderid) {
             await deletePannier();
@@ -471,37 +471,38 @@ const KaliaPay = async (order) => {
             load.classList.add("tohi");
             tohia.classList.remove("tohi");
 
-            const postData = {
-                apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
-                service: '010324183052320001',
-                amount: parseInt(order.reduction),
-                custom_data: response.orderid,
-                extra: order.transaction_id,
-                provider: order.payment_method,
-                customer: customer
-            };
+            /* const postData = {
+                 apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
+                 service: '010324183052320001',
+                 amount: parseInt(order.reduction),
+                 custom_data: response.orderid,
+                 extra: order.transaction_id,
+                 provider: order.payment_method,
+                 customer: customer
+             };
+ 
+             const apiUrl = 'https://kaliapay.com/flash-light/';
+             const requestOptions = {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/x-www-form-urlencoded',
+                     'Access-Control-Allow-Origin': '*' // Update this to the actual allowed origin(s)
+                 },
+                 body: new URLSearchParams(postData).toString()
+             };
+             
+ 
+ 
+ 
+             fetch(apiUrl, requestOptions)
+                 .then(response => response.json())
+                 .then(data => {
+ 
+ 
+                 })
+                 .catch(error => console.error('Error:', error));*/
+            window.location.href = response.orderid
 
-            const apiUrl = 'https://kaliapay.com/flash-light/';
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': '*' // Update this to the actual allowed origin(s)
-                },
-                body: new URLSearchParams(postData).toString()
-            };
-            
-
-
-
-            fetch(apiUrl, requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    window.location.href = data.url
-
-
-                })
-                .catch(error => console.error('Error:', error));
 
         } else if (!response) {
             handleError("Erreur inconnue, Veuillez réessayer plus tard");
