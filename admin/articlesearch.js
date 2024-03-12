@@ -4,8 +4,13 @@ async function ArticlesUISearch(search) {
     ActiveCla.classList.remove('active');
     ActiveAra.classList.add('active');
     ActiveAna.classList.remove('active');
-    const AFrPhSch = await GetArticle()
-    const ArticleFromPhoneSearch = AFrPhSch.filter((eds) => eds.addarticle.startsWith(search) || eds.barcode.startsWith(search));
+    const AFrPhSch = await GetArticle();
+    const ArticleFromPhoneSearch = AFrPhSch.filter((eds) =>
+        eds.addarticle.startsWith(search) ||
+        eds.barcode.startsWith(search) ||
+        eds.addarticle.toLowerCase().startsWith(search.toLowerCase()) ||
+        eds.addarticle.toUpperCase().startsWith(search.toUpperCase())
+    );
 
     const articlesHTML = `
                 <br>
