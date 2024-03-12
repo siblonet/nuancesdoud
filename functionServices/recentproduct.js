@@ -226,8 +226,7 @@ function recentProduct(recenPr) {
 
                     <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
 
-                        <a style="cursor: pointer !important;"
-                            href="detaila?ov=${product._id}">
+                        <a style="cursor: pointer !important;" class="imageonweb" href="detaila?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
                             <img src="${product.image[0].ima}" class="hover-image" alt="image"> 
                         </a>

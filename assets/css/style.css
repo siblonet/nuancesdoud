@@ -3444,7 +3444,11 @@ Products CSS
   -webkit-transform: scale(1.07);
   transform: scale(1.07);
 }
-
+.imageonweb{
+  height: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 .products-box:hover .products-image a .hover-image {
   opacity: 1;
   visibility: visible;
