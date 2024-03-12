@@ -134,7 +134,7 @@ function recentProduct(recenPr) {
                                     <ul>
                                         <li>
                                             <div class="wishlist-btn">
-                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="Pannier('${product._id}')">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
                                                     <i class="bx bx-shopping-bag bx bx-heart"></i>
                                                     <span class="tooltip-label">Ajouter</span>
                                                 </a>
@@ -236,7 +236,7 @@ function recentProduct(recenPr) {
                         <ul>
                             <li>
                                 <div class="wishlist-btn">
-                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="Pannier('${product._id}')">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
                                         <i class="bx bx-shopping-bag bx bx-heart"></i>
                                         <span class="tooltip-label">Ajouter</span>
                                     </a>
