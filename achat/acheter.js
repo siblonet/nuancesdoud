@@ -467,7 +467,7 @@ const KaliaPay = async (order) => {
 
 
 
-        const response = await requesttoBackend('POST', `orders/${customer}/nuance`, order);
+        const response = await requesttoBackend('POST', `orders/${customer ? customer : "0701743686"}/nuance`, order);
 
         if (response && response.orderid) {
             await deletePannier();
