@@ -1860,7 +1860,7 @@ Main Banner CSS
   display: flex;
   flex-wrap: 1;
   justify-content: center;
-  background-color: transparent !important;
+  background-image: url(../img/promo.png);
 }
 
 
@@ -5419,8 +5419,11 @@ Offer CSS
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(158, 108, 61, 0.671) !important;
-  /* Adjust the opacity (0.8 in this example) */
+  background-image: url(../img/promo.png) !important;
+  background-position: center !important;
+  background-repeat: repeat !important;
+  background-size: cover !important;
+  /* background: rgba(158, 108, 61, 0.671) !important;*/
   z-index: -1;
   border-radius: 5px;
   margin: 10px;
