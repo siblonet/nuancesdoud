@@ -73,7 +73,7 @@ async function getallPanier() {
             const adda = pri.prix * pri.quantcho;
             totalPricea += adda;
         };
-        const totalPriceb = totalPricea + 1000;
+        const totalPriceb = totalPricea // + prix de livraison;
         const pantotalhtml = `
                                 <tr>                       
                                     <td class="product-name">
@@ -88,7 +88,7 @@ async function getallPanier() {
                                         <a href="#">Expédition</a>
                                     </td>
                                     <td class="product-total">
-                                        <span class="subtotal-amount">1000 F</span>
+                                        <span class="subtotal-amount">? F</span>
                                     </td>
                                 </tr> 
                                 <tr>                       
