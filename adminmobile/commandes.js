@@ -5,13 +5,14 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     ActiveCl.classList.remove('active');
     ActiveAr.classList.remove('active');
     ActiveAn.classList.remove('active');
-    let ordersHTML = '';
     document.getElementById('searcha').style.display = "none";
+
+    let ordersHTML = '';
 
     const ordersnotAvail = await GetOrder();
     const orders = ordersnotAvail.filter((reveiw) => reveiw.statut !== "done");
+
     ordersHTML += `
-                <br>
                 <br>
                 <br>
                 <br>
@@ -26,10 +27,10 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                         ${order.articles.map(orar => {
             return `
                             <div data-toggle="modal" data-target="#optionCancile"
-                                onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id._id}')">
+                                onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
                                 <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
-                                <p style="color: #1d191a">${orar.prix} F</p>
+                                <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
                             </div>
                             <span style="width: 10px;"></span>
                             `;
@@ -37,39 +38,44 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                     </div>
       
                     <hr>
-      
-                    <div class="" style="align-self: flex-start; width: 150px;">
-                        <p
-                            class="statuscor status delivered">
-                            Livré
+
+                    <div style="align-items: flex-start; width: 170px">
+                        <div class="daterow">
+                            <div style="align-items: center; display: flex; justify-content: flex-end;">
+                                <p class="daterowp">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+                            </div>
+
+                            <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
+                                <div class="payment_iconsadmin">
+                                    <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
+                                </div>
+                                <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
+                                    ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
+                            Caisse: ${order.staff ? order.staff : "Online"}
                         </p>
+                        <div style="align-self: flex-start; width: 130px">
+                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
+                            ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
+                        </p>
+                        </div>
                     </div>
       
                     <br>
                     
                     <div class="orderinfoso">
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client.nom} ${order.client.prenom}</strong></p>
+                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
                         </div>
+      
       
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${order.reduction}</strong> F</p>
+                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
                         </div>
                     </div>
                 </div>
@@ -81,6 +87,7 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     }).join('')}
 
         `;
+    adminiSpace.innerHTML = ordersHTML;
 
 }
 
@@ -131,7 +138,6 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             }
 
 
-
         } else {
             document.getElementById('optionCancilename').innerText = "Article Supprimé";
 
@@ -150,7 +156,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             document.getElementById('telephoneValue').value = `07000000`;
 
             const modalImage = document.getElementById('ipage');
-            modalImage.src = "../admin/assets/img/imgo.png";
+            modalImage.src = "admin/assets/img/imgo.png";
 
             document.getElementById('livenonupdate').innerHTML = '';
 
@@ -186,9 +192,8 @@ async function cancelOrderById() {
             await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
 
         }
+
         window.location.reload()
-
-
     }
 
 };

@@ -365,7 +365,6 @@ async function loginCommage() {
 
 
 async function SendPanierToOrder(tocomp) {
-    console.log("recepted");
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
@@ -373,8 +372,6 @@ async function SendPanierToOrder(tocomp) {
 
     try {
         const tocompl = await GetPannierToSend(tocomp);
-        console.log(tocompl.payment_method);
-        console.log(tocompl);
         if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "null") {
             await KaliaPay(tocompl);
         } else if (tocompl) {
@@ -464,8 +461,6 @@ const KaliaPay = async (order) => {
     const errer = document.getElementById('rejected');
     try {
         const customer = encodeURIComponent(document.getElementById('customerphone').value);
-
-
 
         const response = await requesttoBackend('POST', `orders/${customer ? customer : "0701743686"}/nuance`, order);
 

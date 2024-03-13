@@ -221,6 +221,9 @@ Add Article CSS
 .daterow {
     position: absolute;
     right: 50px;
+}
+
+.daterowp{
     color: #aaaaaa;
     font-size: 12px;
     text-transform: capitalize;

@@ -21,3 +21,54 @@
 .payment_icons_selected img {
     border-radius: 10px;
 }
+
+
+/*#################################### in admin ########################*/
+
+.payment_iconsadmin {
+    max-width: 30px;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 7px !important;
+    border-bottom-left-radius: 7px !important;
+}
+
+
+.payment_iconsadmin img {
+    width: 100%;
+    height: 100%;
+}
+
+.status_paymen {
+    padding: 2.5px 15px 2.5px 0;
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.status_paymen.delivered {
+    background-color: #86e49d;
+    color: #006b21;
+}
+
+.status_paymen.cancelled {
+    background-color: #d893a3;
+    color: #b30021;
+}
+
+.status_paymen.pending {
+    background-color: #ebc474;
+    color: rgb(255, 0, 149);
+
+}
+
+.status_paymen.shipped {
+    background-color: #6fcaea;
+    color: #00b395;
+
+}
