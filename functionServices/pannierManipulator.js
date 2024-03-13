@@ -15,7 +15,7 @@ async function AddtoPaniera(id) {
     } else {
         const prod = await GetArticleByID(id);
         prod.quantcho = 1;
-        prod.prix = prod.addprix;
+        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
         await PostPannier(prod);
         await ReloadPanniertoHtml();
     }
@@ -43,7 +43,7 @@ async function AddtoPanierb() {
         const prod = await GetArticleByID(ido);
 
         prod.quantcho = quantity;
-        prod.prix = prod.addprix;
+        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
         await PostPannier(prod);
         await ReloadPanniertoHtml();
 

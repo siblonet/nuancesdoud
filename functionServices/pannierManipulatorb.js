@@ -16,7 +16,7 @@ async function AddtoPanierc() {
         const prod = await GetArticleByID(ido);
 
         prod.quantcho = quantity;
-        prod.prix = prod.addprix;
+        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
         await PostPannier(prod);
         window.location.href = "/"
 
@@ -42,7 +42,7 @@ async function AddtoPanierd() {
         const prod = await GetArticleByID(ido);
 
         prod.quantcho = quantity;
-        prod.prix = prod.addprix;
+        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
         await PostPannier(prod);
         window.location.href = "payment"
     }
