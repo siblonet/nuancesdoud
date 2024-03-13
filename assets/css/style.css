@@ -797,12 +797,14 @@ Navbar CSS
   justify-content: center;
 }
 
-.banner-bg1,
-.banner-bg2,
-.banner-bg3 {
-  background-position: center !important;
-  background-repeat: repeat !important;
-  background-size: contain !important;
+@media only screen and (min-width: 767px) {
+  .banner-bg1,
+  .banner-bg2,
+  .banner-bg3 {
+    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: contain !important;
+  }
 }
 
 .linearboottom {
@@ -3444,11 +3446,13 @@ Products CSS
   -webkit-transform: scale(1.07);
   transform: scale(1.07);
 }
-.imageonweb{
+
+.imageonweb {
   height: 100% !important;
   align-items: center !important;
   justify-content: center !important;
 }
+
 .products-box:hover .products-image a .hover-image {
   opacity: 1;
   visibility: visible;
