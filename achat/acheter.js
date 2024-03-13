@@ -221,9 +221,10 @@ async function sendCommen() {
                             payment_status: "waiting",
                             transaction_id: transaction_id,
                         };
+                        console.log("sending  SendPanierToOrder(articleOne);");
 
                         SendPanierToOrder(articleOne);
-
+                        console.log("sent  SendPanierToOrder(articleOne);");
                     } else if (!response) {
                         load.classList.remove("load28")
                         tohia.classList.add("tohi")
@@ -364,19 +365,22 @@ async function loginCommage() {
 
 
 async function SendPanierToOrder(tocomp) {
+    console.log("recepted");
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
 
+
     try {
         const tocompl = await GetPannierToSend(tocomp);
-
+        console.log(tocompl.payment_method);
+        console.log(tocompl);
         if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "null") {
             await KaliaPay(tocompl);
         } else if (tocompl) {
             const response = await requesttoBackend('POST', 'orders/nuance', tocompl);
 
-            if (response && response.done) {
+            if (response && response.created_order) {
                 await deletePannier();
                 load.classList.remove("load28");
                 load.classList.add("tohi");
