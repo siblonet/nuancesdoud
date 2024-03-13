@@ -106,10 +106,10 @@ async function SelectedProductRendering(viewid) {
             document.getElementById('achetematn').style.borderColor = colora;
 
             if (prod.addreduction > 0 && prod.addreduction < prod.addprix) {
-                document.getElementById('quickViewOldPrice').innerText = `${(prod.addreduction / 1000).toFixed(3)} F.CFA`;
+                document.getElementById('quickViewOldPrice').innerText = `${prod.addreduction > 0 && prod.addreduction < prod.addprix ? (prod.addprix / 1000).toFixed(3) : (prod.addreduction / 1000).toFixed(3)} F.CFA`;
             }
 
-            document.getElementById('quickViewNewPrice').innerText = `${(prod.addprix / 1000).toFixed(3)} F.CFA`;
+            document.getElementById('quickViewNewPrice').innerText = `${prod.addreduction > 0 && prod.addreduction < prod.addprix ? (prod.addreduction / 1000).toFixed(3) : (prod.addprix / 1000).toFixed(3)} F.CFA`;
             document.getElementById('quickViewNewPrice').style.color = colora;
 
 
