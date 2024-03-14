@@ -28,6 +28,10 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
             break;
     }
 
+    function isMobileDevice() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('mobile');
+    };
 
     const filterorder = document.getElementById('filter-order');
     setTimeout(() => {
@@ -67,8 +71,25 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
                     <hr>
 
                     <div  style="align-items: flex-start; width: 170px">
-                    <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
-                        <div style="align-self: flex-start; width: 130px">
+
+                    <div class="daterow">
+                    <div style="align-items: center; display: flex; justify-content: flex-end;">
+                        <p class="daterowp">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+                    </div>
+
+                    <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
+                        <div class="payment_iconsadmin">
+                            <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
+                        </div>
+                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
+                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
+                        </p>
+                    </div>
+                </div>
+
+
+
+                    <div style="align-self: flex-start; width: 130px">
                             <p class="statuscor status ${who === 'done' ? 'delivered' : who === 'review' ? 'pending' : who === 'onway' ? 'shipped' : 'cancelled'}">
                             ${who === "done" ? "livré" : who == "review" ? "en attente" : who === "onway" ? "en cours" : "échoué"}
                             </p>
@@ -76,8 +97,32 @@ async function Commandes(who, ActiveDasboard, ActiveAttentes, ActiveEncours, Act
                     </div>
       
                     <br>
+                    <br>
                     
                     <div class="orderinfoso">
+                    ${isMobileDevice() ? ""
+                :
+                `
+                    <div style="background-color: #ffffff;">
+                        <p style="max-height: 50px; overflow: hidden;">Client: <strong>Vous</strong></p>
+                    </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
+                        </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
+                        </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
+                        </div>
+                        `
+            }
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
                             <p style="max-height: 50px; overflow: hidden;">Total: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
@@ -107,7 +152,11 @@ const filterOrder = async () => {
 
     const ordersnotAvail = await GetOrder();
     const orders = filterArrayByDateRange(ordersnotAvail, startDate, endDate);
-
+    
+    function isMobileDevice() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('mobile');
+    };
 
     if (orders && orders.length > 0) {
 
@@ -139,7 +188,23 @@ const filterOrder = async () => {
                     <hr>
 
                     <div  style="align-items: flex-start; width: 170px">
-                    <p class="daterow">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+
+                    <div class="daterow">
+                    <div style="align-items: center; display: flex; justify-content: flex-end;">
+                        <p class="daterowp">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+                    </div>
+
+                    <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
+                        <div class="payment_iconsadmin">
+                            <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
+                        </div>
+                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
+                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
+                        </p>
+                    </div>
+                </div>
+
+
 
                         <div style="align-self: flex-start; width: 130px">
                         <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
@@ -149,8 +214,33 @@ const filterOrder = async () => {
                     </div>
       
                     <br>
+                    <br>
                     
                     <div class="orderinfoso">
+                    ${isMobileDevice() ? ""
+                :
+                `
+                    <div style="background-color: #ffffff;">
+                        <p style="max-height: 50px; overflow: hidden;">Client: <strong>Vous</strong></p>
+                    </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
+                        </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
+                        </div>
+      
+                        <span style="width: 10px;"></span>
+                        <div style="background-color: #ffffff;">
+                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
+                        </div>
+                        `
+            }
+
                         <span style="width: 10px;"></span>
                         <div style="background-color: #ffffff;">
                             <p style="max-height: 50px; overflow: hidden;">Total: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
