@@ -111,13 +111,34 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
 
 
 async function openOrderforediting(orderid, orderarticleid, articleid) {
+    const bottoms = `
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="selectStatusChange('onway')">En
+    cours</button>
+    <button type="button" class="btn btn-success" data-dismiss="modal"
+    onclick="selectStatusChange('done')">Livré</button>
+    <button type="button" class="btn btn-dangera" data-dismiss="modal"
+    onclick="selectStatusChange('fail')">Échoué</button>
+    <button type="button" class="btn btn-warning" data-dismiss="modal" style="color: #fff;"
+    onclick="selectStatusChange('review')">En attente</button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal"
+    onclick="cancelOrderById()">Annuller</button>
+    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
+    `
+
+    const bottomDoneAdmin = `
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#optionCancileEchange">Echanger</button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal"
+    onclick="cancelOrderById()">Retour</button>
+    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
+    `
     GetOrderByID(orderid).then(order => {
         const product = order.articles.find(po => po._id == orderarticleid);
 
         if (product && product.arti_id) {
+            document.getElementById('livenonupdate').innerHTML = bottoms;
 
             document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
-            document.getElementById('optionViewNewPrice').innerText = `${product.arti_id.addprix} F.CFA`;
+            document.getElementById('optionViewNewPrice').innerText = `${product.prix} F.CFA`;
             document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${product.arti_id.barcode}`;
             document.getElementById('productQuantity').value = product.quantcho;
             document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
@@ -150,7 +171,10 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             const modalImage = document.getElementById('ipage');
             modalImage.src = product.arti_id.image[0].ima;
 
-            if (order.statut == "done") {
+            if (order.statut == "done" && isAdmin) {
+                document.getElementById('livenonupdate').innerHTML = bottomDoneAdmin;
+
+            } else if (order.statut == "done") {
                 document.getElementById('livenonupdate').innerHTML = '';
 
             }
@@ -176,8 +200,13 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             const modalImage = document.getElementById('ipage');
             modalImage.src = "admin/assets/img/imgo.png";
 
-            document.getElementById('livenonupdate').innerHTML = '';
+            if (order.statut == "done" && isAdmin) {
+                document.getElementById('livenonupdate').innerHTML = bottomDoneAdmin;
 
+            } else if (order.statut == "done") {
+                document.getElementById('livenonupdate').innerHTML = '';
+
+            }
         };
 
     }).catch();
