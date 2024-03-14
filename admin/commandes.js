@@ -130,7 +130,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
     <button type="button" class="btn btn-danger" data-dismiss="modal"
     onclick="cancelOrderById()">Retour</button>
     <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
-    `
+    `;
     GetOrderByID(orderid).then(order => {
         const product = order.articles.find(po => po._id == orderarticleid);
 
@@ -138,7 +138,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             document.getElementById('livenonupdate').innerHTML = bottoms;
 
             document.getElementById('optionCancilename').innerText = product.arti_id.addarticle;
-            document.getElementById('optionViewNewPrice').innerText = `${product.prix} F.CFA`;
+            document.getElementById('optionViewNewPrice').innerText = `${(product.prix / 1000).toFixed(3)} F.CFA`;
             document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${product.arti_id.barcode}`;
             document.getElementById('productQuantity').value = product.quantcho;
             document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
