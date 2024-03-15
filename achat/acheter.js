@@ -379,9 +379,6 @@ async function SendPanierToOrder(tocomp) {
 
             if (response && response.created_order) {
                 await deletePannier();
-                load.classList.remove("load28");
-                load.classList.add("tohi");
-                tohia.classList.remove("tohi");
                 window.location.href = "client";
             } else if (!response) {
                 handleError("Erreur inconnue, Veuillez réessayer plus tard");
@@ -466,40 +463,6 @@ const KaliaPay = async (order) => {
 
         if (response && response.orderid) {
             await deletePannier();
-            load.classList.remove("load28");
-            load.classList.add("tohi");
-            tohia.classList.remove("tohi");
-
-            /* const postData = {
-                 apikey: "ae236ee337b78dfc46a24e3a50e1a270fce8db37",
-                 service: '010324183052320001',
-                 amount: parseInt(order.reduction),
-                 custom_data: response.orderid,
-                 extra: order.transaction_id,
-                 provider: order.payment_method,
-                 customer: customer
-             };
- 
-             const apiUrl = 'https://kaliapay.com/flash-light/';
-             const requestOptions = {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/x-www-form-urlencoded',
-                     'Access-Control-Allow-Origin': '*' // Update this to the actual allowed origin(s)
-                 },
-                 body: new URLSearchParams(postData).toString()
-             };
-             
- 
- 
- 
-             fetch(apiUrl, requestOptions)
-                 .then(response => response.json())
-                 .then(data => {
- 
- 
-                 })
-                 .catch(error => console.error('Error:', error));*/
             window.location.href = response.orderid
 
 
