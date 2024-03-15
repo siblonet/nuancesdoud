@@ -53,9 +53,6 @@ async function Inscription() {
 
                 const splo = response.token.split("°");
                 const admin = splo[6];
-                load.classList.remove("load28")
-                load.classList.add("tohi")
-                tohia.classList.remove("tohi");
 
                 window.location.href = admin == "GIFV" ? odMinurl : "client"
 
@@ -123,9 +120,6 @@ async function loGin() {
 
             const splo = response.token.split("°");
             const admin = splo[6];
-            load.classList.remove("load28")
-            load.classList.add("tohi")
-            tohia.classList.remove("tohi");
             window.location.href = admin == "GIFV" ? odMinurl : "client"
 
         } else if (!response) {
