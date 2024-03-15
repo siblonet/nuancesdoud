@@ -291,7 +291,7 @@ const optionCancileEchange = async () => {
                         <a id="artname${index}">${echa.addarticle}</a>
                       </td>
                       <td class="product-price">
-                        <span class="unit-amount" id="echangeprice${index}" contenteditable="true">${echa.addreduction > 0 ? (echa.addreduction * productQuantityb / 1000).toFixed(3) : (echa.addprix * productQuantityb / 1000).toFixed(3)}</span> F
+                        <span class="unit-amount" id="echangeprice${index}" contenteditable="true">${echa.addreduction > 0 ? ((echa.addreduction * productQuantityb) / 1000).toFixed(3) : ((echa.addprix * productQuantityb) / 1000).toFixed(3)}</span> F
                       </td>
                       <td class="product-quantity">
                         <div class="input-counter" id="quantity-manipulatea${index}">
