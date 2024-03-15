@@ -244,3 +244,125 @@ async function cancelOrderById() {
     }
 
 };
+
+
+
+
+async function increaseQuantityEchange(articleid, domid, priceid) {
+    const selecteArticle = await GetArticleByID(articleid);
+
+    document.getElementById(domid).value = parseInt(document.getElementById(domid).value) + 1;
+    const pricei = document.getElementById(priceid).innerText;
+    const price = parseInt(pricei.replace(/\./g, ''));
+
+    document.getElementById(priceid).innerText = ((price + parseInt(selecteArticle.addprix)) / 1000).toFixed(3);
+}
+
+
+async function decreaseQuantityEchange(articleid, domid, priceid) {
+    const selecteArticle = await GetArticleByID(articleid);
+    const quanchan = document.getElementById(domid);
+
+    quanchan.value = parseInt(quanchan.value) > 1 ? parseInt(quanchan.value) - 1 : parseInt(quanchan.value);
+
+    const pricei = document.getElementById(priceid).innerText;
+    const price = parseInt(pricei.replace(/\./g, ''));
+
+    document.getElementById(priceid).innerText = parseInt(quanchan.value) > 1 ? ((price - parseInt(selecteArticle.addprix)) / 1000).toFixed(3) : (price / 1000).toFixed(3);
+
+}
+
+const optionCancileEchange = async () => {
+    const productQuantityb = parseInt(document.getElementById('productQuantity').value);
+
+    const tbodydataa = document.getElementById('tbody-dataa');
+    const affitoEchange = await GetArticle();
+
+    affitoEchange.forEach((echa, index) => {
+        const echangeTBODY =
+            `
+            <tr>
+                      <td class="product-thumbnail">
+                        <a>
+                          <img src="${echa.image[0].ima}" alt="item">
+                        </a>
+                      </td>
+                      <td>
+                        <a id="artname${index}">${echa.addarticle}</a>
+                      </td>
+                      <td class="product-price">
+                        <span class="unit-amount" id="echangeprice${index}" contenteditable="true">${echa.addreduction > 0 ? (echa.addreduction * productQuantityb / 1000).toFixed(3) : (echa.addprix * productQuantityb / 1000).toFixed(3)}</span> F
+                      </td>
+                      <td class="product-quantity">
+                        <div class="input-counter" id="quantity-manipulatea${index}">
+                          <div class="input-counter">
+                            <span class="minus-btn" onclick="decreaseQuantityEchange('${echa._id ? echa._id : echa.id_has}', 'echanquanid${index}', 'echangeprice${index}')">-</span>
+                            <input type="number" min="0" id="echanquanid${index}" value="${productQuantityb}">
+                            <span class="plus-btn" onclick="increaseQuantityEchange('${echa._id ? echa._id : echa.id_has}', 'echanquanid${index}', 'echangeprice${index}')">+</span>
+                          </div>
+
+                        </div>
+                      </td>
+
+                      <td class="product-remove">
+                        <a class="remove" style="cursor: pointer !important; color: #00b395 !important;"
+                          onclick="changeOrderArticle('${echa._id ? echa._id : echa.id_has}', 'echangeprice${index}', 'echanquanid${index}')">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4">
+                              <path
+                                d="M33 7.263A18.916 18.916 0 0 0 24 5C13.507 5 5 13.507 5 24s8.507 19 19 19a18.93 18.93 0 0 0 8-1.761" />
+                              <path stroke-linejoin="round" d="M31 30h12m-28-8l7 7l19-18m-4 13v12" />
+                            </g>
+                          </svg>
+                        </a>
+                      </td>
+                    </tr>
+            `;
+
+        tbodydataa.innerHTML += echangeTBODY;
+
+    });
+}
+
+async function changeOrderArticle(articleid, echprice, echanqua) {
+
+    const echangepricea = document.getElementById(`${echprice}`).innerText;
+    const echangeprice = parseInt(echangepricea.replace(/\./g, ''));
+
+    const productQuantitya = document.getElementById(`${echanqua}`).value;
+    const orderid = document.getElementById('ido').value;
+
+    const orderarticleid = document.getElementById('proid').value;
+
+    const optionViewNewPricea = document.getElementById('optionViewNewPrice').innerText;
+
+    const optionViewNewPrice = parseInt(optionViewNewPricea.replace(/\./g, ''));
+
+
+    const productQuantity = parseInt(document.getElementById('productQuantity').value);
+
+
+        const selectedArticle = await GetArticleByID(articleid);
+        const wholeorder = await GetOrderByID(orderid);
+        const currenreductionprice = wholeorder.reduction - (optionViewNewPrice * productQuantity);
+
+        const toechange = {
+            quantcho: productQuantitya,
+            prix: echangeprice,
+            reduction: parseInt(currenreductionprice) + parseInt(echangeprice),
+        };
+
+        await requesttoBackend('PUT', `orders/echange/order/${orderid}/${orderarticleid}/${articleid}`, toechange);
+        
+
+        document.getElementById('optionCancilename').innerText = selectedArticle.addarticle;
+        document.getElementById('optionViewNewPrice').innerText = `${(echangeprice / 1000).toFixed(3)} F.CFA`;
+        document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${selectedArticle.barcode}`;
+        document.getElementById('productQuantity').value = productQuantitya;
+
+        const modalImage = document.getElementById('ipage');
+        modalImage.src = selectedArticle.image[0].ima;
+        window.location.reload()
+
+
+}
