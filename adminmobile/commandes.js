@@ -229,7 +229,6 @@ async function cancelOrderById() {
 
 
 
-
 async function increaseQuantityEchange(articleid, domid, priceid) {
     const selecteArticle = await GetArticleByID(articleid);
 
@@ -237,7 +236,7 @@ async function increaseQuantityEchange(articleid, domid, priceid) {
     const pricei = document.getElementById(priceid).innerText;
     const price = parseInt(pricei.replace(/\./g, ''));
 
-    document.getElementById(priceid).innerText = ((price + parseInt(selecteArticle.addprix)) / 1000).toFixed(3);
+    document.getElementById(priceid).innerText = ((price + parseInt(selecteArticle.addreduction > 0 ? selecteArticle.addreduction : selecteArticle.addprix)) / 1000).toFixed(3);
 }
 
 
@@ -250,7 +249,7 @@ async function decreaseQuantityEchange(articleid, domid, priceid) {
     const pricei = document.getElementById(priceid).innerText;
     const price = parseInt(pricei.replace(/\./g, ''));
 
-    document.getElementById(priceid).innerText = parseInt(quanchan.value) > 1 ? ((price - parseInt(selecteArticle.addprix)) / 1000).toFixed(3) : (price / 1000).toFixed(3);
+    document.getElementById(priceid).innerText = parseInt(quanchan.value) > 1 ? ((price - parseInt(selecteArticle.addreduction > 0 ? selecteArticle.addreduction : selecteArticle.addprix)) / 1000).toFixed(3) : ((selecteArticle.addreduction > 0 ? selecteArticle.addreduction : selecteArticle.addprix) / 1000).toFixed(3);
 
 }
 
