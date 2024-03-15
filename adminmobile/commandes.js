@@ -108,7 +108,7 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
     `
 
     const bottomDoneAdmin = `
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#optionCancileEchange">Echanger</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#optionCancileEchange"  onclick="optionCancileEchange()">Echanger</button>
     <button type="button" class="btn btn-danger" data-dismiss="modal"
     onclick="cancelOrderById()">Retour</button>
     <button type="button" class="btn btn-outline-success" data-dismiss="modal">Quitter</button>
