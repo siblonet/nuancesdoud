@@ -1,9 +1,7 @@
-let annoncePers = [];
 
-(async function ($) {
+async function ChangeSlade() {
     const items = await GetSettings();
     annoncePers = items;
-    console.loog(items);
 
     if (items && items.length > 0) {
 
@@ -13,7 +11,9 @@ let annoncePers = [];
         $("#logointerne").attr("src", "./assets/img/logo.png");
     };
 
-})(jQuery);
+};
+ChangeSlade()
+
 
 const changeIcons = (event, which, idvalue) => {
     const slideaid = document.getElementById(idvalue).value;

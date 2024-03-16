@@ -22,10 +22,10 @@ async function setPageSettings() {
         $("#background-video")[0].load();
         $("#background-video")[0].play();
 
-        $(".nobleim").attr("src", `${setPad.find(item => item.which === "logoextern") ? setPad.find(item => item.which === "logoextern").image : "assets/img/logonouce.jpg"}`);
+        $(".nobleim").attr("src", `${setPad.find(item => item.which === "logoextern") ? setPad.find(item => item.which === "logoextern").image : "assets/img/logo.png"}`);
         $(".bg-image1").css("background-image", `url(${setPad.find(item => item.which === "backglise") ? setPad.find(item => item.which === "backglise").image : "assets/img/par1.png"})`);
     } else {
-        $(".nobleim").attr("src", "assets/img/logonouce.jpg")
+        $(".nobleim").attr("src", "assets/img/logo.png")
         $("#chanVideo").attr("src", "assets/background.webm");
         $("#background-video")[0].load();
         $("#background-video")[0].play();
