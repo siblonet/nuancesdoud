@@ -458,3 +458,284 @@ async function showProductQuickView(a, productId) {
     }
 
 };
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+async function FilterArticle(search) {
+    const productContainer = document.getElementById('product-container');
+    const recenPr = await GetArticle("avail");
+    function isMobileDevice() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('mobile');
+    }
+
+    const ProdAvailable = search === "all" ? recenPr : recenPr.filter((searchMatch) =>
+        searchMatch.addarticle.startsWith(search) ||
+        searchMatch.barcode.startsWith(search) ||
+        searchMatch.addarticle.toLowerCase().startsWith(search.toLowerCase()) ||
+        searchMatch.addarticle.toUpperCase().startsWith(search.toUpperCase()) ||
+        searchMatch.addgenre.startsWith(search)
+    )
+
+    if (ProdAvailable.length > 0) {
+        productContainer.innerHTML = ''
+        ProdAvailable.forEach(product => {
+            const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
+            const productHTML = `
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+
+                        ${isMobileDevice() ?
+                    `
+                            <div class="products-box">
+
+                            <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
+
+                            <div class="products-imagea">
+                                <a class="imageahandlea" style="cursor: pointer !important;" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#productsQuickView" 
+                                    onclick="showProductQuickView('a', '${product._id}')">
+                                    <img class="one" src="${product.image[0].ima}" alt="image">
+                                </a>
+                                <a class="imageahandleb" style="cursor: pointer !important;" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#productsQuickView" 
+                                    onclick="showProductQuickView('b', '${product._id}')">
+                                    <img class="two" src="${product.image[0].ima}" alt="image"> 
+                                </a>
+                            </div>
+                               
+                        
+
+                                <div class="products-button">
+                                    <ul>
+                                        <li>
+                                            <div class="wishlist-btn">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                                    <i class="bx bx-shopping-bag bx bx-heart"></i>
+                                                    <span class="tooltip-label">Ajouter</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="compare-btn">
+                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
+                                                    <i class="bx bx-refresh"></i>
+                                                    <span class="tooltip-label">Plus infos</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="quick-view-btn" onclick="showProductQuickView('${product._id}')">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                                    <i class="bx bx-search-alt"></i>
+                                                    <span class="tooltip-label">Vue rapide</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                ${product.addnouveaute == "NOUVEAU" && product.addreduction < product.addprix ?
+                        `
+                        <div class="promo">Nouveautés</div>
+                        `
+                        :
+                        ""
+                    } 
+                                ${product.addoccasion == "PROMO" ?
+                        `
+                                        <div class="promo">Promo</div>
+                                    `
+                        :
+                        ""
+                    }
+
+                                ${product.addoccasion == "SOLD" ?
+                        `
+                                    <div class="sold">Solde</div>
+                                `
+                        :
+                        ""
+                    }
+                            </div>
+
+
+                            <div class="products-content">
+                                <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
+                                <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
+                                <div class="star-rating">
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                </div>
+                                <div class="price">
+                                ${product.addreduction > 0 && product.addreduction < product.addprix ?
+                        `
+                                            <span class="old-price">${(product.addprix / 1000).toFixed(3)} F.CFA</span>
+                                    `
+                        :
+                        ""
+                    }
+                                    <span class="new-price">${product.addreduction > 0 && product.addreduction < product.addprix ? (product.addreduction / 1000).toFixed(3) : (product.addprix / 1000).toFixed(3)} F.CFA</span>
+                                </div>
+                                <a style="cursor: pointer !important;" class="add-to-cart" onclick="AddtoPaniera('${product._id}')">Ajouter au panier</a>
+                            </div>
+                            ${product.addreduction > 0 && product.addreduction < product.addprix ?
+                        `
+                            <span class="products-discounta">
+                                <span>
+                                    -${percentDf.toFixed()}%
+                                </span>
+                            </span>
+                              `
+                        :
+                        ""
+                    }
+                       
+                        </div>
+                        `
+                    :
+                    `
+
+                    <div class="products-box">
+
+                    <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
+
+                        <a style="cursor: pointer !important;" class="imageonweb" href="detaila?ov=${product._id}">
+                            <img src="${product.image[0].ima}" class="main-image" alt="image">
+                            <img src="${product.image[0].ima}" class="hover-image" alt="image"> 
+                        </a>
+
+                        <div class="products-button">
+                        <ul>
+                            <li>
+                                <div class="wishlist-btn">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                        <i class="bx bx-shopping-bag bx bx-heart"></i>
+                                        <span class="tooltip-label">Ajouter</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="compare-btn">
+                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
+                                        <i class="bx bx-refresh"></i>
+                                        <span class="tooltip-label">Plus infos</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="quick-view-btn" onclick="showProductQuickView('a', '${product._id}')">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                        <i class="bx bx-search-alt"></i>
+                                        <span class="tooltip-label">Vue rapide</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    ${product.addoccasion == "Promo" ?
+                        `
+                            <div class="new-tage">Promo</div>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${product.addoccasion == "Sold" ?
+                        `
+                        <div class="sale-tag">Solde</div>
+                    `
+                        :
+                        ""
+                    }
+                </div>
+
+
+                <div class="products-content">
+                    <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
+                    <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
+                    <div class="star-rating">
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                    </div>
+                    <div class="price">
+                    ${product.addreduction > 0 && product.addreduction < product.addprix ?
+                        `
+                                <span class="old-price">${(product.addprix / 1000).toFixed(3)} F.CFA</span>
+                        `
+                        :
+                        ""
+                    }
+                        <span class="new-price">${product.addreduction > 0 && product.addreduction < product.addprix ? (product.addreduction / 1000).toFixed(3) : (product.addprix / 1000).toFixed(3)} F.CFA</span>
+                    </div>
+                    <a style="cursor: pointer !important;" class="add-to-cart" onclick="AddtoPaniera('${product._id}')">Ajouter au panier</a>
+                </div>
+                ${product.addreduction > 0 && product.addreduction < product.addprix ?
+                        `
+                <span class="products-discount">
+                    <span>
+                        -${percentDf.toFixed()}%
+                    </span>
+                </span>
+                  `
+                        :
+                        ""
+                    }
+           
+            </div>
+                        `
+                }
+
+                    </div>
+        `;
+
+            productContainer.innerHTML += productHTML;
+        });
+
+
+        const loaderRemove = document.getElementById('loaderRemove');
+        loaderRemove.innerHTML = "";
+        loaderRemove.style.display = "none";
+    } else {
+
+        const productHTML = `
+                <div class="container">
+                    <div class="section-title">
+                        <h2>${search} est indisponible pour l'instant</h2>
+                    </div>
+                    <div style="align-self: center; align-items: center; justify-content: center; text-align: center">
+                        <img src="assets/img/error-404.png" alt="Le magasin est vide">
+                    </div>
+                 
+                </div>
+            `;
+
+        productContainer.innerHTML = productHTML;
+        const loaderRemove = document.getElementById('loaderRemove');
+        loaderRemove.innerHTML = "";
+        loaderRemove.style.display = "none";
+    };
+    getUsenam();
+
+};
+
+const inputElements = document.getElementById("searchArticle");
+
+// Add an event listener for the input event
+inputElements.addEventListener("input", function () {
+
+
+    FilterArticle(inputElements.value)
+});

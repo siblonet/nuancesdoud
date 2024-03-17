@@ -798,6 +798,7 @@ Navbar CSS
 }
 
 @media only screen and (min-width: 767px) {
+
   .banner-bg1,
   .banner-bg2,
   .banner-bg3 {
@@ -11511,3 +11512,37 @@ Live Chat CSS
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.filtero {
+  display: flex;
+  align-items: center !important;
+  justify-content: flex-end;
+  padding-right: 5%;
+  color: #1d191a;
+  z-index: 9999;
+  position: relative;
+}
+
+#searchArticle {
+  border-radius: 10px;
+  background-color: #eeeeee;
+  border-width: 0;
+  font-size: 15px;
+  padding: 5px 10px 5px 10px;
+}
+
+.filtero .lista {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start;
+}
+
+@media only screen and (min-width: 200px) and (max-width: 700px) {
+  .filtero {
+    display: block;
+    align-items: center !important;
+    justify-content: center;
+    padding: 5%;
+  }
+}
