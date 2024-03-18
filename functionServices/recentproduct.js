@@ -479,7 +479,10 @@ async function FilterArticle(search) {
         searchMatch.barcode.startsWith(search) ||
         searchMatch.addarticle.toLowerCase().startsWith(search.toLowerCase()) ||
         searchMatch.addarticle.toUpperCase().startsWith(search.toUpperCase()) ||
-        searchMatch.addgenre.startsWith(search)
+        searchMatch.addgenre.startsWith(search)||
+        searchMatch.addmarque.toLowerCase().startsWith(search.toLowerCase()) ||
+        searchMatch.addmarque.toUpperCase().startsWith(search.toUpperCase()) ||
+        searchMatch.addmarque.startsWith(search)
     )
 
     if (ProdAvailable.length > 0) {
