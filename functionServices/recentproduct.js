@@ -142,7 +142,7 @@ function recentProduct(recenPr) {
                                         </li>
                                         <li>
                                             <div class="compare-btn">
-                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}">
+                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                                     <i class="bx bx-refresh"></i>
                                                     <span class="tooltip-label">Plus infos</span>
                                                 </a>
@@ -243,7 +243,7 @@ function recentProduct(recenPr) {
                             </li>
                             <li>
                                 <div class="compare-btn">
-                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}">
+                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                         <i class="bx bx-refresh"></i>
                                         <span class="tooltip-label">Plus infos</span>
                                     </a>
@@ -527,7 +527,7 @@ async function FilterArticle(search) {
                                         </li>
                                         <li>
                                             <div class="compare-btn">
-                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}">
+                                                <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                                     <i class="bx bx-refresh"></i>
                                                     <span class="tooltip-label">Plus infos</span>
                                                 </a>
@@ -628,7 +628,7 @@ async function FilterArticle(search) {
                             </li>
                             <li>
                                 <div class="compare-btn">
-                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}">
+                                    <a style="color: ${product.addcoul.substring(8, 15)} !important" href="detaila?ov=${product._id}}">
                                         <i class="bx bx-refresh"></i>
                                         <span class="tooltip-label">Plus infos</span>
                                     </a>
