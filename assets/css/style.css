@@ -11530,6 +11530,7 @@ Live Chat CSS
   border-width: 0;
   font-size: 15px;
   padding: 5px 10px 5px 10px;
+  width: 270px !important;
 }
 
 .filtero .lista {
