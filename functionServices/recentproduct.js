@@ -134,7 +134,7 @@ function recentProduct(recenPr) {
                                     <ul>
                                         <li>
                                             <div class="wishlist-btn">
-                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(0, 7)} !important" onclick="AddtoPaniera('${product._id}')">
                                                     <i class="bx bx-shopping-bag bx bx-heart"></i>
                                                     <span class="tooltip-label">Ajouter</span>
                                                 </a>
@@ -150,7 +150,7 @@ function recentProduct(recenPr) {
                                         </li>
                                         <li>
                                             <div class="quick-view-btn" onclick="showProductQuickView('${product._id}')">
-                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(16, 23)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
                                                     <i class="bx bx-search-alt"></i>
                                                     <span class="tooltip-label">Vue rapide</span>
                                                 </a>
@@ -184,8 +184,8 @@ function recentProduct(recenPr) {
 
 
                             <div class="products-content">
-                                <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
-                                <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
+                                <span class="category" style="color: ${product.addcoul.substring(8, 15)};">Parfum</span>
+                                <h3><a href="detaila?ov=${product._id}" style="color: ${product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                                 <div class="star-rating">
                                     <i class="bx bxs-star"></i>
                                     <i class="bx bxs-star"></i>
@@ -208,7 +208,7 @@ function recentProduct(recenPr) {
                             ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
                             <span class="products-discounta">
-                                <span>
+                                <span style="background-color: ${product.addcoul.substring(0, 7)} !important;">
                                     -${percentDf.toFixed()}%
                                 </span>
                             </span>
@@ -479,7 +479,7 @@ async function FilterArticle(search) {
         searchMatch.barcode.startsWith(search) ||
         searchMatch.addarticle.toLowerCase().startsWith(search.toLowerCase()) ||
         searchMatch.addarticle.toUpperCase().startsWith(search.toUpperCase()) ||
-        searchMatch.addgenre.startsWith(search)||
+        searchMatch.addgenre.startsWith(search) ||
         searchMatch.addmarque.toLowerCase().startsWith(search.toLowerCase()) ||
         searchMatch.addmarque.toUpperCase().startsWith(search.toUpperCase()) ||
         searchMatch.addmarque.startsWith(search)

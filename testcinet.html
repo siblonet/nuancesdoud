@@ -1,117 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Color Extraction</title>
-<style>
-  canvas {
-    display: none; /* Hide the canvas */
-  }
-  .color-box {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    display: inline-block;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Color Extraction</title>
+    <style>
+        canvas {
+            display: none;
+            /* Hide the canvas */
+        }
+
+        .color-box {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+        }
+    </style>
 </head>
+
 <body>
 
-<input type="file" id="imageInput" accept="image/*">
-<div id="colors"></div>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="colors"></div>
 
-<canvas id="imageCanvas"></canvas>
+    <canvas id="imageCanvas"></canvas>
 
-<script>
-const imageInput = document.getElementById('imageInput');
-const colorsDiv = document.getElementById('colors');
-const canvas = document.getElementById('imageCanvas');
-const ctx = canvas.getContext('2d');
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const colorsDiv = document.getElementById('colors');
+        const canvas = document.getElementById('imageCanvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
 
-imageInput.addEventListener('change', handleImage);
+        imageInput.addEventListener('change', handleImage);
 
-function handleImage(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
+        function handleImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
 
-  reader.onload = function(e) {
-    const img = new Image();
-    img.onload = function() {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0, img.width, img.height);
-      const imageData = ctx.getImageData(0, 0, img.width, img.height);
-      const colors = getColorsFromImageData(imageData);
-      displayColors(colors);
-    }
-    img.src = e.target.result;
-  }
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0, img.width, img.height);
+                    const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                    const colors = getColorsFromImageData(imageData);
+                    displayColors(colors);
+                }
+                img.src = e.target.result;
+            }
 
-  reader.readAsDataURL(file);
-}
+            reader.readAsDataURL(file);
+        }
 
-function getColorsFromImageData(imageData) {
-  const colorCounts = {};
-  const colors = [];
+        function getColorsFromImageData(imageData) {
+            const colors = [];
+            let or = [];
+            let og = [];
+            let ob = [];
 
-  for (let i = 0; i < imageData.data.length; i += 4) {
-    const r = imageData.data[i];
-    const g = imageData.data[i + 1];
-    const b = imageData.data[i + 2];
-    const a = imageData.data[i + 3];
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                const a = imageData.data[i + 3];
 
-    // Skip transparent pixels
-    if (a === 0) continue;
+                // Skip transparent pixels
+                if (a === 0) continue;
 
-    // Convert RGB to HSL
-    const hsl = rgbToHsl(r, g, b);
+                // Convert RGB to HSL
+                const hsl = rgbToHsl(r, g, b);
 
-    // Check saturation and luminance thresholds
-    if (hsl[1] > 0.2 && hsl[2] < 0.9) { // Adjust thresholds as needed
-      const color = `rgb(${r}, ${g}, ${b})`;
-      if (!colorCounts[color]) {
-        colorCounts[color] = 0;
-        colors.push(color);
-      }
-      colorCounts[color]++;
-    }
-  }
+                // Check saturation and luminance thresholds
+                if (hsl[1] > 0.7 && hsl[2] < 0.7) { // Adjust thresholds as needed
+                    const color = `rgb(${r}, ${g}, ${b})`;
+                    let isDifferent = true;
+                    for (let co = 0; co < or.length; co++) {
+                        if (Math.abs(r - or[co]) <= 40 && Math.abs(g - og[co]) <= 40 && Math.abs(b - ob[co]) <= 40) {
+                            isDifferent = false;
+                            break; // No need to check further if a similar color is found
+                        }
+                    }
+                    if (isDifferent) {
+                        or.push(r);
+                        og.push(g);
+                        ob.push(b);
+                        colors.push(color);
+                    }
 
-  return colors;
-}
 
-function rgbToHsl(r, g, b) {
-  r /= 255, g /= 255, b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
+                }
+            }
 
-  if (max === min) {
-    h = s = 0; // achromatic
-  } else {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-    h /= 6;
-  }
+            return colors;
+        }
 
-  return [h, s, l];
-}
+        function rgbToHsl(r, g, b) {
+            r /= 255, g /= 255, b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
 
-function displayColors(colors) {
-  colorsDiv.innerHTML = '';
-  colors.forEach(color => {
-    const colorBox = document.createElement('div');
-    colorBox.classList.add('color-box');
-    colorBox.style.backgroundColor = color;
-    colorsDiv.appendChild(colorBox);
-  });
-}
-</script>
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            return [h, s, l];
+        }
+
+        function displayColors(colors) {
+            colorsDiv.innerHTML = '';
+            colors.forEach(color => {
+                const colorBox = document.createElement('div');
+                colorBox.classList.add('color-box');
+                colorBox.style.backgroundColor = color;
+                colorsDiv.appendChild(colorBox);
+            });
+        }
+    </script>
 
 </body>
+
 </html>

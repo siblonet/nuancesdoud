@@ -142,7 +142,7 @@
         padding: 8px 10px 8px 12px;
         border-bottom-right-radius: 8px;
         width: 90px;
-        background-color: red;
+        background-color: rgba(26, 4, 4, 0.678);
         color: #ffffff;
         text-transform: uppercase;
         font-weight: 600;
@@ -168,7 +168,7 @@
         right: 0px;
         top: -6px;
         border-radius: 0px 80px 0px 0px;
-        background: red;
+        background: rgb(48, 1, 1);
     }
 
     .nouveau {

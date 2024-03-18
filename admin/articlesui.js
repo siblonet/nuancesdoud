@@ -199,6 +199,22 @@ async function AddArticleImage() {
         const img = document.getElementById('imagePreviewHere');
         img.src = url.ima;
 
+
+        const canvas = document.getElementById('imageCanvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+
+
+        const imgG = new Image();
+        imgG.onload = function () {
+            canvas.width = imgG.width;
+            canvas.height = imgG.height;
+            ctx.drawImage(imgG, 0, 0, imgG.width, imgG.height);
+            const imageData = ctx.getImageData(0, 0, imgG.width, imgG.height);
+            const colors = getColorsFromImageData(imageData);
+            displayColors(colors);
+        };
+
+        imgG.src = event.target.result;
     };
     reader.readAsDataURL(file);
     document.getElementById('limitimag1').style.display = "none";
@@ -264,7 +280,17 @@ async function openArticleforediting(id_has) {
         document.getElementById('editeimageid1').value = Onlineimas[0]._id;
 
         document.getElementById('limitimage1').style.display = "none";
+        loadImageFromURL(product.image[0].ima, function (img) {
+            const canvas = document.getElementById('imageCanvas');
 
+            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            const colors = getColorsFromImageData(imageData);
+            displayColorsA(colors);
+        });
     });
 
 };
@@ -378,8 +404,10 @@ async function EditeArticle() {
             const createItem = async () => {
                 try {
                     await requesttoBackend('PUT', `boutique/${_id}`, product);
+                    ChoosenColor = [];
+                    document.getElementById('colorsa').innerHTML = "";
+                    document.getElementById('choosenColora').innerHTML = "";
                     initDataLoader();
-
                 } catch (error) {
                     console.error('Error updating product:', error.message);
                 }

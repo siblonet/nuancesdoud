@@ -45,7 +45,18 @@
             padding: 0 !important;
         }
 
+        canvas {
+            display: none;
+            /* Hide the canvas */
+        }
 
+        .color-box {
+            width: 30px;
+            height: 30px;
+            margin: 2px;
+            display: inline-block;
+            cursor: pointer;
+        }
 
         .backiflex {
             display: flex !important;
@@ -372,6 +383,10 @@
     <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
     <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pin Code inputing @@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 
+
+    <canvas id="imageCanvas"></canvas>
+
+
     <div class="modal fade productsQuickView" id="addArticle" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -476,6 +491,12 @@
                                 </div>
 
                                 <div class="" style="height: 15px; background-color: #ffffff;"></div>
+                                <div id="colors"></div>
+
+                                <br>
+
+                                <div id="choosenColor">
+                                </div>
 
                                 <br>
 
@@ -609,7 +630,16 @@
                                     </div>
                                     <div class="" style="height: 15px; background-color: #ffffff;"></div>
 
+
+                                    <div id="colorsa"></div>
+
                                     <br>
+
+                                    <div id="choosenColora">
+                                    </div>
+
+
+
 
                                     <div>
 
@@ -1164,6 +1194,7 @@
     <script src="../initializers/database_handl.js"></script>
     <script src="../functionServices/product.services.js"></script>
     <script src="../functionServices/filterfunctiono.js"></script>
+    <script src="../functionServices/colorsGenerator.js"></script>
     <script src="../functionServices/requesthttps.js"></script>
     <script src="../initializers/convertisseur.js"></script>
 
