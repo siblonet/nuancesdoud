@@ -207,11 +207,55 @@ function recentProduct(recenPr) {
                             </div>
                             ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
-                            <span class="products-discounta">
-                                <span style="background-color: ${product.addcoul.substring(0, 7)} !important;">
+
+                        <span class="products-discountbo aoo${product._id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+                                <!-- Styling for the main SVG container -->
+                                <style>
+                                    .products-box .products-discountbo.aoo${product._id} {
+                                        position: absolute;
+                                        bottom: 96.5px;
+                                        right: -6.1px;
+                                        display: inline-block;
+                                    }
+                                    
+                                    .products-box .products-discountbo.aoo${product._id} path {
+                                        fill: ${product.addcoul.substring(0, 7)};
+                                    }
+                                    
+                                    /* Styling for the ::before pseudo-element */
+                                    .products-box .products-discountbo.aoo${product._id}:before {
+                                        content: "";
+                                        position: absolute;
+                                        height: 6px;
+                                        width: 6px;
+                                        right: 0px;
+                                        top: -6px;
+                                        border-radius: 0px 80px 0px 0px;
+                                        background: ${product.addcoul.substring(0, 7)}57;
+                                    }
+                                    
+                                    /* Styling for the ::after pseudo-element */
+                                    .products-box .products-discountbo.aoo${product._id}:after {
+                                        content: "";
+                                        position: absolute;
+                                        height: 5px;
+                                        width: 5.3px;
+                                        right: 0.7px;
+                                        top: -5px;
+                                        border-radius: 0px 80px 0px 0px;
+                                        background: ${product.addcoul.substring(0, 7)};
+                                    }
+                                </style>
+                                
+                                <!-- SVG path for the discount box -->
+                                <path d="M0,0 90,0 Q90,30 82,30 L0,30z" />
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-size: 17px; font-weight: 600">
                                     -${percentDf.toFixed()}%
-                                </span>
-                            </span>
+                                </text>
+                            </svg>
+                        </span>
+                    
                               `
                         :
                         ""
@@ -439,8 +483,8 @@ async function showProductQuickView(a, productId) {
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)}`);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)}`);
         $('.rating .four').css('color', `${product.addcoul.substring(24, 31)}`);
-        
-        document.getElementById('rating').innerText = `5 étoile`;
+
+        document.getElementById('rating').innerText = `5 étoiles`;
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
 
