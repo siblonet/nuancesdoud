@@ -489,7 +489,7 @@ async function showProductQuickView(a, productId) {
         const modalImage = document.getElementById('ipage');
         modalImage.src = imagefolder[0].ima;
 
-        const newURL = `detaila ? ov = ${product._id} `;  // Replace with the desired new URL
+        const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
 
         const linkElement = document.getElementById('change-url');
 
@@ -534,7 +534,7 @@ async function showProductQuickView(a, productId) {
         const modalImage = document.getElementById('ipage');
         modalImage.src = product.image[0].ima;
 
-        const newURL = `detaila ? ov = ${product._id} `;  // Replace with the desired new URL
+        const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
 
         const linkElement = document.getElementById('change-url');
 
