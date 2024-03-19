@@ -22,7 +22,7 @@ async function initDataLoader() {
             await PostOrder(online.order);
             await PostArticle(online.article);
             await PostSettings(online.pagesetting);
-            recentProduct(online.article);
+            recentProduct(online.article, online.pagesetting);
 
         } else {
             const productContainer = document.getElementById('product-container');

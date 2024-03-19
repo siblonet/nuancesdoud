@@ -528,3 +528,40 @@ Add Article CSS
 .heioftheviw{
     max-height: 600px !important;
 }
+
+
+#backglise{
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+}
+.pubstyle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+.pubstyle .suppimer {
+    width: 130px !important;
+    overflow: hidden !important;
+    border-radius: 25px !important;
+    box-shadow: 0 .4rem .8rem #0005;
+    background-color: #b30021;
+    cursor: pointer !important;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+.pubstyle input {
+    width: 130px !important;
+    overflow: hidden !important;
+    border-radius: 50px !important;
+    box-shadow: 0 .4rem .8rem #0005;
+    cursor: pointer !important;
+}

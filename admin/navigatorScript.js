@@ -150,10 +150,17 @@ const NafigatioTo = async (where, who = null) => {
                         <div class="col-sm-6 pr-sm-2 statistics-grid">
                             <div id="backglise" class="card card_border border-primary-topa p-4 backi">
                                 <input type="hidden" id="backgliseid" value="huhed9683e">
-                                <input onchange="changeIcons(event, 'backglise', 'backgliseid')" type="file"
-                                    class="imageFile" id="backgliseimg" accept="image/*" />
+                                    <div class="pubstyle">
+                                    <p>Annonces</p>
+                                    
+                                    <a class="suppimer" onclick="deleteAnnonce('backgliseid')">
+                                       Supprimer
+                                    </a>
+
+                                    <input onchange="changeIcons(event, 'backglise', 'backgliseid')" type="file" class="" id="backgliseimg" accept="image/*" />
+
+                                </div>
                             </div>
-                            <p>Pub le bas (PC)</p>
 
                         </div>
                         <div class="col-sm-6 pl-sm-2 statistics-grid">

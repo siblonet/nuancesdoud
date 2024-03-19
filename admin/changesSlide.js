@@ -34,7 +34,11 @@ const changeIcons = (event, which, idvalue) => {
 
 
 
-
+const deleteAnnonce = async (idvalue) => {
+    const slideaid = document.getElementById(idvalue).value;
+    await requesttoBackend('POST', `boutique/deleteannonce/annonce/${slideaid}`, {});
+    initDataLoader();
+}
 
 const changeSlade = (event, which, idvalue) => {
     const slideaid = document.getElementById(idvalue).value;

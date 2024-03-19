@@ -83,7 +83,7 @@ async function navigateAdminCLient() {
     getUsenam();
 }
 
-function recentProduct(recenPr) {
+function recentProduct(recenPr, ADA) {
     const ProdAvailable = [];
     const productContainer = document.getElementById('product-container');
     productContainer.innerHTML = '';
@@ -100,9 +100,10 @@ function recentProduct(recenPr) {
             }
         });
     }
-
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const ADS = ADA.find(item => item.which === "backglise").image;
     if (ProdAvailable.length > 0) {
-        ProdAvailable.forEach(product => {
+        ProdAvailable.forEach((product, index) => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
                     <div class="col-lg-4 col-md-6 col-sm-6">
@@ -373,6 +374,30 @@ function recentProduct(recenPr) {
                 }
 
                     </div>
+                    ${ADS ? viewportWidth > 991 ? index == 2 ?
+                    `
+                            <div class="ads-view-inthemidle">
+                                <img class="ads-view-image" src='${ADS}' alt="image d'evenement">
+                            </div>
+                        
+                        `
+                    :
+                    ""
+                    :
+                    ` ${index == 1 ?
+                        `
+                                
+                            <div class="ads-view-inthemidle">
+                                <img class="ads-view-image" src='${ADS}' alt="image d'evenement">
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+                        `
+                    :
+                    ""
+                }
         `;
 
             productContainer.innerHTML += productHTML;
@@ -386,7 +411,7 @@ function recentProduct(recenPr) {
     } else {
         const tokens = sessionStorage.getItem('tibule');
         const productHTML = `
-                <div class="container">
+            < div class= "container" >
                     <div class="section-title">
                         <h2>Le magasin est vide pour l'instant</h2>
                     </div>
@@ -406,8 +431,8 @@ function recentProduct(recenPr) {
 
                 ""
             }
-                </div>
-            `;
+                </div >
+        `;
 
         productContainer.innerHTML += productHTML;
         const loaderRemove = document.getElementById('loaderRemove');
@@ -428,19 +453,19 @@ async function showProductQuickView(a, productId) {
 
         document.getElementById('coloholder').innerText = product.addcoul;
 
-        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
-        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)}`;
+        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)} `;
+        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)} `;
 
         document.getElementById('quickViewProductName').innerText = product.addarticle;
-        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)}`;
+        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)} `;
 
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
 
         document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)}`);
-        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)}`);
-        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)}`);
-        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)}`);
+        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
+        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
+        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
+        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)} `);
 
         document.getElementById('rating').innerText = `5 étoiles`;
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
@@ -452,7 +477,7 @@ async function showProductQuickView(a, productId) {
         };
 
         document.getElementById('idp').value = product.who;
-        document.getElementById('ido').value = `${product._id}`;
+        document.getElementById('ido').value = `${product._id} `;
 
         const element = document.getElementById('hidlater');
         element.classList.remove('hiddendhid');
@@ -460,11 +485,11 @@ async function showProductQuickView(a, productId) {
 
 
         const bacgro = document.getElementById('bagron');
-        bacgro.style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
+        bacgro.style.backgroundColor = `${product.addcoul.substring(0, 7)} `;
         const modalImage = document.getElementById('ipage');
         modalImage.src = imagefolder[0].ima;
 
-        const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
+        const newURL = `detaila ? ov = ${product._id} `;  // Replace with the desired new URL
 
         const linkElement = document.getElementById('change-url');
 
@@ -475,17 +500,17 @@ async function showProductQuickView(a, productId) {
 
         document.getElementById('coloholder').innerText = product.addcoul;
 
-        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
-        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)}`;
+        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)} `;
+        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)} `;
 
         document.getElementById('quickViewProductName').innerText = product.addarticle;
-        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)}`;
+        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)} `;
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
         document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)}`);
-        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)}`);
-        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)}`);
-        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)}`);
+        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
+        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
+        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
+        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)} `);
         document.getElementById('rating').innerText = `5 étoile`;
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
@@ -496,7 +521,7 @@ async function showProductQuickView(a, productId) {
 
 
         document.getElementById('idp').value = product.who;
-        document.getElementById('ido').value = `${product._id}`;
+        document.getElementById('ido').value = `${product._id} `;
 
         const element = document.getElementById('hidlater');
         element.classList.remove('hiddendshow');
@@ -504,12 +529,12 @@ async function showProductQuickView(a, productId) {
 
 
         const bacgro = document.getElementById('bagron');
-        bacgro.style.backgroundColor = `${colora}`;
+        bacgro.style.backgroundColor = `${colora} `;
 
         const modalImage = document.getElementById('ipage');
         modalImage.src = product.image[0].ima;
 
-        const newURL = `detaila?ov=${product._id}`;  // Replace with the desired new URL
+        const newURL = `detaila ? ov = ${product._id} `;  // Replace with the desired new URL
 
         const linkElement = document.getElementById('change-url');
 
@@ -551,9 +576,9 @@ async function FilterArticle(search) {
         ProdAvailable.forEach(product => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+        < div class="col-lg-4 col-md-6 col-sm-6" >
 
-                        ${isMobileDevice() ?
+            ${isMobileDevice() ?
                     `
                             <div class="products-box">
 
@@ -762,7 +787,7 @@ async function FilterArticle(search) {
                         `
                 }
 
-                    </div>
+                    </div >
         `;
 
             productContainer.innerHTML += productHTML;
@@ -775,7 +800,7 @@ async function FilterArticle(search) {
     } else {
 
         const productHTML = `
-                <div class="container">
+        < div class="container" >
                     <div class="section-title">
                         <h2>${search} est indisponible pour l'instant</h2>
                     </div>
@@ -783,8 +808,8 @@ async function FilterArticle(search) {
                         <img src="assets/img/error-404.png" alt="Le magasin est vide">
                     </div>
                  
-                </div>
-            `;
+                </div >
+        `;
 
         productContainer.innerHTML = productHTML;
         const loaderRemove = document.getElementById('loaderRemove');
