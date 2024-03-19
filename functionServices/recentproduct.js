@@ -351,7 +351,7 @@ function recentProduct(recenPr) {
                             <path d="M0,0 82,0 Q90,0 90,8 L90,30 0,30z" />
                             
                             <!-- Text element for the percentage value -->
-                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-size: 17px; font-weight: 600">
                                 -${percentDf.toFixed()}%
                             </text>
                         </svg>
