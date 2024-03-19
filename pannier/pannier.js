@@ -49,11 +49,10 @@ async function getallPanier() {
             const adda = parseInt(pri.prix) * parseInt(pri.quantcho);
             totalPricea += adda;
         };
-        const totalPriceb = totalPricea + 1000;
         const pantotalhtml = `
                             <li>Sous-total <span>${(totalPricea / 1000).toFixed(3)} F</span></li>
-                            <li>Livraison <span>1000 F</span></li>
-                            <li>Total <span>${(totalPriceb / 1000).toFixed(3)} F.CFA</span></li>
+                            <li>Livraison <span>? F</span></li>
+                            <li>Total <span>${(totalPricea / 1000).toFixed(3)} F.CFA</span></li>
                             `;
         pantotalid.innerHTML += pantotalhtml;
     } else {
