@@ -224,7 +224,7 @@ function recentProduct(recenPr) {
 
                     <div class="products-box">
 
-                    <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
+                    <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(16, 23)}'">
 
                         <a style="cursor: pointer !important;" class="imageonweb" href="detaila?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
@@ -235,7 +235,7 @@ function recentProduct(recenPr) {
                         <ul>
                             <li>
                                 <div class="wishlist-btn">
-                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(0, 7)} !important" onclick="AddtoPaniera('${product._id}')">
                                         <i class="bx bx-shopping-bag bx bx-heart"></i>
                                         <span class="tooltip-label">Ajouter</span>
                                     </a>
@@ -251,7 +251,7 @@ function recentProduct(recenPr) {
                             </li>
                             <li>
                                 <div class="quick-view-btn" onclick="showProductQuickView('a', '${product._id}')">
-                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(16, 23)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
                                         <i class="bx bx-search-alt"></i>
                                         <span class="tooltip-label">Vue rapide</span>
                                     </a>
@@ -283,10 +283,10 @@ function recentProduct(recenPr) {
                     <h3><a href="detaila?ov=${product._id}" style="color: ${product.addreduction > 0 ? "#000000" : product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                     <div class="star-rating">
                         <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                     </div>
                     <div class="price">
                     ${product.addreduction > 0 && product.addreduction < product.addprix ?
