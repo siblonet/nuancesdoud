@@ -78,7 +78,7 @@ async function getallPanier() {
                                 </tr> 
                                 <tr>                       
                                     <td class="product-name">
-                                        <a href="#">Expédition</a>
+                                        <a href="#">Livraison</a>
                                     </td>
                                     <td class="product-total">
                                         <span class="subtotal-amount">? F</span>
