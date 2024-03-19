@@ -22,7 +22,7 @@ async function setPageSettings() {
         $("#background-video")[0].play();
 
         $(".nobleim").attr("src", `${setPad.find(item => item.which === "logoextern") ? setPad.find(item => item.which === "logoextern").image : "assets/img/logo.png"}`);
-        $(".ads-image").attr("src", `${setPad.find(item => item.which === "backglise") ? setPad.find(item => item.which === "backglise").image : "assets/img/par1.jpeg"}`);
+        $(".ads-image").attr("src", `${setPad.find(item => item.which === "backglise") ? setPad.find(item => item.which === "backglise").image ? setPad.find(item => item.which === "backglise").image : "assets/img/par1.jpeg" : "assets/img/par1.jpeg"}`);
 
 
     } else {
