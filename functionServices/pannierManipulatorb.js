@@ -1,53 +1,3 @@
-async function AddtoPanierc() {
-    const ido = document.getElementById('ido').value;
-    const quantity = parseInt(document.getElementById('productQuantity').value);
-    const exit = await GetPannierByID(ido);
-
-    if (exit) {
-        document.getElementById('modalcoma').style.display = "block";
-        document.getElementById('modalcoma').setAttribute("aria-hidden", "false");
-        document.getElementById('messages').innerText = "Exist déjà dans le panier!";
-
-        setTimeout(() => {
-            document.getElementById('modalcoma').style.display = "none";
-            document.getElementById('modalcoma').setAttribute("aria-hidden", "true");
-        }, 2500);
-    } else {
-        const prod = await GetArticleByID(ido);
-
-        prod.quantcho = quantity;
-        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
-        await PostPannier(prod);
-        window.location.href = "/"
-
-    }
-
-};
-
-async function AddtoPanierd() {
-    const ido = document.getElementById('ido').value;
-    const quantity = parseInt(document.getElementById('productQuantity').value);
-    const exit = await GetPannierByID(ido);
-
-    if (exit) {
-        document.getElementById('modalcoma').style.display = "block";
-        document.getElementById('modalcoma').setAttribute("aria-hidden", "false");
-        document.getElementById('messages').innerText = "Exist déjà dans le panier!";
-
-        setTimeout(() => {
-            document.getElementById('modalcoma').style.display = "none";
-            document.getElementById('modalcoma').setAttribute("aria-hidden", "true");
-        }, 2500);
-    } else {
-        const prod = await GetArticleByID(ido);
-
-        prod.quantcho = quantity;
-        prod.prix = prod.addreduction && prod.addreduction > 0 ? prod.addreduction : prod.addprix;
-        await PostPannier(prod);
-        window.location.href = "payment"
-    }
-
-};
 async function removePannierByIdb(id) {
     await deletePannierByID(id);
     await ReloadPanniertoHtmlb();
@@ -87,7 +37,7 @@ async function ReloadPanniertoHtmlb() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber1.innerHTML += panniernumHTML1;
+        pannierNumber1.innerHTML = panniernumHTML1;
 
 
 
@@ -98,7 +48,7 @@ async function ReloadPanniertoHtmlb() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber2.innerHTML += panniernumHTML2;
+        pannierNumber2.innerHTML = panniernumHTML2;
 
         const pannierNumber3 = document.getElementById('paniernumber3');
         pannierNumber3.innerHTML = ''; // Clear previous content
@@ -106,7 +56,7 @@ async function ReloadPanniertoHtmlb() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber3.innerHTML += panniernumHTML3;
+        pannierNumber3.innerHTML = panniernumHTML3;
 
 
 

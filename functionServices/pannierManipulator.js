@@ -70,7 +70,7 @@ async function ReloadPanniertoHtml() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber1.innerHTML += panniernumHTML1;
+        pannierNumber1.innerHTML = panniernumHTML1;
 
 
 
@@ -81,7 +81,7 @@ async function ReloadPanniertoHtml() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber2.innerHTML += panniernumHTML2;
+        pannierNumber2.innerHTML = panniernumHTML2;
 
         const pannierNumber3 = document.getElementById('paniernumber3');
         pannierNumber3.innerHTML = ''; // Clear previous content
@@ -89,9 +89,7 @@ async function ReloadPanniertoHtml() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        pannierNumber3.innerHTML += panniernumHTML3;
-
-
+        pannierNumber3.innerHTML = panniernumHTML3;
 
 
         panner.forEach(pro => {
@@ -151,7 +149,7 @@ async function ReloadPanniertoHtml() {
                                     <i class="bx bx-shopping-bag"></i>
                                     <span>${panner.length}</span>
                                 `;
-        panierNumber1r.innerHTML += panniernumHTML1r;
+        panierNumber1r.innerHTML = panniernumHTML1r;
     } else {
         const h3Element = document.getElementById('monpanier');
 
@@ -180,7 +178,7 @@ async function ReloadPanniertoHtml() {
         const panniernumHTML1 = `
                                     <i class="bx bx-shopping-bag"></i>
                                 `;
-        pannierNumber1.innerHTML += panniernumHTML1;
+        pannierNumber1.innerHTML = panniernumHTML1;
 
 
 
@@ -188,13 +186,13 @@ async function ReloadPanniertoHtml() {
         const panniernumHTML2 = `
                                     <i class="bx bx-shopping-bag"></i>
                                 `;
-        pannierNumber2.innerHTML += panniernumHTML2;
+        pannierNumber2.innerHTML = panniernumHTML2;
 
         pannierNumber3.innerHTML = ''; // Clear previous content
         const panniernumHTML3 = `
                                     <i class="bx bx-shopping-bag"></i>
                                 `;
-        pannierNumber3.innerHTML += panniernumHTML3;
+        pannierNumber3.innerHTML = panniernumHTML3;
 
         const panierNumber1r = document.getElementById('paniernumber1r');
 
@@ -202,7 +200,7 @@ async function ReloadPanniertoHtml() {
         const panniernumHTML1r = `
                                     <i class="bx bx-shopping-bag"></i>
                                 `;
-        panierNumber1r.innerHTML += panniernumHTML1r;
+        panierNumber1r.innerHTML = panniernumHTML1r;
     }
 
 };

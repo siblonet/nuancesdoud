@@ -102,7 +102,7 @@ function recentProduct(recenPr) {
     }
 
     if (ProdAvailable.length > 0) {
-        ProdAvailable.forEach((product, index) => {
+        ProdAvailable.forEach(product => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
                     <div class="col-lg-4 col-md-6 col-sm-6">
@@ -128,8 +128,6 @@ function recentProduct(recenPr) {
                                 </a>
                             </div>
                                
-                        
-
                                 <div class="products-button">
                                     <ul>
                                         <li>
@@ -158,28 +156,7 @@ function recentProduct(recenPr) {
                                         </li>
                                     </ul>
                                 </div>
-                                ${product.addnouveaute == "NOUVEAU" && product.addreduction < product.addprix ?
-                        `
-                        <div class="promo">Nouveautés</div>
-                        `
-                        :
-                        ""
-                    } 
-                                ${product.addoccasion == "PROMO" ?
-                        `
-                                        <div class="promo">Promo</div>
-                                    `
-                        :
-                        ""
-                    }
-
-                                ${product.addoccasion == "SOLD" ?
-                        `
-                                    <div class="sold">Solde</div>
-                                `
-                        :
-                        ""
-                    }
+                            
                             </div>
 
 
@@ -304,21 +281,6 @@ function recentProduct(recenPr) {
                         </ul>
                     </div>
                     
-                    ${product.addoccasion == "Promo" ?
-                        `
-                            <div class="new-tage">Promo</div>
-                        `
-                        :
-                        ""
-                    }
-
-                    ${product.addoccasion == "Sold" ?
-                        `
-                        <div class="sale-tag">Solde</div>
-                    `
-                        :
-                        ""
-                    }
                 </div>
 
 
@@ -412,10 +374,6 @@ function recentProduct(recenPr) {
 
                     </div>
         `;
-
-            /**<span style="background-color: ${product.addcoul.substring(0, 7)} !important;">
-                                -${percentDf.toFixed()}%
-                                </span> */
 
             productContainer.innerHTML += productHTML;
 
