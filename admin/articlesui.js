@@ -128,7 +128,6 @@ function CreateArticle() {
         const addgenre = document.getElementById('addgenre').value;
         const addprix = document.getElementById('addprix').value;
         const addreduction = document.getElementById('addreduction').value;
-        const addoccasion = document.getElementById('addoccasion').value;
         const addbarcode = document.getElementById('addbarcode').value;
 
         const addcoul = document.getElementById('addcoul').value;
@@ -144,7 +143,7 @@ function CreateArticle() {
                 addgenre: addgenre,
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
-                addoccasion: addoccasion,
+                addoccasion: "",
                 addcoul: addcoul ? addcoul : "#000000,#000000,#000000,#000000",
                 addmarque: addmarque,
                 notes: notes,
@@ -268,7 +267,6 @@ async function openArticleforediting(id_has) {
         document.getElementById('editegenre').value = product.addgenre;
         document.getElementById('editereduction').value = product.addreduction;
         document.getElementById('editeprix').value = product.addprix;
-        document.getElementById('editeoccasion').value = product.addoccasion;
         document.getElementById('editecoul').value = product.addcoul;
         document.getElementById('editemarque').value = product.addmarque;
         document.getElementById('editebarcode').value = product.barcode;
@@ -376,7 +374,6 @@ async function EditeArticle() {
         const addgenre = document.getElementById('editegenre').value;
         const addprix = document.getElementById('editeprix').value;
         const addreduction = document.getElementById('editereduction').value;
-        const addoccasion = document.getElementById('editeoccasion').value;
         const addcoul = document.getElementById('editecoul').value;
         const addmarque = document.getElementById('editemarque').value;
         const addbarcode = document.getElementById('editebarcode').value;
@@ -391,7 +388,7 @@ async function EditeArticle() {
                 addgenre: addgenre,
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
-                addoccasion: addoccasion,
+                addoccasion: "",
                 addcoul: addcoul,
                 addmarque: addmarque,
                 notes: notes,
