@@ -424,21 +424,23 @@ async function showProductQuickView(a, productId) {
     if (!result) {
         imagefolder = product.image;
 
-        const splo = product.addcoul.split(",") ? product.addcoul.split(",") : "gold";
-        const colora = splo[0] == "null" ? "gold" : splo[0] == "#ffffff" || "#FFFFFF" ? "gold" : splo[0];
-
         document.getElementById('coloholder').innerText = product.addcoul;
 
-        document.getElementById('addToCartBtn').style.backgroundColor = colora;
-        document.getElementById('addToCartBtn').style.borderColor = colora;
+        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
+        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)}`;
 
         document.getElementById('quickViewProductName').innerText = product.addarticle;
-        document.getElementById('quickViewProductName').style.color = `${colora}`;
+        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)}`;
 
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
 
         document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        document.getElementById('rating').innerText = `5 avis`;
+        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)}`);
+        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)}`);
+        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)}`);
+        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)}`);
+        
+        document.getElementById('rating').innerText = `5 étoile`;
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
 
@@ -456,7 +458,7 @@ async function showProductQuickView(a, productId) {
 
 
         const bacgro = document.getElementById('bagron');
-        bacgro.style.backgroundColor = `${colora}`;
+        bacgro.style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
         const modalImage = document.getElementById('ipage');
         modalImage.src = imagefolder[0].ima;
 
@@ -468,19 +470,21 @@ async function showProductQuickView(a, productId) {
             linkElement.setAttribute('href', newURL);
         }
     } else {
-        const splo = product.addcoul.split(",") ? product.addcoul.split(",") : "gold";
-        const colora = splo[0] == "null" ? "gold" : splo[0] == "#ffffff" || "#FFFFFF" ? "gold" : splo[0];
 
         document.getElementById('coloholder').innerText = product.addcoul;
 
-        document.getElementById('addToCartBtn').style.backgroundColor = colora;
-        document.getElementById('addToCartBtn').style.borderColor = colora;
+        document.getElementById('addToCartBtn').style.backgroundColor = `${product.addcoul.substring(0, 7)}`;
+        document.getElementById('addToCartBtn').style.borderColor = `${product.addcoul.substring(8, 15)}`;
 
         document.getElementById('quickViewProductName').innerText = product.addarticle;
-        document.getElementById('quickViewProductName').style.color = `${colora}`;
+        document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)}`;
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
         document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        document.getElementById('rating').innerText = `5 avis`;
+        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)}`);
+        $('.rating .two').css('color', `${product.addcoul.substring(8, 15)}`);
+        $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)}`);
+        $('.rating .four').css('color', `${product.addcoul.substring(24, 31)}`);
+        document.getElementById('rating').innerText = `5 étoile`;
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
         let prodque = document.getElementById('productQuantity');
