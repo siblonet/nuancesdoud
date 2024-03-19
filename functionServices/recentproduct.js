@@ -188,10 +188,10 @@ function recentProduct(recenPr) {
                                 <h3><a href="detaila?ov=${product._id}" style="color: ${product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                                 <div class="star-rating">
                                     <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
+                                    <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
+                                    <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
+                                    <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                                 </div>
                                 <div class="price">
                                 ${product.addreduction > 0 && product.addreduction < product.addprix ?
