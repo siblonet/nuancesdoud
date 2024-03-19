@@ -15,13 +15,6 @@ function RenderingCheckout() {
         document.getElementById('prenomValue').disabled = true;
         document.getElementById('nomValue').value = thisiswhat(`${lastname}`);
         document.getElementById('nomValue').disabled = true;
-        document.getElementById('motValue').disabled = true;
-        document.getElementById('motValue').value = "********";
-        document.getElementById('motValue').disabled = true;
-        document.getElementById('confirmezValue').value = "********";
-        document.getElementById('confirmezValue').disabled = true;
-        document.getElementById('emailValue').value = thisiswhat(`${email}`);
-        document.getElementById('emailValue').disabled = true;
         document.getElementById('telephoneValue').value = mynam;
         const connectedor = document.getElementById('connectedor');
         connectedor.innerHTML = '';
@@ -323,12 +316,6 @@ async function loginCommage() {
         document.getElementById('prenomValue').disabled = true;
         document.getElementById('nomValue').value = lastName;
         document.getElementById('nomValue').disabled = true;
-        document.getElementById('motValue').value = password;
-        document.getElementById('motValue').disabled = true;
-        document.getElementById('confirmezValue').value = password;
-        document.getElementById('confirmezValue').disabled = true;
-        document.getElementById('emailValue').value = email;
-        document.getElementById('emailValue').disabled = true;
         document.getElementById('telephoneValue').value = telphone;
 
         const connectedor = document.getElementById('connectedor');
