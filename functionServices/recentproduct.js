@@ -303,7 +303,7 @@ function recentProduct(recenPr) {
                 ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
                         <span class="products-discount aee${product._id}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
                             <!-- Styling for the main SVG container -->
                             <style>
                                 .products-box .products-discount.aee${product._id} {
@@ -312,11 +312,11 @@ function recentProduct(recenPr) {
                                     right: 10px;
                                     display: inline-block;
                                 }
-                
+                        
                                 .products-box .products-discount.aee${product._id} path {
                                     fill: ${product.addcoul.substring(0, 7)};
                                 }
-                
+                        
                                 /* Styling for the ::before pseudo-element */
                                 .products-box .products-discount.aee${product._id}:before {
                                     content: "";
@@ -327,7 +327,7 @@ function recentProduct(recenPr) {
                                     top: 0;
                                     background: ${product.addcoul.substring(0, 7)};
                                 }
-                
+                        
                                 /* Styling for the ::after pseudo-element */
                                 .products-box .products-discount.aee${product._id}:after {
                                     content: "";
@@ -339,12 +339,19 @@ function recentProduct(recenPr) {
                                     border-radius: 8px 8px 0 0;
                                     background: ${product.addcoul.substring(0, 7)};
                                 }
+                                
+                                /* Styling for the discount percentage text */
+                                .products-box .products-discount.aee${product._id} text {
+                                    fill: white;
+                                    font-size: 12px;
+                                }
                             </style>
-                            -${percentDf.toFixed()}%
                             
                             <!-- SVG path for the discount box -->
-                            <path d="M0,0 90,0 90,30 0,30z" />
-                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="14" font-weight="600">
+                            <path d="M0,0 82,0 Q90,0 90,8 L90,30 0,30z" />
+                            
+                            <!-- Text element for the percentage value -->
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
                                 -${percentDf.toFixed()}%
                             </text>
                         </svg>
