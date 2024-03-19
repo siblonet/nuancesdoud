@@ -27,6 +27,54 @@
 
     <canvas id="imageCanvas"></canvas>
 
+
+    <span class="products-discount">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+            <!-- Styling for the main SVG container -->
+            <style>
+                .products-box .products-discount {
+                    position: absolute;
+                    top: -6.1px;
+                    right: 10px;
+                    display: inline-block;
+                }
+
+                .products-box .products-discount path {
+                    fill: red;
+                }
+
+                /* Styling for the ::before pseudo-element */
+                .products-box .products-discount:before {
+                    content: "";
+                    position: absolute;
+                    height: 6px;
+                    width: 6px;
+                    left: -6px;
+                    top: 0;
+                    background: red;
+                }
+
+                /* Styling for the ::after pseudo-element */
+                .products-box .products-discount:after {
+                    content: "";
+                    position: absolute;
+                    height: 6px;
+                    width: 8px;
+                    left: -8px;
+                    top: 0;
+                    border-radius: 8px 8px 0 0;
+                    background: red;
+                }
+            </style>
+            -${percentDf.toFixed()}%
+
+            <!-- SVG path for the discount box -->
+            <path d="M0,0 90,0 90,30 0,30z" />
+        </svg>
+
+    </span>
+
+
     <script>
         const imageInput = document.getElementById('imageInput');
         const colorsDiv = document.getElementById('colors');

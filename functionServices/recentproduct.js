@@ -102,7 +102,7 @@ function recentProduct(recenPr) {
     }
 
     if (ProdAvailable.length > 0) {
-        ProdAvailable.forEach(product => {
+        ProdAvailable.forEach((product, index) => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
                     <div class="col-lg-4 col-md-6 col-sm-6">
@@ -302,11 +302,54 @@ function recentProduct(recenPr) {
                 </div>
                 ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
-                <span class="products-discount">
-                    <span>
-                        -${percentDf.toFixed()}%
+                        <span class="products-discount aee${product._id}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+                            <!-- Styling for the main SVG container -->
+                            <style>
+                                .products-box .products-discount.aee${product._id} {
+                                    position: absolute;
+                                    top: -6.1px;
+                                    right: 10px;
+                                    display: inline-block;
+                                }
+                
+                                .products-box .products-discount.aee${product._id} path {
+                                    fill: ${product.addcoul.substring(0, 7)};
+                                }
+                
+                                /* Styling for the ::before pseudo-element */
+                                .products-box .products-discount.aee${product._id}:before {
+                                    content: "";
+                                    position: absolute;
+                                    height: 6px;
+                                    width: 6px;
+                                    left: -6px;
+                                    top: 0;
+                                    background: ${product.addcoul.substring(0, 7)};
+                                }
+                
+                                /* Styling for the ::after pseudo-element */
+                                .products-box .products-discount.aee${product._id}:after {
+                                    content: "";
+                                    position: absolute;
+                                    height: 6px;
+                                    width: 8px;
+                                    left: -8px;
+                                    top: 0;
+                                    border-radius: 8px 8px 0 0;
+                                    background: ${product.addcoul.substring(0, 7)};
+                                }
+                            </style>
+                            -${percentDf.toFixed()}%
+                            
+                            <!-- SVG path for the discount box -->
+                            <path d="M0,0 90,0 90,30 0,30z" />
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="14" font-weight="600">
+                                -${percentDf.toFixed()}%
+                            </text>
+                        </svg>
+
                     </span>
-                </span>
                   `
                         :
                         ""
@@ -319,7 +362,12 @@ function recentProduct(recenPr) {
                     </div>
         `;
 
+            /**<span style="background-color: ${product.addcoul.substring(0, 7)} !important;">
+                                -${percentDf.toFixed()}%
+                                </span> */
+
             productContainer.innerHTML += productHTML;
+
         });
 
 
