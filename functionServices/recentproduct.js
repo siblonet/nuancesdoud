@@ -289,11 +289,12 @@ function recentProduct(recenPr, ADA) {
                     <span class="category" style="color: ${product.addreduction > 0 ? product.addcoul.substring(0, 7) : "#000000"};">Parfum</span>
                     <h3><a href="detaila?ov=${product._id}" style="color: ${product.addreduction > 0 ? "#000000" : product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                     <div class="star-rating">
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                         <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
+                        <span style="color: #aaaaaa !important">5 étoiles</span>
                     </div>
                     <div class="price">
                     ${product.addreduction > 0 && product.addreduction < product.addprix ?
@@ -573,12 +574,12 @@ async function FilterArticle(search) {
 
     if (ProdAvailable.length > 0) {
         productContainer.innerHTML = ''
-        ProdAvailable.forEach(product => {
+        ProdAvailable.forEach((product, index) => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
-        < div class="col-lg-4 col-md-6 col-sm-6" >
+                    <div class="col-lg-4 col-md-6 col-sm-6">
 
-            ${isMobileDevice() ?
+                        ${isMobileDevice() ?
                     `
                             <div class="products-box">
 
@@ -599,13 +600,11 @@ async function FilterArticle(search) {
                                 </a>
                             </div>
                                
-                        
-
                                 <div class="products-button">
                                     <ul>
                                         <li>
                                             <div class="wishlist-btn">
-                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(0, 7)} !important" onclick="AddtoPaniera('${product._id}')">
                                                     <i class="bx bx-shopping-bag bx bx-heart"></i>
                                                     <span class="tooltip-label">Ajouter</span>
                                                 </a>
@@ -621,7 +620,7 @@ async function FilterArticle(search) {
                                         </li>
                                         <li>
                                             <div class="quick-view-btn" onclick="showProductQuickView('${product._id}')">
-                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                                <a style="cursor: pointer !important; color: ${product.addcoul.substring(16, 23)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
                                                     <i class="bx bx-search-alt"></i>
                                                     <span class="tooltip-label">Vue rapide</span>
                                                 </a>
@@ -629,34 +628,13 @@ async function FilterArticle(search) {
                                         </li>
                                     </ul>
                                 </div>
-                                ${product.addnouveaute == "NOUVEAU" && product.addreduction < product.addprix ?
-                        `
-                        <div class="promo">Nouveautés</div>
-                        `
-                        :
-                        ""
-                    } 
-                                ${product.addoccasion == "PROMO" ?
-                        `
-                                        <div class="promo">Promo</div>
-                                    `
-                        :
-                        ""
-                    }
-
-                                ${product.addoccasion == "SOLD" ?
-                        `
-                                    <div class="sold">Solde</div>
-                                `
-                        :
-                        ""
-                    }
+                            
                             </div>
 
 
                             <div class="products-content">
-                                <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
-                                <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
+                                <span class="category" style="color: ${product.addcoul.substring(8, 15)};">Parfum</span>
+                                <h3><a href="detaila?ov=${product._id}" style="color: ${product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                                 <div class="star-rating">
                                     <i class="bx bxs-star"></i>
                                     <i class="bx bxs-star"></i>
@@ -678,11 +656,55 @@ async function FilterArticle(search) {
                             </div>
                             ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
-                            <span class="products-discounta">
-                                <span>
+
+                        <span class="products-discountbo aoo${product._id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+                                <!-- Styling for the main SVG container -->
+                                <style>
+                                    .products-box .products-discountbo.aoo${product._id} {
+                                        position: absolute;
+                                        bottom: 96.5px;
+                                        right: -6.1px;
+                                        display: inline-block;
+                                    }
+                                    
+                                    .products-box .products-discountbo.aoo${product._id} path {
+                                        fill: ${product.addcoul.substring(0, 7)};
+                                    }
+                                    
+                                    /* Styling for the ::before pseudo-element */
+                                    .products-box .products-discountbo.aoo${product._id}:before {
+                                        content: "";
+                                        position: absolute;
+                                        height: 6px;
+                                        width: 6px;
+                                        right: 0px;
+                                        top: -6px;
+                                        border-radius: 0px 80px 0px 0px;
+                                        background: ${product.addcoul.substring(0, 7)}57;
+                                    }
+                                    
+                                    /* Styling for the ::after pseudo-element */
+                                    .products-box .products-discountbo.aoo${product._id}:after {
+                                        content: "";
+                                        position: absolute;
+                                        height: 5px;
+                                        width: 5.3px;
+                                        right: 0.7px;
+                                        top: -5px;
+                                        border-radius: 0px 80px 0px 0px;
+                                        background: ${product.addcoul.substring(0, 7)};
+                                    }
+                                </style>
+                                
+                                <!-- SVG path for the discount box -->
+                                <path d="M0,0 90,0 Q90,30 82,30 L0,30z" />
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-size: 17px; font-weight: 600">
                                     -${percentDf.toFixed()}%
-                                </span>
-                            </span>
+                                </text>
+                            </svg>
+                        </span>
+                    
                               `
                         :
                         ""
@@ -695,7 +717,7 @@ async function FilterArticle(search) {
 
                     <div class="products-box">
 
-                    <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(0, 7)}'">
+                    <div class="products-image" style="background-color: ${product.addcoul.substring(0, 7)};" onmouseover="this.style.backgroundColor='${product.addcoul.substring(8, 15)}'" onmouseout="this.style.backgroundColor='${product.addcoul.substring(16, 23)}'">
 
                         <a style="cursor: pointer !important;" class="imageonweb" href="detaila?ov=${product._id}">
                             <img src="${product.image[0].ima}" class="main-image" alt="image">
@@ -706,7 +728,7 @@ async function FilterArticle(search) {
                         <ul>
                             <li>
                                 <div class="wishlist-btn">
-                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" onclick="AddtoPaniera('${product._id}')">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(0, 7)} !important" onclick="AddtoPaniera('${product._id}')">
                                         <i class="bx bx-shopping-bag bx bx-heart"></i>
                                         <span class="tooltip-label">Ajouter</span>
                                     </a>
@@ -722,7 +744,7 @@ async function FilterArticle(search) {
                             </li>
                             <li>
                                 <div class="quick-view-btn" onclick="showProductQuickView('a', '${product._id}')">
-                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(8, 15)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
+                                    <a style="cursor: pointer !important; color: ${product.addcoul.substring(16, 23)} !important" data-bs-toggle="modal" data-bs-target="#productsQuickView">
                                         <i class="bx bx-search-alt"></i>
                                         <span class="tooltip-label">Vue rapide</span>
                                     </a>
@@ -731,33 +753,19 @@ async function FilterArticle(search) {
                         </ul>
                     </div>
                     
-                    ${product.addoccasion == "Promo" ?
-                        `
-                            <div class="new-tage">Promo</div>
-                        `
-                        :
-                        ""
-                    }
-
-                    ${product.addoccasion == "Sold" ?
-                        `
-                        <div class="sale-tag">Solde</div>
-                    `
-                        :
-                        ""
-                    }
                 </div>
 
 
                 <div class="products-content">
-                    <span class="category" style="color: ${product.addcoul.substring(0, 7)};">Parfum</span>
-                    <h3><a href="detaila?ov=${product._id}">${product.addarticle}</a></h3>
+                    <span class="category" style="color: ${product.addreduction > 0 ? product.addcoul.substring(0, 7) : "#000000"};">Parfum</span>
+                    <h3><a href="detaila?ov=${product._id}" style="color: ${product.addreduction > 0 ? "#000000" : product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                     <div class="star-rating">
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
+                        <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                         <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
+                        <span style="color: #aaaaaa !important">5 étoiles</span>
                     </div>
                     <div class="price">
                     ${product.addreduction > 0 && product.addreduction < product.addprix ?
@@ -773,11 +781,61 @@ async function FilterArticle(search) {
                 </div>
                 ${product.addreduction > 0 && product.addreduction < product.addprix ?
                         `
-                <span class="products-discount">
-                    <span>
-                        -${percentDf.toFixed()}%
+                        <span class="products-discount aee${product._id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 30" width="90" height="30">
+                            <!-- Styling for the main SVG container -->
+                            <style>
+                                .products-box .products-discount.aee${product._id} {
+                                    position: absolute;
+                                    top: -6.1px;
+                                    right: 10px;
+                                    display: inline-block;
+                                }
+                        
+                                .products-box .products-discount.aee${product._id} path {
+                                    fill: ${product.addcoul.substring(0, 7)};
+                                }
+                        
+                                /* Styling for the ::before pseudo-element */
+                                .products-box .products-discount.aee${product._id}:before {
+                                    content: "";
+                                    position: absolute;
+                                    height: 6px;
+                                    width: 6px;
+                                    left: -6px;
+                                    top: 0;
+                                    background: ${product.addcoul.substring(0, 7)};
+                                }
+                        
+                                /* Styling for the ::after pseudo-element */
+                                .products-box .products-discount.aee${product._id}:after {
+                                    content: "";
+                                    position: absolute;
+                                    height: 6px;
+                                    width: 8px;
+                                    left: -8px;
+                                    top: 0;
+                                    border-radius: 8px 8px 0 0;
+                                    background: ${product.addcoul.substring(0, 7)};
+                                }
+                                
+                                /* Styling for the discount percentage text */
+                                .products-box .products-discount.aee${product._id} text {
+                                    fill: white;
+                                    font-size: 12px;
+                                }
+                            </style>
+                            
+                            <!-- SVG path for the discount box -->
+                            <path d="M0,0 82,0 Q90,0 90,8 L90,30 0,30z" />
+                            
+                            <!-- Text element for the percentage value -->
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-size: 17px; font-weight: 600">
+                                -${percentDf.toFixed()}%
+                            </text>
+                        </svg>
+
                     </span>
-                </span>
                   `
                         :
                         ""
@@ -787,10 +845,12 @@ async function FilterArticle(search) {
                         `
                 }
 
-                    </div >
+                    </div>
+                    
         `;
 
             productContainer.innerHTML += productHTML;
+
         });
 
 
