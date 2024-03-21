@@ -4,6 +4,9 @@ function PeopleHandle(who, ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, ad
     ActiveCl.classList.add('active');
     ActiveAr.classList.remove('active');
     ActiveAn.classList.remove('active');
+
+    document.getElementById('filter-order').classList.remove('active');
+
     addAticlebtn.innerHTML = "";
     const clientsHTML = `
     
@@ -72,26 +75,90 @@ async function openClientforedit(clid, whos) {
     document.getElementById('clientPrenom').value = opennedClient.prenom;
     document.getElementById('clientEmail').value = opennedClient.email;
     document.getElementById('clientPhone').value = opennedClient.phone;
-    document.getElementById('userStatus').classList.add(`${opennedClient.staff === 'true' ? 'btn-info' : opennedClient.admin === 'true' ? 'btn-success' : 'btn-dangera'}`);
-    document.getElementById('userStatus').innerText = `${opennedClient.staff === 'true' ? 'Employé' : opennedClient.admin === 'true' ? 'Adminitrateur' : 'Client'}`;
 
+
+    document.getElementById('userStatus').classList.add(`${opennedClient.admin === 'true' ? 'btn-success' : opennedClient.staff === 'true' ? 'btn-info' : 'btn-dangera'}`);
+    document.getElementById('userStatus').innerText = `${opennedClient.admin === 'true' ? 'Statut: Adminitrateur' : opennedClient.staff === 'true' ? 'Statut: Employé' : 'Statut: Client'}`;
+
+    document.getElementById('userdelete').checked = opennedClient.userdelete ? opennedClient.userdelete : false;
+    document.getElementById('userinfo').checked = opennedClient.userinfo ? opennedClient.userinfo : false;
+    document.getElementById('userstatus').checked = opennedClient.userstatus ? opennedClient.userstatus : false;
+    document.getElementById('orderback').checked = opennedClient.orderback ? opennedClient.orderback : false;
+    document.getElementById('orderchange').checked = opennedClient.orderchange ? opennedClient.orderchange : false;
+    document.getElementById('orderdone').checked = opennedClient.orderdone ? opennedClient.orderdone : false;
+    document.getElementById('orderwof').checked = opennedClient.orderwof ? opennedClient.orderwof : false;
 
     const token = sessionStorage.getItem('tibule');
     const splo = token.split("°");
     const userid = thisiswhat(`${splo[0]}`);
 
     const usermodif = document.getElementById('usermodif');
+    usermodif.innerHTML = "";
 
-    if (userid == clid) {
+    if (isAdmin && userid == clid) {
+        $('.ifadminopen').css('display', 'inline');
+        const usermodifHTML = `
+            <button type="button" class="btn btn-info" data-dismiss="modal"
+            onclick="changePeopleStatus('staff')">Employer</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal"
+                onclick="changePeopleStatus('admin')">Admin</button>
+            <button type="button" class="btn btn-dangera" data-dismiss="modal"
+                onclick="changePeopleStatus('client')">Client</button>
+        
+            <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                onclick="updateUser()">Modifer
+            </button>
+    `;
+        usermodif.innerHTML += usermodifHTML;
+
+    } else if (isAdmin) {
+        $('.ifadminopen').css('display', 'inline');
+        const usermodifHTML = `
+        <button type="button" class="btn btn-info" data-dismiss="modal"
+        onclick="changePeopleStatus('staff')">Employer</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal"
+            onclick="changePeopleStatus('admin')">Admin</button>
+        <button type="button" class="btn btn-dangera" data-dismiss="modal"
+            onclick="changePeopleStatus('client')">Client</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+            onclick="deleteUser()">Supprimer</button>
+        <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+            onclick="updateUser()">Modifer
+        </button>
+`;
+        usermodif.innerHTML += usermodifHTML;
+    } else if (userid == clid) {
         const usermodifHTML = `
         <button type="button"  class="btn btn-outline-success" data-dismiss="modal"
             onclick="updateUser()">Modifer
         </button>
     `;
         usermodif.innerHTML = usermodifHTML;
-    } else {
-        usermodif.innerHTML = "";
+    } 
 
+    if (opennedClient.userdelete && !isAdmin) {
+        const usermodifHTML = `
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+        onclick="deleteUser()">Supprimer</button>
+    `;
+        usermodif.innerHTML = usermodifHTML;
+    } else if (opennedClient.userinfo && !isAdmin) {
+        const usermodifHTML = `
+        <button type="button"  class="btn btn-outline-success" data-dismiss="modal"
+            onclick="updateUser()">Modifer
+        </button>
+    `;
+        usermodif.innerHTML += usermodifHTML;
+    } else if (opennedClient.userstatus && !isAdmin) {
+        const usermodifHTML = `
+        <button type="button" class="btn btn-info" data-dismiss="modal"
+        onclick="changePeopleStatus('staff')">Employer</button>
+
+
+        <button type="button" class="btn btn-dangera" data-dismiss="modal"
+                        onclick="changePeopleStatus('client')">Client</button>
+    `;
+        usermodif.innerHTML += usermodifHTML;
     }
 
 };

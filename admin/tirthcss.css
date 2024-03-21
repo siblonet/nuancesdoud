@@ -629,3 +629,9 @@ option menu botom CSS
     margin-right: -50px;
     display: none;
 }
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ user permission @@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+.ifadminopen{
+    display: none;
+}

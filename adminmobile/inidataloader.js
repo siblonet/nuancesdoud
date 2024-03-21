@@ -7,7 +7,7 @@ function getAdmin() {
         username = thisiswhat(`${nam}â${lastname}`);
         document.getElementById('usernam').innerText = username;
         isAdmin = splo[6] == "GIFV" ? true : false;
-        document.getElementById('userstatus').innerText = splo[6] == "GIFV" ? "Administrateur" : "Employé(e)";
+        document.getElementById('userstatusa').innerText = splo[6] == "GIFV" ? "Administrateur" : "Employé(e)";
         connected = true;
 
         return splo[6] == "GIFV" ? true : false

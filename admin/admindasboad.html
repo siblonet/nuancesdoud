@@ -289,7 +289,7 @@
                                         <li class="flexdis">
                                             <div>
                                                 <h5 class="user-name" id="usernam"></h5>
-                                                <span class="status ml-2" id="userstatus"></span>
+                                                <span class="status ml-2" id="userstatusa"></span>
                                             </div>
 
                                         </li>
@@ -437,7 +437,7 @@
                                             <input type="text" class="form-control" id="addreduction" value="0">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Couleur <span class="required"></span></label>
@@ -497,7 +497,7 @@
                                 <div id="colors"></div>
 
                                 <br>
-                                
+
                                 <div id="choosenColor">
                                 </div>
 
@@ -572,7 +572,7 @@
                                             <input type="text" class="form-control" id="editereduction">
                                         </div>
                                     </div>
-                                   
+
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Couleur <span class="required"></span></label>
@@ -1052,19 +1052,105 @@
 
                     </div>
 
-                    <button type="button" class="btn" data-dismiss="modal" id="userStatus"></button>
+                    <div class="col-lg-6 col-md-6 ifadminopen">
+                        <br>
+                        <h3>Permission Commandes</h3>
+                        <div class="products-content">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>En Attente/Cours/échoué</label>
+                                        <input type="checkbox" class="" id="orderwof"
+                                            onclick="PermissionHandled('orderwof')">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Livré</label>
+                                        <input type="checkbox" class="" id="orderdone"
+                                            onclick="PermissionHandled('orderdone')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-6 col-md-6 ifadminopen">
+                        <br>
+                        <br>
+                        <div class="products-content">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Echanger</label>
+                                        <input type="checkbox" class="" id="orderchange"
+                                            onclick="PermissionHandled('orderchange')">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Rétour</label>
+                                        <input type="checkbox" class="" id="orderback"
+                                            onclick="PermissionHandled('orderback')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-lg-6 col-md-6 ifadminopen">
+                        <br>
+                        <h3>Permission Utilisateur</h3>
+                        <div class="products-content">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Monifier Infos</label>
+                                        <input type="checkbox" class="" id="userinfo"
+                                            onclick="PermissionHandled('userinfo')">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Changer Statut</label>
+                                        <input type="checkbox" class="" id="userstatus"
+                                            onclick="PermissionHandled('userstatus')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 ifadminopen">
+                        <br>
+                        <br>
+                        <div class="products-content">
+                            <div class="billing-details">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Supprimer</label>
+                                        <input type="checkbox" class="" id="userdelete"
+                                            onclick="PermissionHandled('userdelete')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal"
-                        onclick="changePeopleStatus('staff')">Employer</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal"
-                        onclick="changePeopleStatus('admin')">Admin</button>
-                    <button type="button" class="btn btn-dangera" data-dismiss="modal"
-                        onclick="changePeopleStatus('client')">Client</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"
-                        onclick="deleteUser()">Supprimer</button>
-                    <div id="usermodif"></div>
+                <br>
+                <p id="userStatus"
+                    style="width: 150px !important; padding: 5px; text-align: center; align-items: center !important; border-radius: 10px;">
+                </p>
+
+                <div class="modal-footer" id="usermodif">
+
                 </div>
             </div>
 
@@ -1145,7 +1231,8 @@
 
         <p style="height: 10px;"> </p>
 
-        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer" onclick="DiscountAll()">
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer"
+            onclick="DiscountAll()">
             <span
                 style="padding: 10px; border-radius: 10px; background-color: #007bff; font-size: 14px; font-weight: bold; color: #ffffff;">
                 0%</span>
@@ -1157,7 +1244,8 @@
 
         <p style="height: 10px;"> </p>
 
-        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer" onclick="Dicountstyle('off')">
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer"
+            onclick="Dicountstyle('off')">
             <span
                 style="padding: 10px; border-radius: 10px; background-color: #007fbb; font-size: 14px; font-weight: bold; color: #ffffff;">
                 0%</span>
@@ -1322,6 +1410,7 @@
     <script src="../initializers/router.js"></script>
     <script src="../initializers/database_handl.js"></script>
     <script src="../functionServices/product.services.js"></script>
+    <script src="../functionServices/permission_handling.js"></script>
     <script src="../functionServices/filterfunctiono.js"></script>
     <script src="../functionServices/colorsGenerator.js"></script>
     <script src="../functionServices/requesthttps.js"></script>
