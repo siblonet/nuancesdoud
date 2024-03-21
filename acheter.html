@@ -116,9 +116,10 @@
             <div class="bob">
             </div>
             <div class="page-title-content">
-                <a class="navbar-brand" href="index.html">
-                    <img class="nobleim" src="" alt="logo" width="120" , height="120">
-                </a>
+                <div
+                    style="align-items: center; justify-content: center; align-self: enter; height: 120px !important; width: 50px !important; overflow: hidden !important; padding-top: 50px; padding-bottom: 90px;">
+                    <img class="nobleim" src="" alt="logo" style="height: 70px; width: 47px;">
+                </div>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
                     <li style="color: #f80265 !important;">Validation</li>
@@ -163,33 +164,7 @@
                         <div class="billing-details">
                             <h3 class="title">Détails de facturation</h3>
                             <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Prénom <span class="required">*</span></label>
-                                        <input type="text" class="form-control" id="prenomValue">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Nom<span class="required">*</span></label>
-                                        <input type="text" class="form-control" id="nomValue">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Ville <span class="required">*</span></label>
-                                        <input type="text" class="form-control" id="villeValue">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Adresse précise<span class="required">*</span></label>
-                                        <input type="text" class="form-control" id="adresseValue">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6">
+                                <div class="col-lg-12 col-md-6 haidphone">
                                     <div class="form-group">
                                         <label>Téléphone Sans indicatif <i
                                                 style="text-decoration: line-through; color: red;">+225</i> <span
@@ -197,6 +172,37 @@
                                         <input type="tel" class="form-control" id="telephoneValue">
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-6 haidnom">
+                                    <div class="form-group">
+                                        <label>Nom
+                                            <i style="text-decoration: line-through; color: red;">Prénom</i>
+                                            <span class="required">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="nomValue">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 haidprenom">
+                                    <div class="form-group">
+                                        <label>Prénom <span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="prenomValue">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-6 haidville">
+                                    <div class="form-group">
+                                        <label>Ville <span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="villeValue">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-6 haidadress">
+                                    <div class="form-group">
+                                        <label>Adresse précise<span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="adresseValue">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -275,14 +281,8 @@
 
                             </div>
 
-                            <div class="payment-box">
-                                <a style="cursor: pointer !important" class="default-btn loading" onclick="sendCommen()"
-                                    id="noorderduplu">
-                                    <span class="" id="tohia">Valider la commande</span>
-                                    <div class="tohi" id="tohi">
-                                        <p>En cours ...</p>
-                                    </div>
-                                </a>
+                            <div class="payment-box" id="validate-hide-forfil">
+
 
                             </div>
                         </div>
@@ -296,7 +296,7 @@
     <div class="modal fade productsQuickView" id="connexionComade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span><i class="bx bx-x"></i></span>
                 </button>
                 <form>
