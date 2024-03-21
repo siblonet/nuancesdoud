@@ -36,8 +36,8 @@ const pErsonnalige = () => {
 
 
             $("#backglise").css("background-image", `url(${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise").image : "../assets/img/par1.jpeg"})`);
-            $("#logoextern").attr("src", `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern").image : "./assets/img/logo.png"}`);
-            $("#logointern").attr("src", `${annoncePers.find(item => item.which === "logointern") ? annoncePers.find(item => item.which === "logointern").image : "./assets/img/logo.png"}`);
+            $("#logoextern").attr("src", `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern").image : "../assets/img/logo.png"}`);
+            $("#logointern").attr("src", `${annoncePers.find(item => item.which === "logointern") ? annoncePers.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);
             $("#loginimg").css("background-image", `url(${annoncePers.find(item => item.which === "loginimg") ? annoncePers.find(item => item.which === "loginimg").image : "../assets/img/par1.jpeg"})`);
             document.getElementById('backgliseid').value = `${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise")._id : "huhed9683e"}`;
             document.getElementById('logoexternid').value = `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern")._id : "huhed9683e"}`;
@@ -59,8 +59,8 @@ const pErsonnalige = () => {
             $("#phonec").css("background-image", "url(../assets/img/par1.jpeg)");
 
             $("#backglise").css("background-image", 'url(../assets/img/par1.jpeg)');
-            $("#logoextern").attr("src", "./assets/img/logo.png");
-            $("#logointern").attr("src", "./assets/img/logo.png");
+            $("#logoextern").attr("src", "../assets/img/logo.png");
+            $("#logointern").attr("src", "../assets/img/logo.png");
             $("#loginimg").css("background-image", "url(../assets/img/par1.jpeg)");
             $(".loadavideo").css("display", "none");
 
