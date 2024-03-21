@@ -34,6 +34,7 @@ const pErsonnalige = () => {
             $("#baVdeo")[0].load();
             $("#baVdeo")[0].play();
 
+            $("#imagebackglise").attr("src", `${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise").image : "../assets/img/logo.png"}`);
             $("#backglise").css("background-image", `url(${annoncePers.find(item => item.which === "backglise") ? annoncePers.find(item => item.which === "backglise").image : "../assets/img/par1.jpeg"})`);
             $("#logoextern").attr("src", `${annoncePers.find(item => item.which === "logoextern") ? annoncePers.find(item => item.which === "logoextern").image : "../assets/img/logo.png"}`);
             $("#logointern").attr("src", `${annoncePers.find(item => item.which === "logointern") ? annoncePers.find(item => item.which === "logointern").image : "../assets/img/logo.png"}`);

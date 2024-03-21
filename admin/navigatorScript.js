@@ -150,7 +150,12 @@ const NafigatioTo = async (where, who = null) => {
                         <div class="col-sm-6 pr-sm-2 statistics-grid">
                             <div id="backglise" class="card card_border border-primary-topa p-4 backi">
                                 <input type="hidden" id="backgliseid" value="huhed9683e">
-                                    <div class="pubstyle">
+                                <img id="imagebackglise" src="../assets/img/par1.jpeg"
+                                style="height: 100% !important; width: 100% !important;"
+                                alt="Loading ..." />
+                                </div>
+
+                                <div class="pubstyle">
                                     <p>Annonces</p>
                                     
                                     <a class="suppimer" onclick="deleteAnnonce('backgliseid')">
@@ -160,7 +165,6 @@ const NafigatioTo = async (where, who = null) => {
                                     <input onchange="changeIcons(event, 'backglise', 'backgliseid')" type="file" class="" id="backgliseimg" accept="image/*" />
 
                                 </div>
-                            </div>
 
                         </div>
                         <div class="col-sm-6 pl-sm-2 statistics-grid">

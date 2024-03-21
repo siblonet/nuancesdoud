@@ -536,6 +536,8 @@ Add Article CSS
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: contain !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .pubstyle {
