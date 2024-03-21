@@ -20,6 +20,10 @@ function StartCreateArticle() {
 `;
 
     onlineImapro1.style = styels;
+    document.getElementById('opp-bottom').classList.remove('active');
+    document.getElementById('discount-feildsall').classList.remove('active');
+    document.getElementById('discount-feildsone').classList.remove('active');
+    document.getElementById('opp-bottom-open').classList.add('active');
 }
 
 function closeModaldata() {

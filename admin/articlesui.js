@@ -8,7 +8,7 @@ let adminiSpacea;
 
 
 function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
-    
+
     ArticleFromPhoneSearch = [];
     ActiveDasa = ActiveDas;
     ActiveCoa = ActiveCo;
@@ -24,11 +24,10 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
     ActiveAn.classList.remove('active');
     document.getElementById('filter-order').classList.remove('active');
 
-    const livecha = document.getElementById('add-article');
-
     setTimeout(() => {
-        livecha.classList.add('active');
+        document.getElementById('opp-bottom-open').classList.add('active');
     }, 1000);
+
 
     GetArticle("avail").then((offarticles) => {
 
@@ -55,6 +54,7 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
                             </div>
                            
                             <div class="">
+                            <input type="checkbox" id="discountCheckbox${article._id}" ${article.addreduction > 0 ? 'checked' : ''} class="discountCheckbox" onclick="DiscountOneUpdate('discountCheckbox${article._id}', '${article._id}')">
                                 <p class="sta shipp"  style="cursor: pointer" data-toggle="modal" data-target="#modArticle" onclick="openArticleforediting('${article._id}')">Ouvrir</p>
                                 <div style="height: 5px"></div>
                                 <p  class="sta" style="padding-left: ${article.quantity > 0 ? '10px' : '30px'}; padding-right: ${article.quantity > 0 ? '10px' : '30px'}; font-size: 14px; background-color: ${article.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${article.quantity > 0 ? "#ffffff" : "red"}">${article.quantity > 0 ? "Disponible" : "Finis"}</p>
@@ -524,3 +524,73 @@ async function PatploVisualation() {
 
 
 }
+
+
+
+const Dicountstyle = (which) => {
+    document.getElementById('discountvalueall').value = 0;
+    document.getElementById('discountvalueone').value = 0;
+    $('.discountCheckbox').css('display', 'none');
+    if (which == "all") {
+        document.getElementById('opp-bottom').classList.remove('active');
+        document.getElementById('discount-feildsone').classList.remove('active');
+        document.getElementById('discount-feildsall').classList.add('active');
+
+    } else if (which == "one") {
+        document.getElementById('discount-feildsall').classList.remove('active');
+        document.getElementById('opp-bottom').classList.remove('active');
+        document.getElementById('discountvalueone').disabled = false;
+        document.getElementById('discount-feildsone').classList.add('active');
+    } else if (which == "off") {
+        document.getElementById('discount-feildsall').classList.remove('active');
+        document.getElementById('opp-bottom').classList.remove('active');
+        document.getElementById('discountvalueone').disabled = true;
+        document.getElementById('discount-feildsone').classList.add('active');
+    } else if (which == "open") {
+        document.getElementById('discount-feildsall').classList.remove('active');
+        document.getElementById('discount-feildsone').classList.remove('active');
+        document.getElementById('opp-bottom-open').classList.remove('active');
+        document.getElementById('opp-bottom').classList.add('active');
+
+    } else if (which == "none") {
+        document.getElementById('opp-bottom').classList.remove('active');
+        document.getElementById('discount-feildsall').classList.remove('active');
+        document.getElementById('discount-feildsone').classList.remove('active');
+        document.getElementById('opp-bottom-open').classList.add('active');
+
+    }
+};
+
+
+const DiscountAll = async () => {
+    var result = window.confirm("Etes-vous vraiment sur?");
+
+    if (result) {
+        const discount = parseInt(document.getElementById('discountvalueall').value);
+        await requesttoBackend('PUT', `boutique/discountall/nuance/${discount > 0 ? discount : 0}`, {});
+        initDataLoader();
+    }
+
+};
+
+const DiscountOne = () => {
+    $('.discountCheckbox').css('display', 'inline');
+};
+
+
+const DiscountOneUpdate = async (htmlid, id) => {
+    const checked = document.getElementById(`${htmlid}`).checked;
+    const discount = parseInt(document.getElementById('discountvalueone').value);
+    if (checked && discount > 0) {
+        const article = await GetArticleByID(id);
+        const percentage = (discount / 100) * parseInt(article.addprix);
+        const valuer = parseInt(article.addprix) - percentage;
+
+        await requesttoBackend('PUT', `boutique/onediscount/one/${id}`, { addreduction: valuer });
+    } else if (!checked) {
+        await requesttoBackend('PUT', `boutique/onediscount/one/${id}`, { addreduction: 0 });
+    } else {
+        alert("Entrez le pourcentage")
+    }
+
+};

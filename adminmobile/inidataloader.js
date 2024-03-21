@@ -38,8 +38,6 @@ async function initDataLoader() {
             NafigatioTo("dasboard");
 
         } catch (error) {
-            NafigatioTo("dasboard");
-
             console.log(error);
         }
         $(function () {

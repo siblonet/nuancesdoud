@@ -1107,15 +1107,112 @@
 
 
 
+    <div class="opp-bottom" id="opp-bottom-open">
+        <a style="padding: 10px; border-radius: 10px; background-color: #007fbb; font-size: 14px; font-weight: bold; color: #ffffff;"
+            onclick="Dicountstyle('open')">
+            <i class="lnr lnr-layers"></i>
+        </a>
+    </div>
 
-    <div class="add-article" id="add-article">
+    <div class="opp-bottom" id="opp-bottom">
+        <a style="padding: 10px; border-radius: 10px; background-color: #bb2c00; font-size: 14px; font-weight: bold; color: #ffffff;"
+            onclick="Dicountstyle('none')">
+            x
+        </a>
+
+        <p style="height: 10px;"> </p>
+
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer"
+            onclick="Dicountstyle('all')">
+            <span
+                style="padding: 10px; border-radius: 10px; background-color: #752741; font-size: 14px; font-weight: bold; color: #ffffff;">
+                -0%</span>
+            <span style="width: 10px;"> </span>
+
+            <p style="font-size: 14px; color: #000000;">Add-discount-to-all</p>
+        </a>
+        <p style="height: 10px;"> </p>
+
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer"
+            onclick="Dicountstyle('one')">
+            <span
+                style="padding: 10px; border-radius: 10px; background-color: #f709eb; font-size: 14px; font-weight: bold; color: #ffffff;">
+                -0%</span>
+            <span style="width: 10px;"> </span>
+
+            <p style="font-size: 14px; color: #000000;">add-discount-to-some</p>
+        </a>
+
+        <p style="height: 10px;"> </p>
+
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer" onclick="DiscountAll()">
+            <span
+                style="padding: 10px; border-radius: 10px; background-color: #007bff; font-size: 14px; font-weight: bold; color: #ffffff;">
+                0%</span>
+            <span style="width: 10px;"> </span>
+
+            <p style="font-size: 14px; color: #000000;">Remove-all-discount</p>
+        </a>
+
+
+        <p style="height: 10px;"> </p>
+
+        <a style="display: flex; justify-content: flex-start; align-items: center; height: 40px; cursor: pointer" onclick="Dicountstyle('off')">
+            <span
+                style="padding: 10px; border-radius: 10px; background-color: #007fbb; font-size: 14px; font-weight: bold; color: #ffffff;">
+                0%</span>
+            <span style="width: 10px;"> </span>
+            <p style="font-size: 14px; color: #000000;">Remove-some-discount</p>
+
+        </a>
+        <p style="height: 15px;"> </p>
+
+        <a>
+            <button type="button" id="autocliadd" class="btn btn-primary" data-toggle="modal" data-target="#addArticle"
+                onclick="StartCreateArticle()">
+                Ajouter
+            </button>
+            <input type="hidden" id="autocliaddcheck" value="off">
+        </a>
+
+    </div>
+
+
+    <div class="discount-feilds" id="discount-feildsall">
+        <input type="number" id="discountvalueall">
+        <span style="width: 10px;"></span>
+
+        <span class="discount-bottoms" style="background-color: #007bff" onclick="DiscountAll()">
+            ALL
+        </span>
+
+        <span class="discount-bottoms" style="background-color: #ff0077" onclick="Dicountstyle('none')">
+            x
+        </span>
+    </div>
+
+    <div class="discount-feilds" id="discount-feildsone">
+        <input type="number" id="discountvalueone">
+        <span style="width: 10px;"></span>
+
+        <span class="discount-bottoms" style="background-color: #007fbb;" onclick="DiscountOne()">
+            Choose
+        </span>
+
+        <span class="discount-bottoms" style="background-color: #ff0077" onclick="Dicountstyle('none')">
+            x
+        </span>
+    </div>
+
+
+    <!--div class="add-article" id="add-article">
 
         <button type="button" id="autocliadd" class="btn btn-primary" data-toggle="modal" data-target="#addArticle"
             onclick="StartCreateArticle()">
             Ajouter
         </button>
         <input type="hidden" id="autocliaddcheck" value="off">
-    </div>
+    </div-->
 
 
     <div class="add-article" id="filter-order">
