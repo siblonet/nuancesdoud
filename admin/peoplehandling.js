@@ -91,6 +91,7 @@ async function openClientforedit(clid, whos) {
     const token = sessionStorage.getItem('tibule');
     const splo = token.split("°");
     const userid = thisiswhat(`${splo[0]}`);
+    const userCurrent = await GetPersonByID(userid)
 
     const usermodif = document.getElementById('usermodif');
     usermodif.innerHTML = "";
@@ -136,20 +137,20 @@ async function openClientforedit(clid, whos) {
         usermodif.innerHTML = usermodifHTML;
     } 
 
-    if (opennedClient.userdelete && !isAdmin) {
+    if (userCurrent.userdelete && !isAdmin) {
         const usermodifHTML = `
         <button type="button" class="btn btn-danger" data-dismiss="modal"
         onclick="deleteUser()">Supprimer</button>
     `;
         usermodif.innerHTML = usermodifHTML;
-    } else if (opennedClient.userinfo && !isAdmin) {
+    } else if (userCurrent.userinfo && !isAdmin) {
         const usermodifHTML = `
         <button type="button"  class="btn btn-outline-success" data-dismiss="modal"
             onclick="updateUser()">Modifer
         </button>
     `;
         usermodif.innerHTML += usermodifHTML;
-    } else if (opennedClient.userstatus && !isAdmin) {
+    } else if (userCurrent.userstatus && !isAdmin) {
         const usermodifHTML = `
         <button type="button" class="btn btn-info" data-dismiss="modal"
         onclick="changePeopleStatus('staff')">Employer</button>
