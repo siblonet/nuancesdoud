@@ -532,11 +532,12 @@ Add Article CSS
     max-height: 600px !important;
 }
 
-#backglise{
+#backglise {
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: contain !important;
 }
+
 .pubstyle {
     display: flex;
     justify-content: space-between;
@@ -566,4 +567,66 @@ Add Article CSS
     border-radius: 50px !important;
     box-shadow: 0 .4rem .8rem #0005;
     cursor: pointer !important;
+}
+
+
+/*================================================
+option menu botom CSS
+=================================================*/
+.opp-bottom {
+    position: fixed;
+    cursor: pointer;
+    bottom: -45px;
+    left: 25px;
+    background-color: transparent;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.opp-bottom.active {
+    bottom: 5%;
+    opacity: 1;
+    visibility: visible !important;
+
+}
+
+.discount-feilds {
+    position: fixed;
+    bottom: -45px;
+    left: 25px;
+    background-color: transparent;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discount-feilds.active {
+    bottom: 5%;
+    opacity: 1;
+    visibility: visible !important;
+
+}
+
+.discount-bottoms {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.discountCheckbox {
+    height: 30px;
+    width: 30px;
+    margin-right: -50px;
+    display: none;
 }
