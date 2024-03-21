@@ -124,40 +124,7 @@ async function SelectedProductRendering(viewid) {
             $('.tabs li.current a').css('border-color', `${prod.addcoul.substring(16, 23)}`);
 
 
-            const emptyadd = document.getElementById('emptyadd');
-            emptyadd.style.width = "100%"
-            emptyadd.style.height = "500px"
-            const emptyaddHtml = `
-                        <section class="facility-area pb-70 foot-circle">
-                            <section class="offer-area bg-image1 ptb-100">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-6">
-                                        <div class="offer-content">
-                                        <span class="sub-title" style="color: #006e65 !important;"></span>
-
-
-
-
-                                        <h2></h2>
-                                        <p></p>
-
-                                        <div class="anim">
-                                            <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
-                                            <a href="#product-container" class="button-85 wow comIn"
-                                                data-wow-delay=".3s">
-                                               
-                                            </a>
-                                        </div>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </section>
-                        `;
-
-            emptyadd.innerHTML = emptyaddHtml;
+            
             const livecha = document.getElementById('live-chat');
 
             setTimeout(() => {
@@ -171,40 +138,7 @@ async function SelectedProductRendering(viewid) {
             errerp.innerText = "Error Inconnu";
             errerp.style.color = "red";
             document.getElementById('nothingEroo').innerHTML = "";
-            const emptyadd = document.getElementById('emptyadd');
-            emptyadd.style.width = "100%"
-            emptyadd.style.height = "500px"
-            const emptyaddHtml = `
-                        <section class="facility-area pb-70 foot-circle">
-                            <section class="offer-area bg-image1 ptb-100">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-6">
-                                        <div class="offer-content">
-                                        <span class="sub-title" style="color: #006e65 !important;"></span>
-
-
-
-
-                                        <h2></h2>
-                                        <p></p>
-
-                                        <div class="anim">
-                                            <div class="button-85a  wow comIn" data-wow-delay=".3s"></div>
-                                            <a href="#product-container" class="button-85 wow comIn"
-                                                data-wow-delay=".3s">
-                                               
-                                            </a>
-                                        </div>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </section>
-                        `;
-
-            emptyadd.innerHTML = emptyaddHtml;
+            
             const livecha = document.getElementById('live-chat');
 
             setTimeout(() => {
