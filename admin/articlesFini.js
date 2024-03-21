@@ -6,12 +6,6 @@ function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAtic
     ActiveAr.classList.add('active');
     ActiveAn.classList.remove('active');
 
-    const livecha = document.getElementById('add-article');
-
-    setTimeout(() => {
-        livecha.classList.add('active');
-    }, 1000);
-
 
     GetArticle("zero").then((offarticles) => {
 

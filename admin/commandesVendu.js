@@ -10,8 +10,6 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
     ActiveAn.classList.remove('active');
     document.getElementById('searcha').style.display = "none";
 
-    document.getElementById('add-article').classList.remove('active');
-
 
     const filterorder = document.getElementById('filter-order');
     setTimeout(() => {
