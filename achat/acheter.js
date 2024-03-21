@@ -153,6 +153,12 @@ async function sendCommen() {
             };
 
             SendPanierToOrder(articleOne);
+        } else {
+            alert("Renseignez les chemps obligatoire");
+            document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
         };
 
     } else {
@@ -240,7 +246,9 @@ async function sendCommen() {
         } else {
             alert("Renseignez les chemps obligatoire");
             document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
-
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
         }
     }
 

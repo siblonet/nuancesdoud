@@ -478,7 +478,7 @@ async function showProductQuickView(a, productId) {
         };
 
         document.getElementById('idp').value = product.who;
-        document.getElementById('ido').value = `${product._id} `;
+        document.getElementById('ido').value = `${product._id}`;
 
         const element = document.getElementById('hidlater');
         element.classList.remove('hiddendhid');
@@ -522,7 +522,7 @@ async function showProductQuickView(a, productId) {
 
 
         document.getElementById('idp').value = product.who;
-        document.getElementById('ido').value = `${product._id} `;
+        document.getElementById('ido').value = `${product._id}`;
 
         const element = document.getElementById('hidlater');
         element.classList.remove('hiddendshow');
