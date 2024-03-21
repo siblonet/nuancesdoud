@@ -595,6 +595,7 @@ adresseValueA.addEventListener("input", function () {
 });
 
 telephoneValueA.addEventListener("input", function () {
+    telephoneValueA.value = telephoneValueA.value.replace(/^(\+|)225/g, "");
 
     if (telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         $('.haidnom').css('display', 'inline');
