@@ -1,19 +1,4 @@
 let paymen_method_selected = "noselected";
-const VALIDAHTML = `
-                        <a style="cursor: pointer !important" class="default-btn loading" onclick="sendCommen()"
-                                    id="noorderduplu">
-                            <span class="" id="tohia">Valider la commande</span>
-                            <div class="tohi" id="tohi">
-                                <p>En cours ...</p>
-                            </div>
-                        </a>
-`;
-
-const prenomValueA = document.getElementById('prenomValue');
-const nomValueA = document.getElementById('nomValue');
-const villeValueA = document.getElementById('villeValue');
-const adresseValueA = document.getElementById('adresseValue');
-const telephoneValueA = document.getElementById('telephoneValue');
 
 function RenderingCheckout() {
     getallPanier();
@@ -31,8 +16,6 @@ function RenderingCheckout() {
         document.getElementById('nomValue').value = thisiswhat(`${lastname}`);
         document.getElementById('nomValue').disabled = true;
         document.getElementById('telephoneValue').value = mynam;
-        $('.haidville').css('display', 'inline');
-
         const connectedor = document.getElementById('connectedor');
         connectedor.innerHTML = '';
         const connectedorHTML =
@@ -130,6 +113,9 @@ async function getallPanier() {
 async function sendCommen() {
     document.getElementById('noorderduplu').setAttribute('onclick', null);
 
+    const payment_method = paymen_method_selected === "null" ? "cash" : paymen_method_selected;
+
+
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
@@ -140,7 +126,7 @@ async function sendCommen() {
     const token = sessionStorage.getItem('tibule');
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
 
-    if (token && paymen_method_selected !== "noselected") {
+    if (token) {
         const splo = token.split("°");
 
         const _id = splo[0];
@@ -161,7 +147,7 @@ async function sendCommen() {
                 owner: "nuance",
                 client: mynam,
                 reduction: 0,
-                payment_method: paymen_method_selected,
+                payment_method: payment_method,
                 payment_status: "waiting",
                 transaction_id: transaction_id,
             };
@@ -182,7 +168,7 @@ async function sendCommen() {
         const adresseValue = document.getElementById('adresseValue').value;
         const telephoneValue = document.getElementById('telephoneValue').value;
 
-        if (paymen_method_selected !== "noselected" && prenomValue && nomValue && villeValue && adresseValue && telephoneValue) {
+        if (prenomValue && nomValue && villeValue && adresseValue && telephoneValue) {
             const person = {
                 prenom: prenomValue,
                 nom: nomValue,
@@ -221,7 +207,7 @@ async function sendCommen() {
                         owner: "nuance",
                         reduction: 0,
                         client: clientid,
-                        payment_method: paymen_method_selected,
+                        payment_method: payment_method,
                         payment_status: "waiting",
                         transaction_id: transaction_id,
                     };
@@ -278,17 +264,18 @@ async function sendCommen() {
 
 
 async function loginCommage() {
-    const connectedor = document.getElementById('connectedor');
+    const tohia = document.getElementById('tohia');
+    const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
     const phone = document.getElementById('phone').value;
     const password = document.getElementById('password').value;
 
     if (phone && password) {
-        connectedor.innerHTML = `
-            <div class="user-actions-linear"></div>
-            <span class="span" style="color: #ff0000 !important;">Connexion en cours ...</span>
-        `;
         try {
+            tohia.classList.add("tohi");
+            load.classList.remove("tohi");
+            load.classList.add("load28");
+
             const userCredentials = {
                 phone: phone,
                 motdepass: password,
@@ -297,59 +284,13 @@ async function loginCommage() {
             const responseData = await requesttoBackend('POST', 'people/login/nuance', userCredentials);
 
             if (!responseData) {
-                connectedor.innerHTML = `
-                <div class="user-actions-linear"></div>
-
-
-                <i style="color: #037703 !important;" class="bx bx-log-in">
-                </i>
-                <span class="span" style="color: #000000 !important;">Client
-                    déjà enregistré ?
-                    <a style="color: #037703 !important;" onmouseover="this.style.color='#007bff'"
-                        onmouseout="this.style.color='#000000'" data-bs-toggle="modal"
-                        data-bs-target="#connexionComade">
-                        Cliquez ici pour vous connecter
-                    </a>
-                </span>
-            `;
                 handleLoginError("Erreur inconnue, veuillez réessayer plus tard");
             } else if (responseData && responseData.token) {
                 handleSuccessfulLogin(responseData);
             } else if (responseData && responseData.ee) {
                 handleLoginError("Identifiants incorrects !");
-                connectedor.innerHTML = `
-                <div class="user-actions-linear"></div>
-
-
-                <i style="color: #037703 !important;" class="bx bx-log-in">
-                </i>
-                <span class="span" style="color: #000000 !important;">Client
-                    déjà enregistré ?
-                    <a style="color: #037703 !important;" onmouseover="this.style.color='#007bff'"
-                        onmouseout="this.style.color='#000000'" data-bs-toggle="modal"
-                        data-bs-target="#connexionComade">
-                        Cliquez ici pour vous connecter
-                    </a>
-                </span>
-            `;
             }
         } catch (error) {
-            console.log(error);
-            connectedor.innerHTML = `
-            <div class="user-actions-linear"></div>
-
-
-                <i style="color: #037703 !important;" class="bx bx-log-in">
-                </i>
-                <span class="span" style="color: #000000 !important;">Client
-                    déjà enregistré ?
-                    <a style="color: #037703 !important;" onmouseover="this.style.color='#007bff'"
-                        onmouseout="this.style.color='#000000'" data-bs-toggle="modal"
-                        data-bs-target="#connexionComade">
-                        Cliquez ici pour vous connecter
-                    </a>
-                </span>
-        `
             handleLoginError("Vérifiez que vous avez accès à l'internet");
         }
     } else {
@@ -358,6 +299,9 @@ async function loginCommage() {
 
     function handleLoginError(errorMessage) {
         setTimeout(() => {
+            load.classList.remove("load28");
+            load.classList.add("tohi");
+            tohia.classList.remove("tohi");
             errer.classList.add("rejected");
             document.getElementById('nointer').innerText = errorMessage;
 
@@ -381,13 +325,16 @@ async function loginCommage() {
         document.getElementById('nomValue').value = lastName;
         document.getElementById('nomValue').disabled = true;
         document.getElementById('telephoneValue').value = telphone;
-        $('.haidville').css('display', 'inline');
 
         const connectedor = document.getElementById('connectedor');
         connectedor.innerHTML = `
             <div class="user-actions-linear"></div>
             <span class="span" style="color: #037703 !important;"> Bienvenue ${mynama}</span>
         `;
+
+        load.classList.remove("load28");
+        load.classList.add("tohi");
+        tohia.classList.remove("tohi");
     }
 }
 
@@ -400,7 +347,7 @@ async function SendPanierToOrder(tocomp) {
 
     try {
         const tocompl = await GetPannierToSend(tocomp);
-        if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "noselected") {
+        if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "null") {
             await KaliaPay(tocompl);
         } else if (tocompl) {
             const response = await requesttoBackend('POST', 'orders/nuance', tocompl);
@@ -458,20 +405,14 @@ const PaymenSelecion = (paymen_method) => {
         customerphone.value = "";
         customerphone.placeholder = "";
         customerphone.style.display = "none";
-    };
-
-
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
-        document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
-
     }
 };
 
 
 const Payment_Choix = (paymen_choix) => {
-    paymen_method_selected = paymen_choix;
-
     if (paymen_choix === "cash") {
+        paymen_method_selected = "cash";
+
         const customerphone = document.getElementById('customerphone');
         customerphone.value = "";
         customerphone.placeholder = "";
@@ -481,11 +422,6 @@ const Payment_Choix = (paymen_choix) => {
         document.getElementById('mtnci').classList.remove('payment_icons_selected');
         document.getElementById('waveci').classList.remove('payment_icons_selected');
         document.getElementById('cards').classList.remove('payment_icons_selected');
-
-        if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
-            document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
-
-        }
     }
 };
 
@@ -533,17 +469,26 @@ const KaliaPay = async (order) => {
     }
 };
 
+const VALIDAHTML = `
+                        <a style="cursor: pointer !important" class="default-btn loading" onclick="sendCommen()"
+                                    id="noorderduplu">
+                            <span class="" id="tohia">Valider la commande</span>
+                            <div class="tohi" id="tohi">
+                                <p>En cours ...</p>
+                            </div>
+                        </a>
+`;
 
+const prenomValueA = document.getElementById('prenomValue');
+const nomValueA = document.getElementById('nomValue');
+const villeValueA = document.getElementById('villeValue');
+const adresseValueA = document.getElementById('adresseValue');
+const telephoneValueA = document.getElementById('telephoneValue');
+const payment_methodA = paymen_method_selected !== "null" ? paymen_method_selected : "cash";
 
 // Add an event listener for the input event
 prenomValueA.addEventListener("input", function () {
-
-    if (prenomValueA.value.length > 2) {
-        $('.haidville').css('display', 'inline');
-
-    };
-
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+    if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
     } else {
@@ -553,13 +498,7 @@ prenomValueA.addEventListener("input", function () {
 });
 
 nomValueA.addEventListener("input", function () {
-
-    if (nomValueA.value.length > 2) {
-        $('.haidprenom').css('display', 'inline');
-
-    };
-
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+    if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
     } else {
@@ -569,13 +508,7 @@ nomValueA.addEventListener("input", function () {
 });
 
 villeValueA.addEventListener("input", function () {
-
-    if (villeValueA.value.length > 2) {
-        $('.haidadress').css('display', 'inline');
-
-    };
-
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+    if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
     } else {
@@ -585,7 +518,7 @@ villeValueA.addEventListener("input", function () {
 });
 
 adresseValueA.addEventListener("input", function () {
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+    if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
     } else {
@@ -595,13 +528,7 @@ adresseValueA.addEventListener("input", function () {
 });
 
 telephoneValueA.addEventListener("input", function () {
-
-    if (telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
-        $('.haidnom').css('display', 'inline');
-
-    };
-
-    if (paymen_method_selected !== "noselected" && prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+    if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
         document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
     } else {
