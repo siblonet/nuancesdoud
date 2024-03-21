@@ -460,9 +460,9 @@ async function showProductQuickView(a, productId) {
         document.getElementById('quickViewProductName').innerText = product.addarticle;
         document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)} `;
 
-        document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
+        document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addprix / 1000).toFixed(3)} F.CFA` : "";
 
-        document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
+        document.getElementById('quickViewNewPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : `${(product.addprix / 1000).toFixed(3)} F.CFA`;
         $('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
@@ -506,8 +506,10 @@ async function showProductQuickView(a, productId) {
 
         document.getElementById('quickViewProductName').innerText = product.addarticle;
         document.getElementById('quickViewProductName').style.color = `${product.addcoul.substring(0, 7)} `;
-        document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : "";
-        document.getElementById('quickViewNewPrice').innerText = `${(product.addprix / 1000).toFixed(3)} F.CFA`;
+        document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addprix / 1000).toFixed(3)} F.CFA` : "";
+
+        document.getElementById('quickViewNewPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : `${(product.addprix / 1000).toFixed(3)} F.CFA`;
+        
         $('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
