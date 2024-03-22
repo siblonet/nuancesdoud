@@ -289,12 +289,20 @@ function recentProduct(recenPr, ADA) {
                     <span class="category" style="color: ${product.addreduction > 0 ? product.addcoul.substring(0, 7) : "#000000"};">Parfum</span>
                     <h3><a href="detaila?ov=${product._id}" style="color: ${product.addreduction > 0 ? "#000000" : product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                     <div class="star-rating">
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <!--
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                         <i class="bx bxs-star"></i>
                         <span style="color: #aaaaaa !important">5 étoiles</span>
+                        
+                        -->
                     </div>
                     <div class="price">
                     ${product.addreduction > 0 && product.addreduction < product.addprix ?
@@ -762,12 +770,21 @@ async function FilterArticle(search) {
                     <span class="category" style="color: ${product.addreduction > 0 ? product.addcoul.substring(0, 7) : "#000000"};">Parfum</span>
                     <h3><a href="detaila?ov=${product._id}" style="color: ${product.addreduction > 0 ? "#000000" : product.addcoul.substring(0, 7)};">${product.addarticle}</a></h3>
                     <div class="star-rating">
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <i class="bx bxs-star"></i>
+                        <!--
+                        
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(0, 7)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(8, 15)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(16, 23)} !important"></i>
                         <i class="bx bxs-star" style="color: ${product.addcoul.substring(24, 31)} !important"></i>
                         <i class="bx bxs-star"></i>
                         <span style="color: #aaaaaa !important">5 étoiles</span>
+                        
+                        -->
                     </div>
                     <div class="price">
                     ${product.addreduction > 0 && product.addreduction < product.addprix ?
