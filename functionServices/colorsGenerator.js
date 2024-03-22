@@ -88,6 +88,8 @@ function displayColors(colors) {
 
 function choosedColor(color) {
     const choosenColor = document.getElementById('choosenColor');
+    document.getElementById('addcoul').value = "";
+
     if (ChoosenColor.length < 4) {
         ChoosenColor.push(color);
 
@@ -172,6 +174,7 @@ function displayColorsA(colors) {
 
 function choosedColorA(color) {
     const choosenColor = document.getElementById('choosenColora');
+    document.getElementById('addcoul').value = "";
     if (ChoosenColor.length < 4) {
         ChoosenColor.push(color);
 
