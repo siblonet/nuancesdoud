@@ -386,7 +386,7 @@ async function EditeArticle() {
         const addgenre = document.getElementById('editegenre').value;
         const addprix = document.getElementById('editeprix').value;
         const addreduction = document.getElementById('editereduction').value;
-        const addcoul = document.getElementById('editecoul').value == "#000000,#000000,#000000,#000000" ? AutoChoosenColor : document.getElementById('editecoul').value;
+        const addcoul = document.getElementById('editecoul').value;
         const addmarque = document.getElementById('editemarque').value;
         const addbarcode = document.getElementById('editebarcode').value;
         const notes = document.getElementById('editenotes').value;
@@ -401,7 +401,7 @@ async function EditeArticle() {
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
                 addoccasion: "",
-                addcoul: addcoul,
+                addcoul: addcoul == "#000000,#000000,#000000,#000000" ? AutoChoosenColor : addcoul,
                 addmarque: addmarque,
                 notes: notes,
                 owner: "nuance",
