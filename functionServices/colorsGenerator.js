@@ -88,7 +88,6 @@ function displayColors(colors) {
 
 function choosedColor(color) {
     const choosenColor = document.getElementById('choosenColor');
-    document.getElementById('addcoul').value = "";
 
     if (ChoosenColor.length < 4) {
         ChoosenColor.push(color);
@@ -174,8 +173,9 @@ function displayColorsA(colors) {
 
 function choosedColorA(color) {
     const choosenColor = document.getElementById('choosenColora');
-    document.getElementById('addcoul').value = "";
+    const editecoulOld = document.getElementById('editecoul');
     if (ChoosenColor.length < 4) {
+        editecoulOld.value = editecoulOld.value.length > 24 ? "" : editecoulOld.value;
         ChoosenColor.push(color);
 
         const colorBox = document.createElement('div');
@@ -190,7 +190,7 @@ function choosedColorA(color) {
         choosenColor.appendChild(colorBox);
 
         // Update addcoul input field
-        document.getElementById('editecoul').value += color + (ChoosenColor.length === 4 ? "" : ",");
+        editecoulOld.value += color + (ChoosenColor.length === 4 ? "" : ",");
     }
 }
 
