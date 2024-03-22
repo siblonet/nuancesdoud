@@ -133,7 +133,7 @@ function CreateArticle() {
                 addprix: parseInt(addprix),
                 addreduction: parseInt(addreduction),
                 addoccasion: "",
-                addcoul: addcoul ? addcoul : "#000000,#000000,#000000,#000000",
+                addcoul: addcoul ? addcoul : AutoChoosenColor,
                 addmarque: addmarque,
                 notes: notes,
                 barcode: addbarcode,
@@ -381,7 +381,7 @@ async function EditeArticle() {
         const addgenre = document.getElementById('editegenre').value;
         const addprix = document.getElementById('editeprix').value;
         const addreduction = document.getElementById('editereduction').value;
-        const addcoul = document.getElementById('editecoul').value;
+        const addcoul = document.getElementById('editecoul').value == "#000000,#000000,#000000,#000000" ? AutoChoosenColor : document.getElementById('editecoul').value;
         const addmarque = document.getElementById('editemarque').value;
         const addbarcode = document.getElementById('editebarcode').value;
         const notes = document.getElementById('editenotes').value;

@@ -70,7 +70,7 @@ function rgbToHsl(r, g, b) {
 
 function displayColors(colors) {
     const colorsDiv = document.getElementById('colors');
-
+    AutoChoosenColor = `${colors[0] ? colors[0] : '#000000'},${colors[1] ? colors[1] : '#000000'},${colors[2] ? colors[2] : '#000000'},${colors[3] ? colors[3] : '#000000'}`
     colorsDiv.innerHTML = '';
     colors.forEach(color => {
         const colorBox = document.createElement('div');
@@ -144,7 +144,7 @@ function RemoveColor(removedColor) {
 function loadImageFromURL(url, callback) {
     const img = new Image();
     img.crossOrigin = "Anonymous"; // This is necessary if the image is hosted on a different domain
-    img.onload = function() {
+    img.onload = function () {
         callback(img);
     };
     img.src = url;
@@ -153,6 +153,7 @@ function loadImageFromURL(url, callback) {
 
 function displayColorsA(colors) {
     const colorsDiv = document.getElementById('colorsa');
+    AutoChoosenColor = `${colors[0] ? colors[0] : '#000000'},${colors[1] ? colors[1] : '#000000'},${colors[2] ? colors[2] : '#000000'},${colors[3] ? colors[3] : '#000000'}`
 
     colorsDiv.innerHTML = '';
     colors.forEach(color => {

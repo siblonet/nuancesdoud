@@ -16,3 +16,4 @@ let isFinis = false;
 let isPeoples = false;
 let adMinurl = 'admini';
 let ChoosenColor = [];
+let AutoChoosenColor = "";
