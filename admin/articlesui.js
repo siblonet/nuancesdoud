@@ -327,6 +327,19 @@ async function EditeArticleImage() {
     reader.onload = async function (event) {
         const base64Data = event.target.result.split(',')[1];
 
+
+        loadImageFromURL(event.target.result, function (img) {
+            const canvas = document.getElementById('imageCanvas');
+
+            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            const colors = getColorsFromImageData(imageData);
+            displayColorsA(colors);
+        });
+
         const response = await fetch(apiUrlfine + "boutique/uploadImage", {
             method: 'POST',
             headers: {
@@ -337,7 +350,6 @@ async function EditeArticleImage() {
 
         if (response.ok) {
             const url = await response.json();
-            console.log(url);
             Onlineimas[0].ima = url.ima;
             setTimeout(() => {
                 imagePreview.src = url.ima;
