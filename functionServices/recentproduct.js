@@ -463,12 +463,12 @@ async function showProductQuickView(a, productId) {
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addprix / 1000).toFixed(3)} F.CFA` : "";
 
         document.getElementById('quickViewNewPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        $('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
+        /*$('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
         $('.rating .four').css('color', `${product.addcoul.substring(24, 31)} `);
 
-        document.getElementById('rating').innerText = `5 étoiles`;
+        document.getElementById('rating').innerText = `5 étoiles`;*/
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
 
@@ -514,7 +514,7 @@ async function showProductQuickView(a, productId) {
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
         $('.rating .four').css('color', `${product.addcoul.substring(24, 31)} `);
-        document.getElementById('rating').innerText = `5 étoile`;*/
+        document.getElementById('rating').innerText = `5 étoiles`;*/
         document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
 
         let prodque = document.getElementById('productQuantity');
