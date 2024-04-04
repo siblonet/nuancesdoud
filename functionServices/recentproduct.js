@@ -420,7 +420,7 @@ function recentProduct(recenPr, ADA) {
     } else {
         const tokens = sessionStorage.getItem('tibule');
         const productHTML = `
-            < div class= "container" >
+            <div class= "container">
                     <div class="section-title">
                         <h2>Le magasin est vide pour l'instant</h2>
                     </div>
@@ -879,7 +879,7 @@ async function FilterArticle(search) {
     } else {
 
         const productHTML = `
-        < div class="container" >
+        <div class="container">
                     <div class="section-title">
                         <h2>${search} est indisponible pour l'instant</h2>
                     </div>
@@ -887,7 +887,7 @@ async function FilterArticle(search) {
                         <img src="assets/img/error-404.png" alt="Le magasin est vide">
                     </div>
                  
-                </div >
+                </div>
         `;
 
         productContainer.innerHTML = productHTML;
