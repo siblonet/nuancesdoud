@@ -167,6 +167,8 @@ function CreateArticle() {
 
 async function AddArticleImage() {
     const imagePreview = document.getElementById(`imagePreviewHere`);
+    if (DeleteImage("imagePreviewHere")) {
+
     imagePreview.src = '';
 
     const fileInput = document.getElementById(`doblik11`);
@@ -180,7 +182,7 @@ async function AddArticleImage() {
     const reader = new FileReader();
     reader.onload = async function (event) {
         const base64Data = event.target.result.split(',')[1];
-        const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name });
+        const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name, old_image: null});
         const imarandomid = Math.floor(Math.random() * 100000000).toString()
         Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
 
@@ -208,21 +210,42 @@ async function AddArticleImage() {
     };
     reader.readAsDataURL(file);
     document.getElementById('limitimag1').style.display = "none";
-
+    }
 }
 
 
 function removeImageCreate() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
     const imagePreview = document.getElementById(`imagePreviewHere`);
-    imagePreview.src = '';
 
     if (result) {
-        Onlineimas.length = 0;
-        document.getElementById('limitimag1').style.display = "flex";
+        if (DeleteImage("imagePreviewHere")) {
+            imagePreview.src = '';
+            Onlineimas.length = 0;
+            document.getElementById('limitimag1').style.display = "flex";
+        }
     }
 
 }
+
+const DeleteImage = async (imagetagid) => {
+    const imagePreview = document.getElementById(`${imagetagid}`);
+    if (imagePreview.src !== "../admin/assets/img/imgo.png") {
+        try {
+            const del_url = await requesttoBacken('POST', 'boutique/deleteImage', { image_url: imagePreview.src });
+            if (del_url.done) {
+                return true;
+            }
+        } catch (error) {
+            console.error("Error deleting image:", error);
+            return false;
+        }
+    } else {
+        return true;
+    }
+};
+
+
 
 
 async function openArticleforediting(id_has) {
@@ -294,10 +317,13 @@ function removeImageEdite() {
 
     if (result) {
         const imagePreview = document.getElementById(`Editeimage1`);
-        imagePreview.src = '../admin/assets/img/imgo.png';
-        Onlineimas[0].ima = "../admin/assets/img/imgo.png";
+        if (DeleteImage("Editeimage1")) {
+            imagePreview.src = '../admin/assets/img/imgo.png';
+            Onlineimas[0].ima = "../admin/assets/img/imgo.png";
 
-        document.getElementById('limitimage1').style.display = "flex";
+            document.getElementById('limitimage1').style.display = "flex";
+        }
+
     }
 
 
@@ -305,6 +331,8 @@ function removeImageEdite() {
 
 async function EditeArticleImage() {
     const imagePreview = document.getElementById(`Editeimage1`);
+    if (DeleteImage("Editeimage1")) {
+
     imagePreview.src = 'gghgh.jpg';
 
 
@@ -359,6 +387,7 @@ async function EditeArticleImage() {
     if (Onlineimas.length > 0) {
         document.getElementById('limitimage1').style.display = "none";
     }
+}
 };
 
 

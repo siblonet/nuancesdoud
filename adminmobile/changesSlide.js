@@ -18,6 +18,7 @@ ChangeSlade()
 const changeIcons = (event, which, idvalue) => {
     const slideaid = document.getElementById(idvalue).value;
     SladeLoading(which);
+    const chanBack = document.getElementById(which).style.backgroundImage;
 
     const file = event.target.files[0];
     if (file) {
@@ -25,7 +26,7 @@ const changeIcons = (event, which, idvalue) => {
 
         reader.onload = async function (e) {
             const base64Data = e.target.result.split(',')[1];
-            sendAnnonce(base64Data, file.name, which, slideaid);
+            sendAnnonce(base64Data, file.name, which, slideaid, chanBack, "image");
             $(`#${which}`).css("background-image", `url(${e.target.result})`);
 
         };
@@ -55,14 +56,16 @@ const changeSlade = (event, which, idvalue) => {
         reader.onload = async function (e) {
             const base64Data = e.target.result.split(',')[1];
             if (which === "baVdeo") {
-                checkVideoDuration(file, base64Data, which, slideaid);
+                checkVideoDuration(file, base64Data, which, slideaid, "chanVideo", "id");
 
                 $("#chanVideo").attr("src", videoElement.src);
                 $("#baVdeo")[0].load();
                 $("#baVdeo")[0].play();
                 $(".loadavideo").css("display", "none");
             } else {
-                sendAnnonce(base64Data, file.name, which, slideaid);
+                const chanBack = document.getElementById(which).style.backgroundImage;
+
+                sendAnnonce(base64Data, file.name, which, slideaid, chanBack, "image");
 
                 $(`#${which}`).css("background-image", `url(${e.target.result})`);
             }
@@ -73,7 +76,7 @@ const changeSlade = (event, which, idvalue) => {
     }
 };
 
-function checkVideoDuration(file, base64Data, which, anonceid) {
+function checkVideoDuration(file, base64Data, which, anonceid, chanVideoid, ido) {
     const maxDurationInSeconds = 10; // Set your desired maximum duration in seconds
 
     const videoElement = document.createElement('video');
@@ -88,7 +91,7 @@ function checkVideoDuration(file, base64Data, which, anonceid) {
             videoElement.src = '';
             document.body.removeChild(videoElement);
         } else {
-            sendAnnonce(base64Data, file.name, which, anonceid);
+            sendAnnonce(base64Data, file.name, which, anonceid, chanVideoid, ido);
 
             document.body.removeChild(videoElement);
         }
@@ -116,19 +119,62 @@ const SladeLoading = (which) => {
 }
 
 
-async function sendAnnonce(base64Data, fileName, which, anonceid) {
-    const response = await fetch(apiUrlfine + `boutique/annonce/nuance/${anonceid}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ima: base64Data, nam: fileName, which: which }),
-    });
+async function sendAnnonce(base64Data, fileName, which, anonceid, iddata, contint) {
+    if (contint === "id" && document.getElementById(`${iddata}`).src.startsWith("https")) {
+        const imagePreview = document.getElementById(`${iddata}`);
+        if (await DeleteAnnonceImage(imagePreview.src)) {
+            const response = await fetch(apiUrlfine + `boutique/annonce/nuance/${anonceid}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ima: base64Data, nam: fileName, which: which, old_image: null }),
+            });
 
-    if (!response.ok) {
-        alert('Error getting signed URL:', response.statusText);
+            if (!response.ok) {
+                alert('Error sending announcement:', response.statusText);
+            }
+        }
+    } else if (contint === "image" && iddata.startsWith("https")) {
+        if (await DeleteAnnonceImage(iddata)) {
+            const response = await fetch(apiUrlfine + `boutique/annonce/nuance/${anonceid}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ima: base64Data, nam: fileName, which: which, old_image: null }),
+            });
+
+            if (!response.ok) {
+                alert('Error sending announcement:', response.statusText);
+            }
+        }
+    } else {
+        const response = await fetch(apiUrlfine + `boutique/annonce/nuance/${anonceid}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ima: base64Data, nam: fileName, which: which, old_image: null }),
+        });
+
+        if (!response.ok) {
+            alert('Error sending announcement:', response.statusText);
+        }
+    }
+}
 
 
+const DeleteAnnonceImage = async (imagetagid) => {
+    try {
+        const del_url = await requesttoBacken('POST', 'boutique/deleteImage', { image_url: imagetagid });
+        if (del_url.done) {
+            return true;
+        }
+    } catch (error) {
+        alert("Error deleting image:");
+        console.error("Error deleting image:", error);
+        return false;
     }
 
-}
+};

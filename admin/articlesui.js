@@ -178,60 +178,80 @@ function CreateArticle() {
 
 async function AddArticleImage() {
     const imagePreview = document.getElementById(`imagePreviewHere`);
-    imagePreview.src = '';
+    if (DeleteImage("imagePreviewHere")) {
+        imagePreview.src = '';
 
-    const fileInput = document.getElementById(`doblik11`);
-    const file = fileInput.files[0];
+        const fileInput = document.getElementById(`doblik11`);
+        const file = fileInput.files[0];
 
-    if (!file) {
-        alert("Aucune image n'a été selectionné!");
-        return;
-    }
+        if (!file) {
+            alert("Aucune image n'a été selectionné!");
+            return;
+        }
 
-    const reader = new FileReader();
-    reader.onload = async function (event) {
-        const base64Data = event.target.result.split(',')[1];
-        const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name });
-        const imarandomid = Math.floor(Math.random() * 100000000).toString()
-        Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+            const base64Data = event.target.result.split(',')[1];
+            const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name, old_image: null });
+            const imarandomid = Math.floor(Math.random() * 100000000).toString()
+            Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
 
-        const img = document.getElementById('imagePreviewHere');
-        img.src = url.ima;
-
-
-        const canvas = document.getElementById('imageCanvas');
-        const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+            const img = document.getElementById('imagePreviewHere');
+            img.src = url.ima;
 
 
-        const imgG = new Image();
-        imgG.onload = function () {
-            canvas.width = imgG.width;
-            canvas.height = imgG.height;
-            ctx.drawImage(imgG, 0, 0, imgG.width, imgG.height);
-            const imageData = ctx.getImageData(0, 0, imgG.width, imgG.height);
-            const colors = getColorsFromImageData(imageData);
-            displayColors(colors);
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+
+
+            const imgG = new Image();
+            imgG.onload = function () {
+                canvas.width = imgG.width;
+                canvas.height = imgG.height;
+                ctx.drawImage(imgG, 0, 0, imgG.width, imgG.height);
+                const imageData = ctx.getImageData(0, 0, imgG.width, imgG.height);
+                const colors = getColorsFromImageData(imageData);
+                displayColors(colors);
+            };
+
+            imgG.src = event.target.result;
         };
-
-        imgG.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-    document.getElementById('limitimag1').style.display = "none";
-
+        reader.readAsDataURL(file);
+        document.getElementById('limitimag1').style.display = "none";
+    }
 }
 
 
 function removeImageCreate() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
-    const imagePreview = document.getElementById(`imagePreviewHere`);
-    imagePreview.src = '';
-
     if (result) {
-        Onlineimas.length = 0;
-        document.getElementById('limitimag1').style.display = "flex";
+        const imagePreview = document.getElementById(`imagePreviewHere`);
+        if (DeleteImage("imagePreviewHere")) {
+            imagePreview.src = '';
+            Onlineimas.length = 0;
+            document.getElementById('limitimag1').style.display = "flex";
+        }
     }
 
 }
+
+const DeleteImage = async (imagetagid) => {
+    const imagePreview = document.getElementById(`${imagetagid}`);
+    if (imagePreview.src !== "../admin/assets/img/imgo.png") {
+        try {
+            const del_url = await requesttoBacken('POST', 'boutique/deleteImage', { image_url: imagePreview.src });
+            if (del_url.done) {
+                return true;
+            }
+        } catch (error) {
+            alert("Error deleting image:");
+            console.error("Error deleting image:", error);
+            return false;
+        }
+    } else {
+        return true;
+    }
+};
 
 
 async function openArticleforediting(id_has) {
@@ -297,72 +317,75 @@ async function openArticleforediting(id_has) {
 
 function removeImageEdite() {
     var result = window.confirm("Voulez vous vraiment le retirer?");
-
     if (result) {
         const imagePreview = document.getElementById(`Editeimage1`);
-        imagePreview.src = 'admin/assets/img/imgo.png';
-        Onlineimas[0].ima = "admin/assets/img/imgo.png";
+        if (DeleteImage("Editeimage1")) {
+            imagePreview.src = '../admin/assets/img/imgo.png';
+            Onlineimas[0].ima = "../admin/assets/img/imgo.png";
 
-        document.getElementById('limitimage1').style.display = "flex";
+            document.getElementById('limitimage1').style.display = "flex";
+        }
+
     }
-
 
 }
 
 async function EditeArticleImage() {
     const imagePreview = document.getElementById(`Editeimage1`);
-    imagePreview.src = 'gghgh.jpg';
+    if (DeleteImage("Editeimage1")) {
+        imagePreview.src = 'gghgh.jpg';
 
 
-    const fileInput = document.getElementById(`Editeimageonline1inpu`);
-    const file = fileInput.files[0];
+        const fileInput = document.getElementById(`Editeimageonline1inpu`);
+        const file = fileInput.files[0];
 
-    if (!file) {
-        alert("Aucune image n'a été selectionné!");
-        return;
-    };
-
-
-    const reader = new FileReader();
-    reader.onload = async function (event) {
-        const base64Data = event.target.result.split(',')[1];
+        if (!file) {
+            alert("Aucune image n'a été selectionné!");
+            return;
+        };
 
 
-        loadImageFromURL(event.target.result, function (img) {
-            const canvas = document.getElementById('imageCanvas');
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+            const base64Data = event.target.result.split(',')[1];
 
-            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            const imageData = ctx.getImageData(0, 0, img.width, img.height);
-            const colors = getColorsFromImageData(imageData);
-            displayColorsA(colors);
-        });
 
-        const response = await fetch(apiUrlfine + "boutique/uploadImage", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ima: base64Data, nam: file.name }),
-        });
+            loadImageFromURL(event.target.result, function (img) {
+                const canvas = document.getElementById('imageCanvas');
 
-        if (response.ok) {
-            const url = await response.json();
-            Onlineimas[0].ima = url.ima;
-            setTimeout(() => {
-                imagePreview.src = url.ima;
-            }, 2500);
-        } else {
-            console.log("gegegeg")
+                const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const colors = getColorsFromImageData(imageData);
+                displayColorsA(colors);
+            });
+
+            const response = await fetch(apiUrlfine + "boutique/uploadImage", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ima: base64Data, nam: file.name }),
+            });
+
+            if (response.ok) {
+                const url = await response.json();
+                Onlineimas[0].ima = url.ima;
+                setTimeout(() => {
+                    imagePreview.src = url.ima;
+                }, 2500);
+            } else {
+                console.log("gegegeg")
+            }
+
+
+        };
+        reader.readAsDataURL(file);
+        if (Onlineimas.length > 0) {
+            document.getElementById('limitimage1').style.display = "none";
         }
-
-
-    };
-    reader.readAsDataURL(file);
-    if (Onlineimas.length > 0) {
-        document.getElementById('limitimage1').style.display = "none";
     }
 };
 
