@@ -51,20 +51,22 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
 
 
     try {
-        const orders = await requesttoBackend('GET', `orders/traitedAllOrder/nuance/0/${todeusole}`);
+        if (todeusole > 0) {
 
-        if (orders.orders && orders.orders.length > 0) {
-            await deleteOrder();
-            await PostOrder(orders.orders);
+            const orders = await requesttoBackend('GET', `orders/traitedAllOrder/nuance/0/${todeusole}`);
 
-
-            orders.orders.forEach((pan) => {
-                TotalRecet += parseInt(pan.reduction);
-            });
+            if (orders.orders && orders.orders.length > 0) {
+                await deleteOrder();
+                await PostOrder(orders.orders);
 
 
+                orders.orders.forEach((pan) => {
+                    TotalRecet += parseInt(pan.reduction);
+                });
 
-            ordersHTML = `
+
+
+                ordersHTML = `
                 <br>
                 <br>
                 <br>
@@ -72,14 +74,14 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                     <h1 style="margin-left: 25px;">Total: <span style="font-weight: bold">${(TotalRecet / 1000).toFixed(3)}</span> F.CFA</h1>
                 </div>
         ${orders.orders.map((order) => {
-                return `
+                    return `
                 <div class="articlerow">
       
                 <div class="articlerwedge">
       
                     <div class="articlesInfos">
                         ${order.articles.map(orar => {
-            return `
+                        return `
                             <div data-toggle="modal" data-target="#optionCancile"
                                 onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
@@ -88,7 +90,7 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                             </div>
                             <span style="width: 10px;"></span>
                             `;
-        }).join('')}
+                    }).join('')}
                     </div>
       
                     <hr>
@@ -106,9 +108,9 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                         <div class="payment_iconsadmin">
                             <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
                         </div>
-                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
-                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
-                        </p>
+                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">
+                        ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status == "vraison" ? "Payer à la livraison" : "échoué"}
+                    </p>
                     </div>
                 </div>
 
@@ -140,39 +142,51 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                     <br>
             
                     `;
-            }).join('')}
+                }).join('')}
 
                     ${orders.lengf > orders.orders.length ?
-                    `
+                        `
                             <div id="plusa" style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-bottom: 50px;">
                                 <button type="button" class="btn btn-outline-success"  style="align-self: center;"
                                     onclick="IncreaseItemsOrender(${todeusole}, '0', 'done')">Afficer les encients
                                 </button>
                             </div>
                             `
-                    :
-                    ""
-                }
+                        :
+                        ""
+                    }
 
 
             `;
 
-        } else if (orders.lengf == 0) {
-            ordersHTML = `
+            } else if (orders.lengf == 0) {
+                ordersHTML = `
                                     <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
                                         <p style="align-self: center; color: #ffffff">Vous n'avez rien vendu !</p>
                                     </div>
                                 `;
-        } else {
+            } else {
 
-            ordersHTML = `
+                ordersHTML = `
                                     <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
                                         <p style="align-self: center; color: #ffffff">Chargement échoué, verifie la connexion</p>
                                     </div>
                                 `;
+            }
+
+        } else {
+            ordersHTML = `
+    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+        <p style="align-self: center; color: #ffffff">Vous n'avez d'abord rien vendu !</p>
+    </div>
+<br>
+    <div id="plusa" style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-bottom: 50px;">
+                <button type="button" class="btn btn-outline-success"  style="align-self: center;"
+                    onclick="IncreaseItemsOrender(${todeusole}, '5', 'done')">Afficer les encients
+                </button>
+    </div>
+`;
         }
-
-
         adminiSpace.innerHTML = ordersHTML;
 
     } catch (error) {
@@ -250,9 +264,9 @@ const filterOrder = async () => {
                         <div class="payment_iconsadmin">
                             <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
                         </div>
-                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
-                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
-                        </p>
+                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">
+                        ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status == "vraison" ? "Payer à la livraison" : "échoué"}
+                    </p>
                     </div>
                 </div>
 

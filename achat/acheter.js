@@ -128,8 +128,8 @@ async function getallPanier() {
 
 
 async function sendCommen() {
+    console.log(paymen_method_selected);
     document.getElementById('noorderduplu').setAttribute('onclick', null);
-console.log("aaa");
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
@@ -141,7 +141,6 @@ console.log("aaa");
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
 
     if (token && paymen_method_selected !== "noselected") {
-        console.log("aaa");
 
         const splo = token.split("°");
 
@@ -164,13 +163,13 @@ console.log("aaa");
                 client: mynam,
                 reduction: 0,
                 payment_method: paymen_method_selected,
-                payment_status: "waiting",
+                payment_status: paymen_method_selected === "no" ? "vraison" : "waiting",
                 transaction_id: transaction_id,
             };
 
             SendPanierToOrder(articleOne);
         } else {
-            alert("Renseignez les chemps obligatoire");
+            alert("Renseignez les chemps obligatoire et Selectionnez methode de payment");
             document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
             load.classList.remove("load28");
             load.classList.add("tohi");
@@ -224,7 +223,7 @@ console.log("aaa");
                         reduction: 0,
                         client: clientid,
                         payment_method: paymen_method_selected,
-                        payment_status: "waiting",
+                        payment_status: paymen_method_selected === "no" ? "vraison" : "waiting",
                         transaction_id: transaction_id,
                     };
 
@@ -260,7 +259,7 @@ console.log("aaa");
 
 
         } else {
-            alert("Renseignez les chemps obligatoire");
+            alert("Renseignez les chemps obligatoire et Selectionnez methode de payment");
             document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
             load.classList.remove("load28");
             load.classList.add("tohi");

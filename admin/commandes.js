@@ -70,9 +70,9 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                                         <div class="payment_iconsadmin">
                                             <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
                                         </div>
-                                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
-                                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
-                                        </p>
+                                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">
+                                        ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status == "vraison" ? "Payer à la livraison" : "échoué"}
+                                    </p>
                                     </div>
                                 </div>
 
@@ -179,12 +179,41 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
 
 
-            const orderStatuHtml = document.getElementById('statusOrder');
-            orderStatuHtml.innerHTML = '';
+
+
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+            const statusOrderView = document.getElementById('statusOrderView');
+            const statusPaymentView = document.getElementById('statusPaymentView');
+            statusOrderView.innerHTML = '';
+
+            statusPaymentView.innerHTML = '';
             const orderStatus = order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué";
-            const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
-                                        `;
-            orderStatuHtml.innerHTML = orderStatu;
+            const paymentStatus = order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status === "vraison" ? "Payer à la livraison" : "échoué";
+
+
+            const orderStatu = `   
+        <img src="./assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
+        <span class="status_paymen ${order.statut === "done" ? "delivered" : order.statut == "review" ? "pending" : order.statut === "onway" ? "shipped" : "cancelled"}">${orderStatus}</span>                                        
+`;
+
+            const paymentStatu = `   
+            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
+            <span class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">${paymentStatus}</span>                                        
+    `;
+
+            statusOrderView.innerHTML = orderStatu;
+            statusPaymentView.innerHTML = paymentStatu;
+
+
+
+
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
             document.getElementById('ido').value = `${orderid}`;
@@ -221,12 +250,40 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
             document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
 
 
-            const orderStatuHtml = document.getElementById('statusOrder');
-            orderStatuHtml.innerHTML = '';
+
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+            const statusOrderView = document.getElementById('statusOrderView');
+            const statusPaymentView = document.getElementById('statusPaymentView');
+            statusOrderView.innerHTML = '';
+
+            statusPaymentView.innerHTML = '';
             const orderStatus = order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué";
-            const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
-                                        `;
-            orderStatuHtml.innerHTML = orderStatu;
+            const paymentStatus = order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status === "vraison" ? "Payer à la livraison" : "échoué";
+
+
+            const orderStatu = `   
+        <img src="./assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
+        <span class="status_paymen ${order.statut === "done" ? "delivered" : order.statut == "review" ? "pending" : order.statut === "onway" ? "shipped" : "cancelled"}">${orderStatus}</span>                                        
+`;
+
+            const paymentStatu = `   
+            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
+            <span class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">${paymentStatus}</span>                                        
+    `;
+
+            statusOrderView.innerHTML = orderStatu;
+            statusPaymentView.innerHTML = paymentStatu;
+
+
+
+
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+            /**@@@@@@@@@@@@@@@@@@@@@@@ order stats traiting openOrderforediting end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
             document.getElementById('ido').value = `${orderid}`;

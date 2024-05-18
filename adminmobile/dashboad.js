@@ -70,7 +70,7 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
                   </i>
 
                       <h3 class="text-secondary number" id="CommandesNuma">0</h3>
-                      <p class="stat-text">Vende d'Aujourd'hui</p>
+                      <p class="stat-text">Vente d'Aujourd'hui</p>
                     </div>
                   </div>
                 </div>
