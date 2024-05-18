@@ -13,7 +13,7 @@ const NafigatioTo = async (where, who = null) => {
 
         if (where === "dasboard") {
             DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace);
-            PatploVisualation();
+            //PatploVisualation();
         } else if (where === "commandes") {
             CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace);
         } else if (where === "vendu") {
@@ -26,6 +26,9 @@ const NafigatioTo = async (where, who = null) => {
 
         } else if (where === "finis") {
             ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace);
+
+        } else if (where === "ActionsMaker") {
+            LoadActionsRecors(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace);
 
         } else if (where === "annonce") {
             ActiveDas.classList.remove('active');

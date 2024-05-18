@@ -23,6 +23,9 @@ const NafigatioTo = async (where, who = null) => {
         } else if (where === "articles") {
             ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace);
 
+        } else if (where === "ActionsMaker") {
+            LoadActionsRecors(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace);
+
         } else if (where === "finis") {
             ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace);
 

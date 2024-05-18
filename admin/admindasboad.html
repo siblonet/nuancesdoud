@@ -4,6 +4,7 @@
 <head>
     <meta name="theme-color" content="#d2b154" />
     <link rel="stylesheet" href="../assets/css/payment.css">
+    <link rel="stylesheet" href="../assets/css/table.css">
 
     <link rel="stylesheet" href="admin/assets/css/boxicons.min.css">
     <link rel="stylesheet" href="admin/assets/css/loading.css">
@@ -502,14 +503,17 @@
                                 </div>
 
                                 <div>
-                                    <a id="ajouteencou" style="cursor: pointer !important;" data-dismiss="modal"
-                                        aria-label="Close" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
+                                    <a id="ajouteencou" style="cursor: pointer !important;" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
 
                                     <a style="cursor: pointer !important;" class="btn btn-info" data-dismiss="modal"
                                         onclick="ClearArticleinfos('addarticles')">Fermer</a>
                                 </div>
 
+                                <br>
 
+                                <div id="requedMessage">
+                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1428,6 +1432,7 @@
     <script src="admin/articlesadding.js"></script>
     <script src="admin/commandes.js"></script>
     <script src="admin/commandesVendu.js"></script>
+    <script src="../functionServices/actiondisplayer.js"></script>
     <script src="admin/navigatorScript.js"></script>
     <script src="admin/uerparams.js"></script>
     <script src="admin/changesSlide.js"></script>

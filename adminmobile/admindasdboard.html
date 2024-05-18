@@ -20,6 +20,7 @@
     <meta property="article:published_time" content="2023-10-19T08:00:00Z" />
     <meta property="article:modified_time" content="2023-10-19T08:00:00Z" />
 
+    <link rel="stylesheet" href="../assets/css/table.css">
 
     <link rel="stylesheet" href="../assets/css/loading.css">
     <link rel="stylesheet" href="../assets/css/payment.css">
@@ -496,14 +497,17 @@
                                 <br>
 
                                 <div>
-                                    <a id="ajouteencou" style="cursor: pointer !important;" data-dismiss="modal"
-                                        aria-label="Close" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
+                                    <a id="ajouteencou" style="cursor: pointer !important;" class="btn btn-success" onclick="CreateArticle()">Ajouter</a>
 
                                     <a style="cursor: pointer !important;" class="btn btn-info" data-dismiss="modal"
                                         onclick="ClearArticleinfos('addarticles')">Fermer</a>
                                 </div>
 
+                                <br>
 
+                                <div id="requedMessage">
+                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1383,6 +1387,7 @@
     <script src="adminmobile/articlesearch.js"></script>
     <script src="adminmobile/articlesadding.js"></script>
     <script src="adminmobile/commandes.js"></script>
+    <script src="../functionServices/actiondisplayer.js"></script>
     <script src="adminmobile/commandesVendu.js"></script>
     <script src="adminmobile/navigatorScript.js"></script>
     <script src="adminmobile/uerparams.js"></script>

@@ -1,4 +1,4 @@
-function PeopleHandle(who, ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace) {
+async function PeopleHandle(who, ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace) {
     ActiveDas.classList.remove('active');
     ActiveCo.classList.remove('active');
     ActiveCl.classList.add('active');
@@ -38,10 +38,11 @@ function PeopleHandle(who, ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, ad
 
     const tbodyId = document.getElementById('tbody-client');
     tbodyId.innerHTML = '';
-    GetPeople(who).then((people) =>
-        people.forEach(person => {
-            const clientTBODY =
-                `
+    const people = await requesttoBackend('GET', `people/nonadmin/nuance`);
+
+    people.forEach(person => {
+        const clientTBODY =
+            `
                     <tr  style="cursor: pointer" data-toggle="modal" data-target="#optionClient" onclick="openClientforedit('${person._id}', 'online')" >
                         <td class="" style="color: #4d4d4d !important;"> 
                         ${person.nom} ${person.prenom}
@@ -58,10 +59,11 @@ function PeopleHandle(who, ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, ad
                     </tr>
                     `;
 
-            tbodyId.innerHTML += clientTBODY;
+        tbodyId.innerHTML += clientTBODY;
 
-        })
-    ).catch((error) => console.log(error))
+    })
+
+    await PostPeople(people);
 
 }
 

@@ -1,4 +1,10 @@
-function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace) {
+async function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebtn, adminiSpace) {
+    ActiveDasa = ActiveDas;
+    ActiveCoa = ActiveCo;
+    ActiveCla = ActiveCl;
+    ActiveAra = ActiveAr;
+    ActiveAna = ActiveAn;
+    adminiSpacea = adminiSpace;
 
     ActiveDas.classList.remove('active');
     ActiveCo.classList.remove('active');
@@ -6,17 +12,32 @@ function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAtic
     ActiveAr.classList.add('active');
     ActiveAn.classList.remove('active');
 
+    adminiSpace.innerHTML = `
+    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+        <p style="align-self: center; color: #ffffff">Chargement en cours ...</p>
+    </div>
+    `;
 
-    GetArticle("zero").then((offarticles) => {
 
-        const articlesHTML = `
+    const availArt = await requesttoBackend('GET', 'boutique/only/article/nuance/zero');
+
+    const availArtiLimit = availArt.length ? availArt.slice(0, 5) : [];
+    try {
+        await PostArticle(availArt)
+    } catch (error) {
+
+    }
+
+
+
+    const articlesHTML = `
                 <br>
                 <br>
                 <br>
                 <br>
               
-        ${offarticles.map(article => {
-            return `
+        ${availArtiLimit.map(article => {
+        return `
             <div class="articlerow">
       
                 <div class="articlerwedgea">
@@ -25,7 +46,7 @@ function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAtic
                        
                             <div class="imageholder">
                                
-                                <img src="${article.image[0] ? article.image[0].ima : ''}" alt="image1">
+                                <img data-toggle="modal" data-target="#modArticle" onclick="openArticleforediting('${article._id}')" src="${article.image[0] ? article.image[0].ima : ''}" alt="image1">
 
 
                             </div>
@@ -71,12 +92,31 @@ function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAtic
             <br>
       
             `;
-        }).join('')}
+    }).join('')}
 
-        `;
+    ${availArt.length > 5 ?
+            `
+<div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-bottom: 50px;">
+<button type="button" class="btn btn-outline-success"  style="align-self: center;"
+    onclick="IncreaseItems(5, 'zero')">Plus
+</button>
+</div>
+`
+            :
+            ""
+        }
 
-        adminiSpace.innerHTML = articlesHTML;
-    }).catch((error) => console.log(error))
+`;
+
+    adminiSpace.innerHTML = articlesHTML;
+
+    if (availArtiLimit.length < 1) {
+        adminiSpace.innerHTML = `
+<div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+    <p style="align-self: center; color: #ffffff">Pas darticle en ligne</p>
+</div>
+`;
+    }
 
 }
 

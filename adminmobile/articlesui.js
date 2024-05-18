@@ -7,7 +7,7 @@ let adminiSpacea;
 
 
 
-function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
+async function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
 
     ArticleFromPhoneSearch = [];
     ActiveDasa = ActiveDas;
@@ -29,75 +29,107 @@ function ArticlesUI(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpa
         document.getElementById('opp-bottom-open').classList.add('active');
     }, 1000);
 
-    GetArticle("avail").then((offarticles) => {
+
+    adminiSpace.innerHTML = `
+    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+        <p style="align-self: center; color: #ffffff">Chargement en cours ...</p>
+    </div>
+    `;
 
 
-        const articlesHTML = `
-                <br>
-                <br>
-                <br>
-                <br>
 
-        ${offarticles.map(article => {
-            return `
-            <div class="articlerow">
-      
-                <div class="articlerwedgea">
-      
-                    <div class="articlesInfosa">
-                       
-                            <div class="imageholder">
-                                <img src="${article.image[0] ? article.image[0].ima : ''}" alt="image1">
+
+    await deleteArticle();
+
+    const availArti = await requesttoBackend('GET', 'boutique/only/article/nuance/avail');
+
+    const availArtiLimit = availArti.length ? availArti.slice(0, 5) : [];
+    await PostArticle(availArti);
+
+    const articlesHTML = `
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                
+            ${availArtiLimit.map(article => {
+                    return `
+                        <div class="articlerow">
+                
+                            <div class="articlerwedgea">
+
+                                <div class="articlesInfosa">
+                                    
+                                        <div class="imageholder">
+                                            <img data-toggle="modal" data-target="#modArticle" onclick="openArticleforediting('${article._id}')" src="${article.image[0] ? article.image[0].ima : ''}" alt="image1">
+                                        </div>
+                                        
+                                        <div class="discountCheckboxOuvrirDisp">
+                                            <input type="checkbox" id="discountCheckbox${article._id}" ${article.addreduction > 0 ? 'checked' : ''} class="discountCheckbox" onclick="DiscountOneUpdate('discountCheckbox${article._id}', '${article._id}')">
+                                            <p class="sta shipp"  style="cursor: pointer" data-toggle="modal" data-target="#modArticle" onclick="openArticleforediting('${article._id}')">Ouvrir</p>
+                                            <div style="height: 5px"></div>
+                                            <p  class="sta" style="padding-left: ${article.quantity > 0 ? '10px' : '30px'}; padding-right: ${article.quantity > 0 ? '10px' : '30px'}; font-size: 14px; background-color: ${article.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${article.quantity > 0 ? "#ffffff" : "red"}">${article.quantity > 0 ? "Disponible" : "Finis"}</p>
+                                            <div style="height: 7px"></div>
+                                        </div>
+                                </div>
+
+                                <hr>
+
+                                
+                                <div class="orderinfoso">
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;"><strong>${article.addarticle}</strong></p>
+                                    </div>
+
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Qté: <strong>${article.quantity}</strong></p>
+                                    </div>
+
+
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${(article.addprix / 1000).toFixed(3)}</strong> F</p>
+                                    </div>
+
+                                </div>
                             </div>
-                           
-                            <div class="discountCheckboxOuvrirDisp">
-                                <input type="checkbox" id="discountCheckbox${article._id}" ${article.addreduction > 0 ? 'checked' : ''} class="discountCheckbox" onclick="DiscountOneUpdate('discountCheckbox${article._id}', '${article._id}')">
-                                <p class="sta shipp"  style="cursor: pointer" data-toggle="modal" data-target="#modArticle" onclick="openArticleforediting('${article._id}')">Ouvrir</p>
-                                <div style="height: 5px"></div>
-                                <p  class="sta" style="padding-left: ${article.quantity > 0 ? '10px' : '30px'}; padding-right: ${article.quantity > 0 ? '10px' : '30px'}; font-size: 14px; background-color: ${article.quantity > 0 ? "#054846" : "rgba(255, 0, 89, 0.341)"}; font-weight: bold; color: ${article.quantity > 0 ? "#ffffff" : "red"}">${article.quantity > 0 ? "Disponible" : "Finis"}</p>
-                                <div style="height: 7px"></div>
+                        </div>
+                <br>
+                <br>
+
+                `;
+                }).join('')}
+                        ${availArti.length > 5 ?
+                                    `
+                            <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-bottom: 50px;">
+                                <button type="button" class="btn btn-outline-success"  style="align-self: center;"
+                                    onclick="IncreaseItems(5, 'avail')">Plus
+                                </button>
                             </div>
-                    </div>
-      
-                    <hr>
+                            `
+                                    :
+                                    ""
+                                }
+                
+                `;
 
-                    
-                    <div class="orderinfoso">
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;"><strong>${article.addarticle}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Qté: <strong>${article.quantity}</strong></p>
-                        </div>
-      
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Prix: <strong>${(article.addprix / 1000).toFixed(3)}</strong> F</p>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-      
-            `;
-        }).join('')}
+                adminiSpace.innerHTML = articlesHTML;
 
-        `;
+                        if (availArtiLimit.length < 1) {
+                            adminiSpace.innerHTML = `
+                            <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                                <p style="align-self: center; color: #ffffff">Pas darticle en ligne</p>
+                            </div>
+                        `;
+                        }
 
-
-
-        adminiSpace.innerHTML = articlesHTML;
-        document.getElementById('searcha').style.display = "block";
-
-    }).catch((error) => console.log(error))
+    document.getElementById('searcha').style.display = "block";
 
 
 }
+
+
 
 const inputElement = document.getElementById("form1");
 
@@ -111,6 +143,8 @@ inputElement.addEventListener("input", function () {
 
 
 function CreateArticle() {
+    document.getElementById("requedMessage").innerHTML = "";
+
     try {
         const addarticle = document.getElementById('addarticle').value;
         const addquant = document.getElementById('addquant').value;
@@ -125,6 +159,9 @@ function CreateArticle() {
 
 
         if (addarticle && addgenre && addbarcode && addprix && addmarque && Onlineimas.length > 0) {
+            document.getElementById("requedMessage").innerHTML = `
+                <a style="color: #007bff; font-weight: bold; font-size: 17;">En cours ...</a>
+                `;
             const product = {
                 id_has: Math.floor(Math.random() * 100000000).toString(),
                 addarticle: addarticle,
@@ -140,27 +177,44 @@ function CreateArticle() {
                 owner: "nuance",
                 image: Onlineimas
             };
-            document.getElementById("ajouteencou").innerText = "En cours"
 
             const createItem = async () => {
+                const token = sessionStorage.getItem('tibule');
+                const splo = token.split("°");
+                const userid = thisiswhat(`${splo[0]}`);
                 try {
-                    const createdProdec = await requesttoBackend('POST', 'boutique', product);
+                    const createdProdec = await requesttoBackend('POST', `boutique/Web-Soft/${userid}`, product);
                     if (createdProdec) {
-                        const items = await requesttoBackend('GET', 'boutique/only/article/nuance');
+                        const items = await requesttoBackend('GET', 'boutique/only/article/nuance/avail');
                         await deleteArticle();
                         await PostArticle(items);
                     }
+                    document.getElementById("requedMessage").innerHTML = `
+                    <a style="color: green; font-weight: bold; font-size: 17;">Ajouter avec success</a>
+                `;
+                document.getElementById("ajouteencou").innerText = "Ajouter Encore"
 
                 } catch (error) {
+                    document.getElementById("requedMessage").innerHTML = `
+                    <a style="color: red; font-weight: bold; font-size: 17;">échèc</a>
+                `;
                     console.error('Error creating product:', error.message);
                 }
             };
 
             createItem();
-            document.getElementById("ajouteencou").innerText = "Ajouter Encore"
 
+        }else {
+            document.getElementById("requedMessage").innerHTML = `
+                <a style="color: #f70958; font-weight: bold; font-size: 20;">Assure-toi d'avoir
+                    renseigné tous les champs obligatoires.
+                </a>
+            `;
         }
     } catch (error) {
+        document.getElementById("requedMessage").innerHTML = `
+        <a style="color: red; font-weight: bold; font-size: 17;">échèc</a>
+    `;
         console.log(error)
     }
 }
@@ -168,48 +222,54 @@ function CreateArticle() {
 async function AddArticleImage() {
     const imagePreview = document.getElementById(`imagePreviewHere`);
     if (DeleteImage("imagePreviewHere")) {
+        imagePreview.src = '';
 
-    imagePreview.src = '';
+        const fileInput = document.getElementById(`doblik11`);
+        const file = fileInput.files[0];
 
-    const fileInput = document.getElementById(`doblik11`);
-    const file = fileInput.files[0];
+        if (!file) {
+            alert("Aucune image n'a été selectionné!");
+            return;
+        }
+        document.getElementById("requedMessage").innerHTML = `
+        <a style="color: #007bff; font-weight: bold; font-size: 17;">En cours ...</a>
+        `;
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+            const base64Data = event.target.result.split(',')[1];
+            const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name, old_image: null });
+            const imarandomid = Math.floor(Math.random() * 100000000).toString()
+            Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
 
-    if (!file) {
-        alert("Aucune image n'a été selectionné!");
-        return;
-    }
+            const img = document.getElementById('imagePreviewHere');
+            img.src = url.ima;
 
-    const reader = new FileReader();
-    reader.onload = async function (event) {
-        const base64Data = event.target.result.split(',')[1];
-        const url = await requesttoBackend('POST', 'boutique/uploadImage', { ima: base64Data, nam: file.name, old_image: null});
-        const imarandomid = Math.floor(Math.random() * 100000000).toString()
-        Onlineimas.push({ ima: url.ima, has_aidii: imarandomid });
-
-        const img = document.getElementById('imagePreviewHere');
-        img.src = url.ima;
+            document.getElementById("requedMessage").innerHTML = `
+            <a style="color: #007bff; font-weight: bold; font-size: 17;">Image ajouté</a>
+            `;
+            setTimeout(() => {
+                document.getElementById("requedMessage").innerHTML = ``;
+            }, 3000);
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
 
 
-        const canvas = document.getElementById('imageCanvas');
-        const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+            const imgG = new Image();
+            imgG.onload = function () {
+                canvas.width = imgG.width;
+                canvas.height = imgG.height;
+                ctx.drawImage(imgG, 0, 0, imgG.width, imgG.height);
+                const imageData = ctx.getImageData(0, 0, imgG.width, imgG.height);
+                const colors = getColorsFromImageData(imageData);
+                displayColors(colors);
+            };
+
+            imgG.src = event.target.result;
 
 
-        const imgG = new Image();
-        imgG.onload = function () {
-            canvas.width = imgG.width;
-            canvas.height = imgG.height;
-            ctx.drawImage(imgG, 0, 0, imgG.width, imgG.height);
-            const imageData = ctx.getImageData(0, 0, imgG.width, imgG.height);
-            const colors = getColorsFromImageData(imageData);
-            displayColors(colors);
         };
-
-        imgG.src = event.target.result;
-
-
-    };
-    reader.readAsDataURL(file);
-    document.getElementById('limitimag1').style.display = "none";
+        reader.readAsDataURL(file);
+        document.getElementById('limitimag1').style.display = "none";
     }
 }
 
@@ -230,20 +290,31 @@ function removeImageCreate() {
 
 const DeleteImage = async (imagetagid) => {
     const imagePreview = document.getElementById(`${imagetagid}`);
-    if (imagePreview.src !== "../admin/assets/img/imgo.png") {
+    if (!imagePreview) {
+        console.error("Image tag not found");
+        return false;
+    }
+    
+    if (imagePreview.src.startsWith("https")) {
         try {
-            const del_url = await requesttoBacken('POST', 'boutique/deleteImage', { image_url: imagePreview.src });
+            const del_url = await requesttoBackend('POST', 'boutique/deleteImage', { image_url: imagePreview.src });
             if (del_url.done) {
                 return true;
+            } else {
+                console.error("Failed to delete image on backend");
+                return false;
             }
         } catch (error) {
+            alert("Error deleting image");
             console.error("Error deleting image:", error);
             return false;
         }
     } else {
+        // Local image or image without https, considered as deleted
         return true;
     }
 };
+
 
 
 
@@ -333,61 +404,61 @@ async function EditeArticleImage() {
     const imagePreview = document.getElementById(`Editeimage1`);
     if (DeleteImage("Editeimage1")) {
 
-    imagePreview.src = 'gghgh.jpg';
+        imagePreview.src = 'gghgh.jpg';
 
 
-    const fileInput = document.getElementById(`Editeimageonline1inpu`);
-    const file = fileInput.files[0];
+        const fileInput = document.getElementById(`Editeimageonline1inpu`);
+        const file = fileInput.files[0];
 
-    if (!file) {
-        alert("Aucune image n'a été selectionné!");
-        return;
-    };
-
-
-    const reader = new FileReader();
-    reader.onload = async function (event) {
-        const base64Data = event.target.result.split(',')[1];
+        if (!file) {
+            alert("Aucune image n'a été selectionné!");
+            return;
+        };
 
 
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+            const base64Data = event.target.result.split(',')[1];
 
-        loadImageFromURL(event.target.result, function (img) {
-            const canvas = document.getElementById('imageCanvas');
 
-            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            const imageData = ctx.getImageData(0, 0, img.width, img.height);
-            const colors = getColorsFromImageData(imageData);
-            displayColorsA(colors);
-        });
 
-        const response = await fetch(apiUrlfine + "boutique/uploadImage", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ima: base64Data, nam: file.name }),
-        });
+            loadImageFromURL(event.target.result, function (img) {
+                const canvas = document.getElementById('imageCanvas');
 
-        if (response.ok) {
-            const url = await response.json();
-            Onlineimas[0].ima = url.ima;
-            setTimeout(() => {
-                imagePreview.src = url.ima;
-            }, 2500);
-        } else {
-            console.log("gegegeg")
+                const ctx = canvas.getContext('2d', { willReadFrequently: true }); // Set willReadFrequently to true
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const colors = getColorsFromImageData(imageData);
+                displayColorsA(colors);
+            });
+
+            const response = await fetch(apiUrlfine + "boutique/uploadImage", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ima: base64Data, nam: file.name }),
+            });
+
+            if (response.ok) {
+                const url = await response.json();
+                Onlineimas[0].ima = url.ima;
+                setTimeout(() => {
+                    imagePreview.src = url.ima;
+                }, 2500);
+            } else {
+                console.log("gegegeg")
+            }
+
+
+        };
+        reader.readAsDataURL(file);
+        if (Onlineimas.length > 0) {
+            document.getElementById('limitimage1').style.display = "none";
         }
-
-
-    };
-    reader.readAsDataURL(file);
-    if (Onlineimas.length > 0) {
-        document.getElementById('limitimage1').style.display = "none";
     }
-}
 };
 
 
@@ -434,8 +505,11 @@ async function EditeArticle() {
             };
 
             const createItem = async () => {
+                const token = sessionStorage.getItem('tibule');
+                const splo = token.split("°");
+                const userid = thisiswhat(`${splo[0]}`);
                 try {
-                    await requesttoBackend('PUT', `boutique/${_id}`, product);
+                    await requesttoBackend('PUT', `boutique/Web-Soft/${userid}/${_id}`, product);
                     ChoosenColor = [];
                     document.getElementById('colorsa').innerHTML = "";
                     document.getElementById('choosenColora').innerHTML = "";
@@ -455,15 +529,26 @@ async function EditeArticle() {
     }
 };
 
-
 async function RemoveArticleById() {
     var result = window.confirm("Voulez vous vraiment supprimer?");
 
     if (result) {
+
+        const imagePreview1 = document.getElementById("Editeimage1");
+        if (imagePreview1.src.startsWith("https")) {
+            await requesttoBackend('POST', 'boutique/deleteImage', { image_url: imagePreview1.src });
+        }
+
+        const token = sessionStorage.getItem('tibule');
+        const splo = token.split("°");
+        const userid = thisiswhat(`${splo[0]}`);
+
         const _ide = document.getElementById("ediatiid").value;
-        await requesttoBackend('DELETE', `boutique/${_ide}`);
+        await requesttoBackend('DELETE', `boutique/Web-Soft/${userid}/${_ide}`);
         Onlineimas.length = 0;
         initDataLoader();
+
+
     }
 
 };
@@ -508,8 +593,12 @@ const DiscountAll = async () => {
     var result = window.confirm("Etes-vous vraiment sur?");
 
     if (result) {
+        const token = sessionStorage.getItem('tibule');
+        const splo = token.split("°");
+        const userid = thisiswhat(`${splo[0]}`);
+
         const discount = parseInt(document.getElementById('discountvalueall').value);
-        await requesttoBackend('PUT', `boutique/discountall/nuance/${discount > 0 ? discount : 0}`, {});
+        await requesttoBackend('PUT', `boutique/discountall/Web-Soft/${userid}/nuance/${discount > 0 ? discount : 0}`, {});
         initDataLoader();
     }
 
@@ -519,18 +608,21 @@ const DiscountOne = () => {
     $('.discountCheckbox').css('display', 'inline');
 };
 
-
 const DiscountOneUpdate = async (htmlid, id) => {
     const checked = document.getElementById(`${htmlid}`).checked;
     const discount = parseInt(document.getElementById('discountvalueone').value);
+    const token = sessionStorage.getItem('tibule');
+    const splo = token.split("°");
+    const userid = thisiswhat(`${splo[0]}`);
+
     if (checked && discount > 0) {
         const article = await GetArticleByID(id);
         const percentage = (discount / 100) * parseInt(article.addprix);
         const valuer = parseInt(article.addprix) - percentage;
 
-        await requesttoBackend('PUT', `boutique/onediscount/one/${id}`, { addreduction: valuer });
+        await requesttoBackend('PUT', `boutique/onediscount/one/Web-Soft/${userid}/${id}`, { addreduction: valuer });
     } else if (!checked) {
-        await requesttoBackend('PUT', `boutique/onediscount/one/${id}`, { addreduction: 0 });
+        await requesttoBackend('PUT', `boutique/onediscount/one/Web-Soft/${userid}/${id}`, { addreduction: 0 });
     } else {
         alert("Entrez le pourcentage")
     }

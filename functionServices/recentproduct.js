@@ -84,7 +84,6 @@ async function navigateAdminCLient() {
 }
 
 function recentProduct(recenPr, ADA) {
-    const ProdAvailable = [];
     const productContainer = document.getElementById('product-container');
     productContainer.innerHTML = '';
 
@@ -93,17 +92,11 @@ function recentProduct(recenPr, ADA) {
         return userAgent.includes('mobile');
     }
 
-    if (recenPr.length > 0) {
-        recenPr.forEach(prodAvailable => {
-            if (prodAvailable.quantity > 0) {
-                ProdAvailable.push(prodAvailable);
-            }
-        });
-    }
+
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     const ADS = ADA.find(item => item.which === "backglise").image;
-    if (ProdAvailable.length > 0) {
-        ProdAvailable.forEach((product, index) => {
+    if (recenPr.length > 0) {
+        recenPr.forEach((product, index) => {
             const percentDf = ((product.addprix - product.addreduction) / product.addprix) * 100;
             const productHTML = `
                     <div class="col-lg-4 col-md-6 col-sm-6">
@@ -517,7 +510,7 @@ async function showProductQuickView(a, productId) {
         document.getElementById('quickViewOldPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addprix / 1000).toFixed(3)} F.CFA` : "";
 
         document.getElementById('quickViewNewPrice').innerText = product.addreduction > 0 && product.addreduction < product.addprix ? `${(product.addreduction / 1000).toFixed(3)} F.CFA` : `${(product.addprix / 1000).toFixed(3)} F.CFA`;
-        
+
         /*$('.rating .one').css('color', `${product.addcoul.substring(0, 7)} `);
         $('.rating .two').css('color', `${product.addcoul.substring(8, 15)} `);
         $('.rating .tree').css('color', `${product.addcoul.substring(16, 23)} `);
@@ -565,7 +558,8 @@ async function showProductQuickView(a, productId) {
 
 async function FilterArticle(search) {
     const productContainer = document.getElementById('product-container');
-    const recenPr = await GetArticle("avail");
+    const recenPr = await GetArticleAvailable();
+
     function isMobileDevice() {
         const userAgent = navigator.userAgent.toLowerCase();
         return userAgent.includes('mobile');

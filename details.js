@@ -328,7 +328,6 @@ async function ReloadPanniertoHtmlc() {
         const pannierNumber2 = document.getElementById('paniernumber2');
 
 
-        const pannierNumber3 = document.getElementById('paniernumber3');
 
 
 
@@ -346,11 +345,7 @@ async function ReloadPanniertoHtmlc() {
                                 `;
         pannierNumber2.innerHTML += panniernumHTML2;
 
-        pannierNumber3.innerHTML = ''; // Clear previous content
-        const panniernumHTML3 = `
-                                    <i class="bx bx-shopping-bag"></i>
-                                `;
-        pannierNumber3.innerHTML += panniernumHTML3;
+    
     }
 };
 

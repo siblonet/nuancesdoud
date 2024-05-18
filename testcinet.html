@@ -1,16 +1,131 @@
-New update for the website: 
-1) filters (Homme, Femme, Unisexe) and a search bar (Nom; Marque, Barcode). DONE
+<!DOCTYPE html>
+<html lang="en">
 
-2) Color from image generator. DONE
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success Animation</title>
 
-3) Items view style (with the generated color). DONE
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
 
-4) Removing some input fields when the client wants to buy an article. DONE
+        .hidden {
+            display: none;
+        }
 
-5) Automatic discounting on every item.
+        #success-animation {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-6) Option to post a picture of any event, such as those pictures of SALE DISCOUNTING that you have added to your WhatsApp status.
+        .checkmark-wrapper {
+            width: 100px;
+            height: 100px;
+        }
 
+        .checkmark {
+            width: 100%;
+            height: 100%;
+            stroke-width: 2;
+            stroke: #4CAF50;
+            stroke-miterlimit: 10;
+            stroke-linecap: round;
+            animation: draw 0.5s ease-in-out forwards;
+        }
 
-7) Permission handling, meaning that next, you will have to add specific permissions to your staff members to have access to specific operations such as handling returned items from clients, canceling orders even if the order status has been changed to delivered, deleting user accounts on their behalf, updating user accounts on their behalf, and much more (this involves modifying the server code as well).
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
 
+        .checkmark__check {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.3s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes draw {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ff6347, #ffa500, #ffd700, #adff2f, #32cd32, #00fa9a, #00ced1, #1e90ff, #9370db, #8a2be2);
+            animation: confetti-fall 2s ease-in-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-200px);
+            }
+
+            100% {
+                transform: translateY(200px);
+            }
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="success-animation" class="hidden">
+        <div class="checkmark-wrapper">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+        <h2>Order Successful!</h2>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate a successful order submission after 2 seconds
+            setTimeout(() => {
+                showSuccessAnimation();
+            }, 2000);
+        });
+
+        function showSuccessAnimation() {
+            const successAnimation = document.getElementById('success-animation');
+            successAnimation.classList.remove('hidden');
+
+            // Hide the animation after 3 seconds
+            setTimeout(() => {
+                successAnimation.classList.add('hidden');
+            }, 5000);
+        }
+
+    </script>
+</body>
+
+</html>

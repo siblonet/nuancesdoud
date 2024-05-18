@@ -129,7 +129,7 @@ async function getallPanier() {
 
 async function sendCommen() {
     document.getElementById('noorderduplu').setAttribute('onclick', null);
-
+console.log("aaa");
     const tohia = document.getElementById('tohia');
     const load = document.getElementById('tohi');
     const errer = document.getElementById('rejected');
@@ -141,6 +141,8 @@ async function sendCommen() {
     const transaction_id = Math.floor(Math.random() * 100000000).toString()
 
     if (token && paymen_method_selected !== "noselected") {
+        console.log("aaa");
+
         const splo = token.split("°");
 
         const _id = splo[0];
@@ -400,14 +402,29 @@ async function SendPanierToOrder(tocomp) {
 
     try {
         const tocompl = await GetPannierToSend(tocomp);
-        if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "noselected") {
+        if (tocompl && tocompl.payment_method !== "cash" && tocompl.payment_method !== "noselected" && tocompl.payment_method !== "no") {
             await KaliaPay(tocompl);
         } else if (tocompl) {
-            const response = await requesttoBackend('POST', 'orders/nuance', tocompl);
+            const token = sessionStorage.getItem('tibule');
+            const splo = token.split("°");
+            const userid = thisiswhat(`${splo[0]}`);
+            const response = await requesttoBackend('POST', `orders/Web-Soft/${userid}/nuance`, tocompl);
 
             if (response && response.created_order) {
+                document.getElementById('wheretoridto').innerHTML = `
+                            Vous serez redirigé vers votre compte dans <span id="countdown"
+                            style="color: #007bff; font-size: 18px; font-weight: bold;">10</span> secondes.
+                        `;
+                document.getElementById('clienturl').href = "client";
+                document.getElementById('succesStarta').click();
                 await deletePannier();
-                window.location.href = "client";
+                showSuccessAnimation();
+
+
+                setTimeout(() => {
+                    window.location.href = "client";
+                }, 7000);
+
             } else if (!response) {
                 handleError("Erreur inconnue, Veuillez réessayer plus tard");
                 document.getElementById('noorderduplu').setAttribute('onclick', 'sendCommen()');
@@ -486,8 +503,36 @@ const Payment_Choix = (paymen_choix) => {
             document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
 
         }
+    }else if(paymen_choix === "no"){
+        if (prenomValueA.value.length > 2 && nomValueA.value.length > 2 && villeValueA.value.length > 2 && adresseValueA.value.length > 4 && telephoneValueA.value.length > 9 && telephoneValueA.value.length < 11) {
+            document.getElementById("validate-hide-forfil").innerHTML = VALIDAHTML
+        }
     }
 };
+
+
+
+
+
+function showSuccessAnimation() {
+    // Start countdown
+    let countdown = 10;
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.textContent = countdown;
+
+    const countdownInterval = setInterval(() => {
+        countdown -= 1;
+        countdownElement.textContent = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+}
+
+
+
+
 
 
 const KaliaPay = async (order) => {
@@ -497,12 +542,25 @@ const KaliaPay = async (order) => {
     const errer = document.getElementById('rejected');
     try {
         const customer = encodeURIComponent(document.getElementById('customerphone').value);
-
-        const response = await requesttoBackend('POST', `orders/${customer ? customer : "0701743686"}/nuance`, order);
+        const token = sessionStorage.getItem('tibule');
+        const splo = token.split("°");
+        const userid = thisiswhat(`${splo[0]}`);
+        const response = await requesttoBackend('POST', `orders/Web-Soft/${userid}/${customer ? customer : "0701743686"}/nuance`, order);
 
         if (response && response.orderid) {
+            document.getElementById('wheretoridto').innerHTML = `
+                Vous serez redirigé vers la page de paiement dans <span id="countdown"
+                style="color: #007bff; font-size: 18px; font-weight: bold;">10</span> secondes.
+            `;
+            document.getElementById('clienturl').href = response.orderid;
+
+            document.getElementById('succesStarta').click();
             await deletePannier();
-            window.location.href = response.orderid
+            showSuccessAnimation();
+
+            setTimeout(() => {
+                window.location.href = response.orderid
+            }, 7000);
 
 
         } else if (!response) {

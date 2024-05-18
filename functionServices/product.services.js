@@ -88,6 +88,26 @@ async function PostPeople(people) {
 }
 
 
+async function PostOnePerson(person) {
+    const peopledb = await openPeopleDatabase();
+    const PpTransation = peopledb.transaction(["PeopleContent"], "readwrite");
+    const PpStore = PpTransation.objectStore("PeopleContent");
+
+    let added = false;
+    const adding = PpStore.add(person);
+
+    adding.onsuccess = () => {
+        added = true;
+    };
+
+    adding.onerror = (event) => {
+        console.log("PostPeople", event.target.error);
+    };
+
+    return added
+}
+
+
 async function PostSettings(settingdata) {
     const settingdb = await openSettingsDatabase();
     const PSTransation = settingdb.transaction(["SettingStore"], "readwrite");
@@ -120,6 +140,31 @@ async function PostSettings(settingdata) {
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getting systme as get start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getting systme as get start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getting systme as get start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+async function GetArticleAvailable() {
+    const articldb = await openArticleDatabase();
+    const GATransation = articldb.transaction(["ArticleStore"], "readonly");
+    const GAStore = GATransation.objectStore("ArticleStore");
+
+    return new Promise((resolve, reject) => {
+        const articles = [];
+
+        GAStore.openCursor().onsuccess = (event) => {
+            const cursor = event.target.result;
+            if (cursor) {
+                articles.push(cursor.value);
+                cursor.continue();
+            } else {
+                resolve(articles.sort((a, b) => new Date(b.created) - new Date(a.created)));
+            }
+        };
+        GATransation.onerror = (event) => {
+            reject("Transaction error: " + event.target.errorCode);
+        };
+    });
+
+}
+
 
 async function GetArticle(what = null) {
     const articldb = await openArticleDatabase();
@@ -220,7 +265,7 @@ async function GetPannierToSend(order) {
                     quantcho: cursor.value.quantcho,
                     prix: cursor.value.prix
                 });
-                
+
                 order.reduction += cursor.value.prix * cursor.value.quantcho
                 cursor.continue();
             } else {

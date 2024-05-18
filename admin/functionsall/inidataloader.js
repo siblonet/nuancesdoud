@@ -23,16 +23,17 @@ async function initDataLoader() {
             deleteArticle();
             deleteOrder();
             deleteSetting();
-            deletePeople();
+            //deletePeople();
 
-            const online = await requesttoBackend('GET', 'boutique/nuance');
-            if (online.article || online.pagesetting || online.order) {
+            const online = await requesttoBackend('GET', 'boutique/annoncedata/nuance');
+            if (online) {
 
-                const people = await requesttoBackend('GET', 'people/persons/nuance');
-                await PostPeople(people);
-                await PostOrder(online.order);
-                await PostArticle(online.article);
-                await PostSettings(online.pagesetting);
+                //const people = await requesttoBackend('GET', 'people/persons/nuance');
+                //const order = await requesttoBackend('GET', 'orders/nuance');
+                //await PostPeople(people);
+                //await PostOrder(order);
+                //await PostArticle(online.article);
+                await PostSettings(online);
 
             }
             NafigatioTo("dasboard");
@@ -43,7 +44,7 @@ async function initDataLoader() {
         $(function () {
             $("#loaderRemove").fadeOut("slow");;
         });
-    }else{
+    } else {
         window.location.href = "/"
     }
 };

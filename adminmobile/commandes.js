@@ -1,4 +1,7 @@
+let adminiSpaceb;
+
 async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
+    adminiSpaceb = adminiSpace;
 
     ActiveDas.classList.remove('active');
     ActiveCo.classList.add('active');
@@ -7,25 +10,39 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     ActiveAn.classList.remove('active');
     document.getElementById('searcha').style.display = "none";
 
+
+
+
+
+
+    /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+    adminiSpace.innerHTML = `
+    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+        <p style="align-self: center; color: #ffffff">Chargement en cours ...</p>
+    </div>
+`;
+
+
     let ordersHTML = '';
 
-    const ordersnotAvail = await GetOrder();
-    const orders = ordersnotAvail.filter((reveiw) => reveiw.statut !== "done");
-
-    ordersHTML += `
+    const orders = await requesttoBackend('GET', 'orders/allUntraitedOrder/nuance');
+    if (orders && orders.length) {
+        await deleteOrder();
+        await PostOrder(orders);
+        ordersHTML += `
                 <br>
                 <br>
                 <br>
               
         ${orders.map((order) => {
-        return `
+            return `
             <div class="articlerow">
       
                 <div class="articlerwedge">
       
                     <div class="articlesInfos">
                         ${order.articles.map(orar => {
-            return `
+                return `
                             <div data-toggle="modal" data-target="#optionCancile"
                                 onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
                                 <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
@@ -34,7 +51,7 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
                             </div>
                             <span style="width: 10px;"></span>
                             `;
-        }).join('')}
+            }).join('')}
                     </div>
       
                     <hr>
@@ -84,9 +101,22 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
             <br>
       
             `;
-    }).join('')}
+        }).join('')}
 
         `;
+    } else if (orders && orders.length < 1) {
+        ordersHTML = `
+                        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                            <p style="align-self: center; color: #ffffff">Pas de commande !</p>
+                        </div>
+                        `;
+    } else {
+        ordersHTML = `
+                        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                            <p style="align-self: center; color: #ffffff">Chargement échoué, verifie la connexion</p>
+                        </div>
+                    `;
+    }
     adminiSpace.innerHTML = ordersHTML;
 
 }
@@ -165,19 +195,30 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
         } else {
             document.getElementById('optionCancilename').innerText = "Article Supprimé";
 
-            document.getElementById('optionViewNewPrice').innerText = `00.000 F.CFA`;
-            document.getElementById('optionViewNewBarcode').innerText = `Barcode`;
-            document.getElementById('productQuantity').value = 0;
-            document.getElementById('clientNameOrder').innerText = `Client`;
+            document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
 
 
             const orderStatuHtml = document.getElementById('statusOrder');
-            orderStatuHtml.innerHTML = '<p>Statut: </p> <span style="color: green">Livré</span>';
+            orderStatuHtml.innerHTML = '';
+            const orderStatus = order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué";
+            const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
+                                        `;
+            orderStatuHtml.innerHTML = orderStatu;
 
-            document.getElementById('villeValue').value = `Ville`;
-            document.getElementById('communeValue').value = `Commune`;
-            document.getElementById('adresseValue').value = `Lieu`;
-            document.getElementById('telephoneValue').value = `07000000`;
+
+            document.getElementById('ido').value = `${orderid}`;
+            document.getElementById('proid').value = `${orderarticleid}`;
+            document.getElementById('arti_id').value = `${articleid}`;
+
+            const element = document.getElementById('hidlater');
+            element.classList.remove('hiddendhid');
+            element.classList.add('hiddendshow');
+
+
+            document.getElementById('villeValue').value = `${order.ville}`;
+            document.getElementById('communeValue').value = `${order.commune}`;
+            document.getElementById('adresseValue').value = `${order.lieu}`;
+            document.getElementById('telephoneValue').value = `${order.phone}`;
 
             const modalImage = document.getElementById('ipage');
             modalImage.src = "admin/assets/img/imgo.png";
@@ -213,14 +254,20 @@ async function cancelOrderById() {
         const arti_id = document.getElementById('arti_id').value;
         const quan = document.getElementById('productQuantity').value;
 
+        const token = sessionStorage.getItem('tibule');
+        const splo = token.split("°");
+        const userid = thisiswhat(`${splo[0]}`);
+
         const vin_or = await GetOrderByID(ido);
-        if (vin_or.articles.length > 1) {
-            await requesttoBackend('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
 
+        if (vin_or.articles && vin_or.articles.length > 1) {
+            await requesttoBackend('DELETE', `orders/oarderar/Web-Soft/${userid}/${ido}/${proid}/${arti_id}/${quan}`);
+        } else if (vin_or.articles && vin_or.articles.length == 1 && vin_or.articles[0].arti_id) {
+            await requesttoBackend('DELETE', `orders/Web-Soft/${userid}/${ido}/${arti_id}/${quan}`);
         } else {
-            await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
-
+            await requesttoBackend('DELETE', `orders/already/article/deleted/${ido}`);
         }
+
 
         window.location.reload()
     }

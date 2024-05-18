@@ -1,5 +1,7 @@
-async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
+let adminiSpaceb;
 
+async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
+    adminiSpaceb = adminiSpace;
     ActiveDas.classList.remove('active');
     ActiveCo.classList.add('active');
     ActiveCl.classList.remove('active');
@@ -7,105 +9,138 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
     ActiveAn.classList.remove('active');
     document.getElementById('searcha').style.display = "none";
 
+
+
+
+
+    /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+    adminiSpace.innerHTML = `
+            <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                <p style="align-self: center; color: #ffffff">Chargement en cours ...</p>
+            </div>
+        `;
+
+    const filterorder = document.getElementById('filter-order');
+    setTimeout(() => {
+        filterorder.classList.add('active');
+    }, 1000);
+
     let ordersHTML = '';
 
-    const ordersnotAvail = await GetOrder();
-    const orders = ordersnotAvail.filter((reveiw) => reveiw.statut !== "done");
-
-    ordersHTML += `
+    const orders = await requesttoBackend('GET', 'orders/allUntraitedOrder/nuance');
+    if (orders && orders.length) {
+        await deleteOrder();
+        await PostOrder(orders);
+        ordersHTML = `
                 <br>
                 <br>
                 <br>
-              
-        ${orders.map((order) => {
-        return `
-            <div class="articlerow">
-      
-                <div class="articlerwedge">
-      
-                    <div class="articlesInfos">
-                        ${order.articles.map(orar => {
+                ${orders.map((order) => {
             return `
-                            <div data-toggle="modal" data-target="#optionCancile"
-                                onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : null}')">
-                                <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
-                                <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
-                                <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
+                    <div class="articlerow">
+            
+                        <div class="articlerwedge">
+            
+                            <div class="articlesInfos">
+                                ${order.articles.map(orar => {
+                return `
+                                    <div data-toggle="modal" data-target="#optionCancile"
+                                        onclick="openOrderforediting('${order._id}', '${orar._id}', '${orar.arti_id ? orar.arti_id._id : "null"}')">
+                                        <p style="">${orar.arti_id ? orar.arti_id.addarticle : 'Article Supprimé'}</p>
+                                        <p style="color: #1d191a">Quantité: ${orar.quantcho}</p>
+                                        <p style="color: #1d191a">${(orar.prix / 1000).toFixed(3)} F</p>
+                                    </div>
+                                    <span style="width: 10px;"></span>
+                                    `;
+            }).join('')}
                             </div>
-                            <span style="width: 10px;"></span>
-                            `;
-        }).join('')}
-                    </div>
-      
-                    <hr>
+            
+                            <hr>
 
-                    <div  style="align-items: flex-start; width: 170px">
+                            <div  style="align-items: flex-start; width: 170px">
 
+                            <div class="daterow">
+                                    <div style="align-items: center; display: flex; justify-content: flex-end;">
+                                        <p class="daterowp">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
+                                    </div>
 
-                        <div class="daterow">
-                            <div style="align-items: center; display: flex; justify-content: flex-end;">
-                                <p class="daterowp">${moment(order.created).format("MMMM D, YYYY HH:mm:ss")}</p>
-                            </div>
-
-                            <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
-                                <div class="payment_iconsadmin">
-                                    <img src="${order.payment_method === "orangeci" ? "../assets/img/orange.png" : order.payment_method == "mtnci" ? "../assets/img/mtn.png" : order.payment_method === 'waveci' ? '../assets/img/icon.png' : order.payment_method === 'cards' ? '../assets/img/vm.png' : '../assets/img/cash.png'}" alt="Payment">
+                                    <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
+                                        <div class="payment_iconsadmin">
+                                            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
+                                        </div>
+                                        <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
+                                            ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : 'cancelled'}">
-                                    ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : "échoué"}
+
+
+                                <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
+                                    Claisse: ${order.staff ? order.staff : "Online"}
                                 </p>
+                                <div style="align-self: flex-start; width: 130px">
+                                    <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
+                                        ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
+                                    </p>
+                                </div>
+                                </div>
+                
+                                <br>
+                            
+                                <div class="orderinfoso">
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
+                                    </div>
+                
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
+                                    </div>
+                
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
+                                    </div>
+                
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
+                                    </div>
+                
+                                    <span style="width: 10px;"></span>
+                                    <div style="background-color: #ffffff;">
+                                        <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <br>
+                        <br>
+        
+                        `;
+        }).join('')}
 
+                    `;
+    } else if (orders && orders.length < 1) {
+        ordersHTML = `
+                        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                            <p style="align-self: center; color: #ffffff">Pas de commande !</p>
+                        </div>
+                        `;
+    } else {
+        ordersHTML = `
+                        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                            <p style="align-self: center; color: #ffffff">Chargement échoué, verifie la connexion</p>
+                        </div>
+                    `;
+    }
 
-
-                        <p class="statuscor" style="align-self: flex-start; margin-left: -50px !important;">
-                            Caisse: ${order.staff ? order.staff : "Online"}
-                        </p>
-                        <div style="align-self: flex-start; width: 130px">
-                        <p class="statuscor status ${order.statut === 'done' ? 'delivered' : order.statut === 'review' ? 'pending' : order.statut === 'onway' ? 'shipped' : 'cancelled'}">
-                            ${order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué"}
-                        </p>
-                        </div>
-                    </div>
-      
-                    <br>
-                    
-                    <div class="orderinfoso">
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Client: <strong>${order.client ? order.client.nom : "Client"} ${order.client ? order.client.prenom : "Supprimé"}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Tél: <strong>${order.phone ? order.phone : order.client ? order.client.phone : 'Supprumé'}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Ville: <strong>${order.ville}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Article(s): <strong>${order.articles.length}</strong></p>
-                        </div>
-      
-                        <span style="width: 10px;"></span>
-                        <div style="background-color: #ffffff;">
-                            <p style="max-height: 50px; overflow: hidden;">Cash: <strong>${(order.reduction / 1000).toFixed(3)}</strong> F</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-      
-            `;
-    }).join('')}
-
-        `;
     adminiSpace.innerHTML = ordersHTML;
+
+
+    /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 }
 
@@ -183,19 +218,30 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
         } else {
             document.getElementById('optionCancilename').innerText = "Article Supprimé";
 
-            document.getElementById('optionViewNewPrice').innerText = `00.000 F.CFA`;
-            document.getElementById('optionViewNewBarcode').innerText = `Barcode`;
-            document.getElementById('productQuantity').value = 0;
-            document.getElementById('clientNameOrder').innerText = `Client`;
+            document.getElementById('clientNameOrder').innerText = `Client: ${order.client.nom} ${order.client.prenom}`;
 
 
             const orderStatuHtml = document.getElementById('statusOrder');
-            orderStatuHtml.innerHTML = '<p>Statut: </p> <span style="color: green">Livré</span>';
+            orderStatuHtml.innerHTML = '';
+            const orderStatus = order.statut === "done" ? "livré" : order.statut == "review" ? "en attente" : order.statut === "onway" ? "en cours" : "échoué";
+            const orderStatu = `                     <p>Statut: </p> <span style="color: ${orderStatus === 'livré' ? 'green' : orderStatus === 'en attente' ? 'orange' : orderStatus === 'en cours' ? 'pink' : 'red'}">${orderStatus}</span>
+                                        `;
+            orderStatuHtml.innerHTML = orderStatu;
 
-            document.getElementById('villeValue').value = `Ville`;
-            document.getElementById('communeValue').value = `Commune`;
-            document.getElementById('adresseValue').value = `Lieu`;
-            document.getElementById('telephoneValue').value = `07000000`;
+
+            document.getElementById('ido').value = `${orderid}`;
+            document.getElementById('proid').value = `${orderarticleid}`;
+            document.getElementById('arti_id').value = `${articleid}`;
+
+            const element = document.getElementById('hidlater');
+            element.classList.remove('hiddendhid');
+            element.classList.add('hiddendshow');
+
+
+            document.getElementById('villeValue').value = `${order.ville}`;
+            document.getElementById('communeValue').value = `${order.commune}`;
+            document.getElementById('adresseValue').value = `${order.lieu}`;
+            document.getElementById('telephoneValue').value = `${order.phone}`;
 
             const modalImage = document.getElementById('ipage');
             modalImage.src = "admin/assets/img/imgo.png";
@@ -231,14 +277,20 @@ async function cancelOrderById() {
         const arti_id = document.getElementById('arti_id').value;
         const quan = document.getElementById('productQuantity').value;
 
+        const token = sessionStorage.getItem('tibule');
+        const splo = token.split("°");
+        const userid = thisiswhat(`${splo[0]}`);
+
         const vin_or = await GetOrderByID(ido);
-        if (vin_or.articles.length > 1) {
-            await requesttoBackend('DELETE', `orders/oarderar/${ido}/${proid}/${arti_id}/${quan}`);
 
+        if (vin_or.articles && vin_or.articles.length > 1) {
+            await requesttoBackend('DELETE', `orders/oarderar/Web-Soft/${userid}/${ido}/${proid}/${arti_id}/${quan}`);
+        } else if (vin_or.articles && vin_or.articles.length == 1 && vin_or.articles[0].arti_id) {
+            await requesttoBackend('DELETE', `orders/Web-Soft/${userid}/${ido}/${arti_id}/${quan}`);
         } else {
-            await requesttoBackend('DELETE', `orders/${ido}/${arti_id}/${quan}`);
-
+            await requesttoBackend('DELETE', `orders/already/article/deleted/${ido}`);
         }
+
 
         window.location.reload()
     }
@@ -340,27 +392,27 @@ async function changeOrderArticle(articleid, echprice, echanqua) {
     const productQuantity = parseInt(document.getElementById('productQuantity').value);
 
 
-        const selectedArticle = await GetArticleByID(articleid);
-        const wholeorder = await GetOrderByID(orderid);
-        const currenreductionprice = wholeorder.reduction - (optionViewNewPrice * productQuantity);
+    const selectedArticle = await GetArticleByID(articleid);
+    const wholeorder = await GetOrderByID(orderid);
+    const currenreductionprice = wholeorder.reduction - (optionViewNewPrice * productQuantity);
 
-        const toechange = {
-            quantcho: productQuantitya,
-            prix: echangeprice,
-            reduction: parseInt(currenreductionprice) + parseInt(echangeprice),
-        };
+    const toechange = {
+        quantcho: productQuantitya,
+        prix: echangeprice,
+        reduction: parseInt(currenreductionprice) + parseInt(echangeprice),
+    };
 
-        await requesttoBackend('PUT', `orders/echange/order/${orderid}/${orderarticleid}/${articleid}`, toechange);
-        
+    await requesttoBackend('PUT', `orders/echange/order/${orderid}/${orderarticleid}/${articleid}`, toechange);
 
-        document.getElementById('optionCancilename').innerText = selectedArticle.addarticle;
-        document.getElementById('optionViewNewPrice').innerText = `${(echangeprice / 1000).toFixed(3)} F.CFA`;
-        document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${selectedArticle.barcode}`;
-        document.getElementById('productQuantity').value = productQuantitya;
 
-        const modalImage = document.getElementById('ipage');
-        modalImage.src = selectedArticle.image[0].ima;
-        window.location.reload()
+    document.getElementById('optionCancilename').innerText = selectedArticle.addarticle;
+    document.getElementById('optionViewNewPrice').innerText = `${(echangeprice / 1000).toFixed(3)} F.CFA`;
+    document.getElementById('optionViewNewBarcode').innerText = `Barcode: ${selectedArticle.barcode}`;
+    document.getElementById('productQuantity').value = productQuantitya;
+
+    const modalImage = document.getElementById('ipage');
+    modalImage.src = selectedArticle.image[0].ima;
+    window.location.reload()
 
 
 }

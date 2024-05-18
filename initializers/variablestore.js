@@ -17,3 +17,4 @@ let isPeoples = false;
 let adMinurl = 'admini';
 let ChoosenColor = [];
 let AutoChoosenColor = "";
+let todeusole = 0;

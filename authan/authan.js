@@ -54,6 +54,11 @@ async function Inscription() {
                 const splo = response.token.split("°");
                 const admin = splo[6];
 
+                await deletePeople();
+                const userid = thisiswhat(`${splo[0]}`);
+                const userCurrent = await requesttoBackend('GET', `people/withidpersons/${userid}`);
+                await PostOnePerson(userCurrent);
+
                 window.location.href = admin == "GIFV" ? odMinurl : "client"
 
 
@@ -116,10 +121,13 @@ async function loGin() {
         } else if (response && response.token) {
             sessionStorage.setItem('tibule', response.token);
             localStorage.removeItem('myLive');
-
-
+            await deletePeople();
             const splo = response.token.split("°");
             const admin = splo[6];
+            const userid = thisiswhat(`${splo[0]}`);
+            const userCurrent = await requesttoBackend('GET', `people/withidpersons/${userid}`);
+            await PostOnePerson(userCurrent);
+
             window.location.href = admin == "GIFV" ? odMinurl : "client"
 
         } else if (!response) {

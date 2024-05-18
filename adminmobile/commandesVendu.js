@@ -1,7 +1,19 @@
-let adminiSpaceb;
+let ActiveDasb;
+let ActiveCob;
+let ActiveClb;
+let ActiveArb;
+let ActiveAnb;
+
 
 async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, adminiSpace) {
     adminiSpaceb = adminiSpace;
+
+    ActiveDasb = ActiveDas;
+    ActiveCob = ActiveCo;
+    ActiveClb = ActiveCl;
+    ActiveArb = ActiveAr;
+    ActiveAnb = ActiveAn;
+
 
     ActiveDas.classList.remove('active');
     ActiveCo.classList.add('active');
@@ -19,26 +31,49 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
     let ordersHTML = '';
     let TotalRecet = 0;
 
-    const ordersnotAvail = await GetOrder();
-    const orders = ordersnotAvail.filter((reveiw) => reveiw.statut == "done");
-
-    if (orders && orders.length > 0) {
-        orders.forEach((pan) => {
-            TotalRecet += parseInt(pan.reduction);
-        });
-    }
 
 
-    ordersHTML += `
+
+
+
+
+
+    /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+    adminiSpace.innerHTML = `
+        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+            <p style="align-self: center; color: #ffffff">Chargement en cours ...</p>
+        </div>
+    `;
+
+
+
+
+    try {
+        const orders = await requesttoBackend('GET', `orders/traitedAllOrder/nuance/0/${todeusole}`);
+
+        if (orders.orders && orders.orders.length > 0) {
+            await deleteOrder();
+            await PostOrder(orders.orders);
+
+
+            orders.orders.forEach((pan) => {
+                TotalRecet += parseInt(pan.reduction);
+            });
+
+
+
+            ordersHTML = `
                 <br>
                 <br>
                 <br>
                 <div class="welcome-msg pt-3 pb-4" id="">
                     <h1 style="margin-left: 25px;">Total: <span style="font-weight: bold">${(TotalRecet / 1000).toFixed(3)}</span> F.CFA</h1>
                 </div>
-        ${orders.map((order) => {
-        return `
-            <div class="articlerow">
+        ${orders.orders.map((order) => {
+                return `
+                <div class="articlerow">
       
                 <div class="articlerwedge">
       
@@ -101,14 +136,54 @@ async function CommandesVendu(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn,
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
-      
-            `;
-    }).join('')}
+                    <br>
+                    <br>
+            
+                    `;
+            }).join('')}
 
+                    ${orders.lengf > orders.orders.length ?
+                    `
+                            <div id="plusa" style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-bottom: 50px;">
+                                <button type="button" class="btn btn-outline-success"  style="align-self: center;"
+                                    onclick="IncreaseItemsOrender(${todeusole}, '0', 'done')">Afficer les encients
+                                </button>
+                            </div>
+                            `
+                    :
+                    ""
+                }
+
+
+            `;
+
+        } else if (orders.lengf == 0) {
+            ordersHTML = `
+                                    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                                        <p style="align-self: center; color: #ffffff">Vous n'avez rien vendu !</p>
+                                    </div>
+                                `;
+        } else {
+
+            ordersHTML = `
+                                    <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                                        <p style="align-self: center; color: #ffffff">Chargement échoué, verifie la connexion</p>
+                                    </div>
+                                `;
+        }
+
+
+        adminiSpace.innerHTML = ordersHTML;
+
+    } catch (error) {
+        ordersHTML = `
+            <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+                <p style="align-self: center; color: #ffffff">Chargement échoué, verifie la connexion</p>
+            </div>
         `;
-    adminiSpace.innerHTML = ordersHTML;
+        adminiSpace.innerHTML = ordersHTML;
+
+    }
 
 };
 

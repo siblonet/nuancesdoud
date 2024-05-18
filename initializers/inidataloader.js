@@ -15,11 +15,7 @@ async function initDataLoader() {
         deletePeople();
 
         const online = await requesttoBackend('GET', 'boutique/nuance');
-        if (online.article || online.pagesetting || online.order) {
-
-            const people = await requesttoBackend('GET', 'people/persons/nuance');
-            await PostPeople(people);
-            await PostOrder(online.order);
+        if (online.article || online.pagesetting) {
             await PostArticle(online.article);
             await PostSettings(online.pagesetting);
             recentProduct(online.article, online.pagesetting);
