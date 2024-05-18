@@ -470,7 +470,7 @@ async function showProductQuickView(a, productId) {
         $('.rating .four').css('color', `${product.addcoul.substring(24, 31)} `);
 
         document.getElementById('rating').innerText = `5 étoiles`;*/
-        document.getElementById('descrip').innerText = product.notes.length > 9 ? product.notes : "";
+        document.getElementById('descrip').innerText = product.notes;
 
 
         let prodque = document.getElementById('productQuantity');

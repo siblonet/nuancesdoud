@@ -4,7 +4,7 @@ async function ArticlesUISearch(search) {
     ActiveCla.classList.remove('active');
     ActiveAra.classList.add('active');
     ActiveAna.classList.remove('active');
-    
+
     const AFrPhSch = await GetArticle();
     const ArticleFromPhoneSearch = AFrPhSch.filter((eds) =>
         eds.addarticle.startsWith(search) ||
@@ -12,15 +12,17 @@ async function ArticlesUISearch(search) {
         eds.addarticle.toLowerCase().startsWith(search.toLowerCase()) ||
         eds.addarticle.toUpperCase().startsWith(search.toUpperCase())
     );
+    let articlesHTML = "";
+    if (ArticleFromPhoneSearch && ArticleFromPhoneSearch.length > 0) {
 
-    const articlesHTML = `
+            articlesHTML = `
                 <br>
                 <br>
                 <br>
                 <br>
               
         ${ArticleFromPhoneSearch.map(article => {
-        return `
+            return `
             <div class="articlerow">
       
                 <div class="articlerwedgea">
@@ -77,10 +79,16 @@ async function ArticlesUISearch(search) {
             <br>
       
             `;
-    }).join('')}
+        }).join('')}
 
         `;
-
+    } else {
+        articlesHTML = `
+        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+        <p style="align-self: center; color: #ffffff"><span style="color: red">${search}</span> N'exist pas !</p>
+        </div>
+    `;
+    }
     adminiSpacea.innerHTML = articlesHTML;
 }
 
@@ -93,7 +101,7 @@ async function ArticlesUISearch(search) {
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ increasing Order @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ increasing Order @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ increasing Order @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
- 
+
 
 async function IncreaseItemsOrender(old_posi, sarr = null, who = null) {
     ActiveDasb.classList.remove('active');

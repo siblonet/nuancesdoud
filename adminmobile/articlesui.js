@@ -545,6 +545,8 @@ async function RemoveArticleById() {
 
         const _ide = document.getElementById("ediatiid").value;
         await requesttoBackend('DELETE', `boutique/Web-Soft/${userid}/${_ide}`);
+        imagePreview1.src = "../admin/assets/img/imgo.png";
+
         Onlineimas.length = 0;
         initDataLoader();
 

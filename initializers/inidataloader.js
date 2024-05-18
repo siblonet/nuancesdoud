@@ -9,10 +9,10 @@ async function initDataLoader() {
     }
 
     try {
-        deleteArticle();
-        deleteOrder();
-        deleteSetting();
-        deletePeople();
+        await deleteArticle();
+        await deleteOrder();
+        await deleteSetting();
+        await deletePeople();
 
         const online = await requesttoBackend('GET', 'boutique/nuance');
         if (online.article || online.pagesetting) {

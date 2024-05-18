@@ -14,8 +14,12 @@ async function ArticlesUISearch(search) {
         eds.addarticle.toUpperCase().startsWith(search.toUpperCase())
     );
 
+    let articlesHTML = "";
 
-    const articlesHTML = `
+if (ArticleFromPhoneSearch && ArticleFromPhoneSearch.length > 0) {
+    
+
+   articlesHTML = `
                 <br>
                 <br>
                 <br>
@@ -76,7 +80,13 @@ async function ArticlesUISearch(search) {
     }).join('')}
 
         `;
-
+    }else{
+        articlesHTML = `
+        <div style="width: 100%; text-align: center; justify-content: center; align-items: center;  padding-top: 150px;  background-color: #678a9e">
+            <p style="align-self: center; color: #ffffff"><span style="color: red">${search}</span> N'exist pas !</p>
+        </div>
+    `;
+    }
     adminiSpacea.innerHTML = articlesHTML;
 }
 

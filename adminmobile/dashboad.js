@@ -141,6 +141,10 @@ function DashBoad(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, addAticlebt
 
 
 const NavBaractivity = async () => {
+  await deleteArticle();
+  await deleteOrder();
+  await deleteSetting();
+  await deletePeople();
   const datalength = await requesttoBackend('GET', 'boutique/returnData/Length/nuance');
 
   if (datalength.aAL >= 0) {
