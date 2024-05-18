@@ -163,7 +163,7 @@ async function IncreaseItemsOrender(old_posi, sarr = null, who = null) {
 
                             <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
                                 <div class="payment_iconsadmin">
-                                    <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
+                                    <img src="${order.payment_method === "orangeci" ? "admin/assets/img/orange.png" : order.payment_method == "mtnci" ? "admin/assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
                                 </div>
                                 <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">
                                 ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status == "vraison" ? "Payer à la livraison" : "échoué"}

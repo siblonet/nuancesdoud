@@ -68,7 +68,7 @@ async function CommandesFonc(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, 
 
                                     <div style="align-items: center; width: 170px; display: flex; justify-content: flex-end;">
                                         <div class="payment_iconsadmin">
-                                            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
+                                            <img src="${order.payment_method === "orangeci" ? "admin/assets/img/orange.png" : order.payment_method == "mtnci" ? "admin/assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" alt="Payment">
                                         </div>
                                         <p class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">
                                         ${order.payment_status === "paid" ? "Payé" : order.payment_status == "waiting" ? "En cours" : order.payment_status == "vraison" ? "Payer à la livraison" : "échoué"}
@@ -196,12 +196,12 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
 
 
             const orderStatu = `   
-        <img src="./assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
+        <img src="admin/assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
         <span class="status_paymen ${order.statut === "done" ? "delivered" : order.statut == "review" ? "pending" : order.statut === "onway" ? "shipped" : "cancelled"}">${orderStatus}</span>                                        
 `;
 
             const paymentStatu = `   
-            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
+            <img src="${order.payment_method === "orangeci" ? "admin/assets/img/orange.png" : order.payment_method == "mtnci" ? "admin/assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
             <span class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">${paymentStatus}</span>                                        
     `;
 
@@ -266,12 +266,12 @@ async function openOrderforediting(orderid, orderarticleid, articleid) {
 
 
             const orderStatu = `   
-        <img src="./assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
+        <img src="admin/assets/img/store2.png" style="height: 30px; width: 25px;" alt="Order">
         <span class="status_paymen ${order.statut === "done" ? "delivered" : order.statut == "review" ? "pending" : order.statut === "onway" ? "shipped" : "cancelled"}">${orderStatus}</span>                                        
 `;
 
             const paymentStatu = `   
-            <img src="${order.payment_method === "orangeci" ? "./assets/img/orange.png" : order.payment_method == "mtnci" ? "./assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
+            <img src="${order.payment_method === "orangeci" ? "admin/assets/img/orange.png" : order.payment_method == "mtnci" ? "admin/assets/img/mtn.png" : order.payment_method === 'waveci' ? './assets/img/icon.png' : order.payment_method === 'cards' ? './assets/img/vm.png' : './assets/img/cash.png'}" style="height: 30px; width: 25px;" alt="Order">
             <span class="status_paymen ${order.payment_status === 'paid' ? 'delivered' : order.payment_status === 'waiting' ? 'shipped' : order.payment_status === 'vraison' ? 'shipped' : 'cancelled'}">${paymentStatus}</span>                                        
     `;
 

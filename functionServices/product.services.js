@@ -151,7 +151,7 @@ async function GetArticleAvailable() {
 
         GAStore.openCursor().onsuccess = (event) => {
             const cursor = event.target.result;
-            if (cursor) {
+            if (cursor && cursor.value.quantity > 0) {
                 articles.push(cursor.value);
                 cursor.continue();
             } else {
