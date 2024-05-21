@@ -108,6 +108,7 @@ async function ArticlesFini(ActiveDas, ActiveCo, ActiveCl, ActiveAr, ActiveAn, a
     </div>
 `;
     }
+    document.getElementById('searcha').style.display = "block";
 
 }
 
